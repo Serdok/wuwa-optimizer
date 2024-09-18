@@ -1,3 +1,4 @@
+import { base } from '$app/paths';
 import { Attribute } from '$lib/types/stat';
 import { type WeaponLevel, type WeaponMetadata, WeaponType } from '$lib/types/weapon';
 
@@ -11,7 +12,7 @@ export const WEAPONS_METADATA: WeaponMetadata[] = [
 			primary: { attribute: Attribute.ATK, value: 47 },
 			secondary: { attribute: Attribute.CritRate, value: 5.4 },
 		},
-		icon: '/assets/weapon/T_IconWeapon21010026_UI.png'
+		icon: `${base}/assets/weapon/T_IconWeapon21010026_UI.png`
 	},
 	{
 		name: 'Blazing Brilliance',
@@ -21,7 +22,7 @@ export const WEAPONS_METADATA: WeaponMetadata[] = [
 			primary: { attribute: Attribute.ATK, value: 47 },
 			secondary: { attribute: Attribute.CritDamage, value: 10.8 },
 		},
-		icon: '/assets/weapon/T_IconWeapon21020016_UI.png'
+		icon: `${base}/assets/weapon/T_IconWeapon21020016_UI.png`
 	},
 ] as const;
 

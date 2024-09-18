@@ -1,3 +1,4 @@
+import { base } from '$app/paths';
 import { Attribute } from '$lib/types/stat';
 import { WeaponType } from '$lib/types/weapon';
 import { Element } from '$lib/types/element';
@@ -29,8 +30,8 @@ export const CHARACTERS_METADATA: CharacterMetadata[] = [
 			[Attribute.ResonanceLiberationBonus]: 0,
 		},
 		icon: {
-			head: '/assets/character/head/T_IconRoleHead256_26_UI.png',
-			portrait: '/assets/character/portrait/T_IconRole_Pile_changli_UI.png'
+			head: `${base}/assets/character/head/T_IconRoleHead256_26_UI.png`,
+			portrait: `${base}/assets/character/portrait/T_IconRole_Pile_changli_UI.png`
 		},
 	},
 	{
@@ -58,8 +59,8 @@ export const CHARACTERS_METADATA: CharacterMetadata[] = [
 			[Attribute.ResonanceLiberationBonus]: 0,
 		},
 		icon: {
-			head: '/assets/character/head/T_IconRoleHead256_24_UI.png',
-			portrait: '/assets/character/portrait/T_IconRole_Pile_jinxi_UI.png'
+			head: `${base}/assets/character/head/T_IconRoleHead256_24_UI.png`,
+			portrait: `${base}/assets/character/portrait/T_IconRole_Pile_jinxi_UI.png`
 		},
 	}
 ] as const;

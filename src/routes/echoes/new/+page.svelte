@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { EchoClass, EchoQuality, Sonata } from '$lib/types/echo';
 	import { ECHO_CLASS_COST, ECHOES_METADATA } from '$lib/data/echo';
 	import type { Stat, Attribute } from '$lib/types/stat';
@@ -144,7 +145,7 @@
 			{#if metadata}
 				<img src="{metadata.icon.head}" alt="{name}" class="{rarity_colors[quality]}" />
 			{:else}
-				<img src="/assets/monster/head/T_IconMonsterHead00_UI.png" alt="blank echo"/>
+				<img src="{base}/assets/monster/head/T_IconMonsterHead00_UI.png" alt="blank echo"/>
 				<div>Select an echo from the right!</div>
 			{/if}
 		</div>

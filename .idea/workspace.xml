@@ -7,11 +7,6 @@
     <list default="true" id="5d42924a-c413-46c6-8d9d-946e469b47e8" name="Changes" comment="do not display the stat is it is at 0 (or 0%)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/data/character.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/character.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/stat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/stat.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/types/character.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/character.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/types/stat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/stat.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/build/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/build/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/build/FinalStat.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/build/FinalStat.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +83,7 @@
       <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
       <window_info anchor="bottom" id="TODO" show_stripe_button="false" />
       <window_info anchor="bottom" id="File Transfer" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="0" weight="0.419708" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.3299513" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.419708" />
@@ -199,6 +194,17 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="package.json" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator" />

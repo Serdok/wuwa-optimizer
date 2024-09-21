@@ -21,5 +21,23 @@ export enum Attribute {
 	ResonanceLiberationBonus = 'Resonance Liberation DMG Bonus',
 }
 
+export enum SkillType {
+	NormalAttack = 'Normal Attack',
+	ResonanceSkill = 'Resonance Skill',
+	ForteCircuit = 'Forte Circuit',
+	ResonanceLiberation = 'Resonance Liberation',
+	IntroSkill = 'Intro Skill',
+	OutroSkill = 'Outro Skill',
+}
+
+export enum AttackType {
+	BasicAttack = 'Basic Attack',
+	HeavyAttack = 'Heavy Attack',
+	ResonanceSkill = 'Resonance Skill',
+	ResonanceLiberation = 'Resonance Liberation',
+	IntroSkill = 'Intro Skill',
+	OutroSkill = 'Outro Skill',
+}
+
 export type Stat = { attribute: Attribute, value: number, };
 

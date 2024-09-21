@@ -1,7 +1,26 @@
 import { base } from '$app/paths';
-import { Attribute } from '$lib/types/stat';
+import { AttackType, Attribute } from '$lib/types/stat';
+import { Element } from '$lib/types/element';
 
 export const is_flat_stat = (stat: Attribute) => stat === Attribute.HP || stat === Attribute.ATK || stat === Attribute.DEF;
+
+export const ELEMENT_TO_STAT_BONUS = {
+	[Element.Glacio]: Attribute.GlacioBonus,
+	[Element.Fusion]: Attribute.FusionBonus,
+	[Element.Electro]: Attribute.ElectroBonus,
+	[Element.Aero]: Attribute.AeroBonus,
+	[Element.Havoc]: Attribute.HavocBonus,
+	[Element.Spectro]: Attribute.SpectroBonus,
+} as const;
+
+export const ATTACK_TO_STAT_BONUS = {
+	[AttackType.BasicAttack]: Attribute.BasicAttackBonus,
+	[AttackType.HeavyAttack]: Attribute.HeavyAttackBonus,
+	[AttackType.ResonanceSkill]: Attribute.ResonanceSkillBonus,
+	[AttackType.ResonanceLiberation]: Attribute.ResonanceLiberationBonus,
+	// [AttackType.IntroSkill]: Attribute.BasicAttackBonus,
+	// [AttackType.OutroSkill]: Attribute.BasicAttackBonus,
+}
 
 export const STATS_ICONS = {
 	[Attribute.HP]: `${base}/assets/attribute/T_Iconpropertygreenlife_UI.png`,
@@ -24,4 +43,4 @@ export const STATS_ICONS = {
 	[Attribute.HeavyAttackBonus]: `${base}/assets/attribute/T_Iconpropertyredfoco_UI.png`,
 	[Attribute.ResonanceSkillBonus]: `${base}/assets/attribute/T_Iconpropertyredskill_UI.png`,
 	[Attribute.ResonanceLiberationBonus]: `${base}/assets/attribute/T_Iconpropertyredqte_UI.png`,
-};
+} as const;

@@ -1,5 +1,5 @@
 import { base } from '$app/paths';
-import { Attribute } from '$lib/types/stat';
+import { AttackType, Attribute, SkillType } from '$lib/types/stat';
 import { WeaponType } from '$lib/types/weapon';
 import { Element } from '$lib/types/element';
 import type { CharacterLevel, CharacterMetadata } from '$lib/types/character';
@@ -29,6 +29,82 @@ export const CHARACTERS_METADATA: CharacterMetadata[] = [
 			[Attribute.ResonanceSkillBonus]: 0,
 			[Attribute.ResonanceLiberationBonus]: 0,
 		},
+		skills: {
+			[SkillType.NormalAttack]: [
+				{
+					name: 'Basic Attack 1 DMG',
+					element: Element.Fusion,
+					attribute: Attribute.ATK,
+					type: AttackType.BasicAttack,
+					values: [0.2949, 0.2949]
+				},
+				{
+					name: 'Basic Attack 2 DMG',
+					element: Element.Fusion,
+					attribute: Attribute.ATK,
+					type: AttackType.BasicAttack,
+					values: [0.3549, 0.3549]
+				},
+				{
+					name: 'Basic Attack 3 DMG',
+					element: Element.Fusion,
+					attribute: Attribute.ATK,
+					type: AttackType.BasicAttack,
+					values: [0.3645, 0.3645, 0.3645]
+				},
+				{
+					name: 'Basic Attack 4 DMG',
+					element: Element.Fusion,
+					attribute: Attribute.ATK,
+					type: AttackType.BasicAttack,
+					values: [0.507, 0.2958, 0.2958, 0.2958]
+				}
+			],
+			[SkillType.ResonanceSkill]: [
+				{
+					name: 'True Sight: Capture DMG',
+					element: Element.Fusion,
+					attribute: Attribute.ATK,
+					type: AttackType.ResonanceSkill,
+					values: [0.8188, 0.8188, 0.8188, 1.6376]
+				},
+				{
+					name: 'True Sight: Conquest DMG',
+					element: Element.Fusion,
+					attribute: Attribute.ATK,
+					type: AttackType.ResonanceSkill,
+					values: [0.5895, 0.5895, 0.8252, 0.9431]
+				},
+				{
+					name: 'True Sight: Charge DMG',
+					element: Element.Fusion,
+					attribute: Attribute.ATK,
+					type: AttackType.ResonanceSkill,
+					values: [0.7268, 1.0902]
+				},
+			],
+			[SkillType.ForteCircuit]: [
+
+				{
+					name: 'Flaming Sacrifice DMG',
+					element: Element.Fusion,
+					attribute: Attribute.ATK,
+					type: AttackType.ResonanceSkill,
+					values: [0.3925, 0.3925, 0.3925, 0.3925, 0.3925, 4.5785]
+				},
+			],
+			[SkillType.ResonanceLiberation]: [
+				{
+					name: 'Skill DMG',
+					element: Element.Fusion,
+					attribute: Attribute.ATK,
+					type: AttackType.ResonanceLiberation,
+					values: [12.1275]
+				},
+			],
+			[SkillType.IntroSkill]: [],
+			[SkillType.OutroSkill]: [],
+		},
 		icon: {
 			head: `${base}/assets/character/head/T_IconRoleHead256_26_UI.png`,
 			portrait: `${base}/assets/character/portrait/T_IconRole_Pile_changli_UI.png`
@@ -57,6 +133,14 @@ export const CHARACTERS_METADATA: CharacterMetadata[] = [
 			[Attribute.HeavyAttackBonus]: 0,
 			[Attribute.ResonanceSkillBonus]: 0,
 			[Attribute.ResonanceLiberationBonus]: 0,
+		},
+		skills: {
+			[SkillType.NormalAttack]: [],
+			[SkillType.ResonanceSkill]: [],
+			[SkillType.ForteCircuit]: [],
+			[SkillType.ResonanceLiberation]: [],
+			[SkillType.IntroSkill]: [],
+			[SkillType.OutroSkill]: [],
 		},
 		icon: {
 			head: `${base}/assets/character/head/T_IconRoleHead256_24_UI.png`,

@@ -1,14 +1,20 @@
 <script lang="ts">
 	import { CHARACTER_CURVE, CHARACTERS_METADATA } from '$lib/data/character';
 	import { WEAPON_CURVE_1, WEAPON_CURVE_2, WEAPONS_METADATA } from '$lib/data/weapon';
-	import { CharacterLevel, type CharacterStat, FinalCharacterStat } from '$lib/types/character';
+	import {
+		CharacterLevel,
+		type CharacterMetadata,
+		type CharacterSkill,
+		type CharacterStat,
+		FinalCharacterStat
+	} from '$lib/types/character';
 	import { WeaponLevel, WeaponType } from '$lib/types/weapon';
 	import { type Echo, Sonata } from '$lib/types/echo';
 	import { get_sonata_image } from '$lib/data/sonata';
 	import { ECHO_CLASS_COST, ECHOES_METADATA, get_echo_class, get_echo_icon } from '$lib/data/echo';
 	import { get_echoes_snapshot } from '$lib/db/echo';
-	import { Attribute } from '$lib/types/stat';
-	import { is_flat_stat, STATS_ICONS } from '$lib/data/stat';
+	import { Attribute, SkillType } from '$lib/types/stat';
+	import { ATTACK_TO_STAT_BONUS, ELEMENT_TO_STAT_BONUS, is_flat_stat, STATS_ICONS } from '$lib/data/stat';
 	import FinalStat from './FinalStat.svelte';
 
 	let character_key = $state('');
@@ -23,8 +29,18 @@
 
 	let allowed_sonata = $state(Object.values(Sonata).map(s => ({ sonata: s, set_2: false, set_5: true })));
 
+	const build_count = $derived(generate_combinations().length);
 	let max_builds = $state(5);
-	let sort_result_key: keyof FinalCharacterStat = $state(Attribute.ATK);
+
+	const sort_result_keys = $derived.by(() => {
+		const keys = Object.keys(FinalCharacterStat);
+		if (!character) return keys;
+
+		return keys.concat(Object.values(character.skills).flatMap(s => s.flatMap(d => d.name)));
+	});
+	let sort_result_key: string = $state(Attribute.ATK);
+
+	let results: { build: Echo[], build_sets: ReturnType<typeof compute_builds_sets>, build_cost: string, final_stats: FinalCharacterStat, final_damages: CharacterSkill }[] = $state([]);
 
 	function generate_build(echoes: Echo[], n: number, max_weight: number): Echo[][] {
 		if (n === 0) return [[]];
@@ -56,7 +72,7 @@
 				}, ECHO_CLASS_COST[metadata.class]) <= max_weight) // filter out exceeding builds
 				.map(comb => [echo, ...comb]);
 		});
-	};
+	}
 
 	function generate_combinations() {
 		// todo: handle builds with 2-pc filters
@@ -66,9 +82,7 @@
 			const echoes = get_echoes_snapshot().filter(e => e.sonata === s.sonata);
 			return generate_build(echoes, 5, 12);
 		});
-	};
-
-	const build_count = $derived(generate_combinations().length);
+	}
 
 	function compute_builds_sets(build: Echo[]) {
 		const sets = build.reduce<{[sonata in Sonata]?: number}>((sets, e) => {
@@ -90,7 +104,58 @@
 		}).join('-')
 	}
 
-	let results: { build: Echo[], build_sets: ReturnType<typeof compute_builds_sets>, build_cost: string, final_stats: FinalCharacterStat }[] = $state([]);
+	function compute_attacks_damage(character: CharacterMetadata, final_stats: FinalCharacterStat) {
+		const skills = { ...character.skills };
+		for (const value in skills) {
+			const skill = value as SkillType;
+			skills[skill] = skills[skill].map(data => ({
+				...data,
+				values: data.values.map(dmg => {
+					// TODO: handle skill scaling bonus
+					const skill_hit = (final_stats[data.attribute] ?? 0) * dmg;
+					// console.log(`[${skill} - ${data.type}] ${data.name} skill hit: `, skill_hit);
+
+					const skill_bonus = (final_stats[ELEMENT_TO_STAT_BONUS[data.element]] ?? 0) + (final_stats[ATTACK_TO_STAT_BONUS[data.type]] ?? 0);
+					// console.log(`[${skill} - ${data.type}] ${data.name} skill bonus: `, skill_bonus);
+
+					// TODO: handle element deepen bonus
+					const deepen_effect = 100;
+					// console.log(`[${skill} - ${data.type}] ${data.name} deepen effect: `, deepen_effect);
+
+					const avg_crit = (final_stats[Attribute.CritRate] * final_stats[Attribute.CritDamage])/100;
+					// console.log(`[${skill} - ${data.type}] ${data.name} avg crit: `, avg_crit);
+
+					return skill_hit * (1 + skill_bonus/100 * deepen_effect/100 * avg_crit/100);
+				})
+			}));
+		}
+
+		return skills;
+
+		// const damages = Object.entries({ ...character.skills }).map(([key, skills]) => {
+		// 	const skill = key as SkillType;
+		//
+		// 	return { [skill]: skills.map(data => ({
+		// 			...data,
+		// 			values: data.values.map(dmg => {
+		// 				// TODO: handle skill scaling bonus
+		// 				const skill_hit = (final_stats[data.attribute] ?? 0) * dmg;
+		// 				// console.log(`[${skill} - ${data.type}] ${data.name} skill hit: `, skill_hit);
+		//
+		// 				const skill_bonus = (final_stats[ELEMENT_TO_STAT_BONUS[data.element]] ?? 0) + (final_stats[ATTACK_TO_STAT_BONUS[data.type]] ?? 0);
+		// 				// console.log(`[${skill} - ${data.type}] ${data.name} skill bonus: `, skill_bonus);
+		//
+		// 				// TODO: handle element deepen bonus
+		// 				const deepen_effect = 100;
+		// 				// console.log(`[${skill} - ${data.type}] ${data.name} deepen effect: `, deepen_effect);
+		//
+		// 				return skill_hit * skill_bonus/100 * deepen_effect/100;
+		// 			})
+		// 		})),
+		// 	}
+		// })
+		// return damages;
+	}
 
 	const base_stats = $derived.by(() => {
 		if (!character || !weapon) return undefined;
@@ -162,6 +227,8 @@
 	}
 
 	function generate_builds() {
+		if (!character) return;
+
 		const builds = generate_combinations();
 		results = builds.map(build => (
 			{
@@ -169,8 +236,24 @@
 				final_stats: compute_final_stats(build),
 			}))
 			.filter((b): b is {build: Echo[], final_stats: FinalCharacterStat} => !!b.final_stats)
+			.map(b => ({ ...b, final_damages: compute_attacks_damage(character, b.final_stats)}))
 			// Descending order!
-			.toSorted((a, b) => (b.final_stats[sort_result_key] ?? 0) - (a.final_stats[sort_result_key] ?? 0))
+			.toSorted((a, b) => {
+				if (sort_result_key in FinalCharacterStat) {
+					const key = sort_result_key as keyof typeof FinalCharacterStat;
+					return (b.final_stats[key] ?? 0) - (a.final_stats[key] ?? 0);
+				}
+
+				if (Object.values(character.skills).some(s => s.find(d => d.name === sort_result_key))) {
+					const [key, value] = Object.entries(character.skills).find(s => s[1].find(d => d.name === sort_result_key))!;
+					const skill = key as SkillType;
+					const left = b.final_damages[skill].find(v => v.name === sort_result_key)?.values.reduce((acc, n) => acc + n, 0) ?? 0;
+					const right = a.final_damages[skill].find(v => v.name === sort_result_key)?.values.reduce((acc, n) => acc + n, 0) ?? 0;
+					return left - right;
+				}
+
+				return -1;
+			})
 			.slice(0, max_builds)
 			.map(result => ({
 				...result,
@@ -253,7 +336,7 @@
 					<div class="flex flex-col gap-1">
 						<div class="text-sm">Sort results by</div>
 						<select bind:value={sort_result_key} class="text-xs rounded-xl bg-indigo-800">
-							{#each Object.keys(FinalCharacterStat) as key}
+							{#each sort_result_keys as key}
 								<option value="{key}">{key}</option>
 							{/each}
 						</select>
@@ -365,24 +448,44 @@
 							<FinalStat attribute={Attribute.HealingBonus} value={data.final_stats[Attribute.HealingBonus]}></FinalStat>
 						</div>
 					</div>
-					<div class="flex flex-col px-1">
-						<div class="text-lg font-semibold">Attack Bonus</div>
-						<div class="flex flex-col">
-							<FinalStat attribute={Attribute.BasicAttackBonus} value={data.final_stats[Attribute.BasicAttackBonus]}></FinalStat>
-							<FinalStat attribute={Attribute.HeavyAttackBonus} value={data.final_stats[Attribute.HeavyAttackBonus]}></FinalStat>
-							<FinalStat attribute={Attribute.ResonanceSkillBonus} value={data.final_stats[Attribute.ResonanceSkillBonus]}></FinalStat>
-							<FinalStat attribute={Attribute.ResonanceLiberationBonus} value={data.final_stats[Attribute.ResonanceLiberationBonus]}></FinalStat>
+					<div class="flex flex-col gap-1 divide-y">
+						<div class="flex flex-col px-1">
+							<div class="font-semibold">Attack Bonus</div>
+							<div class="flex flex-col">
+								<FinalStat attribute={Attribute.BasicAttackBonus} value={data.final_stats[Attribute.BasicAttackBonus]}></FinalStat>
+								<FinalStat attribute={Attribute.HeavyAttackBonus} value={data.final_stats[Attribute.HeavyAttackBonus]}></FinalStat>
+								<FinalStat attribute={Attribute.ResonanceSkillBonus} value={data.final_stats[Attribute.ResonanceSkillBonus]}></FinalStat>
+								<FinalStat attribute={Attribute.ResonanceLiberationBonus} value={data.final_stats[Attribute.ResonanceLiberationBonus]}></FinalStat>
+							</div>
+						</div>
+						<div class="flex flex-col px-1">
+							<div class="font-semibold">Element Bonus</div>
+							<div class="flex flex-col">
+								<FinalStat attribute={Attribute.GlacioBonus} value={data.final_stats[Attribute.GlacioBonus]}></FinalStat>
+								<FinalStat attribute={Attribute.FusionBonus} value={data.final_stats[Attribute.FusionBonus]}></FinalStat>
+								<FinalStat attribute={Attribute.ElectroBonus} value={data.final_stats[Attribute.ElectroBonus]}></FinalStat>
+								<FinalStat attribute={Attribute.AeroBonus} value={data.final_stats[Attribute.AeroBonus]}></FinalStat>
+								<FinalStat attribute={Attribute.SpectroBonus} value={data.final_stats[Attribute.SpectroBonus]}></FinalStat>
+								<FinalStat attribute={Attribute.HavocBonus} value={data.final_stats[Attribute.HavocBonus]}></FinalStat>
+							</div>
 						</div>
 					</div>
-					<div class="flex flex-col px-1">
-						<div class="text-lg font-semibold">Element Bonus</div>
-						<div class="flex flex-col">
-							<FinalStat attribute={Attribute.GlacioBonus} value={data.final_stats[Attribute.GlacioBonus]}></FinalStat>
-							<FinalStat attribute={Attribute.FusionBonus} value={data.final_stats[Attribute.FusionBonus]}></FinalStat>
-							<FinalStat attribute={Attribute.ElectroBonus} value={data.final_stats[Attribute.ElectroBonus]}></FinalStat>
-							<FinalStat attribute={Attribute.AeroBonus} value={data.final_stats[Attribute.AeroBonus]}></FinalStat>
-							<FinalStat attribute={Attribute.SpectroBonus} value={data.final_stats[Attribute.SpectroBonus]}></FinalStat>
-							<FinalStat attribute={Attribute.HavocBonus} value={data.final_stats[Attribute.HavocBonus]}></FinalStat>
+					<div class="flex-1 flex flex-col px-1">
+						<div class="text-lg font-semibold">Skills (average damage)</div>
+						<div class="flex flex-row divide-x gap-1">
+							{#each Object.entries(data.final_damages).filter(d => d[1].some(v => v.values.length > 0)) as [type, skill_data], i (i)}
+								<div class="flex-1 flex flex-col px-1">
+									<div class="font-semibold">{type}</div>
+									<div class="flex flex-col">
+										{#each skill_data as skill (skill.name)}
+											<div class="flex flex-row justify-between gap-2">
+												<div class="text-sm">{skill.name}</div>
+												<div class="text-sm">{skill.values.reduce((acc, n) => acc + n, 0).toFixed(0)}</div>
+											</div>
+										{/each}
+									</div>
+								</div>
+							{/each}
 						</div>
 					</div>
 				</div>

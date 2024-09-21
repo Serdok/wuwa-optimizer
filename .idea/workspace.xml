@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d42924a-c413-46c6-8d9d-946e469b47e8" name="Changes" comment="fix width of build count">
+    <list default="true" id="5d42924a-c413-46c6-8d9d-946e469b47e8" name="Changes" comment="do not display the stat is it is at 0 (or 0%)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/character.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/character.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/stat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/stat.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/character.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/character.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/stat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/stat.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/build/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/build/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/build/FinalStat.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/build/FinalStat.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +26,8 @@
         <option value="echoes/+page" />
         <option value="new/+page" />
         <option value="build/+page" />
-        <option value="TypeScript File" />
         <option value="FinalStat" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -94,7 +99,7 @@
       <window_info anchor="right" id="Nx Console" show_stripe_button="false" />
       <window_info anchor="right" id="Endpoints" show_stripe_button="false" />
       <window_info anchor="right" id="Coverage" show_stripe_button="false" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="Notifications" order="0" weight="0.32983398" />
       <window_info anchor="right" id="AIAssistant" order="1" weight="0.25" />
       <window_info anchor="right" id="Database" order="2" weight="0.25" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
@@ -160,7 +165,7 @@
       <workItem from="1726354712562" duration="41804000" />
       <workItem from="1726524567246" duration="98000" />
       <workItem from="1726524689469" duration="17763000" />
-      <workItem from="1726916752893" duration="2767000" />
+      <workItem from="1726916752893" duration="15079000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator">
       <option name="closed" value="true" />
@@ -178,7 +183,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726919255852</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="do not display the stat is it is at 0 (or 0%)">
+      <option name="closed" value="true" />
+      <created>1726920301014</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1726920301015</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,6 +203,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator" />
     <MESSAGE value="fix width of build count" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix width of build count" />
+    <MESSAGE value="do not display the stat is it is at 0 (or 0%)" />
+    <option name="LAST_COMMIT_MESSAGE" value="do not display the stat is it is at 0 (or 0%)" />
   </component>
 </project>

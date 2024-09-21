@@ -1,5 +1,5 @@
 import type { Element } from '$lib/types/element';
-import { Attribute } from '$lib/types/stat';
+import { AttackType, Attribute, SkillType } from '$lib/types/stat';
 import type { WeaponType } from '$lib/types/weapon';
 import type { UUID } from '$lib/types/common';
 
@@ -47,19 +47,28 @@ export const FinalCharacterStat = {
 } as const;
 export type FinalCharacterStat = { [attr in keyof typeof FinalCharacterStat]: number };
 
-export type CharacterMetadata = {
-	name: string,
-	quality: CharacterQuality,
-	element: Element,
-	weapon_type: WeaponType,
-	base_stats: FinalCharacterStat,
-	icon: {
-		head: string,
-		portrait: string,
-	}
+export type CharacterAttack = {
+	name: string;
+	element: Element;
+	attribute: Attribute;
+	type: AttackType;
+	values: number[];
 }
 
+export type CharacterSkill = { [type in SkillType]: CharacterAttack[] };
 
+export type CharacterMetadata = {
+	name: string;
+	quality: CharacterQuality;
+	element: Element;
+	weapon_type: WeaponType;
+	base_stats: FinalCharacterStat;
+	skills: CharacterSkill;
+	icon: {
+		head: string;
+		portrait: string;
+	};
+};
 
 export type Character = {
 	id: UUID,

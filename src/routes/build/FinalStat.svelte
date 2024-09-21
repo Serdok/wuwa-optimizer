@@ -8,13 +8,13 @@
 {#if value !== 0}
 	<div class="flex flex-row justify-between gap-4">
 		<div class="flex flex-row items-center gap-1">
-			<img src="{STATS_ICONS[attribute]}" alt="{attribute}" class="w-6"/>
-			<div class="text-lg">{attribute}</div>
+			<img src="{STATS_ICONS[attribute]}" alt="{attribute}" class="w-4"/>
+			<div class="text-sm">{attribute}</div>
 		</div>
 		{#if is_percentage}
-			<div class="text-lg">{value.toFixed(1)}%</div>
+			<div class="text-sm">{value.toFixed(1)}%</div>
 		{:else}
-			<div class="text-lg">{value.toFixed(0)}</div>
+			<div class="text-sm">{value.toFixed(0)}</div>
 		{/if}
 	</div>
 {/if}

@@ -415,7 +415,7 @@
 									<div class="flex flex-row items-center">
 										<div class="flex-1 flex flex-row items-center">
 											<img src="{STATS_ICONS[sub_stat.attribute]}" alt="{sub_stat.attribute}" class="w-6"/>
-											<p class="text-sm font-medium">{sub_stat.attribute}</p>
+											<p class="text-sm">{sub_stat.attribute}</p>
 											{#if is_flat_stat(sub_stat.attribute)}
 												<p class="pr-1 flex-1 text-right">+{sub_stat.value.toFixed(0)}</p>
 											{:else}

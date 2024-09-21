@@ -168,7 +168,7 @@
 				build,
 				final_stats: compute_final_stats(build),
 			}))
-			.filter((b) => b.final_stats)
+			.filter((b): b is {build: Echo[], final_stats: FinalCharacterStat} => !!b.final_stats)
 			// Descending order!
 			.toSorted((a, b) => (b.final_stats[sort_result_key] ?? 0) - (a.final_stats[sort_result_key] ?? 0))
 			.slice(0, max_builds)
@@ -202,12 +202,12 @@
 </script>
 
 <div class="flex flex-row gap-3 items-center">
-	<div class="flex flex-col gap-1 border-2 rounded-xl p-3">
+	<div class="basis-1/6 flex flex-col gap-1 border-2 rounded-xl p-3">
 		<div>{build_count} combinations found</div>
 		<button type="button" onclick="{generate_builds}" class="bg-indigo-600 rounded-lg">Generate builds</button>
 	</div>
 
-	<div class="flex-1 flex flex-col gap-4">
+	<div class="flex flex-col gap-4">
 		<div class="flex flex-col gap-2">
 			<div class="text-xl font-semibold">Character</div>
 			<div class="flex flex-rows gap-4">

@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d42924a-c413-46c6-8d9d-946e469b47e8" name="Changes" comment="" />
+    <list default="true" id="5d42924a-c413-46c6-8d9d-946e469b47e8" name="Changes" comment="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/build/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/build/+page.svelte" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,10 +26,26 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Serdok&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Serdok/wuwa-optimizer.git&quot;,
+    &quot;accountId&quot;: &quot;c553888f-49a7-4cbf-871f-29f3f5868f35&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2m4s8rgOfsuh8UU4ZXIIwqGEoPC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -34,6 +53,8 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/serdok/projects/wuwa-optimizer&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -56,17 +77,17 @@
       <window_info id="Merge Requests" show_stripe_button="false" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Pull Requests" show_stripe_button="false" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13738409" />
-      <window_info id="Commit" order="1" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11303711" />
+      <window_info id="Commit" order="1" weight="0.26573938" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
       <window_info anchor="bottom" id="TODO" show_stripe_button="false" />
       <window_info anchor="bottom" id="File Transfer" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.419708" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3299513" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.17883211" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.419708" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.3299513" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.3299513" />
       <window_info anchor="bottom" id="Services" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.3299513" />
@@ -122,7 +143,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-WS-242.21829.149" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.22855.79" />
       </set>
     </attachedChunks>
   </component>
@@ -138,8 +159,18 @@
       <workItem from="1726354533194" duration="160000" />
       <workItem from="1726354712562" duration="41804000" />
       <workItem from="1726524567246" duration="98000" />
-      <workItem from="1726524689469" duration="15301000" />
+      <workItem from="1726524689469" duration="17763000" />
+      <workItem from="1726916752893" duration="2015000" />
     </task>
+    <task id="LOCAL-00001" summary="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator">
+      <option name="closed" value="true" />
+      <created>1726618825781</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1726618825781</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,5 +178,9 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="package.json" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator" />
   </component>
 </project>

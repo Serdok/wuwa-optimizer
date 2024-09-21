@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d42924a-c413-46c6-8d9d-946e469b47e8" name="Changes" comment="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator">
+    <list default="true" id="5d42924a-c413-46c6-8d9d-946e469b47e8" name="Changes" comment="fix width of build count">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/build/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/build/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/build/FinalStat.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/build/FinalStat.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +78,7 @@
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Pull Requests" show_stripe_button="false" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11303711" />
-      <window_info id="Commit" order="1" weight="0.26573938" />
+      <window_info id="Commit" order="1" weight="0.11303711" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
       <window_info anchor="bottom" id="TODO" show_stripe_button="false" />
@@ -160,7 +160,7 @@
       <workItem from="1726354712562" duration="41804000" />
       <workItem from="1726524567246" duration="98000" />
       <workItem from="1726524689469" duration="17763000" />
-      <workItem from="1726916752893" duration="2015000" />
+      <workItem from="1726916752893" duration="2767000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator">
       <option name="closed" value="true" />
@@ -170,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726618825781</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix width of build count">
+      <option name="closed" value="true" />
+      <created>1726919255852</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1726919255852</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +189,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator" />
+    <MESSAGE value="fix width of build count" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix width of build count" />
   </component>
 </project>

@@ -131,30 +131,6 @@
 		}
 
 		return skills;
-
-		// const damages = Object.entries({ ...character.skills }).map(([key, skills]) => {
-		// 	const skill = key as SkillType;
-		//
-		// 	return { [skill]: skills.map(data => ({
-		// 			...data,
-		// 			values: data.values.map(dmg => {
-		// 				// TODO: handle skill scaling bonus
-		// 				const skill_hit = (final_stats[data.attribute] ?? 0) * dmg;
-		// 				// console.log(`[${skill} - ${data.type}] ${data.name} skill hit: `, skill_hit);
-		//
-		// 				const skill_bonus = (final_stats[ELEMENT_TO_STAT_BONUS[data.element]] ?? 0) + (final_stats[ATTACK_TO_STAT_BONUS[data.type]] ?? 0);
-		// 				// console.log(`[${skill} - ${data.type}] ${data.name} skill bonus: `, skill_bonus);
-		//
-		// 				// TODO: handle element deepen bonus
-		// 				const deepen_effect = 100;
-		// 				// console.log(`[${skill} - ${data.type}] ${data.name} deepen effect: `, deepen_effect);
-		//
-		// 				return skill_hit * skill_bonus/100 * deepen_effect/100;
-		// 			})
-		// 		})),
-		// 	}
-		// })
-		// return damages;
 	}
 
 	const base_stats = $derived.by(() => {
@@ -178,6 +154,12 @@
 		}, {});
 	});
 
+	const character_stats = $derived.by(() => {
+		if (!character) return {} as CharacterStat;
+
+		return character.stat_bonus;
+	})
+
 	const weapon_stats = $derived.by(() => {
 		if (!weapon) return undefined;
 
@@ -195,8 +177,8 @@
 			return stats;
 		}, {});
 
-		const sum_flat_stat = (flat_attribute: Attribute, percentage_attribute: Attribute) => (base_stats[flat_attribute] ?? 0) * (100 + (weapon_stats[percentage_attribute] ?? 0) + (echo_stats[percentage_attribute] ?? 0))/100 + (weapon_stats[flat_attribute] ?? 0) + (echo_stats[flat_attribute] ?? 0);
-		const sum_percentage_stat = (attribute: Attribute) => (base_stats[attribute] ?? 0) + (weapon_stats[attribute] ?? 0) + (echo_stats[attribute] ?? 0);
+		const sum_flat_stat = (flat_attribute: Attribute, percentage_attribute: Attribute) => (base_stats[flat_attribute] ?? 0) * (100 + (character_stats[percentage_attribute] ?? 0) + (weapon_stats[percentage_attribute] ?? 0) + (echo_stats[percentage_attribute] ?? 0))/100 + (character_stats[flat_attribute] ?? 0) + (weapon_stats[flat_attribute] ?? 0) + (echo_stats[flat_attribute] ?? 0);
+		const sum_percentage_stat = (attribute: Attribute) => (base_stats[attribute] ?? 0) + (character_stats[attribute] ?? 0) + (weapon_stats[attribute] ?? 0) + (echo_stats[attribute] ?? 0);
 
 		return {
 			// Flat stats

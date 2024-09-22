@@ -6,6 +6,9 @@ import type { UUID } from '$lib/types/common';
 export const CharacterQuality = [5, 4] as const;
 export type CharacterQuality = typeof CharacterQuality[number];
 
+export const CharacterResonanceChain = [0, 1, 2, 3, 4, 5, 6];
+export type CharacterResonanceChain = typeof CharacterResonanceChain[number];
+
 export type CharacterStat = { [attr in Attribute]?: number; }
 
 export const CharacterLevel = [
@@ -63,6 +66,7 @@ export type CharacterMetadata = {
 	element: Element;
 	weapon_type: WeaponType;
 	base_stats: FinalCharacterStat;
+	stat_bonus: CharacterStat,
 	skills: CharacterSkill;
 	icon: {
 		head: string;

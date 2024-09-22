@@ -29,6 +29,10 @@ export const CHARACTERS_METADATA: CharacterMetadata[] = [
 			[Attribute.ResonanceSkillBonus]: 0,
 			[Attribute.ResonanceLiberationBonus]: 0,
 		},
+		stat_bonus: {
+			[Attribute.ATK_P]: 12,
+			[Attribute.CritRate]: 8,
+		},
 		skills: {
 			[SkillType.NormalAttack]: [
 				{
@@ -134,6 +138,7 @@ export const CHARACTERS_METADATA: CharacterMetadata[] = [
 			[Attribute.ResonanceSkillBonus]: 0,
 			[Attribute.ResonanceLiberationBonus]: 0,
 		},
+		stat_bonus: {},
 		skills: {
 			[SkillType.NormalAttack]: [],
 			[SkillType.ResonanceSkill]: [],

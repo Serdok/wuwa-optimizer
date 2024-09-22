@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d42924a-c413-46c6-8d9d-946e469b47e8" name="Changes" comment="fix: enable prerendering to avoid a 404 error when loading a valid route" />
+    <list default="true" id="5d42924a-c413-46c6-8d9d-946e469b47e8" name="Changes" comment="added bonus stats (gained upon leveling the correct trace), assuming they are all unlocked">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/character.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/character.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/character.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/character.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/build/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/build/+page.svelte" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +92,7 @@
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" weight="0.3299513" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.3299513" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.3299513" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.3299513" />
       <window_info anchor="bottom" id="Services" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.3299513" />
@@ -237,6 +242,7 @@
     <MESSAGE value="fix: base crit damage for characters are 150%, not 100%" />
     <MESSAGE value="fix: styling issues causing overflow with large texts" />
     <MESSAGE value="fix: enable prerendering to avoid a 404 error when loading a valid route" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: enable prerendering to avoid a 404 error when loading a valid route" />
+    <MESSAGE value="added bonus stats (gained upon leveling the correct trace), assuming they are all unlocked" />
+    <option name="LAST_COMMIT_MESSAGE" value="added bonus stats (gained upon leveling the correct trace), assuming they are all unlocked" />
   </component>
 </project>

@@ -100,6 +100,11 @@
 	}
 
 	const finalize_echo = () => {
+		if (!metadata) {
+			console.error('echo metadata not set')
+			return;
+		}
+
 		if (sonata === '') {
 			console.error('sonata not set');
 			return;
@@ -127,6 +132,8 @@
 			id: crypto.randomUUID(),
 			name,
 			quality,
+			class: metadata.class,
+			cost: ECHO_CLASS_COST[metadata.class],
 			sonata: sonata as Sonata,
 			level,
 			main_stat: {

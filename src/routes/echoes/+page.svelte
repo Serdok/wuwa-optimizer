@@ -58,7 +58,7 @@
 								{#if is_flat_stat(echo.main_stat.primary.attribute)}
 									<p class="text-sm">{echo.main_stat.primary.value.toFixed(0)}</p>
 								{:else}
-									<p class="text-sm">{echo.main_stat.primary.value.toFixed(1)}%</p>
+									<p class="text-sm">{(echo.main_stat.primary.value * 100).toFixed(1)}%</p>
 								{/if}
 							</div>
 							<div class="flex flex-row items-center gap-1">
@@ -67,7 +67,7 @@
 								{#if is_flat_stat(echo.main_stat.secondary.attribute)}
 									<p class="text-xs">{echo.main_stat.secondary.value.toFixed(0)}</p>
 								{:else}
-									<p class="text-xs">{echo.main_stat.secondary.value.toFixed(1)}%</p>
+									<p class="text-xs">{(echo.main_stat.secondary.value * 100).toFixed(1)}%</p>
 								{/if}
 							</div>
 						</div>
@@ -83,7 +83,7 @@
 								{#if is_flat_stat(sub_stat.attribute)}
 									<p>+{sub_stat.value.toFixed(0)}</p>
 								{:else}
-									<p>+{sub_stat.value.toFixed(1)}%</p>
+									<p>+{(sub_stat.value * 100).toFixed(1)}%</p>
 								{/if}
 							</div>
 							<div class="text-sm font-light italic pr-2">

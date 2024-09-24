@@ -2,24 +2,8 @@ import { base } from '$app/paths';
 import { AttackType, Attribute } from '$lib/types/stat';
 import { Element } from '$lib/types/element';
 
-export const is_flat_stat = (stat: Attribute) => stat === Attribute.HP || stat === Attribute.ATK || stat === Attribute.DEF;
-
-export const ELEMENT_TO_STAT_BONUS = {
-	[Element.Glacio]: Attribute.GlacioBonus,
-	[Element.Fusion]: Attribute.FusionBonus,
-	[Element.Electro]: Attribute.ElectroBonus,
-	[Element.Aero]: Attribute.AeroBonus,
-	[Element.Havoc]: Attribute.HavocBonus,
-	[Element.Spectro]: Attribute.SpectroBonus,
-} as const;
-
-export const ATTACK_TO_STAT_BONUS = {
-	[AttackType.BasicAttack]: Attribute.BasicAttackBonus,
-	[AttackType.HeavyAttack]: Attribute.HeavyAttackBonus,
-	[AttackType.ResonanceSkill]: Attribute.ResonanceSkillBonus,
-	[AttackType.ResonanceLiberation]: Attribute.ResonanceLiberationBonus,
-	// [AttackType.IntroSkill]: Attribute.BasicAttackBonus,
-	// [AttackType.OutroSkill]: Attribute.BasicAttackBonus,
+export function is_flat_stat(stat: Attribute) {
+	return stat === Attribute.HP || stat === Attribute.ATK || stat === Attribute.DEF;
 }
 
 export const STATS_ICONS = {

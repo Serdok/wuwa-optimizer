@@ -1,30 +1,4 @@
-import { base } from '$app/paths';
-import { Attribute } from '$lib/types/stat';
-import { type WeaponLevel, type WeaponMetadata, WeaponType } from '$lib/types/weapon';
-
-
-export const WEAPONS_METADATA: WeaponMetadata[] = [
-	{
-		name: 'Ages of Harvest',
-		quality: 5,
-		type: WeaponType.BroadSword,
-		main_stat: {
-			primary: { attribute: Attribute.ATK, value: 47 },
-			secondary: { attribute: Attribute.CritRate, value: 5.4 },
-		},
-		icon: `${base}/assets/weapon/T_IconWeapon21010026_UI.png`
-	},
-	{
-		name: 'Blazing Brilliance',
-		quality: 5,
-		type: WeaponType.Sword,
-		main_stat: {
-			primary: { attribute: Attribute.ATK, value: 47 },
-			secondary: { attribute: Attribute.CritDamage, value: 10.8 },
-		},
-		icon: `${base}/assets/weapon/T_IconWeapon21020016_UI.png`
-	},
-] as const;
+import { type WeaponLevel } from '$lib/types/weapon';
 
 export const WEAPON_CURVE_1: { [level in WeaponLevel]: number } = {
 	'1/20': 1,

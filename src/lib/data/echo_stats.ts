@@ -16,28 +16,28 @@ export const PRIMARY_MAIN_STATS = [
 			{
 				attribute: Attribute.HP_P,
 				values: [
-					{ quality: 2, base: 2.8, },
-					{ quality: 3, base: 3, },
-					{ quality: 4, base: 3.4, },
-					{ quality: 5, base: 4.5, },
+					{ quality: 2, base: 0.028, },
+					{ quality: 3, base: 0.03, },
+					{ quality: 4, base: 0.034, },
+					{ quality: 5, base: 0.045, },
 				]
 			},
 			{
 				attribute: Attribute.ATK_P,
 				values: [
-					{ quality: 2, base: 2.2, },
-					{ quality: 3, base: 2.4, },
-					{ quality: 4, base: 2.7, },
-					{ quality: 5, base: 3.6, },
+					{ quality: 2, base: 0.022, },
+					{ quality: 3, base: 0.024, },
+					{ quality: 4, base: 0.027, },
+					{ quality: 5, base: 0.036, },
 				]
 			},
 			{
 				attribute: Attribute.DEF_P,
 				values: [
-					{ quality: 2, base: 2.2, },
-					{ quality: 3, base: 2.4, },
-					{ quality: 4, base: 2.7, },
-					{ quality: 5, base: 3.6, },
+					{ quality: 2, base: 0.022, },
+					{ quality: 3, base: 0.024, },
+					{ quality: 4, base: 0.027, },
+					{ quality: 5, base: 0.036, },
 				]
 			},
 		],
@@ -48,91 +48,91 @@ export const PRIMARY_MAIN_STATS = [
 			{
 				attribute: Attribute.HP_P,
 				values: [
-					{ quality: 2, base: 3.7, },
-					{ quality: 3, base: 4, },
-					{ quality: 4, base: 4.5, },
-					{ quality: 5, base: 6, },
+					{ quality: 2, base: 0.037, },
+					{ quality: 3, base: 0.04, },
+					{ quality: 4, base: 0.045, },
+					{ quality: 5, base: 0.06, },
 				]
 			},
 			{
 				attribute: Attribute.ATK_P,
 				values: [
-					{ quality: 2, base: 3.7, },
-					{ quality: 3, base: 4, },
-					{ quality: 4, base: 4.5, },
-					{ quality: 5, base: 6, },
+					{ quality: 2, base: 0.037, },
+					{ quality: 3, base: 0.04, },
+					{ quality: 4, base: 0.045, },
+					{ quality: 5, base: 0.06, },
 				]
 			},
 			{
 				attribute: Attribute.DEF_P,
 				values: [
-					{ quality: 2, base: 4.7, },
-					{ quality: 3, base: 5, },
-					{ quality: 4, base: 5.7, },
-					{ quality: 5, base: 7.6, },
+					{ quality: 2, base: 0.047, },
+					{ quality: 3, base: 0.05, },
+					{ quality: 4, base: 0.057, },
+					{ quality: 5, base: 0.076, },
 				]
 			},
 			{
 				attribute: Attribute.GlacioBonus,
 				values: [
-					{ quality: 2, base: 3.7, },
-					{ quality: 3, base: 4, },
-					{ quality: 4, base: 4.5, },
-					{ quality: 5, base: 6, },
+					{ quality: 2, base: 0.037, },
+					{ quality: 3, base: 0.04, },
+					{ quality: 4, base: 0.045, },
+					{ quality: 5, base: 0.06, },
 				]
 			},
 			{
 				attribute: Attribute.FusionBonus,
 				values: [
-					{ quality: 2, base: 3.7, },
-					{ quality: 3, base: 4, },
-					{ quality: 4, base: 4.5, },
-					{ quality: 5, base: 6, },
+					{ quality: 2, base: 0.037, },
+					{ quality: 3, base: 0.04, },
+					{ quality: 4, base: 0.045, },
+					{ quality: 5, base: 0.06, },
 				]
 			},
 			{
 				attribute: Attribute.ElectroBonus,
 				values: [
-					{ quality: 2, base: 3.7, },
-					{ quality: 3, base: 4, },
-					{ quality: 4, base: 4.5, },
-					{ quality: 5, base: 6, },
+					{ quality: 2, base: 0.037, },
+					{ quality: 3, base: 0.04, },
+					{ quality: 4, base: 0.045, },
+					{ quality: 5, base: 0.06, },
 				]
 			},
 			{
 				attribute: Attribute.AeroBonus,
 				values: [
-					{ quality: 2, base: 3.7, },
-					{ quality: 3, base: 4, },
-					{ quality: 4, base: 4.5, },
-					{ quality: 5, base: 6, },
+					{ quality: 2, base: 0.037, },
+					{ quality: 3, base: 0.04, },
+					{ quality: 4, base: 0.045, },
+					{ quality: 5, base: 0.06, },
 				]
 			},
 			{
 				attribute: Attribute.SpectroBonus,
 				values: [
-					{ quality: 2, base: 3.7, },
-					{ quality: 3, base: 4, },
-					{ quality: 4, base: 4.5, },
-					{ quality: 5, base: 6, },
+					{ quality: 2, base: 0.037, },
+					{ quality: 3, base: 0.04, },
+					{ quality: 4, base: 0.045, },
+					{ quality: 5, base: 0.06, },
 				]
 			},
 			{
 				attribute: Attribute.HavocBonus,
 				values: [
-					{ quality: 2, base: 3.7, },
-					{ quality: 3, base: 4, },
-					{ quality: 4, base: 4.5, },
-					{ quality: 5, base: 6, },
+					{ quality: 2, base: 0.037, },
+					{ quality: 3, base: 0.04, },
+					{ quality: 4, base: 0.045, },
+					{ quality: 5, base: 0.06, },
 				]
 			},
 			{
 				attribute: Attribute.EnergyRegen,
 				values: [
-					{ quality: 2, base: 3.85, },	// approximation
-					{ quality: 3, base: 5, },
-					{ quality: 4, base: 5.7, },
-					{ quality: 5, base: 7.6, },
+					{ quality: 2, base: 0.0385, },	// approximation
+					{ quality: 3, base: 0.05, },
+					{ quality: 4, base: 0.057, },
+					{ quality: 5, base: 0.076, },
 				]
 			}
 		],
@@ -143,55 +143,55 @@ export const PRIMARY_MAIN_STATS = [
 			{
 				attribute: Attribute.HP_P,
 				values: [
-					{ quality: 2, base: 4.1, },
-					{ quality: 3, base: 4.3, },
-					{ quality: 4, base: 4.9, },
-					{ quality: 5, base: 6.6, },
+					{ quality: 2, base: 0.041, },
+					{ quality: 3, base: 0.043, },
+					{ quality: 4, base: 0.049, },
+					{ quality: 5, base: 0.066, },
 				]
 			},
 			{
 				attribute: Attribute.ATK_P,
 				values: [
-					{ quality: 2, base: 4.1, },
-					{ quality: 3, base: 4.3, },
-					{ quality: 4, base: 4.9, },
-					{ quality: 5, base: 6.6, },
+					{ quality: 2, base: 0.041, },
+					{ quality: 3, base: 0.043, },
+					{ quality: 4, base: 0.049, },
+					{ quality: 5, base: 0.066, },
 				]
 			},
 			{
 				attribute: Attribute.DEF_P,
 				values: [
-					{ quality: 2, base: 5.2, },
-					{ quality: 3, base: 5.5, },
-					{ quality: 4, base: 6.2, },
-					{ quality: 5, base: 8.3, },
+					{ quality: 2, base: 0.052, },
+					{ quality: 3, base: 0.055, },
+					{ quality: 4, base: 0.062, },
+					{ quality: 5, base: 0.083, },
 				]
 			},
 			{
 				attribute: Attribute.CritRate,
 				values: [
-					{ quality: 2, base: 2.7, },
-					{ quality: 3, base: 2.9, },
-					{ quality: 4, base: 3.3, },
-					{ quality: 5, base: 4.4, },
+					{ quality: 2, base: 0.027, },
+					{ quality: 3, base: 0.029, },
+					{ quality: 4, base: 0.033, },
+					{ quality: 5, base: 0.044, },
 				]
 			},
 			{
 				attribute: Attribute.CritDamage,
 				values: [
-					{ quality: 2, base: 5.4, },
-					{ quality: 3, base: 5.8, },
-					{ quality: 4, base: 6.6, },
-					{ quality: 5, base: 8.8, },
+					{ quality: 2, base: 0.054, },
+					{ quality: 3, base: 0.058, },
+					{ quality: 4, base: 0.066, },
+					{ quality: 5, base: 0.088, },
 				]
 			},
 			{
 				attribute: Attribute.HealingBonus,
 				values: [
-					{ quality: 2, base: 3.27, },	// approximation
-					{ quality: 3, base: 3.5, },
-					{ quality: 4, base: 3.9, },
-					{ quality: 5, base: 5.2, },
+					{ quality: 2, base: 0.0327, },	// approximation
+					{ quality: 3, base: 0.035, },
+					{ quality: 4, base: 0.039, },
+					{ quality: 5, base: 0.052, },
 				]
 			},
 		],
@@ -258,42 +258,42 @@ export const SUB_STATS = [
 	},
 	{
 		attribute: Attribute.HP_P,
-		values: [6.4, 7.1, 7.9, 8.6, 9.4, 10.1, 10.9, 11.6],
+		values: [0.064, 0.071, 0.079, 0.086, 0.094, 0.101, 0.109, 0.116],
 	},
 	{
 		attribute: Attribute.ATK_P,
-		values: [6.4, 7.1, 7.9, 8.6, 9.4, 10.1, 10.9, 11.6],
+		values: [0.064, 0.071, 0.079, 0.086, 0.094, 0.101, 0.109, 0.116],
 	},
 	{
 		attribute: Attribute.DEF_P,
-		values: [8.1, 9, 10, 10.9, 11.8, 12.8, 13.8, 14.7],
+		values: [0.081, 0.09, 0.1, 0.109, 0.118, 0.128, 0.138, 0.147],
 	},
 	{
 		attribute: Attribute.CritRate,
-		values: [6.3, 6.9, 7.5, 8.1, 8.7, 9.3, 9.9, 10.5],
+		values: [0.063, 0.069, 0.075, 0.081, 0.087, 0.093, 0.099, 0.105],
 	},
 	{
 		attribute: Attribute.CritDamage,
-		values: [12.6, 13.8, 15, 16.2, 17.4, 18.6, 19.8, 21],
+		values: [0.126, 0.138, 0.15, 0.162, 0.174, 0.186, 0.198, 0.21],
 	},
 	{
 		attribute: Attribute.EnergyRegen,
-		values: [6.8, 7.6, 8.4, 9.2, 10, 10.8, 11.6, 12.4],
+		values: [0.068, 0.076, 0.084, 0.092, 0.1, 0.108, 0.116, 0.124],
 	},
 	{
 		attribute: Attribute.BasicAttackBonus,
-		values: [6.4, 7.1, 7.9, 8.6, 9.4, 10.1, 10.9, 11.6],
+		values: [0.064, 0.071, 0.079, 0.086, 0.094, 0.101, 0.109, 0.116],
 	},
 	{
 		attribute: Attribute.HeavyAttackBonus,
-		values: [6.4, 7.1, 7.9, 8.6, 9.4, 10.1, 10.9, 11.6],
+		values: [0.064, 0.071, 0.079, 0.086, 0.094, 0.101, 0.109, 0.116],
 	},
 	{
 		attribute: Attribute.ResonanceSkillBonus,
-		values: [6.4, 7.1, 7.9, 8.6, 9.4, 10.1, 10.9, 11.6],
+		values: [0.064, 0.071, 0.079, 0.086, 0.094, 0.101, 0.109, 0.116],
 	},
 	{
 		attribute: Attribute.ResonanceLiberationBonus,
-		values: [6.4, 7.1, 7.9, 8.6, 9.4, 10.1, 10.9, 11.6],
+		values: [0.064, 0.071, 0.079, 0.086, 0.094, 0.101, 0.109, 0.116],
 	},
 ] as const;

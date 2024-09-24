@@ -1,257 +1,41 @@
 <script lang="ts">
-	import { CHARACTER_CURVE, CHARACTERS_METADATA } from '$lib/data/character';
-	import { WEAPON_CURVE_1, WEAPON_CURVE_2, WEAPONS_METADATA } from '$lib/data/weapon';
-	import {
-		CharacterLevel,
-		type CharacterMetadata,
-		type CharacterSkill,
-		type CharacterStat,
-		FinalCharacterStat
-	} from '$lib/types/character';
-	import { WeaponLevel, WeaponType } from '$lib/types/weapon';
-	import { type Echo, Sonata } from '$lib/types/echo';
+	import changli from '$lib/data/character/changli';
+	import { Sonata } from '$lib/types/echo';
 	import { get_sonata_image } from '$lib/data/sonata';
-	import { ECHO_CLASS_COST, ECHOES_METADATA, get_echo_class, get_echo_icon } from '$lib/data/echo';
+	import StackInput from './StackInput.svelte';
+	import { create_character_config, create_weapon_config } from '$lib/optimizer/optimizer_config';
+	import { CharacterResonanceChain } from '$lib/types/character';
+	import { generate_builds } from '$lib/optimizer/generate_build';
 	import { get_echoes_snapshot } from '$lib/db/echo';
-	import { Attribute, SkillType } from '$lib/types/stat';
-	import { ATTACK_TO_STAT_BONUS, ELEMENT_TO_STAT_BONUS, is_flat_stat, STATS_ICONS } from '$lib/data/stat';
-	import FinalStat from './FinalStat.svelte';
+	import blazing_brilliance from '$lib/data/weapon/blazing_brilliance';
+	import { WeaponSyntonize } from '$lib/types/weapon';
+	import { compute_damage } from '$lib/optimizer/damage_pipeline';
 
-	let character_key = $state('');
-	const character = $derived(CHARACTERS_METADATA.find(c => c.name === character_key));
-	let character_level = $state(CharacterLevel.toReversed()[0].key);
+	let character_id = $state(changli.game_id);
+	let resonance_chain = $state(CharacterResonanceChain[0]);
+	const character = $derived(create_character_config(character_id, resonance_chain));
 
-	const weapons = $derived(WEAPONS_METADATA.filter(w => character && w.type === character.weapon_type));
+	let weapon_id = $state(blazing_brilliance.game_id);
+	let syntonize = $state(WeaponSyntonize[0]);
+	const weapon = $derived(create_weapon_config(weapon_id, syntonize));
 
-	let weapon_key = $state('');
-	const weapon = $derived(WEAPONS_METADATA.find(w => w.name === weapon_key));
-	let weapon_level = $state(WeaponLevel.toReversed()[0].key);
+	let optimizer_settings = $state({ keep_count: 5, });
 
-	let allowed_sonata = $state(Object.values(Sonata).map(s => ({ sonata: s, set_2: false, set_5: true })));
+	const sonata_filter = $state(Object.values(Sonata).map(s => ({ sonata: s, allow_2p: false, allow_5p: false, })));
 
-	const build_count = $derived(generate_combinations().length);
-	let max_builds = $state(5);
+	const build_count = $derived(generate_builds(get_echoes_snapshot(), sonata_filter).length);
 
-	const sort_result_keys = $derived.by(() => {
-		const keys = Object.keys(FinalCharacterStat);
-		if (!character) return keys;
-
-		return keys.concat(Object.values(character.skills).flatMap(s => s.flatMap(d => d.name)));
-	});
-	let sort_result_key: string = $state(Attribute.ATK);
-
-	let results: { build: Echo[], build_sets: ReturnType<typeof compute_builds_sets>, build_cost: string, final_stats: FinalCharacterStat, final_damages: CharacterSkill }[] = $state([]);
-
-	function generate_build(echoes: Echo[], n: number, max_weight: number): Echo[][] {
-		if (n === 0) return [[]];
-
-		if (echoes.length < n) {
-			// not enough elements to create a 5-pc build
-			// todo: handle partial builds
-			return [];
-		}
-
-		// recursively generate all builds with `echo` as the first element
-		return echoes.flatMap((echo, i) => {
-			const metadata = ECHOES_METADATA.find(e => e.name === echo.name);
-			if (!metadata) {
-				console.error(`echo metadata not found for ${echo.name}`);
-				return [];
-			}
-
-			return generate_build(echoes.slice(i + 1), n - 1, max_weight - ECHO_CLASS_COST[metadata.class])
-				.filter(build => !build.find(e => e.name === echo.name))	// filter out duplicates
-				.filter(build => build.reduce<number>((total_cost, e) => {
-					const meta = ECHOES_METADATA.find(e2 => e2.name === e.name);
-					if (!meta) {
-						console.error(`echo metadata not found for ${e.name}`);
-						return total_cost;
-					}
-
-					return total_cost + ECHO_CLASS_COST[meta.class];
-				}, ECHO_CLASS_COST[metadata.class]) <= max_weight) // filter out exceeding builds
-				.map(comb => [echo, ...comb]);
-		});
+	function launch_optimizer() {
+		const builds = generate_builds(get_echoes_snapshot(), sonata_filter);
+		builds.map(build => compute_damage(character, weapon, build));
 	}
 
-	function generate_combinations() {
-		// todo: handle builds with 2-pc filters
-		const filtered_sonata = allowed_sonata.filter(s => s.set_5);
-
-		return filtered_sonata.flatMap(s => {
-			const echoes = get_echoes_snapshot().filter(e => e.sonata === s.sonata);
-			return generate_build(echoes, 5, 12);
-		});
-	}
-
-	function compute_builds_sets(build: Echo[]) {
-		const sets = build.reduce<{[sonata in Sonata]?: number}>((sets, e) => {
-			sets[e.sonata] = (sets[e.sonata] ?? 0) + 1;
-			return sets;
-		}, {});
-		return Object.entries(sets).map(([sonata, count]): {sonata: Sonata, text: string} => ({sonata: sonata as Sonata, text: `${sonata} (${count}-pc)`}));
-	}
-
-	function compute_builds_cost(build: Echo[]) {
-		return build.map(echo => {
-			const metadata = ECHOES_METADATA.find(e => e.name === echo.name);
-			if (!metadata) {
-				console.error(`metadata not found for echo ${echo.name}`);
-				return 0;
-			}
-
-			return ECHO_CLASS_COST[metadata.class];
-		}).join('-')
-	}
-
-	function compute_attacks_damage(character: CharacterMetadata, final_stats: FinalCharacterStat) {
-		const skills = { ...character.skills };
-		for (const value in skills) {
-			const skill = value as SkillType;
-			skills[skill] = skills[skill].map(data => ({
-				...data,
-				values: data.values.map(dmg => {
-					// TODO: handle skill scaling bonus
-					const skill_hit = (final_stats[data.attribute] ?? 0) * dmg;
-					// console.log(`[${skill} - ${data.type}] ${data.name} skill hit: `, skill_hit);
-
-					const skill_bonus = (final_stats[ELEMENT_TO_STAT_BONUS[data.element]] ?? 0) + (final_stats[ATTACK_TO_STAT_BONUS[data.type]] ?? 0);
-					// console.log(`[${skill} - ${data.type}] ${data.name} skill bonus: `, skill_bonus);
-
-					// TODO: handle element deepen bonus
-					const deepen_effect = 100;
-					// console.log(`[${skill} - ${data.type}] ${data.name} deepen effect: `, deepen_effect);
-
-					const avg_crit = (final_stats[Attribute.CritRate] * final_stats[Attribute.CritDamage])/100;
-					// console.log(`[${skill} - ${data.type}] ${data.name} avg crit: `, avg_crit);
-
-					return skill_hit * (1 + skill_bonus/100 * deepen_effect/100 * avg_crit/100);
-				})
-			}));
-		}
-
-		return skills;
-	}
-
-	const base_stats = $derived.by(() => {
-		if (!character || !weapon) return undefined;
-
-		// todo: handle character conditional stats
-		return Object.entries(character.base_stats).reduce<CharacterStat>((stats, [key, value]) => {
-			const attribute = key as Attribute;
-			// apply character leveling curve
-			if (CHARACTER_CURVE[character_level] && CHARACTER_CURVE[character_level][attribute]) {
-				value *= CHARACTER_CURVE[character_level][attribute] ?? 1;
-			}
-
-			// apply weapon base stats (primary main stat and weapon leveling curve)
-			if (weapon.main_stat.primary.attribute === attribute) {
-				stats[attribute] = value + weapon.main_stat.primary.value * WEAPON_CURVE_1[weapon_level];
-				return stats;
-			}
-			stats[attribute] = value;
-			return stats;
-		}, {});
-	});
-
-	const character_stats = $derived.by(() => {
-		if (!character) return {} as CharacterStat;
-
-		return character.stat_bonus;
-	})
-
-	const weapon_stats = $derived.by(() => {
-		if (!weapon) return undefined;
-
-		// todo: handle weapon conditional stats
-		return { [weapon.main_stat.secondary.attribute]: weapon.main_stat.secondary.value * WEAPON_CURVE_2[weapon_level], };
-	})
-
-	function compute_final_stats(build: Echo[]) {
-		if (!base_stats || !weapon_stats) return undefined;
-
-		const echo_stats = build.reduce<CharacterStat>((stats, echo) => {
-			[echo.main_stat.primary, echo.main_stat.secondary, ...echo.sub_stats].forEach(stat => {
-				stats[stat.attribute] = (stats[stat.attribute] ?? 0) + stat.value;
-			});
-			return stats;
-		}, {});
-
-		const sum_flat_stat = (flat_attribute: Attribute, percentage_attribute: Attribute) => (base_stats[flat_attribute] ?? 0) * (100 + (character_stats[percentage_attribute] ?? 0) + (weapon_stats[percentage_attribute] ?? 0) + (echo_stats[percentage_attribute] ?? 0))/100 + (character_stats[flat_attribute] ?? 0) + (weapon_stats[flat_attribute] ?? 0) + (echo_stats[flat_attribute] ?? 0);
-		const sum_percentage_stat = (attribute: Attribute) => (base_stats[attribute] ?? 0) + (character_stats[attribute] ?? 0) + (weapon_stats[attribute] ?? 0) + (echo_stats[attribute] ?? 0);
-
-		return {
-			// Flat stats
-			[Attribute.HP]: sum_flat_stat(Attribute.HP, Attribute.HP_P),
-			[Attribute.ATK]: sum_flat_stat(Attribute.ATK, Attribute.ATK_P),
-			[Attribute.DEF]: sum_flat_stat(Attribute.DEF, Attribute.DEF_P),
-
-			// Percentage stats
-			[Attribute.CritRate]: sum_percentage_stat(Attribute.CritRate),
-			[Attribute.CritDamage]: sum_percentage_stat(Attribute.CritDamage),
-			[Attribute.EnergyRegen]: sum_percentage_stat(Attribute.EnergyRegen),
-			[Attribute.HealingBonus]: sum_percentage_stat(Attribute.HealingBonus),
-
-			// Element damage bonus
-			[Attribute.GlacioBonus]: sum_percentage_stat(Attribute.GlacioBonus),
-			[Attribute.FusionBonus]: sum_percentage_stat(Attribute.FusionBonus),
-			[Attribute.ElectroBonus]: sum_percentage_stat(Attribute.ElectroBonus),
-			[Attribute.AeroBonus]: sum_percentage_stat(Attribute.AeroBonus),
-			[Attribute.SpectroBonus]: sum_percentage_stat(Attribute.SpectroBonus),
-			[Attribute.HavocBonus]: sum_percentage_stat(Attribute.HavocBonus),
-
-			// Attack type bonus
-			[Attribute.BasicAttackBonus]: sum_percentage_stat(Attribute.BasicAttackBonus),
-			[Attribute.HeavyAttackBonus]: sum_percentage_stat(Attribute.HeavyAttackBonus),
-			[Attribute.ResonanceSkillBonus]: sum_percentage_stat(Attribute.ResonanceSkillBonus),
-			[Attribute.ResonanceLiberationBonus]: sum_percentage_stat(Attribute.ResonanceLiberationBonus),
-		};
-	}
-
-	function generate_builds() {
-		if (!character) return;
-
-		const builds = generate_combinations();
-		results = builds.map(build => (
-			{
-				build,
-				final_stats: compute_final_stats(build),
-			}))
-			.filter((b): b is {build: Echo[], final_stats: FinalCharacterStat} => !!b.final_stats)
-			.map(b => ({ ...b, final_damages: compute_attacks_damage(character, b.final_stats)}))
-			// Descending order!
-			.toSorted((a, b) => {
-				if (sort_result_key in FinalCharacterStat) {
-					const key = sort_result_key as keyof typeof FinalCharacterStat;
-					return (b.final_stats[key] ?? 0) - (a.final_stats[key] ?? 0);
-				}
-
-				if (Object.values(character.skills).some(s => s.find(d => d.name === sort_result_key))) {
-					const [key, value] = Object.entries(character.skills).find(s => s[1].find(d => d.name === sort_result_key))!;
-					const skill = key as SkillType;
-					const left = b.final_damages[skill].find(v => v.name === sort_result_key)?.values.reduce((acc, n) => acc + n, 0) ?? 0;
-					const right = a.final_damages[skill].find(v => v.name === sort_result_key)?.values.reduce((acc, n) => acc + n, 0) ?? 0;
-					return left - right;
-				}
-
-				return -1;
-			})
-			.slice(0, max_builds)
-			.map(result => ({
-				...result,
-				build_sets: compute_builds_sets(result.build),
-				build_cost: compute_builds_cost(result.build),
-			}));
-
-		console.log(`final stats, ordered by ${sort_result_key}: `, $state.snapshot(results));
-	}
-
-	const quality_class = {
-		2: 'flex flex-row gap-2 bg-rarity-2',
-		3: 'flex flex-row gap-2 bg-rarity-3',
-		4: 'flex flex-row gap-2 bg-rarity-4',
-		5: 'flex flex-row gap-2 bg-rarity-5',
-	}
+	// const quality_class = {
+	// 	2: 'flex flex-row gap-2 bg-rarity-2',
+	// 	3: 'flex flex-row gap-2 bg-rarity-3',
+	// 	4: 'flex flex-row gap-2 bg-rarity-4',
+	// 	5: 'flex flex-row gap-2 bg-rarity-5',
+	// }
 
 	const sonata_class = {
 		[Sonata.FreezingFrost]: 'w-6 border border-blue-600 rounded-full',
@@ -269,43 +53,49 @@
 <div class="flex flex-row gap-3 items-center">
 	<div class="basis-1/6 flex flex-col gap-1 border-2 rounded-xl p-3">
 		<div>{build_count} combinations found</div>
-		<button type="button" onclick="{generate_builds}" class="bg-indigo-600 rounded-lg">Generate builds</button>
+		<button type="button" onclick="{launch_optimizer}" disabled="{build_count === 0}" class="bg-indigo-600 disabled:bg-indigo-800 rounded-lg">Optimize</button>
 	</div>
 
 	<div class="flex flex-col gap-4">
 		<div class="flex flex-col gap-2">
-			<div class="text-xl font-semibold">Character</div>
+			<div class="text-xl font-semibold">Character Configuration</div>
 			<div class="flex flex-rows gap-4">
 				<div class="h-72 w-64 border-2 rounded-xl overflow-hidden">
 					{#if character}
-						<img src="{character.icon.portrait}" alt="{character.name}" class="scale-125"/>
-						<!--					<img src="{character.icon.head}" alt="{character.name}" class="scale-125"/>-->
+						<img src="{character.image.portrait}" alt="{character.name}" class="scale-125"/>
+<!--						<img src="{character.image.head}" alt="{character.name}" class="scale-125"/>-->
 					{/if}
 				</div>
 				<div class="h-72 w-64 flex flex-col gap-2 border-2 rounded-xl p-2">
 					<div class="flex flex-col gap-1">
 						<div class="text-sm">Character</div>
-						<select bind:value={character_key} class="text-xs rounded-xl bg-indigo-800">
-							{#each Object.values(WeaponType) as type}
-								<optgroup label="{type}">
-									{#each CHARACTERS_METADATA.filter(c => c.weapon_type === type) as ch (ch.name)}
-										<option value="{ch.name}">{ch.name}</option>
-									{/each}
-								</optgroup>
-							{/each}
-						</select>
+						<div class="flex flex-row gap-1">
+							<select bind:value={character_id} class="text-xs rounded-xl bg-indigo-800 flex-1">
+								<option value="{changli.game_id}">{changli.name}</option>
+							</select>
+							<select bind:value={resonance_chain} class="text-xs rounded-xl bg-indigo-800">
+								{#each CharacterResonanceChain as rc}
+									<option value="{rc}">RC{rc}</option>
+								{/each}
+							</select>
+						</div>
 					</div>
 					<div class="flex flex-col gap-1">
 						<div class="text-sm">Weapon</div>
-						<select bind:value={weapon_key} class="text-xs rounded-xl bg-indigo-800">
-							{#each weapons as we}
-								<option value="{we.name}">{we.name}</option>
-							{/each}
-						</select>
+						<div class="flex flex-row gap-1">
+							<select bind:value={weapon_id} class="text-xs rounded-xl bg-indigo-800 flex-1">
+								<option value="{blazing_brilliance.game_id}">{blazing_brilliance.name}</option>
+							</select>
+							<select bind:value={syntonize} class="text-xs rounded-xl bg-indigo-800">
+								{#each WeaponSyntonize as s}
+									<option value="{s}">S{s}</option>
+								{/each}
+							</select>
+						</div>
 					</div>
 					<div class="flex flex-col gap-1">
 						<div class="text-sm">Optimization settings</div>
-						<select bind:value={max_builds} class="text-xs rounded-xl bg-indigo-800">
+						<select bind:value={optimizer_settings.keep_count} class="text-xs rounded-xl bg-indigo-800">
 							<option value="{1}">Top 1 build</option>
 							<option value="{2}">Top 2 builds</option>
 							<option value="{3}">Top 3 builds</option>
@@ -315,34 +105,43 @@
 							<option value="{10}">Top 10 builds</option>
 						</select>
 					</div>
-					<div class="flex flex-col gap-1">
-						<div class="text-sm">Sort results by</div>
-						<select bind:value={sort_result_key} class="text-xs rounded-xl bg-indigo-800">
-							{#each sort_result_keys as key}
-								<option value="{key}">{key}</option>
-							{/each}
-						</select>
+<!--					<div class="flex flex-col gap-1">-->
+<!--						<div class="text-sm">Sort results by</div>-->
+<!--					</div>-->
+				</div>
+				<div class="h-72 w-64 flex flex-col border-2 rounded-xl p-2">
+					<div class="text-sm">Character Effects</div>
+					<div class="flex flex-col">
+						{#each Object.values(character.stacks) as stack (stack.name)}
+							<StackInput {stack} on_update={(name, value) => stack.value = value} ></StackInput>
+						{/each}
 					</div>
 				</div>
-<!--			<div class="h-72 w-64 border-2 rounded-xl p-2">character conditionals</div>-->
-<!--			<div class="h-72 w-64 border-2 rounded-xl p-2">weapon conditionals</div>-->
+				<div class="h-72 w-64 flex flex-col border-2 rounded-xl p-2">
+					<div class="text-sm">Weapon Effects</div>
+					<div class="flex flex-col">
+						{#each Object.values(weapon.stacks) as stack (stack.name)}
+							<StackInput {stack} on_update={(name, value) => stack.value = value} ></StackInput>
+						{/each}
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="flex flex-col gap-2">
-			<div class="text-xl font-semibold">Echo</div>
+			<div class="text-xl font-semibold">Build Configuration</div>
 			<div class="flex flex-row gap-4">
 				<div class="h-64 border-2 rounded-xl p-2 grid grid-cols-3 items-center gap-2">
-					{#each allowed_sonata as s, i (i)}
+					{#each sonata_filter as filter, i (i)}
 						<div>
 							<div class="flex flex-row gap-1 items-center">
-								<img src="{get_sonata_image(s.sonata)}" alt="{s.sonata}" class="{sonata_class[s.sonata]}"/>
-								<div>{s.sonata}</div>
+								<img src="{get_sonata_image(filter.sonata)}" alt="{filter.sonata}" class="{sonata_class[filter.sonata]}"/>
+								<div>{filter.sonata}</div>
 							</div>
 							<label>2-pc
-								<input type="checkbox" bind:checked={allowed_sonata[i].set_2} disabled/>
+								<input type="checkbox" bind:checked={sonata_filter[i].allow_2p}/>
 							</label>
 							<label>5-pc
-								<input type="checkbox" bind:checked={allowed_sonata[i].set_5}/>
+								<input type="checkbox" bind:checked={sonata_filter[i].allow_5p}/>
 							</label>
 						</div>
 					{/each}
@@ -352,126 +151,126 @@
 	</div>
 </div>
 
-{#if results.length > 0}
-	<div class="mt-6 py-2 border-2 rounded-xl flex flex-col gap-3 divide-y-2">
-		{#each results as data, i (i)}
-			<div class="p-1">
-				<div class="flex flex-row gap-4 items-center">
-					<div class="font-bold text-lg">Build #{i + 1}</div>
-					<div class="font-semibold">{data.build_cost}</div>
-					<div>
-						{#each data.build_sets as set, j (j)}
-							<div class="flex flex-row items-center gap-1">
-								<img src="{get_sonata_image(set.sonata)}" alt="{set.sonata}" class="{sonata_class[set.sonata]}"/>
-								<div>{set.text}</div>
-							</div>
-						{/each}
-					</div>
-				</div>
-				<div class="mt-1 grid grid-cols-5 gap-1">
-					{#each data.build as echo (echo.id)}
-						<div class="h-64 flex flex-col bg-indigo-800 gap-1 rounded-b-2xl">
-							<div>
-								<div class="{quality_class[echo.quality]}">
-									<img src="{get_echo_icon(echo.name)?.head}" alt="{echo.name}" class="w-24 bg-indigo-800 rounded-tr-2xl"/>
-									<div class="flex-1 pl-2 flex flex-col bg-indigo-800 rounded-bl-2xl">
-										<p class="pt-1 text-xs font-light">{get_echo_class(echo.name)}</p>
-										<div class="flex flex-row items-center gap-1">
-											<p class="text-sm font-bold">{echo.name}</p>
-											<p class="pr-1 text-sm font-semibold">+{echo.level}</p>
-										</div>
-										<div class="mt-1 flex flex-row items-center gap-1">
-											<img src="{STATS_ICONS[echo.main_stat.primary.attribute]}" alt="{echo.main_stat.primary.attribute}" class="w-6" />
-											<p class="text-xs font-semibold">{echo.main_stat.primary.attribute}</p>
-											{#if is_flat_stat(echo.main_stat.primary.attribute)}
-												<p class="text-xs pr-1">{echo.main_stat.primary.value.toFixed(0)}</p>
-											{:else}
-												<p class="text-xs pr-1">{echo.main_stat.primary.value.toFixed(1)}%</p>
-											{/if}
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="pl-2 flex-1 flex flex-col">
-								{#each echo.sub_stats as sub_stat (sub_stat.attribute)}
-									<div class="flex flex-row items-center">
-										<div class="flex-1 flex flex-row items-center">
-											<img src="{STATS_ICONS[sub_stat.attribute]}" alt="{sub_stat.attribute}" class="w-6"/>
-											<p class="text-sm">{sub_stat.attribute}</p>
-											{#if is_flat_stat(sub_stat.attribute)}
-												<p class="pr-1 flex-1 text-right">+{sub_stat.value.toFixed(0)}</p>
-											{:else}
-												<p class="pr-1 flex-1 text-right">+{sub_stat.value.toFixed(1)}%</p>
-											{/if}
-										</div>
-									</div>
-								{/each}
-							</div>
-							<div class="pb-1 px-2 flex flex-row gap-2">
-								{#if echo.equipped_by}
-									<p class="flex-1 font-light">Equipped by {echo.equipped_by}</p>
-								{:else}
-									<p class="flex-1 font-light">Not equipped</p>
-								{/if}
-							</div>
-						</div>
-					{/each}
-				</div>
-				<div class="mt-1 flex flex-row flex-wrap gap-3 divide-x">
-					<div class="flex flex-col px-1">
-						<div class="text-lg font-semibold">Stats</div>
-						<div class="flex flex-col">
-							<FinalStat attribute={Attribute.HP} value={data.final_stats[Attribute.HP]} is_percentage={false}></FinalStat>
-							<FinalStat attribute={Attribute.ATK} value={data.final_stats[Attribute.ATK]} is_percentage={false}></FinalStat>
-							<FinalStat attribute={Attribute.DEF} value={data.final_stats[Attribute.DEF]} is_percentage={false}></FinalStat>
-							<FinalStat attribute={Attribute.CritRate} value={data.final_stats[Attribute.CritRate]}></FinalStat>
-							<FinalStat attribute={Attribute.CritDamage} value={data.final_stats[Attribute.CritDamage]}></FinalStat>
-							<FinalStat attribute={Attribute.EnergyRegen} value={data.final_stats[Attribute.EnergyRegen]}></FinalStat>
-							<FinalStat attribute={Attribute.HealingBonus} value={data.final_stats[Attribute.HealingBonus]}></FinalStat>
-						</div>
-					</div>
-					<div class="flex flex-col gap-1 divide-y">
-						<div class="flex flex-col px-1">
-							<div class="font-semibold">Attack Bonus</div>
-							<div class="flex flex-col">
-								<FinalStat attribute={Attribute.BasicAttackBonus} value={data.final_stats[Attribute.BasicAttackBonus]}></FinalStat>
-								<FinalStat attribute={Attribute.HeavyAttackBonus} value={data.final_stats[Attribute.HeavyAttackBonus]}></FinalStat>
-								<FinalStat attribute={Attribute.ResonanceSkillBonus} value={data.final_stats[Attribute.ResonanceSkillBonus]}></FinalStat>
-								<FinalStat attribute={Attribute.ResonanceLiberationBonus} value={data.final_stats[Attribute.ResonanceLiberationBonus]}></FinalStat>
-							</div>
-						</div>
-						<div class="flex flex-col px-1">
-							<div class="font-semibold">Element Bonus</div>
-							<div class="flex flex-col">
-								<FinalStat attribute={Attribute.GlacioBonus} value={data.final_stats[Attribute.GlacioBonus]}></FinalStat>
-								<FinalStat attribute={Attribute.FusionBonus} value={data.final_stats[Attribute.FusionBonus]}></FinalStat>
-								<FinalStat attribute={Attribute.ElectroBonus} value={data.final_stats[Attribute.ElectroBonus]}></FinalStat>
-								<FinalStat attribute={Attribute.AeroBonus} value={data.final_stats[Attribute.AeroBonus]}></FinalStat>
-								<FinalStat attribute={Attribute.SpectroBonus} value={data.final_stats[Attribute.SpectroBonus]}></FinalStat>
-								<FinalStat attribute={Attribute.HavocBonus} value={data.final_stats[Attribute.HavocBonus]}></FinalStat>
-							</div>
-						</div>
-					</div>
-					<div class="flex-1 flex flex-col px-1">
-						<div class="text-lg font-semibold">Skills (average damage)</div>
-						<div class="flex flex-row divide-x gap-1">
-							{#each Object.entries(data.final_damages).filter(d => d[1].some(v => v.values.length > 0)) as [type, skill_data], i (i)}
-								<div class="flex-1 flex flex-col px-1">
-									<div class="font-semibold">{type}</div>
-									<div class="flex flex-col">
-										{#each skill_data as skill (skill.name)}
-											<div class="flex flex-row justify-between gap-2">
-												<div class="text-sm">{skill.name}</div>
-												<div class="text-sm">{skill.values.reduce((acc, n) => acc + n, 0).toFixed(0)}</div>
-											</div>
-										{/each}
-									</div>
-								</div>
-							{/each}
-						</div>
-					</div>
-				</div>
-			</div>
-		{/each}
-	</div>
-{/if}
+<!--{#if results.length > 0}-->
+<!--	<div class="mt-6 py-2 border-2 rounded-xl flex flex-col gap-3 divide-y-2">-->
+<!--		{#each results as data, i (i)}-->
+<!--			<div class="p-1">-->
+<!--				<div class="flex flex-row gap-4 items-center">-->
+<!--					<div class="font-bold text-lg">Build #{i + 1}</div>-->
+<!--					<div class="font-semibold">{data.build_cost}</div>-->
+<!--					<div>-->
+<!--						{#each data.build_sets as set, j (j)}-->
+<!--							<div class="flex flex-row items-center gap-1">-->
+<!--								<img src="{get_sonata_image(set.sonata)}" alt="{set.sonata}" class="{sonata_class[set.sonata]}"/>-->
+<!--								<div>{set.text}</div>-->
+<!--							</div>-->
+<!--						{/each}-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div class="mt-1 grid grid-cols-5 gap-1">-->
+<!--					{#each data.build as echo (echo.id)}-->
+<!--						<div class="h-64 flex flex-col bg-indigo-800 gap-1 rounded-b-2xl">-->
+<!--							<div>-->
+<!--								<div class="{quality_class[echo.quality]}">-->
+<!--									<img src="{get_echo_icon(echo.name)?.head}" alt="{echo.name}" class="w-24 bg-indigo-800 rounded-tr-2xl"/>-->
+<!--									<div class="flex-1 pl-2 flex flex-col bg-indigo-800 rounded-bl-2xl">-->
+<!--										<p class="pt-1 text-xs font-light">{get_echo_class(echo.name)}</p>-->
+<!--										<div class="flex flex-row items-center gap-1">-->
+<!--											<p class="text-sm font-bold">{echo.name}</p>-->
+<!--											<p class="pr-1 text-sm font-semibold">+{echo.level}</p>-->
+<!--										</div>-->
+<!--										<div class="mt-1 flex flex-row items-center gap-1">-->
+<!--											<img src="{STATS_ICONS[echo.main_stat.primary.attribute]}" alt="{echo.main_stat.primary.attribute}" class="w-6" />-->
+<!--											<p class="text-xs font-semibold">{echo.main_stat.primary.attribute}</p>-->
+<!--											{#if is_flat_stat(echo.main_stat.primary.attribute)}-->
+<!--												<p class="text-xs pr-1">{echo.main_stat.primary.value.toFixed(0)}</p>-->
+<!--											{:else}-->
+<!--												<p class="text-xs pr-1">{echo.main_stat.primary.value.toFixed(1)}%</p>-->
+<!--											{/if}-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							<div class="pl-2 flex-1 flex flex-col">-->
+<!--								{#each echo.sub_stats as sub_stat (sub_stat.attribute)}-->
+<!--									<div class="flex flex-row items-center">-->
+<!--										<div class="flex-1 flex flex-row items-center">-->
+<!--											<img src="{STATS_ICONS[sub_stat.attribute]}" alt="{sub_stat.attribute}" class="w-6"/>-->
+<!--											<p class="text-sm">{sub_stat.attribute}</p>-->
+<!--											{#if is_flat_stat(sub_stat.attribute)}-->
+<!--												<p class="pr-1 flex-1 text-right">+{sub_stat.value.toFixed(0)}</p>-->
+<!--											{:else}-->
+<!--												<p class="pr-1 flex-1 text-right">+{sub_stat.value.toFixed(1)}%</p>-->
+<!--											{/if}-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								{/each}-->
+<!--							</div>-->
+<!--							<div class="pb-1 px-2 flex flex-row gap-2">-->
+<!--								{#if echo.equipped_by}-->
+<!--									<p class="flex-1 font-light">Equipped by {echo.equipped_by}</p>-->
+<!--								{:else}-->
+<!--									<p class="flex-1 font-light">Not equipped</p>-->
+<!--								{/if}-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					{/each}-->
+<!--				</div>-->
+<!--				<div class="mt-1 flex flex-row flex-wrap gap-3 divide-x">-->
+<!--					<div class="flex flex-col px-1">-->
+<!--						<div class="text-lg font-semibold">Stats</div>-->
+<!--						<div class="flex flex-col">-->
+<!--							<FinalStat attribute={Attribute.HP} value={data.final_stats[Attribute.HP]} is_percentage={false}></FinalStat>-->
+<!--							<FinalStat attribute={Attribute.ATK} value={data.final_stats[Attribute.ATK]} is_percentage={false}></FinalStat>-->
+<!--							<FinalStat attribute={Attribute.DEF} value={data.final_stats[Attribute.DEF]} is_percentage={false}></FinalStat>-->
+<!--							<FinalStat attribute={Attribute.CritRate} value={data.final_stats[Attribute.CritRate]}></FinalStat>-->
+<!--							<FinalStat attribute={Attribute.CritDamage} value={data.final_stats[Attribute.CritDamage]}></FinalStat>-->
+<!--							<FinalStat attribute={Attribute.EnergyRegen} value={data.final_stats[Attribute.EnergyRegen]}></FinalStat>-->
+<!--							<FinalStat attribute={Attribute.HealingBonus} value={data.final_stats[Attribute.HealingBonus]}></FinalStat>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="flex flex-col gap-1 divide-y">-->
+<!--						<div class="flex flex-col px-1">-->
+<!--							<div class="font-semibold">Attack Bonus</div>-->
+<!--							<div class="flex flex-col">-->
+<!--								<FinalStat attribute={Attribute.BasicAttackBonus} value={data.final_stats[Attribute.BasicAttackBonus]}></FinalStat>-->
+<!--								<FinalStat attribute={Attribute.HeavyAttackBonus} value={data.final_stats[Attribute.HeavyAttackBonus]}></FinalStat>-->
+<!--								<FinalStat attribute={Attribute.ResonanceSkillBonus} value={data.final_stats[Attribute.ResonanceSkillBonus]}></FinalStat>-->
+<!--								<FinalStat attribute={Attribute.ResonanceLiberationBonus} value={data.final_stats[Attribute.ResonanceLiberationBonus]}></FinalStat>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="flex flex-col px-1">-->
+<!--							<div class="font-semibold">Element Bonus</div>-->
+<!--							<div class="flex flex-col">-->
+<!--								<FinalStat attribute={Attribute.GlacioBonus} value={data.final_stats[Attribute.GlacioBonus]}></FinalStat>-->
+<!--								<FinalStat attribute={Attribute.FusionBonus} value={data.final_stats[Attribute.FusionBonus]}></FinalStat>-->
+<!--								<FinalStat attribute={Attribute.ElectroBonus} value={data.final_stats[Attribute.ElectroBonus]}></FinalStat>-->
+<!--								<FinalStat attribute={Attribute.AeroBonus} value={data.final_stats[Attribute.AeroBonus]}></FinalStat>-->
+<!--								<FinalStat attribute={Attribute.SpectroBonus} value={data.final_stats[Attribute.SpectroBonus]}></FinalStat>-->
+<!--								<FinalStat attribute={Attribute.HavocBonus} value={data.final_stats[Attribute.HavocBonus]}></FinalStat>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="flex-1 flex flex-col px-1">-->
+<!--						<div class="text-lg font-semibold">Skills (average damage)</div>-->
+<!--						<div class="flex flex-row divide-x gap-1">-->
+<!--							{#each Object.entries(data.final_damages).filter(d => d[1].some(v => v.values.length > 0)) as [type, skill_data], i (i)}-->
+<!--								<div class="flex-1 flex flex-col px-1">-->
+<!--									<div class="font-semibold">{type}</div>-->
+<!--									<div class="flex flex-col">-->
+<!--										{#each skill_data as skill (skill.name)}-->
+<!--											<div class="flex flex-row justify-between gap-2">-->
+<!--												<div class="text-sm">{skill.name}</div>-->
+<!--												<div class="text-sm">{skill.values.reduce((acc, n) => acc + n, 0).toFixed(0)}</div>-->
+<!--											</div>-->
+<!--										{/each}-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							{/each}-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		{/each}-->
+<!--	</div>-->
+<!--{/if}-->

@@ -1,5 +1,5 @@
-import type { UUID } from '$lib/types/common';
-import type { Stat } from '$lib/types/stat';
+import { Attribute, type Stat } from '$lib/types/stat';
+import type { CharacterStat } from '$lib/types/character';
 
 export enum WeaponType {
 	BroadSword = 'Broadsword',
@@ -11,6 +11,9 @@ export enum WeaponType {
 
 export const WeaponQuality = [5, 4, 3, 2, 1] as const;
 export type WeaponQuality = typeof WeaponQuality[number];
+
+export const WeaponSyntonize = [1, 2, 3, 4, 5] as const;
+export type WeaponSyntonize = typeof WeaponSyntonize[number];
 
 export const WeaponLevel = [
 	{ key: '1/20', ascension: 0, level: 1, },
@@ -30,24 +33,51 @@ export const WeaponLevel = [
 ] as const;
 export type WeaponLevel = typeof WeaponLevel[number]['key'];
 
+export type WeaponStackMetadata = {
+	name: string,
+	default_value: number,
+	max_stacks?: number,
+};
+
+export type WeaponStack = {
+	name: string,
+	default_value: number,
+	value: number,
+	max_stacks?: number,
+};
+
+export type WeaponConditional = {
+	name: string,
+	condition: (weapon: Weapon) => boolean,
+	pre_compute: (weapon: Weapon, stats: CharacterStat) => CharacterStat,
+}
+
 export type WeaponMetadata = {
+	game_id: number,
 	name: string,
 	quality: WeaponQuality,
-	type: WeaponType,
+	weapon_type: WeaponType,
 	main_stat: {
-		primary: Stat,
+		primary: { attribute: Attribute.HP | Attribute.ATK | Attribute.DEF, value: number },
 		secondary: Stat,
 	},
-	icon: string,
+	stacks: { [key in string]: WeaponStackMetadata },
+	conditionals: WeaponConditional[],
+	image: string,
 }
 
 export type Weapon = {
-	id: UUID,
+	game_id: number,
 	name: string,
-	level: WeaponLevel,
+	quality: WeaponQuality,
+	weapon_type: WeaponType,
+	syntonize: WeaponSyntonize,
 	main_stat: {
-		primary: Stat,
+		primary: { attribute: Attribute.HP | Attribute.ATK | Attribute.DEF, value: number },
 		secondary: Stat,
-	}
+	},
+	stacks: { [key in string]: (WeaponStackMetadata & { value: number, }) },
+	conditionals: WeaponConditional[],
+	image: string,
 };
 

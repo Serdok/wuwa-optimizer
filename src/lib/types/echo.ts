@@ -38,6 +38,8 @@ export type Echo = {
 	name: string,
 	sonata: Sonata,
 	quality: EchoQuality,
+	class: EchoClass,
+	cost: EchoCost,
 	level: number,
 	main_stat: { primary: Stat, secondary: Stat, },
 	sub_stats: Stat[],

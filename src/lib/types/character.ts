@@ -1,7 +1,6 @@
 import type { Element } from '$lib/types/element';
-import { AttackType, Attribute, SkillType } from '$lib/types/stat';
+import { AttackType, Attribute, SkillType, type Stat } from '$lib/types/stat';
 import type { WeaponType } from '$lib/types/weapon';
-import type { UUID } from '$lib/types/common';
 
 export const CharacterQuality = [5, 4] as const;
 export type CharacterQuality = typeof CharacterQuality[number];
@@ -9,7 +8,7 @@ export type CharacterQuality = typeof CharacterQuality[number];
 export const CharacterResonanceChain = [0, 1, 2, 3, 4, 5, 6];
 export type CharacterResonanceChain = typeof CharacterResonanceChain[number];
 
-export type CharacterStat = { [attr in Attribute]?: number; }
+export type CharacterStat = { [attr in Attribute]?: number }
 
 export const CharacterLevel = [
 	{ key: '1/20', ascension: 0, level: 1, },
@@ -37,47 +36,111 @@ export const FinalCharacterStat = {
 	[Attribute.CritDamage]: 0,
 	[Attribute.EnergyRegen]: 0,
 	[Attribute.HealingBonus]: 0,
+
 	[Attribute.GlacioBonus]: 0,
 	[Attribute.FusionBonus]: 0,
 	[Attribute.ElectroBonus]: 0,
 	[Attribute.AeroBonus]: 0,
 	[Attribute.SpectroBonus]: 0,
 	[Attribute.HavocBonus]: 0,
+
 	[Attribute.BasicAttackBonus]: 0,
 	[Attribute.HeavyAttackBonus]: 0,
 	[Attribute.ResonanceSkillBonus]: 0,
 	[Attribute.ResonanceLiberationBonus]: 0,
+	[Attribute.ForteCircuitBonus]: 0,
+	[Attribute.IntroBonus]: 0,
+	[Attribute.OutroBonus]: 0,
+
+	[Attribute.GlacioAmplify]: 0,
+	[Attribute.FusionAmplify]: 0,
+	[Attribute.ElectroAmplify]: 0,
+	[Attribute.AeroAmplify]: 0,
+	[Attribute.SpectroAmplify]: 0,
+	[Attribute.HavocAmplify]: 0,
+
+	[Attribute.BasicAttackAmplify]: 0,
+	[Attribute.HeavyAttackAmplify]: 0,
+	[Attribute.ResonanceSkillAmplify]: 0,
+	[Attribute.ResonanceLiberationAmplify]: 0,
+	[Attribute.IntroAmplify]: 0,
+	[Attribute.OutroAmplify]: 0,
+
+	[Attribute.BasicAttackDEFIgnore]: 0,
+	[Attribute.HeavyAttackDEFIgnore]: 0,
+	[Attribute.ResonanceSkillDEFIgnore]: 0,
+	[Attribute.ResonanceLiberationDEFIgnore]: 0,
+	[Attribute.IntroDEFIgnore]: 0,
+	[Attribute.OutroDEFIgnore]: 0,
 } as const;
 export type FinalCharacterStat = { [attr in keyof typeof FinalCharacterStat]: number };
 
-export type CharacterAttack = {
-	name: string;
-	element: Element;
-	attribute: Attribute;
-	type: AttackType;
-	values: number[];
+export type CharacterMotions = {
+	name: string,
+	element: Element,
+	attribute: Attribute.HP | Attribute.ATK | Attribute.DEF,
+	type: AttackType,
+	values: number[],
 }
 
-export type CharacterSkill = { [type in SkillType]: CharacterAttack[] };
+export type CharacterSkill = {
+	name: string,
+	motions: CharacterMotions[],
+};
+
+export type CharacterStackMetadata = {
+	name: string,
+	default_value: number,
+	max_stacks?: number,
+};
+
+export type CharacterStack = {
+	name: string,
+	default_value: number,
+	value: number,
+	max_stacks?: number,
+};
+
+export type CharacterConditional = {
+	name: string,
+	condition: (character: Character) => boolean,
+	pre_compute: (character: Character, stats: CharacterStat) => CharacterStat,
+}
 
 export type CharacterMetadata = {
-	name: string;
-	quality: CharacterQuality;
-	element: Element;
-	weapon_type: WeaponType;
-	base_stats: FinalCharacterStat;
-	stat_bonus: CharacterStat,
-	skills: CharacterSkill;
-	icon: {
-		head: string;
-		portrait: string;
-	};
+	game_id: number,
+	name: string,
+	quality: CharacterQuality,
+	element: Element,
+	weapon_type: WeaponType,
+	base_stats: { [Attribute.HP]: { attribute: Attribute.HP, value: number }, [Attribute.ATK]: { attribute: Attribute.ATK, value: number }, [Attribute.DEF]: { attribute: Attribute.DEF, value: number }, },
+	stat_bonuses: Stat[],
+	skills: { [type in SkillType]: CharacterSkill },
+	stacks: { [key in string]: CharacterStackMetadata },
+	conditionals: CharacterConditional[],
+	image: {
+		circle: string,
+		head: string,
+		portrait: string,
+	},
 };
 
 export type Character = {
-	id: UUID,
+	game_id: number,
 	name: string,
-	level: CharacterLevel,
-	stats: CharacterStat,
-}
+	quality: CharacterQuality,
+	element: Element,
+	weapon_type: WeaponType,
+	resonance_chain: CharacterResonanceChain,
+	base_stats: { [Attribute.HP]: { attribute: Attribute.HP, value: number }, [Attribute.ATK]: { attribute: Attribute.ATK, value: number }, [Attribute.DEF]: { attribute: Attribute.DEF, value: number }, },
+	stat_bonuses: (Stat & { enabled: boolean })[],
+	skills: { [type in SkillType]: CharacterSkill },
+	stacks: { [key in string]: (CharacterStackMetadata & { value: number, }) },
+	conditionals: CharacterConditional[],
+	image: {
+		circle: string,
+		head: string,
+		portrait: string,
+	},
+};
 

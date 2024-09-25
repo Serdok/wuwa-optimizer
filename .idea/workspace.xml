@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d42924a-c413-46c6-8d9d-946e469b47e8" name="Changes" comment="add CI workflow, rework CD workflow to run after CI successfully ran without errors">
+    <list default="true" id="5d42924a-c413-46c6-8d9d-946e469b47e8" name="Changes" comment="add extra echo fields due to the type change">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/new/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/new/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/computed_stats_pipeline.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/computed_stats_pipeline.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,8 +106,8 @@
       <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
       <window_info id="Merge Requests" show_stripe_button="false" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.23413086" />
-      <window_info active="true" id="Commit" order="1" visible="true" weight="0.23413086" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23413086" />
+      <window_info id="Commit" order="1" weight="0.23413086" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info id="Pull Requests" order="2" weight="0.23413086" />
       <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
@@ -115,7 +115,7 @@
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.3299513" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" weight="0.3299513" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.3299513" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3299513" />
       <window_info anchor="bottom" id="Run" order="4" weight="0.3299513" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.50527596" />
       <window_info anchor="bottom" id="Services" order="6" />
@@ -131,7 +131,7 @@
       <window_info anchor="right" id="Maven" order="4" weight="0.25" />
     </layout>
   </component>
-  <component name="RunManager" selected="npm.test">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="should generate 1 empty combinations" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
@@ -187,8 +187,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.test" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.test" />
         <item itemvalue="Vitest.should generate 1 empty combinations" />
         <item itemvalue="npm.preview" />
         <item itemvalue="npm.build" />
@@ -216,7 +216,7 @@
       <workItem from="1726524567246" duration="98000" />
       <workItem from="1726524689469" duration="17763000" />
       <workItem from="1726916752893" duration="15079000" />
-      <workItem from="1727119189872" duration="26177000" />
+      <workItem from="1727119189872" duration="29404000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit&#10;&#10;- basic echo managment (add/delete)&#10;- basic echo display&#10;- basic build generator">
       <option name="closed" value="true" />
@@ -290,7 +290,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727219238885</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add extra echo fields due to the type change">
+      <option name="closed" value="true" />
+      <created>1727219710555</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1727219710555</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,6 +329,7 @@
     <MESSAGE value="changed svelte config to take into account a .env file in the project" />
     <MESSAGE value="feat: conditional buffs and stacks&#10;&#10;- added more attributes to take into account all possible buffs&#10;- changed percentage representation to be handled as-is in code, and multiplied by 100 when displayed&#10;- generate a list of builds (a build is a combination of 1 to 5 echoes) given a sonata filter&#10;- define a set of stacks the character/weapon can get&#10;- define a set of conditionals that a character/weapon can have that applies a set of stat buffs&#10;- aggregate the stats of a given character,weapon and build&#10;- compute the final damage numbers for a character, split into non-crit, average and crit damage numbers" />
     <MESSAGE value="add CI workflow, rework CD workflow to run after CI successfully ran without errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="add CI workflow, rework CD workflow to run after CI successfully ran without errors" />
+    <MESSAGE value="add extra echo fields due to the type change" />
+    <option name="LAST_COMMIT_MESSAGE" value="add extra echo fields due to the type change" />
   </component>
 </project>

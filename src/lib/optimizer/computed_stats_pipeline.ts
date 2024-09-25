@@ -12,9 +12,10 @@ export function compute_stats(character: Character, weapon: Weapon, build: Echo[
 	};
 
 	// apply character bonuses
-	for (const bonus of character.stat_bonuses.filter(b => b.enabled)) {
-		computed_stats[bonus.attribute] = (computed_stats[bonus.attribute] || 0) + bonus.value;
-	}
+	computed_stats = character.stat_bonuses.filter(b => b.enabled).reduce((stats, buff) => ({
+		...stats,
+		[buff.attribute]: (stats[buff.attribute] || 0) + buff.value,
+	}), computed_stats);
 	console.log('after character bonuses: ', structuredClone(computed_stats));
 
 	// apply character conditionals

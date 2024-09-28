@@ -48,7 +48,6 @@ export const FinalCharacterStat = {
 	[Attribute.HeavyAttackBonus]: 0,
 	[Attribute.ResonanceSkillBonus]: 0,
 	[Attribute.ResonanceLiberationBonus]: 0,
-	[Attribute.ForteCircuitBonus]: 0,
 	[Attribute.IntroBonus]: 0,
 	[Attribute.OutroBonus]: 0,
 
@@ -75,18 +74,33 @@ export const FinalCharacterStat = {
 } as const;
 export type FinalCharacterStat = { [attr in keyof typeof FinalCharacterStat]: number };
 
-export type CharacterMotions = {
+export type CharacterMotion = {
 	name: string,
 	element: Element,
 	attribute: Attribute.HP | Attribute.ATK | Attribute.DEF,
 	type: AttackType,
 	values: number[],
+	conditionals: CharacterConditional[]
 }
 
 export type CharacterSkill = {
 	name: string,
-	motions: CharacterMotions[],
+	motions: CharacterMotion[],
 };
+
+export type OptimizedMotion = {
+	name: string,
+	element: Element,
+	attribute: Attribute.HP | Attribute.ATK | Attribute.DEF,
+	type: AttackType,
+	values: number[],
+	hits: { non_crit: number, average: number, crit: number }[],
+}
+
+export type OptimizedSkill = {
+	name: string
+	motions: OptimizedMotion[]
+}
 
 export type CharacterStackMetadata = {
 	name: string,
@@ -117,7 +131,7 @@ export type CharacterMetadata = {
 	stat_bonuses: Stat[],
 	skills: { [type in SkillType]: CharacterSkill },
 	stacks: { [key in string]: CharacterStackMetadata },
-	conditionals: CharacterConditional[],
+	// conditionals: CharacterConditional[],
 	image: {
 		circle: string,
 		head: string,
@@ -136,7 +150,7 @@ export type Character = {
 	stat_bonuses: (Stat & { enabled: boolean })[],
 	skills: { [type in SkillType]: CharacterSkill },
 	stacks: { [key in string]: (CharacterStackMetadata & { value: number, }) },
-	conditionals: CharacterConditional[],
+	// conditionals: CharacterConditional[],
 	image: {
 		circle: string,
 		head: string,

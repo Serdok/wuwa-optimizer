@@ -21,7 +21,6 @@ export enum Attribute {
 	HeavyAttackBonus = 'Heavy Attack DMG Bonus',
 	ResonanceSkillBonus = 'Resonance Skill DMG Bonus',
 	ResonanceLiberationBonus = 'Resonance Liberation DMG Bonus',
-	ForteCircuitBonus = 'Forte Circuit DMG Bonus',
 	IntroBonus = 'Intro DMG Bonus',
 	OutroBonus = 'Outro DMG Bonus',
 
@@ -36,7 +35,6 @@ export enum Attribute {
 	HeavyAttackAmplify = 'Heavy Attack DMG Amplify',
 	ResonanceSkillAmplify = 'Resonance Skill DMG Amplify',
 	ResonanceLiberationAmplify = 'Resonance Liberation DMG Amplify',
-	ForteCircuitAmplify = 'Forte Circuit DMG Amplify',
 	IntroAmplify = 'Intro DMG Amplify',
 	OutroAmplify = 'Outro DMG Amplify',
 
@@ -44,7 +42,6 @@ export enum Attribute {
 	HeavyAttackDEFIgnore = 'Heavy Attack DEF Ignore',
 	ResonanceSkillDEFIgnore = 'Resonance Skill DEF Ignore',
 	ResonanceLiberationDEFIgnore = 'Resonance Liberation DEF Ignore',
-	ForteCircuitDEFIgnore = 'Forte Circuit DEF Ignore',
 	IntroDEFIgnore = 'Intro Skill DEF Ignore',
 	OutroDEFIgnore = 'Outro Skill DEF Ignore',
 

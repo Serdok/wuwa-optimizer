@@ -3,7 +3,7 @@ import type { Weapon } from '$lib/types/weapon';
 import type { Echo } from '$lib/types/echo';
 import { AttackType, Attribute } from '$lib/types/stat';
 import { Element } from '$lib/types/element';
-import { compute_stats } from '$lib/optimizer/computed_stats_pipeline';
+import { compute_base_stats, compute_combat_stats, compute_motion_stats } from '$lib/optimizer/compute_stats';
 
 
 export function compute_damage(character: Character, weapon: Weapon, build: Echo[]) {
@@ -12,61 +12,44 @@ export function compute_damage(character: Character, weapon: Weapon, build: Echo
 	console.log('weapon: ', weapon);
 	console.log('build: ', build);
 
-	const base_stats = compute_base_stat(character.base_stats, weapon);
+	const base_stats = compute_base_stats(character.base_stats, weapon);
 	console.log('base stats', base_stats);
 
-	const computed_stats = compute_stats(character, weapon, build);
+	const combat_stats = compute_combat_stats(character, weapon, build);
+	console.log('combat stats', combat_stats);
 
-	// related_property * (skill_multiplier * skill_scaling)
-	const skills_hits = Object.fromEntries(Object.entries(character.skills).map(([key, skill]) => {
-		return [key, {
-			...skill,
-			motions: skill.motions.map(m => {
-				// TODO: take into account scaling bonus here?
-				const scaling_bonus = (computed_stats[get_related_skill_multiplier(m.type)] ?? 0);
-				return { ...m, values: m.values.map(v => v * sum_as_flat_stat(m.attribute, base_stats, computed_stats) * scaling_bonus), }
-			}),
-		}];
-	}));
-	console.log('skills hits: ', structuredClone(skills_hits));
+	return Object.fromEntries(Object.entries(character.skills).map(([type, data]) => {
+		const motions = data.motions.map(m => {
+			const motion_stats = compute_motion_stats(combat_stats, character, m);
+			console.log(`computed stats for ${data.name} - ${m.name}: `, motion_stats);
 
-	// skill_hit * (element_dmg_bonus + skill_dmg_bonus) * amplify
-	const expected_hits = Object.fromEntries(Object.entries(skills_hits).map(([key, skill]) => {
-		const motions = skill.motions.map(m => {
-			const element_bonus = computed_stats[get_related_element_bonus(m.element)] ?? 1;
-			const element_amplify = computed_stats[get_related_element_amplify(m.element)] ?? 1;
-			const skill_bonus = computed_stats[get_related_skill_bonus(m.type)] ?? 0;
-			const skill_amplify = computed_stats[get_related_skill_amplify(m.type)] ?? 0;
-			return { ...m, values: m.values.map(v => v * (element_bonus + skill_bonus) * (element_amplify + skill_amplify)), };
+			// related_property * (skill_multiplier * skill_scaling)
+			const scaling_bonus = (motion_stats[get_related_skill_multiplier(m.type)] ?? 0);
+			const skill_hits = m.values.map(v => v * (1 + scaling_bonus) * sum_as_flat_stat(m.attribute, base_stats, motion_stats));
+			console.log(`skill hits for ${data.name} - ${m.name}: `, skill_hits);
+
+			// skill_hit * (element_dmg_bonus + skill_dmg_bonus) * amplify
+			const element_bonus = motion_stats[get_related_element_bonus(m.element)] ?? 0;
+			const element_amplify = motion_stats[get_related_element_amplify(m.element)] ?? 0;
+			const skill_bonus = motion_stats[get_related_skill_bonus(m.type)] ?? 0;
+			const skill_amplify = motion_stats[get_related_skill_amplify(m.type)] ?? 0;
+			const expected_hits = skill_hits.map(v => v * (1 + element_bonus + skill_bonus) * (1 + element_amplify + skill_amplify));
+			console.log(`expected hits for ${data.name} - ${m.name}: `, expected_hits);
+
+			// we compute all 3 kinds of crit hits: non-crit (= current values), average, force crit
+			const crit_rate = motion_stats[Attribute.CritRate] ?? 0.05;
+			const crit_damage = motion_stats[Attribute.CritDamage] ?? 1.50;
+			const crit_hits = expected_hits.map(v => ({ non_crit: v, average: v * ((1 - crit_rate) + (crit_rate * crit_damage)), crit: v * crit_damage }));
+			console.log(`crit hits for ${data.name} - ${m.name}: `, crit_hits);
+
+			return { ...m, hits: crit_hits };
 		});
-		return [key, { ...skill, motions, }];
+		return [type, { ...data, motions }];
 	}));
-	console.log('expected hits: ', structuredClone(expected_hits));
-
-	// we compute all 3 kinds of crit hits: non-crit (= current values), average, force crit
-	const final_hits = Object.fromEntries(Object.entries(skills_hits).map(([key, skill]) => {
-		const motions = skill.motions.map(m => {
-			const crit_rate = computed_stats[Attribute.CritRate] ?? 0.05;
-			const crit_damage = computed_stats[Attribute.CritDamage] ?? 1.50;
-			return { ...m, average: m.values.map(v => v * ((1 - crit_rate) + (crit_rate * crit_damage))), crit: m.values.map(v => v * crit_damage) };
-		});
-		return [key, { ...skill, motions, }];
-	}));
-	console.log('final hits: ', structuredClone(final_hits));
 }
 
 function sum_as_flat_stat(flat: keyof Character['base_stats'], base_stats: Character['base_stats'], computed_stats: CharacterStat) {
 	return base_stats[flat].value * (1 + (computed_stats[`${flat}%`] ?? 0)) + (computed_stats[flat] ?? 0);
-}
-
-function compute_base_stat(base_stat: Character['base_stats'], weapon: Weapon): Character['base_stats'] {
-	const { attribute, value: weapon_value } = weapon.main_stat.primary;
-
-	return {
-		...base_stat,
-		// sum the base stat with the matching weapon primary stat
-		[attribute]: { attribute, value: base_stat[attribute].value + weapon_value },
-	};
 }
 
 function get_related_element_bonus(element: Element) {

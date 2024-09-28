@@ -8,18 +8,19 @@ import { CHARACTER_CURVE } from '$lib/data/character';
 
 export function create_character_config(game_id: number, resonance_chain: CharacterResonanceChain): Character {
 	// TODO: get character metadata from game id :^)
+	const character = changli(resonance_chain);
 
 	return {
-		...changli,
+		...character,
 		resonance_chain,
 		base_stats: {
-			[Attribute.HP]: { attribute: Attribute.HP, value: changli.base_stats[Attribute.HP].value * CHARACTER_CURVE['90/90'][Attribute.HP] },
-			[Attribute.ATK]: { attribute: Attribute.ATK, value: changli.base_stats[Attribute.ATK].value * CHARACTER_CURVE['90/90'][Attribute.ATK] },
-			[Attribute.DEF]: { attribute: Attribute.DEF, value: changli.base_stats[Attribute.DEF].value * CHARACTER_CURVE['90/90'][Attribute.DEF] },
+			[Attribute.HP]: { attribute: Attribute.HP, value: character.base_stats[Attribute.HP].value * CHARACTER_CURVE['90/90'][Attribute.HP] },
+			[Attribute.ATK]: { attribute: Attribute.ATK, value: character.base_stats[Attribute.ATK].value * CHARACTER_CURVE['90/90'][Attribute.ATK] },
+			[Attribute.DEF]: { attribute: Attribute.DEF, value: character.base_stats[Attribute.DEF].value * CHARACTER_CURVE['90/90'][Attribute.DEF] },
 		},
-		stat_bonuses: changli.stat_bonuses.map((s) => ({ ...s, enabled: true })), // assume all passive stats are unlocked
+		stat_bonuses: character.stat_bonuses.map((s) => ({ ...s, enabled: true })), // assume all passive stats are unlocked
 		stacks: Object.fromEntries(
-			Object.entries(changli.stacks).map(([key, value]) => [
+			Object.entries(character.stacks).map(([key, value]) => [
 				key,
 				{ ...value, value: value.default_value, }
 			])

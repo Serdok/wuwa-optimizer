@@ -27,13 +27,13 @@
 	let syntonize = $state(WeaponSyntonize[0]);
 	const weapon = $derived(create_weapon_config(weapon_id, syntonize));
 
-	let optimizer_settings = $state({ keep_count: 5, });
+	let optimizer_settings = $state({ keep_count: 3, });
 
 	const sonata_filter = $state(Object.values(Sonata).map(s => ({ sonata: s, allow_2p: false, allow_5p: false, })));
 
 	const build_count = $derived(generate_builds(get_echoes_snapshot(), sonata_filter).length);
 
-	let results: {build: Echo[], configuration: string, damages: object, stats: CharacterStat}[] = $state([]);
+	let results: {build: Echo[], build_effects: { sonata: Sonata, text: string }[], configuration: string, damages: object, stats: CharacterStat}[] = $state([]);
 	function launch_optimizer() {
 		const builds = generate_builds(get_echoes_snapshot(), sonata_filter);
 		results = builds
@@ -42,8 +42,22 @@
 					.filter(b => b.condition(character))
 					.reduce((stats, b) => b.pre_compute(character, stats), compute_combat_stats(character, weapon, build));
 
+				const build_effects = Object.entries(build.reduce<{ [s in Sonata]?: number }>((sets, e) => {
+					sets[e.sonata] = (sets[e.sonata] || 0) + 1;
+					return sets;
+				}, {}))
+					.filter(([, count]) => count >= 2)
+					.map(([set, count]) => {
+						if (count === 5) {
+							return { sonata: set as Sonata, text: `${set} (5-pc)` };
+						}
+						return { sonata: set as Sonata, text: `${set} (2-pc)` };
+					});
+
+
 				return {
 					build,
+					build_effects,
 					configuration: build.map(e => e.cost).join('-'),
 					damages: compute_damage(character, weapon, build),
 					stats: compute_effective_stats(character, weapon, combat_buffs),
@@ -185,14 +199,14 @@
 				<div class="flex flex-row gap-4 items-center">
 					<div class="font-bold text-lg">Build #{i + 1}</div>
 					<div class="font-semibold">{data.configuration}</div>
-<!--					<div>-->
-<!--						{#each data.build_sets as set, j (j)}-->
-<!--							<div class="flex flex-row items-center gap-1">-->
-<!--								<img src="{get_sonata_image(set.sonata)}" alt="{set.sonata}" class="{sonata_class[set.sonata]}"/>-->
-<!--								<div>{set.text}</div>-->
-<!--							</div>-->
-<!--						{/each}-->
-<!--					</div>-->
+					<div>
+						{#each data.build_effects as set, j (j)}
+							<div class="flex flex-row items-center gap-1">
+								<img src="{get_sonata_image(set.sonata)}" alt="{set.sonata}" class="{sonata_class[set.sonata]}"/>
+								<div>{set.text}</div>
+							</div>
+						{/each}
+					</div>
 				</div>
 				<div class="mt-1 grid grid-cols-5 gap-1">
 					{#each data.build as echo (echo.id)}

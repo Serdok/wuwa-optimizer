@@ -1,0 +1,107 @@
+[
+  {
+    "id": "4a428f61-a88d-4b7e-bdcc-3af660df05ab",
+    "name": "Fusion Dreadmane",
+    "quality": 5,
+    "sonata": "Molten Rift",
+    "class": "Common",
+    "cost": 1,
+    "level": 25,
+    "main_stat": {
+      "primary": { "attribute": "ATK%", "value": 18 },
+      "secondary": { "attribute": "HP", "value": 2280 }
+    },
+    "sub_stats": [
+      { "attribute": "DEF", "value": 60 },
+      { "attribute": "Crit. Damage", "value": 15 },
+      { "attribute": "ATK", "value": 30 },
+      { "attribute": "Crit. Rate", "value": 8.7 },
+      { "attribute": "Energy Regen", "value": 10 }
+    ],
+    "equipped_by": null
+  },
+  {
+    "id": "be20755b-1ad0-4024-9a03-611aba7e6900",
+    "name": "Fusion Warrior",
+    "quality": 5,
+    "sonata": "Molten Rift",
+    "class": "Common",
+    "cost": 1,
+    "level": 25,
+    "main_stat": {
+      "primary": { "attribute": "ATK%", "value": 18 },
+      "secondary": { "attribute": "HP", "value": 2280 }
+    },
+    "sub_stats": [
+      { "attribute": "Crit. Damage", "value": 15 },
+      { "attribute": "HP", "value": 430 },
+      { "attribute": "Crit. Rate", "value": 7.5 },
+      { "attribute": "Resonance Liberation DMG Bonus", "value": 8.6 },
+      { "attribute": "DEF%", "value": 10.9 }
+    ],
+    "equipped_by": null
+  },
+  {
+    "id": "e636a200-7aa6-4951-905b-a3539c85746d",
+    "name": "Havoc Dreadmane",
+    "quality": 5,
+    "sonata": "Molten Rift",
+    "class": "Elite",
+    "cost": 3,
+    "level": 25,
+    "main_stat": {
+      "primary": { "attribute": "Fusion DMG Bonus", "value": 30 },
+      "secondary": { "attribute": "ATK", "value": 100 }
+    },
+    "sub_stats": [
+      { "attribute": "Crit. Damage", "value": 21 },
+      { "attribute": "Resonance Liberation DMG Bonus", "value": 10.9 },
+      { "attribute": "ATK", "value": 40 },
+      { "attribute": "HP%", "value": 8.6 },
+      { "attribute": "Crit. Rate", "value": 6.9 }
+    ],
+    "equipped_by": null
+  },
+  {
+    "id": "9d4e0c02-4962-4907-b252-ea195da27c29",
+    "name": "Violet-Feathered Heron",
+    "quality": 5,
+    "sonata": "Molten Rift",
+    "class": "Elite",
+    "cost": 3,
+    "level": 25,
+    "main_stat": {
+      "primary": { "attribute": "ATK%", "value": 30 },
+      "secondary": { "attribute": "ATK", "value": 100 }
+    },
+    "sub_stats": [
+      { "attribute": "Crit. Rate", "value": 7.5 },
+      { "attribute": "ATK%", "value": 7.1 },
+      { "attribute": "Crit. Damage", "value": 17.4 },
+      { "attribute": "HP%", "value": 9.4 },
+      { "attribute": "Heavy Attack DMG Bonus", "value": 7.9 }
+    ],
+    "equipped_by": null
+  },
+  {
+    "id": "89ea59ce-9182-4ceb-b640-04472199192c",
+    "name": "Inferno Rider",
+    "quality": 5,
+    "sonata": "Molten Rift",
+    "class": "Overlord",
+    "cost": 4,
+    "level": 25,
+    "main_stat": {
+      "primary": { "attribute": "Crit. Damage", "value": 44 },
+      "secondary": { "attribute": "ATK", "value": 150 }
+    },
+    "sub_stats": [
+      { "attribute": "Crit. Damage", "value": 15 },
+      { "attribute": "HP%", "value": 10.1 },
+      { "attribute": "DEF", "value": 60 },
+      { "attribute": "Crit. Rate", "value": 6.9 },
+      { "attribute": "Resonance Liberation DMG Bonus", "value": 9.4 }
+    ],
+    "equipped_by": null
+  }
+]

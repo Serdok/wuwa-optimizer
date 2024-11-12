@@ -366,9 +366,9 @@
 					<DisplayEcho {echo} />
 				{/each}
 			</div>
-			<div class="h-80 flex flex-col flex-wrap">
+			<div class="columns-3">
 				<!-- damage + stats -->
-				<div class="flex flex-col gap-1 px-2">
+				<div class="w-full break-inside-avoid flex flex-col gap-1 px-2">
 					<div class="text-xl">Stats</div>
 					{#each Object.entries(result.display_stats) as [key, value] (key)}
 						{#if value !== 0}
@@ -377,7 +377,7 @@
 					{/each}
 				</div>
 				{#each Object.values(result.skills) as skill (skill.type)}
-					<div class="flex flex-col pt-2 px-2">
+					<div class="w-full break-inside-avoid flex flex-col pt-2 px-2">
 						<div class="text-xl">{skill.name}</div>
 						<div>
 							{#each skill.motions as motion (motion.name)}

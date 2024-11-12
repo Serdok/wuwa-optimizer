@@ -2,6 +2,8 @@ name: unit_test
 run-name: Run Unit Tests
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
 

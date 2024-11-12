@@ -84,9 +84,9 @@
 		)
 	}
 
-	function on_sequence_change(value: number) {
+	function on_sequence_change(value: string) {
 		// reset conditionals
-		Object.entries($form_data.character.conditionals).forEach(([key, cond]) => {
+		Object.entries($form_data.character.conditionals).forEach(([key,]) => {
 			if (selected_character && selected_character.conditionals[key].sequence > Number(value)) {
 				$form_data.character.conditionals[key] = 0;
 				if (selected_character.conditionals[key].kind === 'switch') toggle_conditionals['character'][key] = false;
@@ -141,7 +141,7 @@
 				<Card.Content class="flex flex-row justify-around gap-4">
 						<div class="w-72 border rounded-lg overflow-hidden relative">
 							{#if selected_character}
-								<img src="{base}/T_IconRole_Pile_changli_UI.png" alt="{selected_character.name}" class="scale-125"/>
+								<img src="{selected_character.image.portrait}" alt="{selected_character.name}" class="scale-125"/>
 							{/if}
 						</div>
 

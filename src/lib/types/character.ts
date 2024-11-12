@@ -70,4 +70,5 @@ export type CharacterData = {
 	conditionals: Record<string, Conditional>,
 	apply_effects: (input: OptimizerInput, stats: Record<Attribute, number>) => undefined,
 	skills: Record<SkillType, SkillData>,
+	image: { portrait: string, },
 };

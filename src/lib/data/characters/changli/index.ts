@@ -3,6 +3,7 @@ import { Element } from '$lib/types/element';
 import { WeaponType } from '$lib/types/weapon';
 import { AttackDMGBonus, BaseAttribute, CombatAttribute, ElementDMGBonus } from '$lib/types/stat';
 
+import portrait from './T_IconRole_Pile_changli_UI.png';
 
 const character: CharacterData = {
 	name: 'Changli',
@@ -272,6 +273,9 @@ const character: CharacterData = {
 				}
 			]
 		}
+	},
+	image: {
+		portrait,
 	}
 };
 

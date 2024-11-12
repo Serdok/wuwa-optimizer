@@ -22,12 +22,8 @@
 	import { Sonata } from '$lib/types/echo';
 
 	import { optimize } from '$lib/optimizer/optimize';
+	import { all_echoes } from '$lib/mock';
 
-	import fd_1 from '$lib/mock/fd-1';
-	import fw_1 from '$lib/mock/fw-1';
-	import hd_1 from '$lib/mock/hd-1';
-	import ir_1 from '$lib/mock/ir-1';
-	import vfh_1 from '$lib/mock/vfh-1';
 	import type { OptimizerOutput } from '$lib/types/optimizer';
 	import DisplayStat from './DisplayStat.svelte';
 	import DisplayDamage from './DisplayDamage.svelte';
@@ -48,7 +44,7 @@
 			console.log('form ok!')
 
 			const input = form.data;
-			results = optimize(input, [ir_1, vfh_1, hd_1, fw_1, fd_1]);
+			results = optimize(input, all_echoes);
 			console.log(results);
 		}
 	});
@@ -86,6 +82,17 @@
 		slider_conditionals['character'] = Object.fromEntries(
 			Object.entries(character.conditionals).filter(is_slider).map(([key, cond]) => [key, [cond.value]])
 		)
+	}
+
+	function on_sequence_change(value: number) {
+		// reset conditionals
+		Object.entries($form_data.character.conditionals).forEach(([key, cond]) => {
+			if (selected_character && selected_character.conditionals[key].sequence > Number(value)) {
+				$form_data.character.conditionals[key] = 0;
+				if (selected_character.conditionals[key].kind === 'switch') toggle_conditionals['character'][key] = false;
+				if (selected_character.conditionals[key].kind === 'slider') slider_conditionals['character'][key] = [0];
+			}
+		})
 	}
 
 	function on_weapon_change(value: string) {
@@ -131,7 +138,7 @@
 					<Card.Title>Character setup</Card.Title>
 					<Card.Description>Choose a character, weapon and associated buffs</Card.Description>
 				</Card.Header>
-				<Card.Content class="flex flex-row justify-around gap-4 h-80">
+				<Card.Content class="flex flex-row justify-around gap-4">
 						<div class="w-72 border rounded-lg overflow-hidden relative">
 							{#if selected_character}
 								<img src="{base}/T_IconRole_Pile_changli_UI.png" alt="{selected_character.name}" class="scale-125"/>
@@ -165,7 +172,7 @@
 									<Form.Field {form} name="character.sequence">
 										<Form.Control>
 											{#snippet children({ props })}
-												<Select.Root type="single" bind:value={$sequence_proxy}>
+												<Select.Root type="single" bind:value={$sequence_proxy} onValueChange={on_sequence_change}>
 													<Select.Trigger {...props}>
 														{#if $form_data.character.sequence}
 															S{$form_data.character.sequence}
@@ -304,7 +311,7 @@
 					<Card.Title>Equipment</Card.Title>
 					<Card.Description>Choose the allowed Echo sets</Card.Description>
 				</Card.Header>
-				<Card.Content class="flex flex-row justify-around gap-4 h-80">
+				<Card.Content class="flex flex-row justify-around gap-4">
 					<Card.Root>
 						<Card.Content>
 							<Form.Fieldset {form} name="selected_sonatas">

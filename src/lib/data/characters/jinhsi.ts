@@ -1,7 +1,7 @@
 import { AttackType, type CharacterData, SkillType } from '$lib/types/character';
 import { Element } from '$lib/types/element';
 import { WeaponType } from '$lib/types/weapon';
-import { BaseAttribute, CombatAttribute } from '$lib/types/stat';
+import { AttackDMGBonus, BaseAttribute, CombatAttribute, ElementDMGBonus } from '$lib/types/stat';
 
 const character: CharacterData = {
 	name: 'Jinhsi',
@@ -14,18 +14,48 @@ const character: CharacterData = {
 		[BaseAttribute.DEF]: { attribute: BaseAttribute.DEF, value: 103 }
 	},
 	conditionals: {
-
+		'incandescence': {
+			kind: 'slider',
+			name: 'Incandescence',
+			sequence: 0,
+			value: 50,
+			min_value: 0,
+			max_value: 50,
+		},
+		'herald_of_revival': {
+			kind: 'slider',
+			name: 'Herald of Revival',
+			sequence: 1,
+			value: 0,
+			min_value: 0,
+			max_value: 4,
+		},
+		'immortal_descendency': {
+			kind: 'slider',
+			name: 'Immortal\'s Descendency',
+			sequence: 3,
+			value: 0,
+			min_value: 0,
+			max_value: 2,
+		},
+		'benevolent_grace': {
+			kind: 'switch',
+			name: 'Benevolent Grace',
+			sequence: 4,
+			value: 0,
+		}
 	},
 	apply_effects: (input, stats) => {
 		// bonus stats
-		stats[CombatAttribute.ATK_P] += 0.018;
-		stats[CombatAttribute.ATK_P] += 0.018;
-		stats[CombatAttribute.ATK_P] += 0.042;
-		stats[CombatAttribute.ATK_P] += 0.042;
-		stats[CombatAttribute.CritRate] += 0.012;
-		stats[CombatAttribute.CritRate] += 0.012;
-		stats[CombatAttribute.CritRate] += 0.028;
-		stats[CombatAttribute.CritRate] += 0.028;
+		stats[CombatAttribute.ATK_P] += 0.12;
+		stats[CombatAttribute.CritRate] += 0.08;
+
+		// radiant surge
+		stats[ElementDMGBonus.Spectro] += 0.2;
+
+		stats[CombatAttribute.ATK_P] += 0.25 * (input.character.conditionals['immortal_descendency'] || 0);
+
+		stats[ElementDMGBonus.Common] += 0.2 * (input.character.conditionals['benevolent_grace'] || 0);
 	},
 	skills: {
 		[SkillType.Normal]: {
@@ -181,7 +211,13 @@ const character: CharacterData = {
 					element: Element.Spectro,
 					attribute: BaseAttribute.ATK,
 					values: [0.1989, 0.1989, 0.1989, 0.1989, 0.1989, 0.1989],
-					apply_effects: (input, stats) => {},
+					apply_effects: (input, stats) => {
+						stats[AttackDMGBonus.Skill] += 0.2 * (input.character.conditionals['herald_of_revival'] ?? 0);
+
+						if (input.character.sequence >= 6) {
+							stats[CombatAttribute.SkillMultiplier] += 0.45;
+						}
+					},
 				},
 				{
 					type: AttackType.Skill,
@@ -189,14 +225,27 @@ const character: CharacterData = {
 					element: Element.Spectro,
 					attribute: BaseAttribute.ATK,
 					values: [3.4792],
-					apply_effects: (input, stats) => {},
+					apply_effects: (input, stats) => {
+						let incandescence_bonus = 0.4454;
+						if (input.character.sequence >= 6) {
+							incandescence_bonus += 0.45;
+							stats[CombatAttribute.SkillMultiplier] += 0.45;
+						}
+
+						stats[CombatAttribute.SkillMultiplier] += incandescence_bonus * (input.character.conditionals['incandescence'] || 0);
+						stats[AttackDMGBonus.Skill] += 0.2 * (input.character.conditionals['herald_of_revival'] ?? 0);
+					},
 				}
 			]
 		},
 		[SkillType.Liberation]: {
 			type: SkillType.Liberation,
 			name: 'Purge of Light',
-			apply_effects: (input, stats) => {},
+			apply_effects: (input, stats) => {
+				if (input.character.sequence >= 5) {
+					stats[CombatAttribute.SkillMultiplier] += 1.2;
+				}
+			},
 			motions: [
 				{
 					type: AttackType.Liberation,
@@ -217,7 +266,10 @@ const character: CharacterData = {
 		[SkillType.Intro]: {
 			type: SkillType.Intro,
 			name: "Loong's Halo",
-			apply_effects: (input, stats) => {},
+			apply_effects: (input, stats) => {
+				// converged flash
+				stats[CombatAttribute.SkillMultiplier] += 0.5;
+			},
 			motions: [
 				{
 					type: AttackType.Intro,

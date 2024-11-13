@@ -18,6 +18,7 @@
 	import { Switch } from '$lib/components/ui/switch';
 	import { Slider } from '$lib/components/ui/slider';
 	import { Input } from '$lib/components/ui/input';
+	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Label } from '$lib/components/ui/label';
 	import DisplayStat from './DisplayStat.svelte';
 	import DisplayDamage from './DisplayDamage.svelte';
@@ -39,6 +40,7 @@
 		onUpdate: ({ form }) => {
 			if (!form.valid) return;
 			console.log('form ok!')
+			console.log(form)
 
 			const input = form.data;
 			results = optimize(input, all_echoes);
@@ -120,6 +122,25 @@
 	function on_buff_slide(entity: 'character' | 'weapon', key: string, value: number[]) {
 		$form_data[entity].conditionals[key] = value[0];
 	}
+
+	function add_sonata(key: 'allow_2p' | 'allow_5p', sonata: Sonata) {
+		$form_data.selected_sonatas[key] = [...$form_data.selected_sonatas[key], sonata];
+	}
+
+	function remove_sonata(key: 'allow_2p' | 'allow_5p', sonata: Sonata) {
+		$form_data.selected_sonatas[key] = $form_data.selected_sonatas[key].filter(s => s !== sonata);
+	}
+
+	function on_set_checked_change(key: 'allow_2p' | 'allow_5p', sonata: Sonata, value: boolean) {
+		console.log(key, sonata, value)
+		if (value) {
+			add_sonata(key, sonata);
+		} else {
+			remove_sonata(key, sonata);
+		}
+		console.log($form_data.selected_sonatas)
+	}
+
 </script>
 
 <form method="post" use:enhance>
@@ -315,17 +336,19 @@
 								<Form.Legend>Select allowed sets</Form.Legend>
 								<div class="grid grid-cols-3 gap-4">
 									{#each Object.values(Sonata) as sonata}
+										{@const checked_2p = $form_data.selected_sonatas.allow_2p.includes(sonata)}
+										{@const checked_5p = $form_data.selected_sonatas.allow_5p.includes(sonata)}
 										<Form.Control>
 											{#snippet children({ props })}
 												<div class="space-y-2">
 													<Form.Label>{sonata}</Form.Label>
 													<div class="flex flex-row gap-4">
 														<div class="flex flex-row items-center gap-2">
-															<input type="checkbox" {...props} id="allow-2p-{sonata}" name="selected_sonatas.allow_2p" bind:group={$form_data.selected_sonatas.allow_2p} value={sonata}/>
+															<Checkbox {...props} id="allow-2p-{sonata}" name="selected_sonatas.allow_2p" checked={checked_2p} value={sonata} onCheckedChange={v => on_set_checked_change('allow_2p', sonata, v)}/>
 															<Label for="allow-2p-{sonata}">2-pc</Label>
 														</div>
 														<div class="flex flex-row items-center gap-2">
-															<input type="checkbox" {...props} id="allow-5p-{sonata}" name="selected_sonatas.allow_5p" bind:group={$form_data.selected_sonatas.allow_5p} value={sonata}/>
+															<Checkbox {...props} id="allow-5p-{sonata}" name="selected_sonatas.allow_5p" checked={checked_5p} value={sonata} onCheckedChange={v => on_set_checked_change('allow_5p', sonata, v)}/>
 															<Label for="allow-5p-{sonata}">5-pc</Label>
 														</div>
 													</div>

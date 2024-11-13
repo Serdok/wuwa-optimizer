@@ -1,10 +1,14 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { dev } from '$app/environment';
-	import { base } from '$app/paths';
 
-	import SuperDebug, { intProxy, superForm } from 'sveltekit-superforms';
+	import { intProxy, superForm } from 'sveltekit-superforms';
 	import { zod } from 'sveltekit-superforms/adapters';
+
+	import { type Conditional as CharacterCond, Sequence, type SliderBuff } from '$lib/types/character';
+	import { type Conditional as WeaponCond } from '$lib/types/weapon';
+	import { Rank } from '$lib/types/weapon';
+	import { Sonata } from '$lib/types/echo';
+	import type { OptimizerOutput } from '$lib/types/optimizer';
 
 	import * as Tabs from '$lib/components/ui/tabs';
 	import * as Card from '$lib/components/ui/card';
@@ -15,19 +19,12 @@
 	import { Slider } from '$lib/components/ui/slider';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
-
-	import { type Conditional as CharacterCond, Sequence, type SliderBuff } from '$lib/types/character';
-	import { type Conditional as WeaponCond } from '$lib/types/weapon';
-	import { Rank } from '$lib/types/weapon';
-	import { Sonata } from '$lib/types/echo';
-
-	import { optimize } from '$lib/optimizer/optimize';
-	import { all_echoes } from '$lib/mock';
-
-	import type { OptimizerOutput } from '$lib/types/optimizer';
 	import DisplayStat from './DisplayStat.svelte';
 	import DisplayDamage from './DisplayDamage.svelte';
 	import DisplayEcho from './DisplayEcho.svelte';
+
+	import { optimize } from '$lib/optimizer/optimize';
+	import { all_echoes } from '$lib/mock';
 
 	interface Props {
 		data: PageData,

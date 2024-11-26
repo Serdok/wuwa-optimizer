@@ -16,6 +16,14 @@ const config: Config = {
 		},
 		extend: {
 			colors: {
+				element: {
+					glacio: '#39AFD1',
+					fusion: '#C82B49',
+					electro: '#A633B0',
+					aero: '#30C8A0',
+					spectro: '#BDA81C',
+					havoc: '#951754',
+				},
 				border: "hsl(var(--border) / <alpha-value>)",
 				input: "hsl(var(--input) / <alpha-value>)",
 				ring: "hsl(var(--ring) / <alpha-value>)",

@@ -18,7 +18,10 @@ const echo: Echo = {
 		{ attribute: CombatAttribute.CritRate, value: 0.075 },
 		{ attribute: AttackDMGBonus.Liberation, value: 0.086 },
 		{ attribute: CombatAttribute.DEF_P, value: 0.109 }
-	]
+	],
+	image: {
+		head: 'T_IconMonsterHead_045_UI.png'
+	}
 };
 
 export default echo;

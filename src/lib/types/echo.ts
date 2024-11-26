@@ -44,4 +44,7 @@ export type Echo = {
 		secondary: Stat<Exclude<Attribute, BaseAttribute>>
 	},
 	sub_stats: Stat<Attribute>[],
+	image: {
+		head: string,
+	}
 };

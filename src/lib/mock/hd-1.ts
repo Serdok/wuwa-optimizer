@@ -18,7 +18,10 @@ const echo: Echo = {
 		{ attribute: BaseAttribute.ATK, value: 40 },
 		{ attribute: CombatAttribute.HP_P, value: 0.086 },
 		{ attribute: CombatAttribute.CritRate, value: 0.069 }
-	]
+	],
+	image: {
+		head: 'T_IconMonsterHead_984_UI.png'
+	}
 };
 
 export default echo;

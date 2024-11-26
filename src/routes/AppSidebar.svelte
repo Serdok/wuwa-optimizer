@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import * as Sidebar from '$lib/components/ui/sidebar';
-	import { Button } from '$lib/components/ui/button';
 
-	import { House, SquareFunction, Sun, Moon } from 'lucide-svelte';
+	import { House, SquareFunction, Sun, Moon, BoxesIcon } from 'lucide-svelte';
 	import { toggleMode } from 'mode-watcher';
 
 	const items = [
@@ -11,6 +10,11 @@
 			title: 'Build',
 			url: 'build',
 			icon: SquareFunction,
+		},
+		{
+			title: 'Echoes',
+			url: 'echo',
+			icon: BoxesIcon
 		}
 	]
 </script>

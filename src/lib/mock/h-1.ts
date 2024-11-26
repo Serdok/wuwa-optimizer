@@ -18,7 +18,10 @@ const echo: Echo = {
 		{ attribute: AttackDMGBonus.Skill, value: 0.086 },
 		{ attribute: AttackDMGBonus.Liberation, value: 0.086 },
 		{ attribute: BaseAttribute.ATK, value: 40 }
-	]
+	],
+	image: {
+		head: 'T_IconMonsterHead_969_UI.png'
+	}
 };
 
 export default echo;

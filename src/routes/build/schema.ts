@@ -18,5 +18,8 @@ export const schema = z.object({
 	selected_sonatas: z.object({
 		allow_2p: z.nativeEnum(Sonata).array(),
 		allow_5p: z.nativeEnum(Sonata).array()
+	}).default({
+		allow_2p: [],
+		allow_5p: Object.values(Sonata),
 	}),
 })

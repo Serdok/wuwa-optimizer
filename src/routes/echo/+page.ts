@@ -1,5 +1,8 @@
-import { all_echoes } from '$lib/mock';
+// we are hitting indexed-db, which is browser-only
+export const ssr = false;
 
-export const load = () => {
-	return { echoes: all_echoes };
+import { db } from '$lib/db';
+
+export const load = async () => {
+	return { echoes: await db.echoes.toArray() };
 }

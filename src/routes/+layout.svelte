@@ -15,7 +15,7 @@
 <ParaglideJS {i18n}>
 	<Sidebar.Provider>
 		<AppSidebar/>
-		<main class="p-4">
+		<main class="w-full p-4">
 			<Sidebar.Trigger />
 			{@render children()}
 		</main>

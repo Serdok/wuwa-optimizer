@@ -1,4 +1,11 @@
-import type { Attribute, BaseAttribute, Stat } from '$lib/types/stat';
+import {
+	AttackDMGBonus,
+	type Attribute,
+	type BaseAttribute,
+	CombatAttribute,
+	ElementDMGBonus,
+	type Stat
+} from '$lib/types/stat';
 
 export enum Sonata {
 	FreezingFrost = 'Freezing Frost',
@@ -22,7 +29,7 @@ export enum Class {
 export const Cost = [1, 3, 4] as const;
 export type Cost = typeof Cost[number];
 
-export const Quality = [1, 2, 3, 4, 5] as const;
+export const Quality = [2, 3, 4, 5] as const;
 export type Quality = typeof Quality[number];
 
 export type EchoData = {
@@ -30,9 +37,11 @@ export type EchoData = {
 	class: Class,
 	cost: Cost,
 	sonatas: Sonata[],
+	image: { head: string },
 };
 
 export type Echo = {
+	id: string,
 	name: string,
 	sonata: Sonata,
 	quality: Quality,
@@ -41,9 +50,9 @@ export type Echo = {
 	level: number,
 	main_stat: {
 		primary: Stat<BaseAttribute>,
-		secondary: Stat<Exclude<Attribute, BaseAttribute>>
+		secondary: Stat<CombatAttribute> | Stat<ElementDMGBonus>
 	},
-	sub_stats: Stat<Attribute>[],
+	sub_stats: (Stat<BaseAttribute> | Stat<CombatAttribute> | Stat<ElementDMGBonus> | Stat<AttackDMGBonus>)[],
 	image: {
 		head: string,
 	}

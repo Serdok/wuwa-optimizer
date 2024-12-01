@@ -2,6 +2,7 @@ import { Class, type Echo, Sonata } from '$lib/types/echo';
 import { AttackDMGBonus, BaseAttribute, CombatAttribute } from '$lib/types/stat';
 
 const echo: Echo = {
+	id: crypto.randomUUID(),
 	name: 'Jué',
 	quality: 5,
 	cost: 4,

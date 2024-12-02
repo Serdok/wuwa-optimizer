@@ -377,36 +377,38 @@
 			<ToggleGroup.Item value="crit">Crit. only</ToggleGroup.Item>
 		</ToggleGroup.Root>
 	</div>
-	{#each results as result, i (i)}
-		<div class="flex flex-col gap-2">
-			<div>Build {i + 1}/{results.length}</div>
-			<div class="grid grid-cols-5 gap-1 justify-around">
-				<!-- build -->
-				{#each result.build as echo}
-					<DisplayEcho {echo} />
-				{/each}
-			</div>
-			<div class="columns-3">
-				<!-- damage + stats -->
-				<div class="w-full break-inside-avoid flex flex-col gap-1 px-2">
-					<div class="text-xl">Stats</div>
-					{#each Object.entries(result.display_stats) as [key, value] (key)}
-						{#if value !== 0}
-							<DisplayStat attribute={key} {value}/>
-						{/if}
+	<div class="flex flex-col divide-y-4 gap-2">
+		{#each results as result, i (i)}
+			<div class="flex flex-col gap-2">
+				<div>Build {i + 1}/{results.length}</div>
+				<div class="grid grid-cols-5 gap-1 justify-around">
+					<!-- build -->
+					{#each result.build as echo}
+						<DisplayEcho {echo} />
 					{/each}
 				</div>
-				{#each Object.values(result.skills) as skill (skill.type)}
-					<div class="w-full break-inside-avoid flex flex-col pt-2 px-2">
-						<div class="text-xl">{skill.name}</div>
-						<div>
-							{#each skill.motions as motion (motion.name)}
-								<DisplayDamage {motion} {crit_option} />
-							{/each}
-						</div>
+				<div class="columns-3">
+					<!-- damage + stats -->
+					<div class="break-inside-avoid flex flex-col gap-1 px-2">
+						<div class="text-xl">Stats</div>
+						{#each Object.entries(result.display_stats) as [key, value] (key)}
+							{#if value !== 0}
+								<DisplayStat attribute={key} {value}/>
+							{/if}
+						{/each}
 					</div>
-				{/each}
+					{#each Object.values(result.skills) as skill (skill.type)}
+						<div class="w-full break-inside-avoid flex flex-col pt-2 px-2">
+							<div class="text-xl">{skill.name}</div>
+							<div>
+								{#each skill.motions as motion (motion.name)}
+									<DisplayDamage {motion} {crit_option} />
+								{/each}
+							</div>
+						</div>
+					{/each}
+				</div>
 			</div>
-		</div>
-	{/each}
+		{/each}
+	</div>
 </div>

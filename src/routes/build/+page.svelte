@@ -25,6 +25,7 @@
 	import DisplayEcho from './DisplayEcho.svelte';
 
 	import { optimize } from '$lib/optimizer/optimize';
+	import { db } from '$lib/db';
 
 	interface Props {
 		data: PageData,
@@ -39,7 +40,7 @@
 		onUpdate: async ({ form }) => {
 			if (!form.valid) return;
 
-			const echoes = await data.echoes;
+			const echoes = await db.echoes.toArray();
 			const input = form.data;
 			results = optimize(input, echoes);
 		}

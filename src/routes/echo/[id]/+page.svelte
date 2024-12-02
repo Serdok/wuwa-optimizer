@@ -57,7 +57,7 @@
 
 	const main_stats = $derived(selected && data.stats.secondary[selected.cost].stats);
 	const main_value = $derived.by(() => {
-		if (!main_stats) return undefined;
+		if (!main_stats || !$form_data.echo.main_stat.secondary.attribute) return undefined;
 		const value = main_stats[$form_data.echo.main_stat.secondary.attribute].values[$form_data.echo.quality];
 		return value.base * (1 + $form_data.echo.level * 0.16);
 	});

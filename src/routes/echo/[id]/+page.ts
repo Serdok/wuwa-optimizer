@@ -1,6 +1,3 @@
-export const prerender = false;
-export const ssr = false;
-
 import {
 	all_echoes,
 	calamity,

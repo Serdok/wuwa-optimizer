@@ -29,8 +29,6 @@
 	let sonata_filter: string[] = $state(Object.values(Sonata));
 	const selected_sonata = $derived(sonata_values.filter(s => sonata_filter.includes(s.value)).map(s => s.label).join(', ') ?? "Select sonatas");
 
-	let new_id = $derived(crypto.randomUUID());
-
 	const filtered_echoes = $derived.by(() => {
 		let echoes = data.echoes;
 		echoes = echoes.filter(e => quality_filter.includes(e.quality.toString()));
@@ -88,7 +86,7 @@
 
 <div class="my-4">
 	<Button disabled>Scan new echo</Button>
-	<Button variant="default" href="/echo/{new_id}">Add new echo</Button>
+	<Button variant="default" href="/echo/{data.new_id}">Add new echo</Button>
 </div>
 
 <div class="grid grid-cols-3 gap-2 auto-cols-fr">

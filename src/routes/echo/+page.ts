@@ -4,5 +4,5 @@ export const ssr = false;
 import { db } from '$lib/db';
 
 export const load = async () => {
-	return { echoes: await db.echoes.toArray() };
+	return { echoes: await db.echoes.toArray(), new_id: crypto.randomUUID() };
 }

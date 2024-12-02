@@ -6,6 +6,7 @@
 	import { ModeWatcher } from 'mode-watcher';
 	import * as Sidebar from '$lib/components/ui/sidebar';
 	import AppSidebar from './AppSidebar.svelte';
+	import { Toaster } from '$lib/components/ui/sonner';
 
 	let { children } = $props();
 </script>
@@ -19,5 +20,6 @@
 			<Sidebar.Trigger />
 			{@render children()}
 		</main>
+		<Toaster position="bottom-right" richColors closeButton />
 	</Sidebar.Provider>
 </ParaglideJS>

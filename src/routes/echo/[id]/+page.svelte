@@ -6,7 +6,7 @@
 	import SuperDebug, { intProxy, superForm } from 'sveltekit-superforms';
 	import { zod } from 'sveltekit-superforms/adapters';
 
-	import { type Cost, type EchoData, Quality } from '$lib/types/echo';
+	import { type Cost, type Echo, type EchoData, Quality } from '$lib/types/echo';
 	import { type Attribute, BaseAttribute } from '$lib/types/stat';
 	import { attribute_asset } from '$lib/data/attribute';
 
@@ -20,7 +20,7 @@
 	import { Star, Trash } from 'lucide-svelte';
 	import { sonata_assets } from '$lib/data/sonata';
 	import { db } from '$lib/db';
-	import { invalidateAll } from '$app/navigation';
+	import { toast } from 'svelte-sonner';
 
 
 	interface Props {
@@ -35,17 +35,12 @@
 		resetForm: false,
 		onUpdate: async ({ form }) => {
 			if (!form.valid) return;
-			console.log('form ok!')
-			db.echoes.put({
-				id: data.id,
-				...form.data.echo,
-				main_stat: {
-					primary: { attribute: form.data.echo.main_stat.primary.attribute, value: flat_value!, },
-					secondary: { attribute: form.data.echo.main_stat.secondary.attribute, value: main_value!, },
+			toast.promise(update_echo(data.id, form.data.echo), {
+				loading: 'Saving...',
+				success: () => {
+					return `${form.data.echo.name} has been saved`
 				},
-				cost: selected!.cost,
-				class: selected!.class,
-				image: selected!.image,
+				error: 'Error! Please try again'
 			})
 		}
 	});
@@ -73,7 +68,6 @@
 		const value = Object.values(flat_stat)[0].values[$form_data.echo.quality];
 		return value.base * (1 + $form_data.echo.level * 0.16);
 	})
-
 
 
 	function on_echo_select(echo: string | undefined) {
@@ -129,6 +123,20 @@
 		}
 
 		return false;
+	}
+
+	async function update_echo(id: string, echo: Echo) {
+		return db.echoes.put({
+			...echo,
+			id: id,
+			main_stat: {
+				primary: { attribute: echo.main_stat.primary.attribute, value: flat_value!, },
+				secondary: { attribute: echo.main_stat.secondary.attribute, value: main_value!, },
+			},
+			cost: selected!.cost,
+			class: selected!.class,
+			image: selected!.image,
+		})
 	}
 
 	$effect(() => {

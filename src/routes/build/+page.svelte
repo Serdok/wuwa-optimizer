@@ -25,7 +25,6 @@
 	import DisplayEcho from './DisplayEcho.svelte';
 
 	import { optimize } from '$lib/optimizer/optimize';
-	import { all_echoes } from '$lib/mock';
 
 	interface Props {
 		data: PageData,
@@ -37,14 +36,12 @@
 		dataType: 'json',
 		validators: zod(data.schema),
 		resetForm: false,
-		onUpdate: ({ form }) => {
+		onUpdate: async ({ form }) => {
 			if (!form.valid) return;
-			console.log('form ok!')
-			console.log(form)
 
+			const echoes = await data.echoes;
 			const input = form.data;
-			results = optimize(input, all_echoes);
-			console.log(results);
+			results = optimize(input, echoes);
 		}
 	});
 

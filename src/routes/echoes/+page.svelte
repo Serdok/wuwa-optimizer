@@ -13,6 +13,7 @@
 	import { PRIMARY_MAIN_STATS, SECONDARY_MAIN_STATS, SUB_STATS } from '$lib/data/echoes/base_stats';
 	import { type StatKey } from '$lib/data/stats';
 	import { SONATA_DATA, type SonataKey, SONATAS } from '$lib/data/sonatas';
+	import { base } from '$app/paths';
 
 	let sonata_filter: SonataKey[] = $state([]);
 	let rank_filter: string[] = $state([]);
@@ -95,7 +96,7 @@
 	</div>
 
 	<div class="flex flex-row space-x-2">
-		<Button variant="default" href="/echoes/edit">add new echo</Button>
+		<Button variant="default" href="{base}/echoes/edit">add new echo</Button>
 		<Button variant="default" onclick={() => add_random_echo()}>randomize</Button>
 	</div>
 

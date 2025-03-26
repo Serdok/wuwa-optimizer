@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	<div class="border-t-2 flex flex-row items-center justify-end gap-2">
-		<Button variant="ghost" href="/echoes/edit?id={echo.id}"><Pencil /></Button>
+		<Button variant="ghost" href="{base}/echoes/edit?id={echo.id}"><Pencil /></Button>
 		<Button variant="ghost" onclick={() => delete_echo(echo.id)}><Trash /></Button>
 	</div>
 </div>

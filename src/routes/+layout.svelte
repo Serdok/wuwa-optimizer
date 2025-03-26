@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { page } from '$app/state';
+	import { base } from '$app/paths';
+
 	import { i18n } from '$lib/i18n';
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 	import { ModeWatcher, toggleMode } from 'mode-watcher';
@@ -10,7 +13,6 @@
 	import { Moon, Settings, Skull, SquareKanban, Sun } from 'lucide-svelte';
 
 	import '../app.css';
-	import { page } from '$app/state';
 
 	let { children } = $props();
 </script>
@@ -30,7 +32,7 @@
 							<Sidebar.MenuItem>
 								<Sidebar.MenuButton isActive={page.route.id === '/optimize'}>
 									{#snippet child({ props })}
-										<a href="/optimize" {...props}>
+										<a href="{base}/optimize" {...props}>
 											<SquareKanban />
 											<span>optimize</span>
 										</a>
@@ -40,7 +42,7 @@
 							<Sidebar.MenuItem>
 								<Sidebar.MenuButton isActive={page.route.id === '/echoes'}>
 									{#snippet child({ props })}
-										<a href="/echoes" {...props}>
+										<a href="{base}/echoes" {...props}>
 											<Skull />
 											<span>echoes</span>
 										</a>
@@ -62,7 +64,7 @@
 										<Moon class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
 										<span class="sr-only">Toggle theme</span>
 									</Button>
-									<Button href="/settings" variant="outline" size="icon" {...props}><Settings /></Button>
+									<Button href="{base}/settings" variant="outline" size="icon" {...props}><Settings /></Button>
 								</div>
 							{/snippet}
 						</Sidebar.MenuButton>

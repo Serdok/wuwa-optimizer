@@ -4,53 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="add CD">
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/changli/T_IconRole_Pile_changli_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/changli/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/curve.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/jinhsi/T_IconRole_Pile_jinxi_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/jinhsi/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/broadswords/ages_of_harvest/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/broadswords/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/curve.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/swords/blazing_brilliance/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/swords/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/build.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/finalizer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/optimize.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/stats.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/worker.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/worker_pool.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/settings/+page.svelte" afterDir="false" />
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="optimizer page up and running">
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/broadswords/lustrous_razor/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/swords/emerald_of_genesis/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/echoes/cost_1.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_1.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/echoes/cost_3.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_3.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/echoes/cost_4.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_4.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementDark1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementFire1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementIce1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementLight1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementThunder1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementWind1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementZero1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_Iconpropertyattacktag_UI.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_Iconpropertyhealingtag_UI.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_Iconpropertyswitchtag_UI.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/stats/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/stats/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/EchoCard.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/EchoCard.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/edit/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/edit/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/edit/EchoSelector.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/edit/EchoSelector.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/changli/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/changli/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/broadswords/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/broadswords/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/swords/blazing_brilliance/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/swords/blazing_brilliance/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/swords/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/swords/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +200,7 @@
       <workItem from="1742725257684" duration="9175000" />
       <workItem from="1742737271374" duration="16093000" />
       <workItem from="1742764147722" duration="13541000" />
-      <workItem from="1742888063709" duration="47541000" />
+      <workItem from="1742888063709" duration="48664000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -257,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740434822868</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="optimizer page up and running">
+      <option name="closed" value="true" />
+      <created>1742950710295</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742950710295</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,6 +245,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add CD" />
-    <option name="LAST_COMMIT_MESSAGE" value="add CD" />
+    <MESSAGE value="optimizer page up and running" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimizer page up and running" />
   </component>
 </project>

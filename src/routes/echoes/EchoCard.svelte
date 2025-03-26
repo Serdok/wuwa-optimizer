@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<div class="flex flex-row items-center space-x-2">
-				<img src={SONATA_DATA[echo.sonata].image} alt={echo.sonata} class="border-2 border-white rounded-full size-8" />
+				<img src={SONATA_DATA[echo.sonata].image} alt={echo.sonata} class="size-8" />
 				<span>{echo.sonata}</span>
 			</div>
 			<div class="flex flex-col">

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/state';
-
 	import { liveQuery } from 'dexie';
 	import { db } from '$lib/db';
 
@@ -14,7 +12,7 @@
 	import { ALL_ECHOES } from '$lib/data/echoes';
 	import { PRIMARY_MAIN_STATS, SECONDARY_MAIN_STATS, SUB_STATS } from '$lib/data/echoes/base_stats';
 	import { type StatKey } from '$lib/data/stats';
-	import { type SonataKey, SONATAS } from '$lib/data/sonatas';
+	import { SONATA_DATA, type SonataKey, SONATAS } from '$lib/data/sonatas';
 
 	let sonata_filter: SonataKey[] = $state([]);
 	let rank_filter: string[] = $state([]);
@@ -74,9 +72,14 @@
 
 <div class="flex flex-col gap-2">
 	<div>
-		<ToggleGroup.Root type="multiple" bind:value={sonata_filter}>
+		<ToggleGroup.Root type="multiple" bind:value={sonata_filter} class="flex flex-row flex-wrap space-x-3">
 			{#each SONATAS as sonata}
-				<ToggleGroup.Item value={sonata}>{sonata}</ToggleGroup.Item>
+				<ToggleGroup.Item value={sonata}>
+					<div class="flex flex-row items-center space-x-2">
+						<img src={SONATA_DATA[sonata].image} alt={sonata} class="size-8" />
+						<span>{sonata}</span>
+					</div>
+				</ToggleGroup.Item>
 			{/each}
 		</ToggleGroup.Root>
 		<ToggleGroup.Root type="multiple" bind:value={rank_filter}>

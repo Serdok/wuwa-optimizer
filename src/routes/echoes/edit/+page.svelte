@@ -138,7 +138,7 @@
 			<Select.Root type="single" bind:value={sonata} allowDeselect={false}>
 				<Select.Trigger>
 					<div class="flex flex-row items-center space-x-2">
-						<img src={SONATA_DATA[sonata].image} alt={sonata} class="border-2 border-white rounded-full size-8" />
+						<img src={SONATA_DATA[sonata].image} alt={sonata} class="size-8" />
 						<span class="font-medium">{sonata}</span>
 					</div>
 				</Select.Trigger>
@@ -146,7 +146,7 @@
 					{#each selected.possible_sonatas as s}
 						<Select.Item value={s} label={s}>
 							<div class="flex flex-row items-center space-x-2">
-								<img src={SONATA_DATA[s].image} alt={s} class="border-2 border-white rounded-full size-8" />
+								<img src={SONATA_DATA[s].image} alt={s} class="size-8" />
 								<span class="font-medium">{s}</span>
 							</div>
 						</Select.Item>

@@ -34,7 +34,7 @@
 						<span class="sr-only">{echo.key}</span>
 						<span class="absolute bottom-0 right-0 flex flex-row space-x-1">
 							{#each echo.possible_sonatas as s}
-								<img src={SONATA_DATA[s].image} alt={s} class="backdrop-blur-lg border-2 border-black dark:border-white rounded-full w-8" />
+								<img src={SONATA_DATA[s].image} alt={s} class="backdrop-blur-lg w-8" />
 							{/each}
 						</span>
 					</button>

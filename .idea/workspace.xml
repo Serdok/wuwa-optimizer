@@ -4,223 +4,53 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/wuwa-optimizer.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.npmrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.prettierignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e2e/demo.test.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eslint.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/messages/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/messages/fr-fr.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/playwright.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/postcss.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project.inlang/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project.inlang/settings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/demo.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hooks.server.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hooks.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/button/button.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/button/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-content.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-description.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-footer.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-header.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-overlay.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-title.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/dialog/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/input/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/input/input.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/label/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/label/label.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/radio-group/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/radio-group/radio-group-item.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/radio-group/radio-group.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/scroll-area/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/scroll-area/scroll-area-scrollbar.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/scroll-area/scroll-area.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/select/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-content.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-group-heading.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-item.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-scroll-down-button.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-scroll-up-button.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-separator.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-trigger.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/separator/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/separator/separator.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/sonner/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/sonner/sonner.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/toggle-group/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/toggle-group/toggle-group-item.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/toggle-group/toggle-group.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/toggle/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/ui/toggle/toggle.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/base_stats.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_1.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_3.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_4.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/primary_main.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/secondary_main.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/sub_stats.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/elements.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementDark1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementFire1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementIce1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementLight1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementThunder1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementWind1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementZero1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/T_Iconpropertyattacktag_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/T_Iconpropertyhealingtag_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/T_Iconpropertyswitchtag_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertygreencure_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertygreendefense_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertygreenenergy_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertygreenlife_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredattack_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredbaoji_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredcrit_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyreddark_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredfoco_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredgeneral_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredhot_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredice_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredlight_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredmine_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredphysics_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredqte_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredskill_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredspeed_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/T_Iconpropertyredwind_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/display.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/stats/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/db/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/i18n.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/math.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/utils.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/+layout.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/demo/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/demo/paraglide/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/echoes/EchoCard.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/echoes/edit/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/echoes/edit/+page.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/echoes/edit/EchoSelector.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/.nojekyll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead00_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead01_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_015_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_025_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_035_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_045_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_055_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_065_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_075_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_085_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_095_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1000_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1001_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1003_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1004_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1005_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1006_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1007_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1008_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1009_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1010_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1014_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1015_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_1016_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_105_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_115_1_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_115_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_125_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_135_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_145_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_155_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_165_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_175_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_185_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_195_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_205_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_215_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_225_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_226_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_235_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_245_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_255_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_265_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_275_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_285_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_295_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_305_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_315_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_325_1_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_325_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_326_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_327_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_328_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_329_1_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_329_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_330_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_350_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_969_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_970_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_971_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_972_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_973_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_974_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_975_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_976_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_977_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_978_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_979_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_980_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_984_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_985_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_986_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_987_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_988_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_989_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_990_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_992_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_993_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_994_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_995_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_996_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_997_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_998_1_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_998_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/echoes/head/T_IconMonsterHead_999_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/favicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/svelte.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="add CD">
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/changli/T_IconRole_Pile_changli_UI.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/changli/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/curve.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/jinhsi/T_IconRole_Pile_jinxi_UI.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/jinhsi/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/broadswords/ages_of_harvest/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/broadswords/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/curve.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/swords/blazing_brilliance/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/swords/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/build.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/finalizer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/optimize.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/stats.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/worker.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/worker_pool.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/settings/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/echoes/cost_1.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_1.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/echoes/cost_3.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_3.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/echoes/cost_4.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_4.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementDark1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementFire1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementIce1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementLight1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementThunder1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementWind1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_IconElementZero1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_Iconpropertyattacktag_UI.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_Iconpropertyhealingtag_UI.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/T_Iconpropertyswitchtag_UI.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/stats/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/stats/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/echoes/EchoCard.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/EchoCard.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/echoes/edit/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/edit/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/echoes/edit/EchoSelector.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/edit/EchoSelector.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,14 +62,18 @@
       <list>
         <option value="echoes/+page" />
         <option value="edit/+page" />
-        <option value="TypeScript File" />
         <option value="EchoCard" />
         <option value="EchoSelector" />
+        <option value="optimize/+page" />
+        <option value="settings/+page" />
+        <option value="scan/+page" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -254,8 +88,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/serdok/projects/wuwa-optimizer",
+    "last_opened_file_path": "/home/serdok/projects/wuwa-optimizer/src/lib/data/characters/jinhsi",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -265,10 +100,17 @@
     "npm.build.executor": "Run",
     "npm.dev.executor": "Run",
     "npm.preview.executor": "Run",
+    "npm.test.executor": "Run",
+    "npm.test:unit.executor": "Run",
     "prettierjs.PrettierConfiguration.Package": "/home/serdok/projects/wuwa-optimizer/node_modules/prettier",
     "settings.editor.selected.configurable": "settings.nodejs",
     "ts.external.directory.path": "/home/serdok/projects/wuwa-optimizer/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TypeScript"
+    ]
   }
 }]]></component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
@@ -277,19 +119,19 @@
       <window_info id="Merge Requests" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Pull Requests" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11010742" />
-      <window_info id="Commit" order="1" weight="0.11010742" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16088867" />
+      <window_info id="Commit" order="1" weight="0.16088867" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="File Transfer" />
       <window_info anchor="bottom" id="Find" />
-      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.26582792" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.26582792" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.26582792" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3299513" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.3299513" />
       <window_info anchor="bottom" id="Services" order="5" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="documentation.v2" show_stripe_button="false" side_tool="true" />
@@ -304,16 +146,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/lib/data/stats" />
-      <recent name="$PROJECT_DIR$/src/lib/data/echoes" />
+      <recent name="$PROJECT_DIR$/src/lib/data/characters/jinhsi" />
+      <recent name="$PROJECT_DIR$/static/assets/echoes/head" />
+      <recent name="$PROJECT_DIR$/src/lib/optimizer" />
       <recent name="$PROJECT_DIR$/src/lib/data/sonatas" />
-      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/src/lib/data/weapons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/lib/data/weapons/broadswords/ages_of_harvest" />
       <recent name="$PROJECT_DIR$/src/lib/data/stats" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.preview">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -344,18 +188,34 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="test:unit" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test:unit" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.test:unit" />
+      <item itemvalue="npm.build" />
+      <item itemvalue="npm.dev" />
+      <item itemvalue="npm.preview" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.preview" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.preview" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-WS-243.24978.60" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
       </set>
     </attachedChunks>
   </component>
@@ -371,10 +231,51 @@
       <workItem from="1740215870079" duration="20713000" />
       <workItem from="1740241490790" duration="21841000" />
       <workItem from="1740264868017" duration="2077000" />
+      <workItem from="1740322990361" duration="7039000" />
+      <workItem from="1740433799082" duration="2152000" />
+      <workItem from="1740864259562" duration="718000" />
+      <workItem from="1742600450516" duration="3966000" />
+      <workItem from="1742664604967" duration="20912000" />
+      <workItem from="1742725257684" duration="9175000" />
+      <workItem from="1742737271374" duration="16093000" />
+      <workItem from="1742764147722" duration="13541000" />
+      <workItem from="1742888063709" duration="47541000" />
     </task>
+    <task id="LOCAL-00001" summary="add CD">
+      <option name="closed" value="true" />
+      <created>1740434774952</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1740434774952</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add CD">
+      <option name="closed" value="true" />
+      <created>1740434822868</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1740434822868</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add CD" />
+    <option name="LAST_COMMIT_MESSAGE" value="add CD" />
   </component>
 </project>

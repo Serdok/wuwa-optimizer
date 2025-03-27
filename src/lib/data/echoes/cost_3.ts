@@ -178,6 +178,6 @@ export default [
 		key: 'capitaneus',
 		cost: 3,
 		possible_sonatas: ['eternal_radiance', 'gusts_of_welkin'],
-		image: { head: 'T_IconMonsterHead00_UI.png' }
+		image: { head: 'T_IconMonsterHead_32033_UI.png' }
 	}
 ] as const satisfies EchoData[];

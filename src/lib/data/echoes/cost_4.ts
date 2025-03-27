@@ -38,7 +38,7 @@ export default [
 		key: 'reminiscence_fleurdelys',
 		cost: 4,
 		possible_sonatas: ['gusts_of_welkin'],
-		image: { head: 'T_IconMonsterHead00_UI.png', }
+		image: { head: 'T_IconMonsterHead_34012_1_UI.png', }
 	},
 
 	// overlord

@@ -280,36 +280,36 @@ export default [
 		key: 'la_guardia',
 		cost: 1,
 		possible_sonatas: ['midnight_veil', 'gusts_of_welkin'],
-		image: { head: 'T_IconMonsterHead00_UI.png' }
+		image: { head: 'T_IconMonsterHead_31052_UI.png' }
 	},
 	{
 		key: 'sagittario',
 		cost: 1,
 		possible_sonatas: ['eternal_radiance', 'gusts_of_welkin'],
-		image: { head: 'T_IconMonsterHead00_UI.png' }
+		image: { head: 'T_IconMonsterHead_31053_UI.png' }
 	},
 	{
 		key: 'sacredos',
 		cost: 1,
 		possible_sonatas: ['gusts_of_welkin'],
-		image: { head: 'T_IconMonsterHead00_UI.png' }
+		image: { head: 'T_IconMonsterHead_31054_UI.png' }
 	},
 	{
 		key: 'aero_drake',
 		cost: 1,
 		possible_sonatas: ['tidebreaking_courage', 'gusts_of_welkin'],
-		image: { head: 'T_IconMonsterHead00_UI.png' }
+		image: { head: 'T_IconMonsterHead_31055_UI.png' }
 	},
 	{
 		key: 'electro_drake',
 		cost: 1,
 		possible_sonatas: ['midnight_veil', 'gusts_of_welkin'],
-		image: { head: 'T_IconMonsterHead00_UI.png' }
+		image: { head: 'T_IconMonsterHead_31056_UI.png' }
 	},
 	{
 		key: 'glacio_drake',
 		cost: 1,
 		possible_sonatas: ['gusts_of_welkin'],
-		image: { head: 'T_IconMonsterHead00_UI.png' }
+		image: { head: 'T_IconMonsterHead_31057_UI.png' }
 	},
 ] as const satisfies EchoData[];

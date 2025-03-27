@@ -1,4 +1,4 @@
-import type { OptimizerContext, OptimizerOptions } from '$lib/optimizer';
+import type { OptimizerInput, OptimizerOptions } from '$lib/optimizer';
 
 import { db } from '$lib/db';
 import { combination_count } from '$lib/optimizer/build';
@@ -8,7 +8,7 @@ import { toast } from 'svelte-sonner';
 
 type ProgressCallback = (result: WorkerResult | null, done: boolean) => void;
 
-export async function optimize(context: OptimizerContext, options: OptimizerOptions, on_progress: ProgressCallback) {
+export async function optimize(context: OptimizerInput, options: OptimizerOptions, on_progress: ProgressCallback) {
 	const echoes = await db.echoes.toArray();
 
 	// todo: apply more filters?
@@ -32,7 +32,7 @@ export async function optimize(context: OptimizerContext, options: OptimizerOpti
 	const task: WorkerTask = {
 		input: {
 			echoes: filtered_echoes,
-			context,
+			input: context,
 			options,
 		},
 		report_progress: (result) => {

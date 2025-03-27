@@ -23,7 +23,7 @@
 
 	import { ChartColumnBig, LoaderCircle, Settings } from 'lucide-svelte';
 
-	import type { OptimizerContext } from '$lib/optimizer';
+	import type { OptimizerInput } from '$lib/optimizer';
 	import { WorkerPool, type WorkerResult } from '$lib/optimizer/worker_pool';
 	import { optimize } from '$lib/optimizer/optimize';
 	import { MaxPriorityQueue } from '@datastructures-js/priority-queue';
@@ -168,7 +168,7 @@
 			extra[stat].value += value;
 		}
 
-		const input: OptimizerContext = {
+		const input: OptimizerInput = {
 			character: {
 				key,
 				sequence: sequence,

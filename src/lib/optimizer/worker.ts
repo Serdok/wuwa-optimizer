@@ -1,8 +1,4 @@
-import {
-	generate_combinations,
-	generate_permutations,
-	is_valid_combination
-} from '$lib/optimizer/build';
+import { generate_combinations, is_valid_combination } from '$lib/optimizer/build';
 import type { WorkerTask } from '$lib/optimizer/worker_pool';
 import {
 	apply_echo_stats,
@@ -16,21 +12,22 @@ import { WEAPONS } from '$lib/data/weapons';
 import { type StatKey, STATS } from '$lib/data/stats';
 import { weapon_secondary_curve } from '$lib/data/weapons/curve';
 import { default_finalizer } from '$lib/optimizer/finalizer';
+import type { OptimizerContext } from '$lib/optimizer/index';
 
 self.onmessage = function (event: MessageEvent) {
-	const { echoes, context, options } = event.data as WorkerTask['input'];
+	const { echoes, input, options } = event.data as WorkerTask['input'];
 
 	// const permutations = generate_permutations(echoes, 5, []);
 	const combinations = generate_combinations(echoes, 5);
 
 	for (const build of combinations) {
-		if (!is_valid_combination(build, context.filter)) {
+		if (!is_valid_combination(build, input.filter)) {
 			continue;
 		}
 
 		// todo: compute damage
-		const character = CHARACTERS[context.character.key];
-		const weapon = WEAPONS[character.weapon_type][context.weapon.key];
+		const character = CHARACTERS[input.character.key];
+		const weapon = WEAPONS[character.weapon_type][input.weapon.key];
 
 		const base_stats = get_base_stats(character, weapon);
 		const default_stats = get_default_stats();
@@ -38,12 +35,14 @@ self.onmessage = function (event: MessageEvent) {
 		const combat_stats = Object.fromEntries(
 			Object.entries(default_stats).map(([key, value]) => {
 				const stat = key as StatKey;
-				return [stat, value + (base_stats[stat] ?? 0) + (context.character.extra_stats[stat].value ?? 0)];
+				return [stat, value + (base_stats[stat] ?? 0) + (input.character.extra_stats[stat].value ?? 0)];
 			})
 		) as Record<StatKey, number>;
 
-		character.apply_effects(context, combat_stats);
-		weapon.apply_effects(context, combat_stats);
+		const context: OptimizerContext = { character, };
+
+		character.apply_effects(input, combat_stats, context);
+		weapon.apply_effects(input, combat_stats, context);
 		combat_stats[weapon.base_stats.secondary.stat] += weapon.base_stats.secondary.value * weapon_secondary_curve['6/90'];
 
 		const build_stats = structuredClone(combat_stats);
@@ -54,7 +53,7 @@ self.onmessage = function (event: MessageEvent) {
 				.filter((s) => s.motions.length > 0)
 				.map((skill) => {
 					const skill_stats = structuredClone(build_stats);
-					skill.apply_effects(context, skill_stats);
+					skill.apply_effects(input, skill_stats, context);
 
 					return [
 						skill.type,
@@ -63,7 +62,7 @@ self.onmessage = function (event: MessageEvent) {
 							key: skill.key,
 							motions: skill.motions.map((motion) => {
 								const attack_stats = structuredClone(skill_stats);
-								motion.apply_effects(context, attack_stats);
+								motion.apply_effects(input, attack_stats, context);
 
 								return {
 									type: motion.type,

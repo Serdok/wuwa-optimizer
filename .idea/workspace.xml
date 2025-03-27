@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="complete characters and weapons">
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/carlotta/T_IconRole_Pile_kelaita_UI.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/carlotta/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/pistols/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/pistols/static_mist/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/pistols/the_last_dance/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/demo/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/demo/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/EchoCard.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/EchoCard.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/optimize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/optimize.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/worker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/worker_pool.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/worker_pool.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +42,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Serdok&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Serdok/wuwa-optimizer&quot;,
+    &quot;accountId&quot;: &quot;c553888f-49a7-4cbf-871f-29f3f5868f35&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
@@ -44,42 +64,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/serdok/projects/wuwa-optimizer/src/lib/data/characters/jinhsi",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "/home/serdok/.nvm/versions/node/v22.8.0/bin/node",
-    "nodejs_package_manager_path": "npm",
-    "npm.build.executor": "Run",
-    "npm.dev.executor": "Run",
-    "npm.preview.executor": "Run",
-    "npm.test.executor": "Run",
-    "npm.test:unit.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "/home/serdok/projects/wuwa-optimizer/node_modules/prettier",
-    "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "/home/serdok/projects/wuwa-optimizer/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/serdok/projects/wuwa-optimizer/src/lib/data/characters/carlotta&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/serdok/.nvm/versions/node/v22.8.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.preview.executor&quot;: &quot;Run&quot;,
+    &quot;npm.test.executor&quot;: &quot;Run&quot;,
+    &quot;npm.test:unit.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/serdok/projects/wuwa-optimizer/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/serdok/projects/wuwa-optimizer/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TypeScript"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TypeScript&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Bookmarks" side_tool="true" />
       <window_info id="Merge Requests" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Pull Requests" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16088867" />
-      <window_info id="Commit" order="1" weight="0.16088867" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15893555" />
+      <window_info id="Commit" order="1" weight="0.15893555" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="TypeScript" />
@@ -89,8 +109,8 @@
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.26582792" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" weight="0.3299513" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.3299513" />
-      <window_info anchor="bottom" id="Run" order="4" weight="0.3299513" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3299513" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.3299513" />
       <window_info anchor="bottom" id="Services" order="5" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="documentation.v2" show_stripe_button="false" side_tool="true" />
@@ -105,18 +125,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/lib/data/characters/carlotta" />
       <recent name="$PROJECT_DIR$/src/lib/data/characters/jinhsi" />
       <recent name="$PROJECT_DIR$/static/assets/echoes/head" />
       <recent name="$PROJECT_DIR$/src/lib/optimizer" />
       <recent name="$PROJECT_DIR$/src/lib/data/sonatas" />
-      <recent name="$PROJECT_DIR$/src/lib/data/weapons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/lib/data/weapons/broadswords/ages_of_harvest" />
       <recent name="$PROJECT_DIR$/src/lib/data/stats" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -165,8 +185,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.preview" />
       </list>
     </recent_temporary>
@@ -199,6 +219,7 @@
       <workItem from="1742737271374" duration="16093000" />
       <workItem from="1742764147722" duration="13541000" />
       <workItem from="1742888063709" duration="49113000" />
+      <workItem from="1743097435660" duration="5653000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />

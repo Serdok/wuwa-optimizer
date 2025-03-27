@@ -12,7 +12,7 @@ export type EchoFilter = {
 	allow_partial: boolean,
 };
 
-export type OptimizerContext = {
+export type OptimizerInput = {
 	character: {
 		key: string,
 		sequence: number,
@@ -25,7 +25,11 @@ export type OptimizerContext = {
 		buffs: Record<string, number>,
 	},
 	filter: EchoFilter,
-}
+};
+
+export type OptimizerContext = {
+	character: CharacterData,
+};
 
 export type OptimizerOptions = {
 	pool: WorkerPool,
@@ -33,7 +37,7 @@ export type OptimizerOptions = {
 };
 
 export interface GameplayEffect {
-	apply_effects: (input: OptimizerContext, combat_stats: Record<StatKey, number>) => void;
+	apply_effects: (input: OptimizerInput, combat_stats: Record<StatKey, number>, context: OptimizerContext) => void;
 }
 
 export type SwitchBuff = {

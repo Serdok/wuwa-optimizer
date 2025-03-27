@@ -1,10 +1,11 @@
 import type { ElementKey } from '$lib/data/elements';
 import type { WeaponKey } from '$lib/data/weapons';
-import type { BaseStatKey, StatKey, StatValue, StatValueMap } from '$lib/data/stats';
+import type { BaseStatKey, StatValue, StatValueMap } from '$lib/data/stats';
 import type { Buff, GameplayEffect } from '$lib/optimizer';
 
 import changli from './changli';
 import jinhsi from './jinhsi';
+import carlotta from './carlotta';
 
 export const SKILLS = ['normal', 'skill', 'forte', 'burst', 'intro', 'outro'] as const;
 export type SkillKey = typeof SKILLS[number];
@@ -44,4 +45,5 @@ export type CharacterData = GameplayEffect & {
 export const CHARACTERS: Record<string, CharacterData> = {
 	changli,
 	jinhsi,
+	carlotta,
 } as const;

@@ -1,6 +1,6 @@
 import OptimizerWorker from './worker?worker';
 import type { Echo } from '$lib/data/echoes/types';
-import type { OptimizerContext, OptimizerOptions } from '$lib/optimizer/index';
+import type { OptimizerInput, OptimizerOptions } from '$lib/optimizer/index';
 import type { StatKey } from '$lib/data/stats';
 import type { AttackKey, SkillKey } from '$lib/data/characters';
 
@@ -28,7 +28,7 @@ export type WorkerResult = {
 export type WorkerTask = {
 	input: {
 		echoes: Echo[];
-		context: OptimizerContext;
+		input: OptimizerInput;
 		options: OptimizerOptions;
 	};
 

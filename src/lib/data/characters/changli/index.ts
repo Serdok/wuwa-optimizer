@@ -127,7 +127,7 @@ const data: CharacterData = {
 				},
 				{
 					type: 'heavy',
-					key: 'heavy_attack_dmg',
+					key: 'heavy_attack',
 					element: 'fusion',
 					related_stat: 'atk',
 					values: [0.2899, 0.2899, 0.2899, 0.3727],
@@ -135,7 +135,7 @@ const data: CharacterData = {
 				},
 				{
 					type: 'heavy',
-					key: 'mid_air_heavy_attack_dmg',
+					key: 'mid_air_heavy_attack',
 					element: 'fusion',
 					related_stat: 'atk',
 					values: [1.2327],
@@ -153,7 +153,7 @@ const data: CharacterData = {
 		},
 		'skill': {
 			type: 'skill',
-			key: 'tripartite_flame',
+			key: 'tripartite_flames',
 			apply_effects: (input, combat_stats) => {
 				if (input.character.sequence >= 1) {
 					combat_stats['general_bonus'] += 0.1;

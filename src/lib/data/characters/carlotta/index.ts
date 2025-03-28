@@ -33,7 +33,7 @@ const data: CharacterData = {
 			sequence: 0,
 			value: 1,
 		},
-		'yesterday_s_raindrops_make_the_finest_wine': {
+		'yesterday_s_raindrops_make_finest_wine': {
 			key: 'yesterday_s_raindrops_make_the_finest_wine',
 			kind: 'switch',
 			sequence: 4,

@@ -28,6 +28,8 @@
 	import { optimize } from '$lib/optimizer/optimize';
 	import { MaxPriorityQueue } from '@datastructures-js/priority-queue';
 
+	import { m } from '$lib/paraglide/messages';
+
 	const first_character = $derived(Object.values(CHARACTERS)[0]);
 
 	let key = $state('changli');
@@ -227,7 +229,7 @@
 
 <Tabs.Root value="character" class="">
 	<Tabs.List>
-		<Tabs.Trigger value="character">character</Tabs.Trigger>
+		<Tabs.Trigger value="character">{m.character()}</Tabs.Trigger>
 		<Tabs.Trigger value="echoes">echoes</Tabs.Trigger>
 	</Tabs.List>
 
@@ -239,13 +241,13 @@
 			<div class="border rounded-lg flex flex-col space-y-4">
 				<div class="flex-1 flex-col space-y-4">
 					<div class="p-2 flex flex-col space-y-2">
-						<span>character</span>
+						<span>{m.character()}</span>
 						<div class="px-1 flex flex-row space-x-2">
 							<Select.Root type="single" bind:value={key} onValueChange={() => on_character_change()}>
-								<Select.Trigger class="flex-1">{character.key}</Select.Trigger>
+								<Select.Trigger class="flex-1">{m[character.key]?.() || character.key}</Select.Trigger>
 								<Select.Content>
 									{#each Object.values(CHARACTERS) as chr (chr.key)}
-										<Select.Item label={chr.key} value={chr.key} />
+										<Select.Item label={m[chr.key]?.() || chr.key} value={chr.key} />
 									{/each}
 								</Select.Content>
 							</Select.Root>
@@ -260,13 +262,13 @@
 						</div>
 					</div>
 					<div class="p-2 flex flex-col space-y-2">
-						<span>weapon</span>
+						<span>{m.weapon()}</span>
 						<div class="px-1 flex flex-row space-x-2">
 							<Select.Root type="single" bind:value={weapon_key} onValueChange={() => reset_weapon_buffs()}>
-								<Select.Trigger class="flex-1">{weapon.key}</Select.Trigger>
+								<Select.Trigger class="flex-1">{m[weapon.key]?.() || weapon.key}</Select.Trigger>
 								<Select.Content>
 									{#each Object.values(weapons) as weap (weap.key)}
-										<Select.Item label={weap.key} value={weap.key} />
+										<Select.Item label={m[weap.key]?.() || weap.key} value={weap.key} />
 									{/each}
 								</Select.Content>
 							</Select.Root>
@@ -294,7 +296,7 @@
 							</Select.Root>
 							<Dialog.Root bind:open={target_dialog_open}>
 								<Dialog.Trigger class={buttonVariants({ variant: 'secondary', class: 'justify-start px-3' })}>
-									target: {target_key}</Dialog.Trigger>
+									target: {m[target_key]?.() || target_key}</Dialog.Trigger>
 								<Dialog.Content class="max-w-[70%] h-2/3 flex flex-col flex-wrap gap-2">
 									<Dialog.Header>
 										<Dialog.Title>optimization target</Dialog.Title>
@@ -304,48 +306,48 @@
 											<div>basic stats</div>
 											<div class="flex flex-col space-y-1">
 												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'hp'; target_dialog_open = false; }}>hp
+																onclick={() => { target_key = 'hp'; target_dialog_open = false; }}>{m.hp()}
 												</Button>
 												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'atk'; target_dialog_open = false; }}>atk
+																onclick={() => { target_key = 'atk'; target_dialog_open = false; }}>{m.atk()}
 												</Button>
 												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'def'; target_dialog_open = false; }}>def
+																onclick={() => { target_key = 'def'; target_dialog_open = false; }}>{m.def()}
 												</Button>
 												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'crit_rate'; target_dialog_open = false; }}>crit_rate
+																onclick={() => { target_key = 'crit_rate'; target_dialog_open = false; }}>{m.crit_rate()}
 												</Button>
 												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'crit_dmg'; target_dialog_open = false; }}>crit_dmg
+																onclick={() => { target_key = 'crit_dmg'; target_dialog_open = false; }}>{m.crit_dmg()}
 												</Button>
 												<Button type="button" variant="ghost"
 																onclick={() => { target_key = 'energy_regen'; target_dialog_open = false; }}>
-													energy_regen
+													{m.energy_regen()}
 												</Button>
 												<Button type="button" variant="ghost"
 																onclick={() => { target_key = 'healing_bonus'; target_dialog_open = false; }}>
-													healing_bonus
+													{m.healing_bonus()}
 												</Button>
 												<Button type="button" variant="ghost"
-																onclick={() => { target_key = `${character.element}_bonus`; target_dialog_open = false; }}>{character.element}
-													_bonus
+																onclick={() => { target_key = `${character.element}_bonus`; target_dialog_open = false; }}>
+													{m[`${character.element}_bonus`]?.() || `${character.element}_bonus`}
 												</Button>
 												<Button type="button" variant="ghost"
 																onclick={() => { target_key = 'general_bonus'; target_dialog_open = false; }}>
-													general_bonus
+													{m.general_bonus()}
 												</Button>
 											</div>
 										</div>
 										{#each Object.values(character.skills).filter(s => s.motions.length > 0) as skill (skill.key)}
 											<div class="break-inside-avoid border rounded-lg p-2 flex flex-col space-y-2">
 												<div class="flex flex-row items-center">
-													<span class="flex-1">{skill.key}</span>
-													<Badge variant="secondary">{skill.type}</Badge>
+													<span class="flex-1">{m[skill.key]?.() || skill.key}</span>
+													<Badge variant="secondary">{m[skill.type]?.() || skill.type}</Badge>
 												</div>
 												<div class="flex flex-col space-y-1">
 													{#each skill.motions as motion (motion.key)}
 														<Button type="button" variant="ghost"
-																		onclick={() => { target_key = `${skill.key}-${motion.key}`; target_dialog_open = false; }}>{motion.key}</Button>
+																		onclick={() => { target_key = `${skill.key}-${motion.key}`; target_dialog_open = false; }}>{m[motion.key]?.() || motion.key}</Button>
 													{/each}
 												</div>
 											</div>
@@ -371,44 +373,44 @@
 									<div class="px-2">main stats</div>
 									<div class="px-4 grid grid-cols-2 gap-1">
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-hp_p" bind:value={extra_stats['hp_p'].value} class="basis-20" />
-											<Label for="extra-stat-hp_p">hp_p</Label>
+											<Input id="extra-stat-hp_p" value={extra_stats['hp_p'].value} oninput={e => extra_stats['hp_p'].value = +e.currentTarget.value} class="basis-20" />
+											<Label for="extra-stat-hp_p">{m.hp_p()}</Label>
 										</div>
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-hp" bind:value={extra_stats['hp'].value} class="basis-20" />
-											<Label for="extra-stat-hp">hp</Label>
-										</div>
-
-										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-atk_p" bind:value={extra_stats['atk_p'].value} class="basis-20" />
-											<Label for="extra-stat-atk_p">atk_p</Label>
-										</div>
-										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-atk" bind:value={extra_stats['atk'].value} class="basis-20" />
-											<Label for="extra-stat-atk">atk</Label>
+											<Input id="extra-stat-hp" value={extra_stats['hp'].value} oninput={e => extra_stats['hp'].value = +e.currentTarget.value} class="basis-20" />
+											<Label for="extra-stat-hp">{m.hp()}</Label>
 										</div>
 
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-def_p" bind:value={extra_stats['def_p'].value} class="basis-20" />
-											<Label for="extra-stat-def_p">def_p</Label>
+											<Input id="extra-stat-atk_p" value={extra_stats['atk_p'].value} oninput={e => extra_stats['atk_p'].value = +e.currentTarget.value} class="basis-20" />
+											<Label for="extra-stat-atk_p">{m.atk_p()}</Label>
 										</div>
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-def" bind:value={extra_stats['def'].value} class="basis-20" />
-											<Label for="extra-stat-def">def</Label>
+											<Input id="extra-stat-atk" value={extra_stats['atk'].value} oninput={e => extra_stats['atk'].value = +e.currentTarget.value} class="basis-20" />
+											<Label for="extra-stat-atk">{m.atk()}</Label>
 										</div>
 
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-crit_rate" bind:value={extra_stats['crit_rate'].value} class="basis-20" />
-											<Label for="extra-stat-crit_rate">crit_rate</Label>
+											<Input id="extra-stat-def_p" value={extra_stats['def_p'].value} oninput={e => extra_stats['def_p'].value = +e.currentTarget.value} class="basis-20" />
+											<Label for="extra-stat-def_p">{m.def_p()}</Label>
 										</div>
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-crit_dmg" bind:value={extra_stats['crit_dmg'].value} class="basis-20" />
-											<Label for="extra-stat-crit_dmg">crit_dmg</Label>
+											<Input id="extra-stat-def" value={extra_stats['def'].value} oninput={e => extra_stats['def'].value = +e.currentTarget.value} class="basis-20" />
+											<Label for="extra-stat-def">{m.def()}</Label>
+										</div>
+
+										<div class="flex flex-row items-center space-x-2">
+											<Input id="extra-stat-crit_rate" value={extra_stats['crit_rate'].value} oninput={e => extra_stats['crit_rate'].value = +e.currentTarget.value} class="basis-20" />
+											<Label for="extra-stat-crit_rate">{m.crit_rate()}</Label>
 										</div>
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-energy_regen" bind:value={extra_stats['energy_regen'].value}
+											<Input id="extra-stat-crit_dmg" value={extra_stats['crit_dmg'].value} oninput={e => extra_stats['crit_dmg'].value = +e.currentTarget.value} class="basis-20" />
+											<Label for="extra-stat-crit_dmg">{m.crit_dmg()}</Label>
+										</div>
+										<div class="flex flex-row items-center space-x-2">
+											<Input id="extra-stat-energy_regen" value={extra_stats['energy_regen'].value} oninput={e => extra_stats['energy_regen'].value = +e.currentTarget.value}
 														 class="basis-20" />
-											<Label for="extra-stat-energy_regen">energy_regen</Label>
+											<Label for="extra-stat-energy_regen">{m.energy_regen()}</Label>
 										</div>
 									</div>
 								</div>
@@ -416,37 +418,37 @@
 									<div class="px-2">combat stats</div>
 									<div class="px-4 grid grid-cols-2 gap-1">
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-general_bonus" bind:value={extra_stats['general_bonus'].value}
+											<Input id="extra-stat-general_bonus" value={extra_stats['general_bonus'].value} oninput={e => extra_stats['general_bonus'].value = +e.currentTarget.value}
 														 class="basis-20" />
-											<Label for="extra-stat-general_bonus">general_bonus</Label>
+											<Label for="extra-stat-general_bonus">{m.general_bonus()}</Label>
 										</div>
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-general_amplify" bind:value={extra_stats['general_amplify'].value}
+											<Input id="extra-stat-general_amplify" value={extra_stats['general_amplify'].value} oninput={e => extra_stats['general_amplify'].value = +e.currentTarget.value}
 														 class="basis-20" />
-											<Label for="extra-stat-general_amplify">general_amplify</Label>
+											<Label for="extra-stat-general_amplify">{m.general_amplify()}</Label>
 										</div>
 
 										<div class="flex flex-row items-center space-x-2">
 											<Input id="extra-stat-{character.element}_bonus"
-														 bind:value={extra_stats[`${character.element}_bonus`].value} class="basis-20" />
-											<Label for="extra-stat-{character.element}_bonus">{character.element}_bonus</Label>
+														 value={extra_stats[`${character.element}_bonus`].value} oninput={e => extra_stats[`${character.element}_bonus`].value = +e.currentTarget.value} class="basis-20" />
+											<Label for="extra-stat-{character.element}_bonus">{m[`${character.element}_bonus`]?.() || `${character.element}_bonus`}</Label>
 										</div>
 										<div class="flex flex-row items-center space-x-2">
 											<Input id="extra-stat-{character.element}_amplify"
-														 bind:value={extra_stats[`${character.element}_amplify`].value} class="basis-20" />
-											<Label for="extra-stat-{character.element}_amplify">{character.element}_amplify</Label>
+														 value={extra_stats[`${character.element}_amplify`].value} oninput={e => extra_stats[`${character.element}_amplify`].value = +e.currentTarget.value} class="basis-20" />
+											<Label for="extra-stat-{character.element}_amplify">{m[`${character.element}_amplify`]?.() || `${character.element}_amplify`}</Label>
 										</div>
 
 										{#each ATTACKS as a (a)}
 											<div class="flex flex-row items-center space-x-2">
-												<Input id="extra-stat-{a}_bonus" bind:value={extra_stats[`${a}_bonus`].value}
+												<Input id="extra-stat-{a}_bonus" value={extra_stats[`${a}_bonus`].value} oninput={e => extra_stats[`${a}_bonus`].value = +e.currentTarget.value}
 															 class="basis-20" />
-												<Label for="extra-stat-{a}_bonus">{a}_bonus</Label>
+												<Label for="extra-stat-{a}_bonus">{m[`${a}_bonus`]?.() || `${a}_bonus`}</Label>
 											</div>
 											<div class="flex flex-row items-center space-x-2">
-												<Input id="extra-stat-{a}_amplify" bind:value={extra_stats[`${a}_amplify`].value}
+												<Input id="extra-stat-{a}_amplify" value={extra_stats[`${a}_amplify`].value} oninput={e => extra_stats[`${a}_amplify`].value = +e.currentTarget.value}
 															 class="basis-20" />
-												<Label for="extra-stat-{a}_amplify">{a}_amplify</Label>
+												<Label for="extra-stat-{a}_amplify">{m[`${a}_amplify`]?.() || `${a}_amplify`}</Label>
 											</div>
 										{/each}
 									</div>
@@ -455,24 +457,24 @@
 									<div class="px-2">misc stats</div>
 									<div class="px-4 flex flex-col space-y-1">
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-healing_bonus" bind:value={extra_stats['healing_bonus'].value}
+											<Input id="extra-stat-healing_bonus" value={extra_stats['healing_bonus'].value} oninput={e => extra_stats['healing_bonus'].value = +e.currentTarget.value}
 														 class="basis-20" />
-											<Label for="extra-stat-healing_bonus">healing_bonus</Label>
+											<Label for="extra-stat-healing_bonus">{m.healing_bonus()}</Label>
 										</div>
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-skill_multiplier" bind:value={extra_stats['skill_multiplier'].value}
+											<Input id="extra-stat-skill_multiplier" value={extra_stats['skill_multiplier'].value} oninput={e => extra_stats['skill_multiplier'].value = +e.currentTarget.value}
 														 class="basis-20" />
-											<Label for="extra-stat-skill_multiplier">skill_multiplier</Label>
+											<Label for="extra-stat-skill_multiplier">{m.skill_multiplier()}</Label>
 										</div>
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-enemy_resistance" bind:value={extra_stats['enemy_resistance'].value}
+											<Input id="extra-stat-enemy_resistance" value={extra_stats['enemy_resistance'].value} oninput={e => extra_stats['enemy_resistance'].value = +e.currentTarget.value}
 														 class="basis-20" />
-											<Label for="extra-stat-enemy_resistance">enemy_resistance</Label>
+											<Label for="extra-stat-enemy_resistance">{m.enemy_resistance()}</Label>
 										</div>
 										<div class="flex flex-row items-center space-x-2">
-											<Input id="extra-stat-enemy_def_ignore" bind:value={extra_stats['enemy_def_ignore'].value}
+											<Input id="extra-stat-enemy_def_ignore" value={extra_stats['enemy_def_ignore'].value} oninput={e => extra_stats['enemy_def_ignore'].value = +e.currentTarget.value}
 														 class="basis-20" />
-											<Label for="extra-stat-enemy_def_ignore">enemy_def_ignore</Label>
+											<Label for="extra-stat-enemy_def_ignore">{m.enemy_def_ignore()}</Label>
 										</div>
 									</div>
 								</div>
@@ -490,7 +492,7 @@
 							</Sheet.Header>
 							<div class="p-2 flex flex-col space-y-2">
 								<div class="px-2">
-									<div>World</div>
+									<div>world</div>
 									<div class="px-2 flex flex-row items-center space-x-2">
 										<Input id="world-level" bind:value={world_level} class="basis-16" />
 										<Label for="world-level">world level</Label>
@@ -504,7 +506,7 @@
 			<div class="border rounded-lg">
 				<Accordion.Root type="multiple" value={['character-stats', 'character-buffs', 'weapon-buffs']}>
 					<Accordion.Item value="character-buffs">
-						<Accordion.Trigger class="px-2">character buffs</Accordion.Trigger>
+						<Accordion.Trigger class="px-2">{m.character_buffs()}</Accordion.Trigger>
 						<Accordion.Content class="px-2">
 							<div class="px-2 flex flex-col space-y-4">
 								{#each Object.entries(character.buffs) as [key, buff]}
@@ -513,7 +515,7 @@
 											<div class="flex flex-row items-center space-x-2">
 												<Input id={key} bind:value={character_buffs[key]} disabled={sequence < buff.sequence}
 															 class="basis-16" />
-												<Label for={key}>{key}</Label>
+												<Label for={key}>{m[key]?.() || key}</Label>
 											</div>
 											<Slider type="single" bind:value={character_buffs[key]} min={buff.min_value} max={buff.max_value}
 															step={1} disabled={sequence < buff.sequence} class="mt-2" />
@@ -523,7 +525,7 @@
 										<div class="flex flex-row items-center space-x-2">
 											<Switch id={key} {checked} onCheckedChange={chk => character_buffs[key] = +chk}
 															disabled={sequence < buff.sequence} class="" />
-											<Label for={key}>{key}</Label>
+											<Label for={key}>{m[key]?.() || key}</Label>
 										</div>
 									{/if}
 								{/each}
@@ -531,7 +533,7 @@
 						</Accordion.Content>
 					</Accordion.Item>
 					<Accordion.Item value="weapon-buffs">
-						<Accordion.Trigger class="px-2">weapon buffs</Accordion.Trigger>
+						<Accordion.Trigger class="px-2">{m.weapon_buffs()}</Accordion.Trigger>
 						<Accordion.Content class="px-2">
 							<div class="px-2 flex flex-col space-y-4">
 								{#each Object.entries(weapon.buffs) as [key, buff]}
@@ -539,7 +541,7 @@
 										<div>
 											<div class="flex flex-row items-center space-x-2">
 												<Input id={key} bind:value={weapon_buffs[key]} class="basis-16" />
-												<Label for={key}>{key}</Label>
+												<Label for={key}>{m[key]?.() || key}</Label>
 											</div>
 											<Slider type="single" bind:value={weapon_buffs[key]} min={buff.min_value} max={buff.max_value}
 															step={1} class="mt-2" />
@@ -548,7 +550,7 @@
 										{@const checked = weapon_buffs[key] > 0}
 										<div class="flex flex-row items-center space-x-2">
 											<Switch id={key} {checked} onCheckedChange={chk => weapon_buffs[key] = +chk} />
-											<Label for={key}>{key}</Label>
+											<Label for={key}>{m[key]?.() || key}</Label>
 										</div>
 									{/if}
 								{/each}
@@ -579,7 +581,7 @@
 										<Label for="stat-{s.stat}-{i}" class="pl-2 flex flex-row items-center">
 											<img src={STAT_ICONS[s.stat]} alt={s.stat} class="w-6" />
 											<div>+{(s.value * 100).toFixed(1)}%</div>
-											<div class="ml-1">{s.stat}</div>
+											<div class="ml-1">{m[s.stat]?.() || s.stat}</div>
 										</Label>
 									</div>
 								{/each}
@@ -682,7 +684,7 @@
 							<ToggleGroup.Item value={s.stat} class="min-w-36 border rounded-lg">
 								<div class="flex flex-row items-center space-x-1">
 									<img src={STAT_ICONS[s.stat]} alt={s.stat} class="w-6" />
-									<div>{s.stat}</div>
+									<div>{m[s.stat]?.() || s.stat}</div>
 								</div>
 							</ToggleGroup.Item>
 						{/each}
@@ -695,7 +697,7 @@
 							<ToggleGroup.Item value={s.stat} class="min-w-36 border rounded-lg">
 								<div class="flex flex-row items-center space-x-1">
 									<img src={STAT_ICONS[s.stat]} alt={s.stat} class="w-6" />
-									<div>{s.stat}</div>
+									<div>{m[s.stat]?.() || s.stat}</div>
 								</div>
 							</ToggleGroup.Item>
 						{/each}
@@ -708,7 +710,7 @@
 							<ToggleGroup.Item value={s.stat} class="min-w-36 border rounded-lg">
 								<div class="flex flex-row items-center space-x-1">
 									<img src={STAT_ICONS[s.stat]} alt={s.stat} class="w-6" />
-									<div>{s.stat}</div>
+									<div>{m[s.stat]?.() || s.stat}</div>
 								</div>
 							</ToggleGroup.Item>
 						{/each}
@@ -807,12 +809,12 @@
 					</div>
 					{#each Object.values(result.skills) as skill (skill.type)}
 						<div class="w-full break-inside-avoid flex flex-col pt-2 px-2">
-							<div class="text-xl">{skill.key}</div>
+							<div class="text-xl">{m[skill.key]?.() || skill.key}</div>
 							<div>
 								{#each skill.motions as motion (motion.key)}
 									{@const average = format_motion_values(motion.average.map(v => v.toFixed(0)))}
 									<div class="px-2 flex flex-row justify-between gap-2">
-										<div>{motion.key}</div>
+										<div>{m[motion.key]?.() || motion.key}</div>
 										<div>
 											{#each Object.entries(average) as [value, count], i}
 												{#if count > 1}<span class="text-xs px-0.5">{count}x</span>{/if}

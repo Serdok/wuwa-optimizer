@@ -11,8 +11,8 @@ export default {
 		secondary: { stat: 'atk_p', value: 0.081 },
 	},
 	buffs: {
-		'skill_cast': {
-			key: 'skill_cast',
+		'stormy_resolution': {
+			key: 'stormy_resolution',
 			kind: 'slider',
 			value: 3,
 			min_value: 0,
@@ -21,6 +21,6 @@ export default {
 	},
 	apply_effects: (input, combat_stats) => {
 		combat_stats['energy_regen'] += ranks[input.weapon.rank - 1];
-		combat_stats['skill_bonus'] += (skill_bonuses[input.weapon.rank - 1] * (input.weapon.buffs['skill_cast'] || 0));
+		combat_stats['skill_bonus'] += (skill_bonuses[input.weapon.rank - 1] * (input.weapon.buffs['stormy_resolution'] || 0));
 	},
 } as const satisfies WeaponData;

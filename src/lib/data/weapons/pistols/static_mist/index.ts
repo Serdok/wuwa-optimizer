@@ -11,14 +11,14 @@ export default {
 		secondary: { stat: 'crit_rate', value: 0.054 },
 	},
 	buffs: {
-		'stormy_resolution': {
-			key: 'stormy_resolution',
-			kind: 'switch',
-			value: 1,
-		}
+		// 'stormy_resolution': {
+		// 	key: 'stormy_resolution',
+		// 	kind: 'switch',
+		// 	value: 1,
+		// }
 	},
 	apply_effects: (input, combat_stats) => {
 		combat_stats['energy_regen'] += ranks[input.weapon.rank - 1];
-		combat_stats['atk_p'] += attack_bonus[input.weapon.rank - 1] * (input.character.buffs['stormy_resolution'] || 0);
+		// combat_stats['atk_p'] += attack_bonus[input.weapon.rank - 1] * (input.character.buffs['stormy_resolution'] || 0);
 	},
 } as const satisfies WeaponData;

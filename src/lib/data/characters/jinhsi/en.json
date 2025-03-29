@@ -1,0 +1,28 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "jinhsi": "Jinhsi",
+
+  "incandescence": "Incandescence",
+  "herald_of_revival": "Herald of Revival",
+  "immortal_s_descendancy": "Immortal's Descendancy",
+  "benevolent_grace": "Benevolent Grace",
+
+  "slash_of_breaking_dawn": "Slash of Breaking Dawn",
+  "trailing_lights_of_eons": "Trailing Lights of Eons",
+  "luminal_synthesis": "Luminal Synthesis",
+  "purge_of_light": "Purge of Light",
+  "loong_s_halo": "Loong's Halo",
+  "temporal_bender": "Temporal Bender",
+
+  "overflowing_radiance_dmg": "Overflowing Radiance DMG",
+  "incarnation_basic_attack_1_dmg": "Incarnation - Basic Attack 1 DMG",
+  "incarnation_basic_attack_2_dmg": "Incarnation - Basic Attack 2 DMG",
+  "incarnation_basic_attack_3_dmg": "Incarnation - Basic Attack 3 DMG",
+  "incarnation_basic_attack_4_dmg": "Incarnation - Basic Attack 4 DMG",
+  "incarnation_heavy_attack_dmg": "Incarnation - Heavy Attack DMG",
+  "incarnation_dodge_counter_dmg": "Incarnation - Dodge Counter DMG",
+  "crescent_divinity_dmg": "Crescent Divinity DMG",
+  "illuminous_epiphany_solar_flare_dmg": "Illuminous Epiphany: Solar Flare DMG",
+  "illuminous_epiphany_stella_glamor_dmg": "Illuminous Epiphany: Stella Glamor DMG"
+}

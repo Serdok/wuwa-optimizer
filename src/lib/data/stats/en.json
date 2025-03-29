@@ -1,0 +1,53 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "hp": "HP",
+  "hp_p": "HP%",
+
+  "atk": "ATK",
+  "atk_p": "ATK%",
+
+  "def": "DEF",
+  "def_p": "DEF%",
+
+  "crit_rate": "Crit. Rate",
+  "crit_dmg": "Crit. DMG",
+  "energy_regen": "Energy Regen",
+  "healing_bonus": "Healing Bonus",
+
+  "basic_bonus": "Basic DMG Bonus",
+  "heavy_bonus": "Heavy DMG Bonus",
+  "skill_bonus": "Skill DMG Bonus",
+  "burst_bonus": "Liberation DMG Bonus",
+  "intro_bonus": "Intro DMG Bonus",
+  "outro_bonus": "Outro DMG Bonus",
+
+  "basic_amplify": "Basic DMG Amplify",
+  "heavy_amplify": "Heavy DMG Amplify",
+  "skill_amplify": "Skill DMG Amplify",
+  "burst_amplify": "Liberation DMG Amplify",
+  "intro_amplify": "Intro DMG Amplify",
+  "outro_amplify": "Outro DMG Amplify",
+
+  "general_bonus": "General DMG Bonus",
+  "physical_bonus": "Physical DMG Bonus",
+  "glacio_bonus": "Glacio DMG Bonus",
+  "fusion_bonus": "Fusion DMG Bonus",
+  "electro_bonus": "Electro DMG Bonus",
+  "aero_bonus": "Aero DMG Bonus",
+  "spectro_bonus": "Spectro DMG Bonus",
+  "havoc_bonus": "Havoc DMG Bonus",
+
+  "general_amplify": "General DMG Amplify",
+  "physical_amplify": "Physical DMG Amplify",
+  "glacio_amplify": "Glacio DMG Amplify",
+  "fusion_amplify": "Fusion DMG Amplify",
+  "electro_amplify": "Electro DMG Amplify",
+  "aero_amplify": "Aero DMG Amplify",
+  "spectro_amplify": "Spectro DMG Amplify",
+  "havoc_amplify": "Havoc DMG Amplify",
+
+  "skill_multiplier": "Skill Multiplier",
+  "enemy_resistance": "Enemy Resistance",
+  "enemy_def_ignore": "Enemy DEF Ignore"
+}

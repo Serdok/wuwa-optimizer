@@ -228,7 +228,7 @@ const data: CharacterData = {
 				},
 				{
 					type: 'skill',
-					key: 'fatale_finale_dmg',
+					key: 'fatal_finale_dmg',
 					element: 'glacio',
 					related_stat: 'atk',
 					values: [6.4433],

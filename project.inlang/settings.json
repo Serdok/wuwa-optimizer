@@ -6,12 +6,29 @@
 		"https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-missing-translation@1/dist/index.js",
 		"https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-without-source@1/dist/index.js",
 		"https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-valid-js-identifier@1/dist/index.js",
-		"https://cdn.jsdelivr.net/npm/@inlang/plugin-message-format@2/dist/index.js",
+		"https://cdn.jsdelivr.net/npm/@inlang/plugin-message-format@4/dist/index.js",
 		"https://cdn.jsdelivr.net/npm/@inlang/plugin-m-function-matcher@0/dist/index.js"
 	],
 	"plugin.inlang.messageFormat": {
-		"pathPattern": "./messages/{languageTag}.json"
+		"pathPattern": [
+          "./messages/{locale}.json",
+
+          "./src/lib/data/stats/{locale}.json",
+
+          "./src/lib/data/characters/{locale}.json",
+          "./src/lib/data/characters/changli/{locale}.json",
+          "./src/lib/data/characters/jinhsi/{locale}.json",
+          "./src/lib/data/characters/carlotta/{locale}.json",
+
+          "./src/lib/data/weapons/{locale}.json",
+          "./src/lib/data/weapons/broadswords/ages_of_harvest/{locale}.json",
+          "./src/lib/data/weapons/broadswords/lustrous_razor/{locale}.json",
+          "./src/lib/data/weapons/pistols/static_mist/{locale}.json",
+          "./src/lib/data/weapons/pistols/the_last_dance/{locale}.json",
+          "./src/lib/data/weapons/swords/blazing_brilliance/{locale}.json",
+          "./src/lib/data/weapons/swords/emerald_of_genesis/{locale}.json"
+        ]
 	},
 	"sourceLanguageTag": "en",
-	"languageTags": ["en", "fr-fr"]
+	"locales": ["en"]
 }

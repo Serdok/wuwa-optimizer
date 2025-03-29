@@ -10,6 +10,8 @@
 	import { SONATA_DATA } from '$lib/data/sonatas';
 	import { BASE_STATS, STAT_ICONS } from '$lib/data/stats';
 
+	import { m } from '$lib/paraglide/messages';
+
 	interface Props {
 		echo: Echo;
 	}
@@ -45,7 +47,7 @@
 				<div class="flex flex-row items-center space-x-2">
 					{#if echo.primary_stat.stat in STAT_ICONS}
 						<img src={STAT_ICONS[echo.primary_stat.stat]} alt={echo.primary_stat.stat} class="size-10" />
-						<span class="text-lg">{echo.primary_stat.stat}</span>
+						<span class="text-lg">{m[echo.primary_stat.stat]?.() || echo.primary_stat.stat}</span>
 						<span
 							class="text-lg">{BASE_STATS.includes(echo.primary_stat.stat) ? echo.primary_stat.value.toFixed(0) : (echo.primary_stat.value * 100).toFixed(1) + '%'}</span>
 					{/if}
@@ -64,8 +66,7 @@
 				<div class="flex flex-row items-center space-x-2">
 					{#if sub_stat.stat in STAT_ICONS}
 						<img src={STAT_ICONS[sub_stat.stat]} alt={sub_stat.stat} class="size-8" />
-						<span
-							class="">{BASE_STATS.includes(sub_stat.stat) ? sub_stat.value.toFixed(0) : (sub_stat.value * 100).toFixed(1) + '%'}</span>
+						<span>{BASE_STATS.includes(sub_stat.stat) ? sub_stat.value.toFixed(0) : (sub_stat.value * 100).toFixed(1) + '%'}</span>
 					{/if}
 				</div>
 			{/each}

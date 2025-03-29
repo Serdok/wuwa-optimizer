@@ -1,0 +1,26 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "carlotta": "Carlotta",
+
+  "final_bow": "Final Bow",
+  "deconstruction": "Deconstruction",
+  "yesterday_s_raindrops_make_finest_wine": "Yesterday's Raindrops Make Finest Wine",
+
+  "silent_execution": "Silent Execution",
+  "art_of_violence": "Art of Violence",
+  "lethal_repertoire": "Lethal Repertoire",
+  "era_of_new_wave": "Era of New Wave",
+  "wintertime_aria": "Wintertime Aria",
+  "closing_remark": "Closing Remark",
+
+  "necessary_measures_stage_1_dmg": "Necessary Measures Stage 1 DMG",
+  "necessary_measures_stage_2_dmg": "Necessary Measures Stage 2 DMG",
+  "necessary_measures_stage_3_dmg": "Necessary Measures Stage 3 DMG",
+  "containment_tactics_dmg": "Containment Tactics DMG",
+  "customary_greetings_dmg": "Customary Greetings DMG",
+  "chromatic_splendor_dmg": "Chromatic Splendor DMG",
+  "imminent_oblivion_dmg": "Imminemt Oblivion DMG",
+  "death_knell_dmg": "Death Knell DMG",
+  "fatal_finale_dmg": "Fatal Finale DMG"
+}

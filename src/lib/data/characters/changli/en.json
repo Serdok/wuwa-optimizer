@@ -1,0 +1,24 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "changli": "Changli",
+
+  "enflamement": "Enflamement",
+  "fiery_feather": "Fiery Feather",
+  "polished_words": "Polished Words",
+
+  "blazing_enlightment": "Blazing Enlightment",
+  "tripartite_flames": "Tripartite Flames",
+  "flaming_sacrifice": "Flaming Sacrifice",
+  "radiance_of_fealty": "Radiance of Fealty",
+  "obedience_of_rules": "Obedience of Rules",
+  "strategy_of_duality": "Strategy of Duality",
+
+  "heavy_attack": "Heavy Attack",
+  "mid_air_heavy_attack": "Mid-air Heavy Attack",
+  "dodge_counter": "Dodge Counter",
+  "true_sight_capture_dmg": "True Sight: Capture DMG",
+  "true_sight_conquest_dmg": "True Sight: Conquest DMG",
+  "true_sight_charge_dmg": "True Sight: Charge DMG",
+  "flaming_sacrifice_dmg": "Flaming Sacrifice DMG"
+}

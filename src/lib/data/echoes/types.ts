@@ -5,7 +5,6 @@ export type EchoData = {
 	key: string,
 	cost: number,
 	possible_sonatas: SonataKey[],
-	image: { head: string },
 }
 
 export type Echo = {
@@ -18,6 +17,5 @@ export type Echo = {
 	primary_stat: StatValue,
 	secondary_stat: StatValue,
 	sub_stats: StatValue[],
-	image: { head: string },
 	created_at: number,
 };

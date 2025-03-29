@@ -7,6 +7,7 @@
 
 	import { COST_1, COST_3, COST_4, type EchoData } from '$lib/data/echoes';
 	import { SONATA_DATA } from '$lib/data/sonatas';
+	import { get_echo_image } from '$lib/data/echoes/images';
 
 	interface Props {
 		key: string;
@@ -30,7 +31,7 @@
 			<div class="flex flex-row flex-wrap gap-2 pt-2">
 				{#each echoes as echo}
 					<button type="button" class="relative size-36 rounded-xl aspect-square {key === echo.key ? 'ring-2 ring-white' : ''}" onclick={() => { key = echo.key; open = false; }}>
-						<img src="{base}/assets/echoes/head/{echo.image.head}" alt={echo.key} class="rounded-xl" />
+						<img src={get_echo_image(echo.key)} alt={echo.key} class="rounded-xl" />
 						<span class="sr-only">{echo.key}</span>
 						<span class="absolute bottom-0 right-0 flex flex-row space-x-1">
 							{#each echo.possible_sonatas as s}
@@ -46,7 +47,7 @@
 
 <Dialog.Root bind:open>
 	<Dialog.Trigger type="button">
-		<img src="{base}/assets/echoes/head/{selected.image.head}" alt={selected.key} class="rounded-xl size-72" />
+		<img src={get_echo_image(selected.key)} alt={selected.key} class="rounded-xl size-72" />
 	</Dialog.Trigger>
 	<Dialog.Content class="max-w-[80%] h-3/4 flex flex-col gap-2">
 		<Dialog.Header>

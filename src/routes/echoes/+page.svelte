@@ -65,7 +65,6 @@
 			primary_stat: { stat: primary_stat.stat, value: primary_value },
 			secondary_stat: { stat: secondary_stat.stat, value: secondary_value },
 			sub_stats,
-			image: selection.image,
 			created_at: Date.now(),
 		});
 	}

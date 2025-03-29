@@ -61,7 +61,6 @@
 			primary_stat: { stat: primary_key as StatKey, value: primary_value, },
 			secondary_stat: { stat: secondary_key as StatKey, value: secondary_value, },
 			sub_stats: $state.snapshot(sub_stats).filter(s => s.stat !== '') as StatValue[],
-			image: selected.image,
 			created_at: data.echo?.created_at || Date.now(),
 		};
 

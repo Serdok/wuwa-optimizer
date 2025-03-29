@@ -29,6 +29,7 @@
 	import { MaxPriorityQueue } from '@datastructures-js/priority-queue';
 
 	import { m } from '$lib/paraglide/messages';
+	import { get_echo_image } from '$lib/data/echoes/images';
 
 	const first_character = $derived(Object.values(CHARACTERS)[0]);
 
@@ -745,7 +746,7 @@
 						<!-- build -->
 						<div class="border rounded-lg flex flex-col gap-3">
 							<div class="flex flex-row">
-								<img src="{base}/assets/echoes/head/{echo.image.head}" alt={echo.key} class="size-36" />
+								<img src={get_echo_image(echo.key)} alt={echo.key} class="size-36" />
 								<div class="flex flex-col gap-2 ml-2">
 									<div>
 										<span class="font-bold">{echo.key}</span>

@@ -14,6 +14,7 @@
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
+	import * as RadioGroup from '$lib/components/ui/radio-group';
 	import * as Select from '$lib/components/ui/select';
 	import * as Sheet from '$lib/components/ui/sheet';
 	import { Slider } from '$lib/components/ui/slider';
@@ -70,6 +71,8 @@
 
 	let results = $state([] as WorkerResult[]);
 	let is_running = $state(false);
+
+	let damage_selection = $state('average');
 
 	// initialize workers
 	const threads = Math.min(24, navigator.hardwareConcurrency - 1); // leave 1 core available!
@@ -736,6 +739,24 @@
 {/if}
 
 {#if results.length > 0}
+	<div class="my-2">
+		<RadioGroup.Root orientation="horizontal" bind:value={damage_selection} required class="flex flex-row space-x-2">
+			<div>
+				<RadioGroup.Item id="non-crit" value="non-crit" />
+				<Label for="non-crit">non-crit</Label>
+			</div>
+
+			<div>
+				<RadioGroup.Item id="average" value="average" />
+				<Label for="average">average</Label>
+			</div>
+
+			<div>
+				<RadioGroup.Item id="forced-crit" value="forced-crit" />
+				<Label for="forced-crit">forced crit</Label>
+			</div>
+		</RadioGroup.Root>
+	</div>
 	<div class="px-2 flex flex-col space-y-4 divide-y-2">
 		{#each results as result, i (i)}
 			{@const total_cost = result.build.reduce((acc, echo) => acc + echo.cost, 0)}
@@ -813,15 +834,31 @@
 							<div class="text-xl">{m[skill.key]?.() || skill.key}</div>
 							<div>
 								{#each skill.motions as motion (motion.key)}
-									{@const average = format_motion_values(motion.average.map(v => v.toFixed(0)))}
 									<div class="px-2 flex flex-row justify-between gap-2">
 										<div>{m[motion.key]?.() || motion.key}</div>
 										<div>
-											{#each Object.entries(average) as [value, count], i}
-												{#if count > 1}<span class="text-xs px-0.5">{count}x</span>{/if}
-												{value}
-												{#if i < Object.keys(average).length - 1} +{/if}
-											{/each}
+											{#if damage_selection === 'non-crit'}
+												{@const non_crit = format_motion_values(motion.non_crit.map(v => v.toFixed(0)))}
+												{#each Object.entries(non_crit) as [value, count], i}
+													{#if count > 1}<span class="text-xs px-0.5">{count}x</span>{/if}
+													{value}
+													{#if i < Object.keys(non_crit).length - 1} +{/if}
+												{/each}
+											{:else if damage_selection === 'forced-crit'}
+												{@const forced_crit = format_motion_values(motion.forced_crit.map(v => v.toFixed(0)))}
+												{#each Object.entries(forced_crit) as [value, count], i}
+													{#if count > 1}<span class="text-xs px-0.5">{count}x</span>{/if}
+													{value}
+													{#if i < Object.keys(forced_crit).length - 1} +{/if}
+												{/each}
+											{:else}
+												{@const average = format_motion_values(motion.average.map(v => v.toFixed(0)))}
+												{#each Object.entries(average) as [value, count], i}
+													{#if count > 1}<span class="text-xs px-0.5">{count}x</span>{/if}
+													{value}
+													{#if i < Object.keys(average).length - 1} +{/if}
+												{/each}
+											{/if}
 										</div>
 									</div>
 								{/each}

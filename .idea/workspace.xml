@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: rework echo images to be dynamic instead of storing the image key in the db">
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="fix: remove intro and outro dmg bonus in display stats as they don't have an associated icon">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +212,7 @@
       <workItem from="1743097435660" duration="7358000" />
       <workItem from="1743204765800" duration="2088000" />
       <workItem from="1743242337412" duration="7275000" />
-      <workItem from="1743259182424" duration="2292000" />
+      <workItem from="1743259182424" duration="3244000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -301,7 +302,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743261066049</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix: remove intro and outro dmg bonus in display stats as they don't have an associated icon">
+      <option name="closed" value="true" />
+      <created>1743261552636</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1743261552636</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,6 +337,7 @@
     <MESSAGE value="feat: localization" />
     <MESSAGE value="feat: import echoes from JSON" />
     <MESSAGE value="feat: rework echo images to be dynamic instead of storing the image key in the db" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: rework echo images to be dynamic instead of storing the image key in the db" />
+    <MESSAGE value="fix: remove intro and outro dmg bonus in display stats as they don't have an associated icon" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: remove intro and outro dmg bonus in display stats as they don't have an associated icon" />
   </component>
 </project>

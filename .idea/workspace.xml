@@ -4,155 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: import echoes from JSON">
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead00_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead01_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_015_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_025_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_035_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_045_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_055_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_065_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_075_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_085_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_095_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1000_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1001_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1003_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1004_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1005_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1006_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1007_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1008_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1009_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1010_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1014_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1015_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_1016_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_105_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_115_1_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_115_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_125_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_135_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_145_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_155_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_165_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_175_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_185_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_195_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_205_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_215_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_225_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_226_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_235_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_245_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_255_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_265_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_275_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_285_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_295_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_305_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31037_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31038_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31039_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31040_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31041_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31042_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31043_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31044_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31045_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31046_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31047_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31048_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31049_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31050_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31051_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31052_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31053_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31054_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31055_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31056_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_31057_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_315_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32022_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32023_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32024_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32025_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32026_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32027_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32028_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32029_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32030_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32031_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32032_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32033_1_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_32033_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_325_1_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_325_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_326_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_327_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_328_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_329_1_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_329_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_33011_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_33012_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_33013_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_330_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_34010_1_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_34012_1_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_350_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_969_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_970_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_971_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_972_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_973_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_974_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_975_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_976_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_977_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_978_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_979_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_980_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_984_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_985_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_986_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_987_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_988_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_989_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_990_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_992_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_993_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_994_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_995_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_996_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_997_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_998_1_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_998_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_999_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_QX_33007_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_QX_33013_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_QX_34010_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_SG_31047_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_SG_32022_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_SG_32029_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_SG_33009_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_SG_33011_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_YZ_33014_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_YZ_33015_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_YZ_33016_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_YZ_33017_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_YZ_33018_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_YZ_33019_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/head/T_IconMonsterHead_YZ_33020_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/echoes/images/index.ts" afterDir="false" />
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: rework echo images to be dynamic instead of storing the image key in the db">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/echoes/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/echoes/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/db/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/db/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/EchoCard.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/EchoCard.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/edit/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/edit/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/edit/EchoSelector.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/edit/EchoSelector.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +88,7 @@
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Pull Requests" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13549805" />
-      <window_info id="Commit" order="1" weight="0.20043945" />
+      <window_info id="Commit" order="1" weight="0.13549805" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="TypeScript" />
@@ -358,7 +211,7 @@
       <workItem from="1743097435660" duration="7358000" />
       <workItem from="1743204765800" duration="2088000" />
       <workItem from="1743242337412" duration="7275000" />
-      <workItem from="1743259182424" duration="1680000" />
+      <workItem from="1743259182424" duration="2292000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -440,7 +293,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743249214104</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat: rework echo images to be dynamic instead of storing the image key in the db">
+      <option name="closed" value="true" />
+      <created>1743261066049</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1743261066049</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -466,6 +327,7 @@
     <MESSAGE value="fix changli typo" />
     <MESSAGE value="feat: localization" />
     <MESSAGE value="feat: import echoes from JSON" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: import echoes from JSON" />
+    <MESSAGE value="feat: rework echo images to be dynamic instead of storing the image key in the db" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: rework echo images to be dynamic instead of storing the image key in the db" />
   </component>
 </project>

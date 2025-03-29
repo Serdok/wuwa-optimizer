@@ -58,8 +58,6 @@ export function get_display_stats(base_stats: Record<BaseStatKey, number>, comba
 		'heavy_bonus': combat_stats.heavy_bonus,
 		'skill_bonus': combat_stats.skill_bonus,
 		'burst_bonus': combat_stats.burst_bonus,
-		'intro_bonus': combat_stats.intro_bonus,
-		'outro_bonus': combat_stats.outro_bonus,
 	};
 }
 

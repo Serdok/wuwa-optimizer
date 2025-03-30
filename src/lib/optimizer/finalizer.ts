@@ -15,7 +15,7 @@ export function default_finalizer(motion: MotionData, base_stats: Record<BaseSta
 	const expected_hits = skill_hits.map(v => v * (1 + bonus) * (1 + amplify));
 
 	// res * def * dmg reduction * element reduction
-	const resistance = 0.1;
+	const resistance = combat_stats.enemy_resistance;
 	let resistance_factor = 0;
 	if (resistance < 0) {
 		resistance_factor = 1 - (resistance / 2);

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-
 	import { ATTACKS, CHARACTERS } from '$lib/data/characters';
 	import { WEAPONS } from '$lib/data/weapons';
 	import { BASE_STATS, STAT_ICONS, type StatKey, STATS, type StatValue } from '$lib/data/stats';
@@ -14,6 +12,7 @@
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
+	import { Progress } from '$lib/components/ui/progress';
 	import * as RadioGroup from '$lib/components/ui/radio-group';
 	import * as Select from '$lib/components/ui/select';
 	import * as Sheet from '$lib/components/ui/sheet';
@@ -24,13 +23,13 @@
 
 	import { ChartColumnBig, LoaderCircle, Settings } from 'lucide-svelte';
 
-	import type { OptimizerInput } from '$lib/optimizer';
-	import { WorkerPool, type WorkerResult } from '$lib/optimizer/worker_pool';
+	import type { OptimizerInput, WorkerResult } from '$lib/optimizer';
 	import { optimize } from '$lib/optimizer/optimize';
 	import { MaxPriorityQueue } from '@datastructures-js/priority-queue';
 
 	import { m } from '$lib/paraglide/messages';
 	import { get_echo_image } from '$lib/data/echoes/images';
+	import { db } from '$lib/db';
 
 	const first_character = $derived(Object.values(CHARACTERS)[0]);
 
@@ -47,14 +46,13 @@
 
 	let character_buffs: Record<string, number> = $state({});
 	let weapon_buffs: Record<string, number> = $state({});
-	$inspect(weapon_buffs);
 
 	let stat_bonuses: (StatValue | null)[] = $state(Array(8).fill(null));
 	const all_stats_checked = $derived(stat_bonuses.every(s => s !== null));
 	const some_stats_checked = $derived(!all_stats_checked && stat_bonuses.some(s => s !== null));
 
 	let keep_count = $state(0);
-	let target_key = $state('');
+	let target_key: StatKey | `${string}-${string}` = $state('atk');
 	let target_dialog_open = $state(false);
 
 	let world_level = $state(0);
@@ -69,14 +67,17 @@
 
 	let echo_primaries: { 4: StatKey[], 3: StatKey[], 1: StatKey[] } = $state({ 4: [], 3: [], 1: [] });
 
+	const queue = $state(new MaxPriorityQueue<WorkerResult>(r => r.target_value));
 	let results = $state([] as WorkerResult[]);
-	let is_running = $state(false);
+
+	let optimizer_controller = $state();
+	let optimizer_running = $state(false);
+	let start_time = $state(0);
+	let total_builds = $state(0);
+	let processed_count = $state(0);
+	let tested_count = $state(0);
 
 	let damage_selection = $state('average');
-
-	// initialize workers
-	const threads = Math.min(24, navigator.hardwareConcurrency - 1); // leave 1 core available!
-	const pool = new WorkerPool(threads);
 
 	function init_form() {
 		key = first_character.key;
@@ -191,32 +192,33 @@
 				allowed_2p: allowed_sonatas['2-p'],
 				allowed_5p: allowed_sonatas['5-p'],
 				allow_rainbow,
-				allow_partial
-			}
+				allow_partial,
+			},
+			target_key,
 		};
 
+		const echoes = await db.echoes.toArray();
+		const filtered = echoes.filter(e => echo_primaries[e.cost].includes(e.primary_stat.stat));
+
+		optimizer_running = true;
+		start_time = performance.now();
 		results = [];
-		is_running = true;
-		const queue = new MaxPriorityQueue<WorkerResult>(r => r.target_value);
-		await optimize(
-			$state.snapshot(input),
-			{ pool, sort_key: $state.snapshot(target_key) },
-			(result, done) => {
-				if (result) {
-					console.log(result);
-					queue.enqueue(result);
-					results = queue.toArray().slice(0, keep_count);
-				}
-
-				if (done) {
-					cancel_optimizer();
-				}
-		});
-	}
-
-	function cancel_optimizer() {
-		is_running = false;
-		pool.terminate();
+		optimizer_controller = optimize(filtered, $state.snapshot(input), {
+			on_progress: (data) => {
+				// console.log('progress', data);
+				total_builds = data.total;
+				processed_count = data.processed;
+				tested_count = data.current.length;
+			},
+			on_batch: ({ batch }) => {
+				batch.forEach(b => queue.enqueue(b));
+				results = queue.toArray().slice(0, keep_count);
+			},
+			on_complete: (data) => {
+				console.log('complete', data, `${((performance.now() - start_time) / 1000).toFixed(3)} ms`);
+				optimizer_running = false;
+			},
+		})
 	}
 
 	$effect(() => {
@@ -729,10 +731,10 @@
 	</Tabs.Content>
 </Tabs.Root>
 
-{#if !is_running}
+{#if !optimizer_running}
 	<Button type="button" onclick={() => launch_optimizer()} class="mt-2 min-w-full">optimize</Button>
 {:else}
-	<Button type="button" onclick={() => cancel_optimizer()} class="mt-2 min-w-full">
+	<Button type="button" onclick={() => optimizer_controller.cancel_all()} class="mt-2 min-w-full">
 		<LoaderCircle class="animate-spin" />
 		cancel
 	</Button>
@@ -740,7 +742,11 @@
 
 {#if results.length > 0}
 	<div class="my-2">
-		<RadioGroup.Root orientation="horizontal" bind:value={damage_selection} required class="flex flex-row space-x-2">
+		<div>Tested {tested_count} builds out of {total_builds} (skipped {processed_count - tested_count})</div>
+		<Progress value={processed_count} max={total_builds} />
+	</div>
+	<div class="my-2">
+		<RadioGroup.Root orientation="horizontal" bind:value={damage_selection} required class="mx-4 flex flex-row space-x-2 justify-end">
 			<div>
 				<RadioGroup.Item id="non-crit" value="non-crit" />
 				<Label for="non-crit">non-crit</Label>

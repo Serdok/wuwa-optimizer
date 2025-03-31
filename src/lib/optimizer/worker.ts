@@ -1,104 +1,47 @@
-import { generate_combinations, is_valid_combination } from '$lib/optimizer/build';
-import type { WorkerTask } from '$lib/optimizer/worker_pool';
-import {
-	apply_echo_stats,
-	get_base_stats,
-	get_default_stats,
-	get_display_stats,
-	get_final_stats
-} from '$lib/optimizer/stats';
-import { CHARACTERS } from '$lib/data/characters';
-import { WEAPONS } from '$lib/data/weapons';
-import { type StatKey, STATS } from '$lib/data/stats';
-import { weapon_secondary_curve } from '$lib/data/weapons/curve';
-import { default_finalizer } from '$lib/optimizer/finalizer';
-import type { OptimizerContext } from '$lib/optimizer/index';
+import { generate_combinations } from '$lib/math';
+import type { Echo } from '$lib/data/echoes/types';
 
-self.onmessage = function (event: MessageEvent) {
-	const { echoes, input, options } = event.data as WorkerTask['input'];
 
-	// const permutations = generate_permutations(echoes, 5, []);
-	const combinations = generate_combinations(echoes, 5);
+self.onmessage = async function (event: MessageEvent) {
+	const { echoes, input, options } = event.data;
 
-	for (const build of combinations) {
-		if (!is_valid_combination(build, input.filter)) {
-			continue;
+	const batch_size = options.batch_size || 1000;
+	const report_size = options.report_size || 10000;
+
+	let processed = 0;
+	let batch: Echo[][] = [];
+
+	function send_batch(force: boolean = false) {
+		if (batch.length >= batch_size || (force && batch.length > 0)) {
+			self.postMessage({ type: 'batch', combinations: batch, processed, });
+			batch = [];
 		}
-
-		// todo: compute damage
-		const character = CHARACTERS[input.character.key];
-		const weapon = WEAPONS[character.weapon_type][input.weapon.key];
-
-		const base_stats = get_base_stats(character, weapon);
-		const default_stats = get_default_stats();
-
-		const combat_stats = Object.fromEntries(
-			Object.entries(default_stats).map(([key, value]) => {
-				const stat = key as StatKey;
-				return [stat, value + (base_stats[stat] ?? 0) + (input.character.extra_stats[stat].value ?? 0)];
-			})
-		) as Record<StatKey, number>;
-
-		const context: OptimizerContext = { character, };
-
-		character.apply_effects(input, combat_stats, context);
-		weapon.apply_effects(input, combat_stats, context);
-		combat_stats[weapon.base_stats.secondary.stat] += weapon.base_stats.secondary.value * weapon_secondary_curve['6/90'];
-
-		const build_stats = structuredClone(combat_stats);
-		build.forEach((echo) => apply_echo_stats(build_stats, echo));
-
-		const skills = Object.fromEntries(
-			Object.values(character.skills)
-				.filter((s) => s.motions.length > 0)
-				.map((skill) => {
-					const skill_stats = structuredClone(build_stats);
-					skill.apply_effects(input, skill_stats, context);
-
-					return [
-						skill.type,
-						{
-							type: skill.type,
-							key: skill.key,
-							motions: skill.motions.map((motion) => {
-								const attack_stats = structuredClone(skill_stats);
-								motion.apply_effects(input, attack_stats, context);
-
-								return {
-									type: motion.type,
-									key: motion.key,
-									...default_finalizer(motion, base_stats, attack_stats)
-								};
-							})
-						}
-					];
-				})
-		);
-
-		const display_stats = get_display_stats(base_stats, build_stats);
-		const final_stats = get_final_stats(base_stats, build_stats);
-
-		let target_value = 0;
-		if (STATS.includes(options.sort_key)) {
-			const key = options.sort_key as StatKey;
-			target_value = final_stats[key];
-		} else {
-			// it is an attack
-			const [skill_key, attack_key] = options.sort_key.split('-', 2);
-			const target_skill = Object.values(skills).find(s => s.key === skill_key)!;
-			const target_attack = target_skill.motions.find(a => a.key === attack_key)!;
-			target_value = target_attack.average.reduce((acc, v) => acc + v, 0);
-		}
-
-		self.postMessage({
-			build,
-			skills,
-			build_stats,
-			display_stats,
-			final_stats,
-			target_value,
-		});
 	}
 
-	self.postMessage({ type: 'complete' });
-};
+	function* generate_worker_combination(): Generator<Echo[]> {
+		for (let i = 0; i < echoes.length; i += 1) {
+			if (i % options.total_workers !== options.worker_id) {
+				continue;
+			}
+
+			const partial = [echoes[i]];
+			yield* generate_combinations(echoes, input.combination_length, i + 1, partial);
+		}
+	}
+
+	for (const combination of generate_worker_combination()) {
+		batch.push(combination);
+		processed += 1;
+
+		send_batch();
+
+		if (processed % report_size === 0) {
+			// yield control to allow message processing
+			await new Promise(resolve => setTimeout(resolve, 0));
+		}
+	}
+
+	// send any remaining combinations
+	send_batch(true);
+	self.postMessage({ type: 'complete', processed });
+}

@@ -1,57 +1,44 @@
 import type { Echo } from '$lib/data/echoes/types';
-import type { EchoFilter } from '$lib/optimizer/index';
+import type {
+	EchoFilter,
+	OptimizerContext,
+	OptimizerInput,
+	OptimizerOptions
+} from '$lib/optimizer/index';
 import type { SonataKey } from '$lib/data/sonatas';
-import type { StatKey } from '$lib/data/stats';
+import { type StatKey, STATS } from '$lib/data/stats';
+import { type AttackKey, CHARACTERS, type SkillKey } from '$lib/data/characters';
+import { WEAPONS } from '$lib/data/weapons';
+import {
+	apply_echo_stats,
+	get_base_stats,
+	get_default_stats,
+	get_display_stats,
+	get_final_stats
+} from './stats';
+import { weapon_secondary_curve } from '$lib/data/weapons/curve';
+import { default_finalizer } from '$lib/optimizer/finalizer';
 
-export function combination_count<T>(arr: T[], length: number) {
-	if (length > arr.length) { return 0; }
-
-	let count = 1;
-	for (let i = 0; i < length; i += 1) {
-		count *= (arr.length - i) / (i + 1);
-	}
-	return count;
-}
-
-// export function generate_combinations<T>(arr: T[], length: number): T[][] {
-// 	// base case: 1 empty combination can be generated with a length of 0
-// 	if (length === 0) return [[]];
-//
-// 	return arr.flatMap((elem, i) => generate_combinations(arr.slice(i + 1), length - 1).map(rest => [elem, ...rest]));
-// }
-
-export function* generate_combinations<T>(arr: T[], length: number) {
-	const indices = Array.from({ length }, (_, i) => i);
-	while (true) {
-		yield [...indices.map(i => arr[i])];
-
-		let i = length - 1;
-		while (i >= 0 && indices[i] === arr.length - length + i) {
-			i -= 1;
-		}
-		if (i < 0) break;
-
-		indices[i] += 1;
-		for (let j = i + 1; j < length; j += 1) {
-			indices[j] = indices[j - 1] + 1;
-		}
-	}
-}
-
-export function* generate_permutations<T>(items: T[], max_size: number, current: T[]): Generator<T[]> {
-	if (current.length === max_size) {
-		yield current;
-	}
-
-	if (current.length >= max_size) return;
-
-	for (let i = 0; i < items.length; i += 1) {
-		const next = [...current, items[i]];
-		const remaining = items.filter((_, idx) => idx !== i);
-
-		yield* generate_permutations(remaining, max_size, next);
-	}
-}
+export type DamageResult = {
+	build: Echo[];
+	skills: {
+		[S in SkillKey]: {
+			type: S;
+			key: string;
+			motions: {
+				type: AttackKey;
+				key: string;
+				non_crit: number[],
+				average: number[],
+				forced_crit: number[],
+			}[];
+		};
+	};
+	build_stats: Record<StatKey, number>;
+	display_stats: Partial<Record<StatKey, number>>;
+	final_stats: Record<StatKey, number>;
+	target_value: number;
+};
 
 export function is_valid_combination(build: Echo[], filter: EchoFilter): boolean {
 	// ensure the total weight did not exceed the max weight (12)
@@ -89,3 +76,77 @@ export function is_valid_combination(build: Echo[], filter: EchoFilter): boolean
 	return true;
 }
 
+export function compute_damage(build: Echo[], input: OptimizerInput, options: OptimizerOptions): DamageResult {
+	const character = CHARACTERS[input.character.key];
+	const weapon = WEAPONS[character.weapon_type][input.weapon.key];
+
+	const base_stats = get_base_stats(character, weapon);
+	const default_stats = get_default_stats();
+
+	const combat_stats = Object.fromEntries(
+		Object.entries(default_stats).map(([key, value]) => {
+			const stat = key as StatKey;
+			return [stat, value + (base_stats[stat] ?? 0) + (input.character.extra_stats[stat].value ?? 0)];
+		})
+	) as Record<StatKey, number>;
+
+	const context: OptimizerContext = { character, };
+
+	character.apply_effects(input, combat_stats, context);
+	weapon.apply_effects(input, combat_stats, context);
+	combat_stats[weapon.base_stats.secondary.stat] += weapon.base_stats.secondary.value * weapon_secondary_curve['6/90'];
+
+	const build_stats = structuredClone(combat_stats);
+	build.forEach((echo) => apply_echo_stats(build_stats, echo));
+
+	const skills = Object.fromEntries(
+		Object.values(character.skills)
+			.filter((s) => s.motions.length > 0)
+			.map((skill) => {
+				const skill_stats = structuredClone(build_stats);
+				skill.apply_effects(input, skill_stats, context);
+
+				return [
+					skill.type,
+					{
+						type: skill.type,
+						key: skill.key,
+						motions: skill.motions.map((motion) => {
+							const attack_stats = structuredClone(skill_stats);
+							motion.apply_effects(input, attack_stats, context);
+
+							return {
+								type: motion.type,
+								key: motion.key,
+								...default_finalizer(motion, base_stats, attack_stats)
+							};
+						})
+					}
+				];
+			})
+	);
+
+	const display_stats = get_display_stats(base_stats, build_stats);
+	const final_stats = get_final_stats(base_stats, build_stats);
+
+	let target_value: number;
+	if (STATS.includes(input.target_key)) {
+		const key = input.target_key as StatKey;
+		target_value = final_stats[key];
+	} else {
+		// it is an attack
+		const [skill_key, attack_key] = input.target_key.split('-', 2);
+		const target_skill = Object.values(skills).find(s => s.key === skill_key)!;
+		const target_attack = target_skill.motions.find(a => a.key === attack_key)!;
+		target_value = target_attack.average.reduce((acc, v) => acc + v, 0);
+	}
+
+	return {
+		build,
+		skills,
+		build_stats,
+		display_stats,
+		final_stats,
+		target_value,
+	};
+}

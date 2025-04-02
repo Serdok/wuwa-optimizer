@@ -5,35 +5,79 @@ import type { Echo } from '$lib/data/echoes/types';
 import { compute_damage, type DamageResult, is_valid_combination } from '$lib/optimizer/build';
 import type { OptimizerInput, OptimizerOptions } from '$lib/optimizer';
 
-type BatchResult = { combinations: Echo[][], processed: number };
+type BatchResult = { combinations: Echo[][]; processed: number };
+
+export type CostCombo = {
+	count_4: number;
+	count_3: number;
+	count_1: number;
+	total_items: number;
+	total_cost: number;
+	pattern: number[];
+};
+
+function generate_cost_combinations(input: OptimizerInput) {
+	const cost_combos: CostCombo[] = [];
+
+	for (let count_4 = 0; count_4 <= 3; count_4 += 1) {
+		for (let count_3 = 0; count_3 <= 5; count_3 += 1) {
+			const remaining_slots = 5 - count_4 - count_3;
+			if (remaining_slots < 0) continue;
+
+			const possible_1 = Math.min(remaining_slots, 5);
+			for (let count_1 = 0; count_1 <= possible_1; count_1 += 1) {
+				const total_items = count_4 + count_3 + count_1;
+				const total_cost = count_4 * 4 + count_3 * 3 + count_1;
+
+				if (total_cost < 0 || total_cost > 12) continue;
+				if (!input.filter.allow_partial && total_items !== 5) continue;
+
+				cost_combos.push({
+					count_4,
+					count_3,
+					count_1,
+					total_items,
+					total_cost,
+					pattern: [...Array(count_4).fill(4), ...Array(count_3).fill(3), ...Array(count_1).fill(1)]
+				});
+			}
+		}
+	}
+
+	return cost_combos;
+}
 
 export function optimize(echoes: Echo[], input: OptimizerInput, options: OptimizerOptions) {
-	console.log(echoes);
-
 	const defaults = {
-		batch_size: 1000,
-		progress_update_interval: 2000,
+		batch_size: 50,
+		progress_update_interval: 1000,
 		on_progress: null,
 		on_batch: null,
-		on_complete: null,
+		on_complete: null
 	};
 
-	const settings = {...defaults, ...options};
-	const workers_count = options.workers_count || Math.max(12, (navigator.hardwareConcurrency || 4) - 1);
+	const settings = { ...defaults, ...options };
+	const max_workers = options.max_workers || Math.max(12, (navigator.hardwareConcurrency || 4) - 1);
 
-	const expected = combination_count(echoes, 5);
-	// if (input.filter.allow_partial) {
-	// 	expected += combination_count(echoes, 4);
-	// 	expected += combination_count(echoes, 3);
-	// 	expected += combination_count(echoes, 2);
-	// 	expected += combination_count(echoes, 1);
-	// }
-	console.log(`expected: ${expected}`);
+	const cost_4 = echoes.filter(e => e.cost === 4 && input.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
+	const cost_3 = echoes.filter(e => e.cost === 3 && input.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
+	const cost_1 = echoes.filter(e => e.cost === 1 && input.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
+
+	const cost_combos = generate_cost_combinations(input);
+	cost_combos.sort((a, b) => b.total_cost - a.total_cost);
+
+	const expected = cost_combos.reduce((acc, cost_combo) => {
+		const { count_4, count_3, count_1 } = cost_combo;
+
+		return acc + (combination_count(cost_4, count_4) * combination_count(cost_3, count_3) * combination_count(cost_1, count_1));
+	}, 0);
+	const workers_count = Math.min(cost_combos.length, max_workers);
 
 	let total_processed = 0;
 	let completed_workers = 0;
 	const results: DamageResult[] = [];
 
+	const workers: Worker[] = [];
 	const workers_progress = Array(workers_count).fill(0);
 	let last_progress_update = performance.now();
 	let is_progress_update_scheduled = false;
@@ -53,9 +97,9 @@ export function optimize(echoes: Echo[], input: OptimizerInput, options: Optimiz
 			settings.on_progress({
 				current: results,
 				total: expected,
-				processed: total_processed,
+				processed: workers_progress.reduce((p, acc) => acc + p, 0),
 				progress: [...workers_progress],
-				remaining_workers: workers_count - completed_workers,
+				remaining_workers: workers_count - completed_workers
 			});
 
 			last_progress_update = now;
@@ -63,8 +107,8 @@ export function optimize(echoes: Echo[], input: OptimizerInput, options: Optimiz
 		}
 	}
 
-	function on_batch(data: MessageEvent['data'], i: number) {
-		const { combinations, processed } = data as BatchResult;
+	function on_batch(event: MessageEvent, i: number) {
+		const { combinations, processed } = event.data as BatchResult;
 
 		workers_progress[i] = processed;
 
@@ -80,8 +124,8 @@ export function optimize(echoes: Echo[], input: OptimizerInput, options: Optimiz
 		update_progress();
 	}
 
-	function on_complete(data: MessageEvent['data'], i: number) {
-		const { processed } = data;
+	function on_complete(event: MessageEvent, i: number) {
+		const { processed } = event.data;
 		console.log(`worker ${i} finished: ${processed} combinations`);
 		completed_workers += 1;
 
@@ -89,16 +133,16 @@ export function optimize(echoes: Echo[], input: OptimizerInput, options: Optimiz
 		update_progress();
 
 		if (completed_workers === workers_count) {
-			console.log(`all workers completed: ${total_processed} combinations found out of ${expected} expected`);
+			const final = workers_progress.reduce((p, acc) => acc + p, 0);
+			console.log(`all workers completed: ${final} combinations found out of ${expected} expected`);
 
 			if (settings.on_complete) {
-				settings.on_complete({ total: expected, processed: total_processed, completed: true, cancelled: false, });
+				settings.on_complete({ total: expected, processed: final, completed: true, cancelled: false });
 			}
 		}
 	}
 
-
-	const workers: Worker[] = [];
+	// update_progress();
 	for (let i = 0; i < workers_count; i += 1) {
 		const worker = new OptimizerWorker();
 		workers.push(worker);
@@ -106,18 +150,20 @@ export function optimize(echoes: Echo[], input: OptimizerInput, options: Optimiz
 		worker.onmessage = (event: MessageEvent) => {
 			switch (event.data.type) {
 				case 'batch': {
-					on_batch(event.data, i);
+					on_batch(event, i);
 					break;
 				}
 				case 'complete': {
-					on_complete(event.data, i);
+					on_complete(event, i);
 					worker.terminate();
 					break;
 				}
-				default: console.warn('unexpected type', event.data.type);
+				default:
+					console.warn('unexpected type', event.data.type);
 			}
-		}
-		worker.onmessageerror = (event: MessageEvent) => { console.warn(event); }
+		};
+
+		worker.onmessageerror = console.warn;
 
 		const worker_options = {
 			batch_size: settings.batch_size,
@@ -125,16 +171,18 @@ export function optimize(echoes: Echo[], input: OptimizerInput, options: Optimiz
 			total_workers: workers_count,
 			worker_id: i,
 		};
-		worker.postMessage({ echoes, input: {...input, combination_length: 5}, options: worker_options });
+
+		const cost_combo = cost_combos[i];
+		worker.postMessage({ echoes: { cost_4, cost_3, cost_1 }, cost_combo, input, options: worker_options });
 	}
 
 	return {
 		// get_results: () => results,
 		cancel_all: () => {
-			workers.forEach(worker => worker.terminate());
+			workers.forEach((worker) => worker.terminate());
 			if (settings.on_complete) {
-				settings.on_complete({ total: expected, processed: total_processed, completed: false, cancelled: true, });
+				settings.on_complete({ total: expected, processed: total_processed, completed: false, cancelled: true });
 			}
 		}
-	}
+	};
 }

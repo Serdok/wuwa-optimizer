@@ -32,7 +32,7 @@ export function* generate_combinations<T>(arr: T[], length: number, start_index:
 
 export function* generate_permutations<T>(items: T[], max_size: number, current: T[]): Generator<T[]> {
 	if (current.length === max_size) {
-		yield current;
+		yield [...current];
 	}
 
 	if (current.length >= max_size) return;

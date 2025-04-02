@@ -16,6 +16,7 @@
 	import * as RadioGroup from '$lib/components/ui/radio-group';
 	import * as Select from '$lib/components/ui/select';
 	import * as Sheet from '$lib/components/ui/sheet';
+	import { Skeleton } from '$lib/components/ui/skeleton';
 	import { Slider } from '$lib/components/ui/slider';
 	import { Switch } from '$lib/components/ui/switch';
 	import * as Tabs from '$lib/components/ui/tabs';
@@ -740,11 +741,29 @@
 	</Button>
 {/if}
 
-{#if results.length > 0}
+{#if results.length === 0}
+	{#if optimizer_running}
+		<div class="my-2">
+			<div>Tested 0 builds out of <LoaderCircle class="inline-flex animate-spin" /></div>
+			<Progress value={processed_count} max={total_builds} />
+		</div>
+
+		<div class="my-2">
+			<div class="flex items-center space-x-4">
+				<Skeleton class="size-12 rounded-full" />
+				<div class="space-y-2">
+					<Skeleton class="h-4 w-[250px]" />
+					<Skeleton class="h-4 w-[200px]" />
+				</div>
+			</div>
+		</div>
+	{/if}
+{:else}
 	<div class="my-2">
 		<div>Tested {tested_count} builds out of {total_builds} (skipped {processed_count - tested_count})</div>
 		<Progress value={processed_count} max={total_builds} />
 	</div>
+
 	<div class="my-2">
 		<RadioGroup.Root orientation="horizontal" bind:value={damage_selection} required class="mx-4 flex flex-row space-x-2 justify-end">
 			<div>
@@ -876,3 +895,4 @@
 		{/each}
 	</div>
 {/if}
+

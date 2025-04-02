@@ -69,7 +69,7 @@ export type OptimizerOptions = {
 	batch_size?: number,
 	report_size?: number,
 	process_update_interval?: number,
-	workers_count?: number,
+	max_workers?: number,
 	on_progress?: (data: ProgressData) => void,
 	on_batch?: (data: BatchData) => void,
 	on_complete?: (data: CompleteData) => void,

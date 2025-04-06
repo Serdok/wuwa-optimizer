@@ -7,11 +7,11 @@ export function default_finalizer(motion: MotionData, base_stats: Record<BaseSta
 	// source: https://wutheringwaves.gg/damage-calculation-guide/
 
 	// related_property * skill multiplier * skill scaling
-	const skill_hits = motion.values.map(v => v * combat_stats.skill_multiplier * get_base_stat_value(motion.related_stat, base_stats[motion.related_stat], combat_stats));
+	const skill_hits: number[] = motion.values.map((v: number) => v * combat_stats.skill_multiplier * get_base_stat_value(motion.related_stat, base_stats[motion.related_stat], combat_stats));
 
 	// hit * (element bonus + skill bonus) * skill amplify
-	const bonus = combat_stats.general_bonus + combat_stats[`${motion.element}_bonus`] + combat_stats[`${motion.type}_bonus`];
-	const amplify = combat_stats.general_amplify + combat_stats[`${motion.element}_amplify`] + combat_stats[`${motion.type}_amplify`];
+	const bonus: number = combat_stats.general_bonus + combat_stats[`${motion.element}_bonus`] + combat_stats[`${motion.type}_bonus`];
+	const amplify: number = combat_stats.general_amplify + combat_stats[`${motion.element}_amplify`] + combat_stats[`${motion.type}_amplify`];
 	const expected_hits = skill_hits.map(v => v * (1 + bonus) * (1 + amplify));
 
 	// res * def * dmg reduction * element reduction
@@ -25,8 +25,8 @@ export function default_finalizer(motion: MotionData, base_stats: Record<BaseSta
 		resistance_factor = 1/(1 + 5 * resistance);
 	}
 
-	const defense = 792 + 8 * 90;
-	const attack_power = 800 + 8 * 90;
+	const defense = 792 + 8 * combat_stats.enemy_level;
+	const attack_power = 800 + 8 * combat_stats.enemy_level;
 	const defense_factor = attack_power / (attack_power + defense * (1 - combat_stats.enemy_def_ignore));
 
 	const final_hits = expected_hits.map(v => v * resistance_factor * defense_factor);

@@ -24,13 +24,18 @@
 
 	import { ChartColumnBig, LoaderCircle, Settings } from 'lucide-svelte';
 
-	import type { OptimizerInput, WorkerResult } from '$lib/optimizer';
+	import type { OptimizerInput } from '$lib/optimizer';
 	import { optimize } from '$lib/optimizer/optimize';
-	import { MaxPriorityQueue } from '@datastructures-js/priority-queue';
 
 	import { m } from '$lib/paraglide/messages';
 	import { get_echo_image } from '$lib/data/echoes/images';
 	import { db } from '$lib/db';
+	import type { DamageResult } from '$lib/optimizer/build';
+
+	import DisplayDamage from './DisplayDamage.svelte';
+	import DisplayMotion from './DisplayMotion.svelte';
+	import DisplaySkill from './DisplaySkill.svelte';
+	import DisplayStat from './DisplayStat.svelte';
 
 	const first_character = $derived(Object.values(CHARACTERS)[0]);
 
@@ -68,8 +73,7 @@
 
 	let echo_primaries: { 4: StatKey[], 3: StatKey[], 1: StatKey[] } = $state({ 4: [], 3: [], 1: [] });
 
-	const queue = $state(new MaxPriorityQueue<WorkerResult>(r => r.target_value));
-	let results = $state([] as WorkerResult[]);
+	let results = $state([] as DamageResult[]);
 
 	let optimizer_controller = $state();
 	let optimizer_running = $state(false);
@@ -78,7 +82,7 @@
 	let processed_count = $state(0);
 	let tested_count = $state(0);
 
-	let damage_selection = $state('average');
+	let damage_selection: 'non-crit' | 'average' | 'forced-crit' = $state('average');
 
 	function init_form() {
 		key = first_character.key;
@@ -157,13 +161,6 @@
 		allowed_sonatas[pc] = allowed_sonatas[pc].filter((s) => s !== key);
 	}
 
-	function format_motion_values(values: string[]) {
-		return values.reduce<{ [v: string]: number }>((obj, val) => {
-			obj[val] = (obj[val] || 0) + 1;
-			return obj;
-		}, {});
-	}
-
 	async function launch_optimizer() {
 		// sanitize
 		const bonus_stats = $state.snapshot(stat_bonuses).filter(s => s !== null);
@@ -196,24 +193,20 @@
 				allow_partial,
 			},
 			target_key,
+			keep_count,
 		};
-
-		const echoes = await db.echoes.toArray();
-		const filtered = echoes.filter(e => echo_primaries[e.cost].includes(e.primary_stat.stat));
 
 		optimizer_running = true;
 		start_time = performance.now();
 		results = [];
-		optimizer_controller = optimize(filtered, $state.snapshot(input), {
+		optimizer_controller = optimize(await db.echoes.toArray(), $state.snapshot(input), {
 			on_progress: (data) => {
-				// console.log('progress', data);
 				total_builds = data.total;
 				processed_count = data.processed;
-				tested_count = data.current.length;
+				tested_count = data.current.length + data.processed;
 			},
 			on_batch: ({ batch }) => {
-				batch.forEach(b => queue.enqueue(b));
-				results = queue.toArray().slice(0, keep_count);
+				results = batch;
 			},
 			on_complete: (data) => {
 				console.log('complete', data, `${((performance.now() - start_time) / 1000).toFixed(3)} ms`);
@@ -303,7 +296,13 @@
 							</Select.Root>
 							<Dialog.Root bind:open={target_dialog_open}>
 								<Dialog.Trigger class={buttonVariants({ variant: 'secondary', class: 'justify-start px-3' })}>
-									target: {m[target_key]?.() || target_key}</Dialog.Trigger>
+									{#if STATS.includes(target_key)}
+										{m[target_key]?.() || target_key}
+									{:else}
+										{@const [skill_key, attack_key] = target_key.split('-')}
+										{m[skill_key]?.() || skill_key} - {m[attack_key]?.() || attack_key}
+									{/if}
+								</Dialog.Trigger>
 								<Dialog.Content class="max-w-[70%] h-2/3 flex flex-col flex-wrap gap-2">
 									<Dialog.Header>
 										<Dialog.Title>optimization target</Dialog.Title>
@@ -745,7 +744,7 @@
 	{#if optimizer_running}
 		<div class="my-2">
 			<div>Tested 0 builds out of <LoaderCircle class="inline-flex animate-spin" /></div>
-			<Progress value={processed_count} max={total_builds} />
+			<Progress value={tested_count} max={total_builds} />
 		</div>
 
 		<div class="my-2">
@@ -759,9 +758,10 @@
 		</div>
 	{/if}
 {:else}
+	{@const percentage = ((tested_count / total_builds) * 100).toFixed(2)}
 	<div class="my-2">
-		<div>Tested {tested_count} builds out of {total_builds} (skipped {processed_count - tested_count})</div>
-		<Progress value={processed_count} max={total_builds} />
+		<div>Tested {tested_count} builds out of {total_builds} ({percentage} %)</div>
+		<Progress value={tested_count} max={total_builds} />
 	</div>
 
 	<div class="my-2">
@@ -803,35 +803,14 @@
 										<span>{echo.sonata}</span>
 									</div>
 									<div class="flex flex-col">
-										<div class="flex flex-row items-center gap-2">
-											<img src={STAT_ICONS[echo.primary_stat.stat]} alt={echo.primary_stat.stat} class="size-6" />
-											{#if BASE_STATS.includes(echo.primary_stat.stat)}
-												<div>{echo.primary_stat.value.toFixed(0)}</div>
-											{:else}
-												<div>{(echo.primary_stat.value * 100).toFixed(1)}%</div>
-											{/if}
-										</div>
-										<div class="flex flex-row items-center gap-2">
-											<img src={STAT_ICONS[echo.secondary_stat.stat]} alt={echo.secondary_stat.stat} class="size-6" />
-											{#if BASE_STATS.includes(echo.secondary_stat.stat)}
-												<div>{echo.secondary_stat.value.toFixed(0)}</div>
-											{:else}
-												<div>{(echo.secondary_stat.value * 100).toFixed(1)}%</div>
-											{/if}
-										</div>
+										<DisplayStat key={echo.primary_stat.stat} value={echo.primary_stat.value} />
+										<DisplayStat key={echo.secondary_stat.stat} value={echo.secondary_stat.value} />
 									</div>
 								</div>
 							</div>
 							<div class="flex flex-row flex-wrap space-x-2 justify-evenly my-2">
 								{#each echo.sub_stats as sub_stat}
-									<div class="flex flex-row items-center gap-2">
-										<img src={STAT_ICONS[sub_stat.stat]} alt={sub_stat.stat} class="size-6" />
-										{#if BASE_STATS.includes(sub_stat.stat)}
-											<div>{sub_stat.value.toFixed(0)}</div>
-										{:else}
-											<div>{(sub_stat.value * 100).toFixed(1)}%</div>
-										{/if}
-									</div>
+									<DisplayStat key={sub_stat.stat} value={sub_stat.value} />
 								{/each}
 							</div>
 						</div>
@@ -842,53 +821,11 @@
 					<div class="break-inside-avoid flex flex-col gap-1 px-2">
 						<div class="text-xl">Stats</div>
 						{#each Object.entries(result.display_stats) as [key, value] (key)}
-							{#if value !== 0}
-								<div class="flex flex-row items-center gap-2">
-									<img src={STAT_ICONS[key]} alt={key} class="size-6" />
-									{#if BASE_STATS.includes(key)}
-										<div>{value.toFixed(0)}</div>
-									{:else}
-										<div>{(value * 100).toFixed(1)}%</div>
-									{/if}
-								</div>
-							{/if}
+							<DisplayStat key={key as StatKey} {value} />
 						{/each}
 					</div>
 					{#each Object.values(result.skills) as skill (skill.type)}
-						<div class="w-full break-inside-avoid flex flex-col pt-2 px-2">
-							<div class="text-xl">{m[skill.key]?.() || skill.key}</div>
-							<div>
-								{#each skill.motions as motion (motion.key)}
-									<div class="px-2 flex flex-row justify-between gap-2">
-										<div>{m[motion.key]?.() || motion.key}</div>
-										<div>
-											{#if damage_selection === 'non-crit'}
-												{@const non_crit = format_motion_values(motion.non_crit.map(v => v.toFixed(0)))}
-												{#each Object.entries(non_crit) as [value, count], i}
-													{#if count > 1}<span class="text-xs px-0.5">{count}x</span>{/if}
-													{value}
-													{#if i < Object.keys(non_crit).length - 1} +{/if}
-												{/each}
-											{:else if damage_selection === 'forced-crit'}
-												{@const forced_crit = format_motion_values(motion.forced_crit.map(v => v.toFixed(0)))}
-												{#each Object.entries(forced_crit) as [value, count], i}
-													{#if count > 1}<span class="text-xs px-0.5">{count}x</span>{/if}
-													{value}
-													{#if i < Object.keys(forced_crit).length - 1} +{/if}
-												{/each}
-											{:else}
-												{@const average = format_motion_values(motion.average.map(v => v.toFixed(0)))}
-												{#each Object.entries(average) as [value, count], i}
-													{#if count > 1}<span class="text-xs px-0.5">{count}x</span>{/if}
-													{value}
-													{#if i < Object.keys(average).length - 1} +{/if}
-												{/each}
-											{/if}
-										</div>
-									</div>
-								{/each}
-							</div>
-						</div>
+						<DisplaySkill {skill} {damage_selection} />
 					{/each}
 				</div>
 			</div>

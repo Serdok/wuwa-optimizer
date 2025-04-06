@@ -26,6 +26,7 @@ export type OptimizerInput = {
 	},
 	filter: EchoFilter,
 	target_key: StatKey | `${string}-${string}`,
+	keep_count: number,
 };
 
 export type OptimizerContext = {

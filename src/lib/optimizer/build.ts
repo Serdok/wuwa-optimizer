@@ -19,21 +19,23 @@ import {
 import { weapon_secondary_curve } from '$lib/data/weapons/curve';
 import { default_finalizer } from '$lib/optimizer/finalizer';
 
+export type MotionDamage = {
+	type: AttackKey;
+	key: string;
+	non_crit: number[],
+	average: number[],
+	forced_crit: number[],
+};
+
+export type SkillDamage<S extends SkillKey> = {
+	type: S;
+	key: string;
+	motions: MotionDamage[];
+};
+
 export type DamageResult = {
 	build: Echo[];
-	skills: {
-		[S in SkillKey]: {
-			type: S;
-			key: string;
-			motions: {
-				type: AttackKey;
-				key: string;
-				non_crit: number[],
-				average: number[],
-				forced_crit: number[],
-			}[];
-		};
-	};
+	skills: { [S in SkillKey]: SkillDamage<S>; };
 	build_stats: Record<StatKey, number>;
 	display_stats: Partial<Record<StatKey, number>>;
 	final_stats: Record<StatKey, number>;
@@ -124,7 +126,7 @@ export function compute_damage(build: Echo[], input: OptimizerInput, options: Op
 					}
 				];
 			})
-	);
+	) as { [S in SkillKey]: SkillDamage<S>; };
 
 	const display_stats = get_display_stats(base_stats, build_stats);
 	const final_stats = get_final_stats(base_stats, build_stats);

@@ -2,8 +2,9 @@ import { combination_count } from '$lib/math';
 
 import OptimizerWorker from './worker?worker';
 import type { Echo } from '$lib/data/echoes/types';
-import { compute_damage, type DamageResult, is_valid_combination } from '$lib/optimizer/build';
+import { compute_damage, type DamageResult } from '$lib/optimizer/build';
 import type { OptimizerInput, OptimizerOptions } from '$lib/optimizer';
+import { BoundedMaxPriorityQueue } from '$lib/optimizer/bounded_max_priority_queue';
 
 type BatchResult = { combinations: Echo[][]; processed: number };
 
@@ -15,6 +16,13 @@ export type CostCombo = {
 	total_cost: number;
 	pattern: number[];
 };
+
+type WorkerData = {
+	echoes: { cost_4: Echo[], cost_3: Echo[], cost_1: Echo[] },
+	cost_combo: CostCombo,
+	input: OptimizerInput,
+	options: { batch_size: number, report_size: number, total_workers: number, worker_id: number },
+}
 
 function generate_cost_combinations(input: OptimizerInput) {
 	const cost_combos: CostCombo[] = [];
@@ -50,10 +58,8 @@ function generate_cost_combinations(input: OptimizerInput) {
 export function optimize(echoes: Echo[], input: OptimizerInput, options: OptimizerOptions) {
 	const defaults = {
 		batch_size: 50,
+		report_size: 10000,
 		progress_update_interval: 1000,
-		on_progress: null,
-		on_batch: null,
-		on_complete: null
 	};
 
 	const settings = { ...defaults, ...options };
@@ -75,7 +81,10 @@ export function optimize(echoes: Echo[], input: OptimizerInput, options: Optimiz
 
 	let total_processed = 0;
 	let completed_workers = 0;
-	const results: DamageResult[] = [];
+
+
+	const queue = new BoundedMaxPriorityQueue<DamageResult>(input.keep_count, r => r.target_value);
+	// const results: DamageResult[] = [];
 
 	const workers: Worker[] = [];
 	const workers_progress = Array(workers_count).fill(0);
@@ -95,7 +104,7 @@ export function optimize(echoes: Echo[], input: OptimizerInput, options: Optimiz
 
 		if (now - last_progress_update >= settings.progress_update_interval) {
 			settings.on_progress({
-				current: results,
+				current: queue.toArray(),
 				total: expected,
 				processed: workers_progress.reduce((p, acc) => acc + p, 0),
 				progress: [...workers_progress],
@@ -112,12 +121,15 @@ export function optimize(echoes: Echo[], input: OptimizerInput, options: Optimiz
 
 		workers_progress[i] = processed;
 
-		const filtered = combinations.filter(build => is_valid_combination(build, input.filter));
-		const damages = filtered.map(build => compute_damage(build, input, options));
+		// const filtered = combinations.filter(build => is_valid_combination(build, input.filter));
+		const damages = combinations.map(build => compute_damage(build, input, options));
+		// results.push(...damages);
+		for (const damage of damages) {
+			queue.fixed_enqueue(damage);
+		}
 
-		results.push(...damages);
 		if (settings.on_batch) {
-			settings.on_batch({ batch: damages });
+			settings.on_batch({ batch: queue.toArray() });
 		}
 
 		total_processed += combinations.length;
@@ -173,7 +185,7 @@ export function optimize(echoes: Echo[], input: OptimizerInput, options: Optimiz
 		};
 
 		const cost_combo = cost_combos[i];
-		worker.postMessage({ echoes: { cost_4, cost_3, cost_1 }, cost_combo, input, options: worker_options });
+		worker.postMessage({ echoes: { cost_4, cost_3, cost_1 }, cost_combo, input, options: worker_options } satisfies WorkerData);
 	}
 
 	return {

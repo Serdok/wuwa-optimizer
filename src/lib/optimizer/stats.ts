@@ -23,6 +23,7 @@ export function get_default_stats(): Record<StatKey, number> {
 	stats.energy_regen = 1;
 	stats.skill_multiplier = 1;
 
+	stats.enemy_level = 90;
 	stats.enemy_resistance = 0.1;
 
 	return stats;

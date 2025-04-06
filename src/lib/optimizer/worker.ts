@@ -2,6 +2,7 @@ import { generate_combinations } from '$lib/math';
 import type { Echo } from '$lib/data/echoes/types';
 import type { CostCombo } from './optimize';
 import type { OptimizerInput, OptimizerOptions } from '$lib/optimizer/index';
+import type { SonataKey } from '$lib/data/sonatas';
 
 type Data = {
 	echoes: { cost_4: Echo[], cost_3: Echo[], cost_1: Echo[] },
@@ -31,7 +32,7 @@ self.onmessage = async function (event: MessageEvent) {
 	const cost_3 = [...generate_combinations(echoes.cost_3, count_3)];
 	const cost_1 = [...generate_combinations(echoes.cost_1, count_1)];
 
-	console.log(`[${pattern.join('')}] - ${cost_4.length} 4-cost, ${cost_3.length} 3-cost, ${cost_1.length} 1-cost combinations - ${cost_4.length * cost_3.length * cost_1.length} possibilities`);
+	console.log(`[${pattern.join('')}] - ${cost_4.length} 4-cost, ${cost_3.length} 3-cost, ${cost_1.length} 1-cost combinations`);
 
 	for (const sel_4 of cost_4) {
 		for (const sel_3 of cost_3) {
@@ -43,10 +44,13 @@ self.onmessage = async function (event: MessageEvent) {
 				const passes_2p_filter = input.filter.allowed_2p.some(sonata => (sonatas[sonata]?.length || 0) >= 2);
 				const passes_5p_filter = input.filter.allowed_5p.some(sonata => (sonatas[sonata]?.length || 0) >= 5);
 
-				// todo: filter unique echo within same sonata
-
 				if (input.filter.allow_rainbow || passes_2p_filter || passes_5p_filter) {
-					batch.push(build);
+					// todo: filter unique echo within same sonata
+					for (const partial of Object.values(sonatas)) {
+						if (partial.every((echo, i, arr) => arr.findIndex(e => e.key === echo.key) === i)) {
+							batch.push(build);
+						}
+					}
 				}
 
 				processed += 1;

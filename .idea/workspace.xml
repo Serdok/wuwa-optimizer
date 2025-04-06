@@ -4,22 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: rework optimizer pipeline to include progress report">
-      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/bounded_max_priority_queue.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/optimizer/bounded_max_priority_queue.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/optimize/DisplayDamage.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/optimize/DisplayMotion.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/optimize/DisplaySkill.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/optimize/DisplayStat.svelte" afterDir="false" />
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: phoebe">
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/phoebe/T_IconRole_Pile_Feibi_UI.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/phoebe/en.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/rectifier/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/rectifier/luminous_hymn/en.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/rectifier/luminous_hymn/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/stats/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/stats/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/build.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/build.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/finalizer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/finalizer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/optimize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/optimize.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/stats.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/stats.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/worker.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.inlang/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.inlang/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/phoebe/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/phoebe/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,11 +32,11 @@
         <option value="optimize/+page" />
         <option value="settings/+page" />
         <option value="scan/+page" />
-        <option value="TypeScript File" />
         <option value="DisplayDamage" />
         <option value="DisplayMotion" />
         <option value="DisplaySkill" />
         <option value="DisplayStats" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -80,8 +76,8 @@
     "Node.js.vite.config.ts.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feat/optimizer-counter",
-    "last_opened_file_path": "/home/serdok/projects/wuwa-optimizer/src/lib/optimizer",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/serdok/projects/wuwa-optimizer/src/lib/data/weapons/rectifier/luminous_hymn",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -111,19 +107,19 @@
       <window_info id="Merge Requests" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Pull Requests" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14477539" />
-      <window_info id="Commit" order="1" weight="0.19604492" />
-      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.14477539" />
+      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.14477539" />
+      <window_info id="Structure" order="2" sideWeight="0.49935067" side_tool="true" weight="0.14477539" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="File Transfer" />
       <window_info anchor="bottom" id="Find" />
-      <window_info anchor="bottom" id="Version Control" order="0" weight="0.26582792" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.3299513" />
       <window_info anchor="bottom" id="Problems" order="1" />
-      <window_info anchor="bottom" id="Problems View" order="2" weight="0.3299513" />
+      <window_info active="true" anchor="bottom" id="Problems View" order="2" visible="true" weight="0.3299513" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.26582792" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.3299513" />
       <window_info anchor="bottom" id="Services" order="5" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="documentation.v2" show_stripe_button="false" side_tool="true" />
@@ -138,11 +134,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/lib/data/weapons/rectifier/luminous_hymn" />
+      <recent name="$PROJECT_DIR$/src/lib/data/characters/phoebe" />
       <recent name="$PROJECT_DIR$/src/lib/optimizer" />
       <recent name="$PROJECT_DIR$/src/lib/data/echoes/images" />
       <recent name="$PROJECT_DIR$/src/lib/data/weapons/pistols/the_last_dance" />
-      <recent name="$PROJECT_DIR$/src/lib/data/weapons/pistols/static_mist" />
-      <recent name="$PROJECT_DIR$/src/lib/data/weapons/swords/emerald_of_genesis" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/lib/optimizer" />
@@ -202,6 +198,8 @@
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.preview" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -365,7 +363,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -384,6 +394,7 @@
     <MESSAGE value="fix: remove intro and outro dmg bonus in display stats as they don't have an associated icon" />
     <MESSAGE value="fix: add base 0.1% enemy resistance" />
     <MESSAGE value="feat: rework optimizer pipeline to include progress report" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: rework optimizer pipeline to include progress report" />
+    <MESSAGE value="feat: phoebe" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: phoebe" />
   </component>
 </project>

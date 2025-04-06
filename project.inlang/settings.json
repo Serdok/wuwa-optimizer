@@ -1,34 +1,41 @@
 {
-	"$schema": "https://inlang.com/schema/project-settings",
-	"modules": [
-		"https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-empty-pattern@1/dist/index.js",
-		"https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-identical-pattern@1/dist/index.js",
-		"https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-missing-translation@1/dist/index.js",
-		"https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-without-source@1/dist/index.js",
-		"https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-valid-js-identifier@1/dist/index.js",
-		"https://cdn.jsdelivr.net/npm/@inlang/plugin-message-format@4/dist/index.js",
-		"https://cdn.jsdelivr.net/npm/@inlang/plugin-m-function-matcher@0/dist/index.js"
-	],
-	"plugin.inlang.messageFormat": {
-		"pathPattern": [
-          "./messages/{locale}.json",
+  "$schema": "https://inlang.com/schema/project-settings",
+  "modules": [
+    "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-empty-pattern@1/dist/index.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-identical-pattern@1/dist/index.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-missing-translation@1/dist/index.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-without-source@1/dist/index.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-valid-js-identifier@1/dist/index.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/plugin-message-format@4/dist/index.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/plugin-m-function-matcher@0/dist/index.js"
+  ],
+  "baseLocale": "en-US",
+  "plugin.inlang.messageFormat": {
+    "pathPattern": [
+      "./messages/{locale}.json",
 
-          "./src/lib/data/stats/{locale}.json",
+      "./src/lib/data/stats/{locale}.json",
 
-          "./src/lib/data/characters/{locale}.json",
-          "./src/lib/data/characters/changli/{locale}.json",
-          "./src/lib/data/characters/jinhsi/{locale}.json",
-          "./src/lib/data/characters/carlotta/{locale}.json",
+      "./src/lib/data/characters/{locale}.json",
+      "./src/lib/data/characters/changli/{locale}.json",
+      "./src/lib/data/characters/jinhsi/{locale}.json",
+      "./src/lib/data/characters/carlotta/{locale}.json",
+      "./src/lib/data/characters/phoebe/{locale}.json",
 
-          "./src/lib/data/weapons/{locale}.json",
-          "./src/lib/data/weapons/broadswords/ages_of_harvest/{locale}.json",
-          "./src/lib/data/weapons/broadswords/lustrous_razor/{locale}.json",
-          "./src/lib/data/weapons/pistols/static_mist/{locale}.json",
-          "./src/lib/data/weapons/pistols/the_last_dance/{locale}.json",
-          "./src/lib/data/weapons/swords/blazing_brilliance/{locale}.json",
-          "./src/lib/data/weapons/swords/emerald_of_genesis/{locale}.json"
-        ]
-	},
-	"sourceLanguageTag": "en",
-	"locales": ["en"]
+      "./src/lib/data/weapons/{locale}.json",
+
+      "./src/lib/data/weapons/broadswords/ages_of_harvest/{locale}.json",
+      "./src/lib/data/weapons/broadswords/lustrous_razor/{locale}.json",
+
+      "./src/lib/data/weapons/rectifier/luminous_hymn/{locale}.json",
+
+      "./src/lib/data/weapons/pistols/static_mist/{locale}.json",
+      "./src/lib/data/weapons/pistols/the_last_dance/{locale}.json",
+
+      "./src/lib/data/weapons/swords/blazing_brilliance/{locale}.json",
+      "./src/lib/data/weapons/swords/emerald_of_genesis/{locale}.json"
+    ]
+  },
+  "sourceLanguageTag": "en",
+  "locales": ["en"]
 }

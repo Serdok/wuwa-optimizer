@@ -4,6 +4,7 @@ import type { Buff, GameplayEffect } from '$lib/optimizer';
 import { SWORDS } from './swords';
 import { BROADSWORDS } from './broadswords';
 import { PISTOLS } from './pistols';
+import { RECTIFIERS } from './rectifier';
 
 export const WEAPON_TYPES = ['broadsword', 'sword', 'pistol', 'gauntlet', 'rectifier'] as const;
 export type WeaponKey = typeof WEAPON_TYPES[number];
@@ -13,7 +14,7 @@ export const WEAPONS: Record<WeaponKey, Record<string, WeaponData>> = {
 	sword: SWORDS,
 	pistol: PISTOLS,
 	gauntlet: SWORDS,
-	rectifier: SWORDS,
+	rectifier: RECTIFIERS,
 };
 
 export type WeaponData = GameplayEffect & {

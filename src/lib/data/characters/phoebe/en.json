@@ -1,0 +1,26 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "phoebe": "Phoebe",
+
+  "spectro_frazzle": "Spectro Frazzle",
+  "absolution": "Absolution",
+  "confession": "Confession",
+  "ring_of_mirrors": "Ring of Mirrors",
+
+  "o_come_divine_light": "O Come Divine Light",
+  "to_where_light_shines": "To Where Light Shines",
+  "radiant_invocation": "Radiant Invocation",
+  "dawn_of_enlightenment": "Dawn of Enlightenment",
+  "golden_grace": "Golden Grace",
+  "attentive_heart": "Attentive Heart",
+
+  "chamuel_s_star_dodge_counter_dmg": "Chamuel's Star: Dodge Counter DMG",
+  "ring_of_mirrors_refracted_holy_light_dmg": "Ring of Mirrors: Refracted Holy Light DMG",
+  "chamuel_s_star_stage_1_dmg": "Chamuel's Star: Stage 1 DMG",
+  "chamuel_s_star_stage_2_dmg": "Chamuel's Star: Stage 2 DMG",
+  "chamuel_s_star_stage_3_dmg": "Chamuel's Star: Stage 3 DMG",
+  "absolution_litany_dmg": "Absolution Litany DMG",
+  "utter_confession_dmg": "Utter Confession DMG",
+  "heavy_attack_starflash_dmg": "Heavy Attack: Starflash DMG"
+}

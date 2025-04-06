@@ -6,6 +6,7 @@ import type { Buff, GameplayEffect } from '$lib/optimizer';
 import changli from './changli';
 import jinhsi from './jinhsi';
 import carlotta from './carlotta';
+import phoebe from './phoebe';
 
 export const SKILLS = ['normal', 'skill', 'forte', 'burst', 'intro', 'outro'] as const;
 export type SkillKey = typeof SKILLS[number];
@@ -46,4 +47,5 @@ export const CHARACTERS: Record<string, CharacterData> = {
 	changli,
 	jinhsi,
 	carlotta,
+	phoebe,
 } as const;

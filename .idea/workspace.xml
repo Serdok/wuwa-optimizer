@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: phoebe">
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/phoebe/T_IconRole_Pile_Feibi_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/phoebe/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/rectifier/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/rectifier/luminous_hymn/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/rectifier/luminous_hymn/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.inlang/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.inlang/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/phoebe/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/phoebe/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
-    </list>
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="fix: combat stats calculation yielding wrong results" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,6 +49,9 @@
     &quot;accountId&quot;: &quot;c553888f-49a7-4cbf-871f-29f3f5868f35&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
@@ -71,44 +62,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.vite.config.ts.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/serdok/projects/wuwa-optimizer/src/lib/data/weapons/rectifier/luminous_hymn",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "/home/serdok/.nvm/versions/node/v22.8.0/bin/node",
-    "nodejs_package_manager_path": "npm",
-    "npm.build.executor": "Run",
-    "npm.dev.executor": "Run",
-    "npm.preview.executor": "Run",
-    "npm.test.executor": "Run",
-    "npm.test:unit.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "/home/serdok/projects/wuwa-optimizer/node_modules/prettier",
-    "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "/home/serdok/projects/wuwa-optimizer/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.vite.config.ts.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/serdok/projects/wuwa-optimizer/src/lib/data/weapons/rectifier/luminous_hymn&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/serdok/.nvm/versions/node/v22.8.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.preview.executor&quot;: &quot;Run&quot;,
+    &quot;npm.test.executor&quot;: &quot;Run&quot;,
+    &quot;npm.test:unit.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/serdok/projects/wuwa-optimizer/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/serdok/projects/wuwa-optimizer/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "JavaScript",
-      "TypeScript"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JavaScript&quot;,
+      &quot;TypeScript&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Bookmarks" side_tool="true" />
       <window_info id="Merge Requests" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Pull Requests" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.14477539" />
-      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.14477539" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.50064933" weight="0.13549805" />
+      <window_info active="true" id="Commit" order="1" sideWeight="0.50064933" visible="true" weight="0.13549805" />
       <window_info id="Structure" order="2" sideWeight="0.49935067" side_tool="true" weight="0.14477539" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="TypeScript" />
@@ -117,9 +108,9 @@
       <window_info anchor="bottom" id="Find" />
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.3299513" />
       <window_info anchor="bottom" id="Problems" order="1" />
-      <window_info active="true" anchor="bottom" id="Problems View" order="2" visible="true" weight="0.3299513" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.26582792" />
-      <window_info anchor="bottom" id="Run" order="4" weight="0.3299513" />
+      <window_info anchor="bottom" id="Problems View" order="2" weight="0.26582792" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.26582792" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.26582792" />
       <window_info anchor="bottom" id="Services" order="5" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="documentation.v2" show_stripe_button="false" side_tool="true" />
@@ -239,6 +230,7 @@
       <workItem from="1743550824000" duration="8605000" />
       <workItem from="1743631910940" duration="521000" />
       <workItem from="1743941026760" duration="10029000" />
+      <workItem from="1744059605563" duration="1973000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -352,7 +344,23 @@
       <option name="project" value="LOCAL" />
       <updated>1743390029894</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="feat: phoebe">
+      <option name="closed" value="true" />
+      <created>1743972808821</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1743972808821</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix: percentage display">
+      <option name="closed" value="true" />
+      <created>1744061541972</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1744061541972</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,6 +403,7 @@
     <MESSAGE value="fix: add base 0.1% enemy resistance" />
     <MESSAGE value="feat: rework optimizer pipeline to include progress report" />
     <MESSAGE value="feat: phoebe" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: phoebe" />
+    <MESSAGE value="fix: percentage display" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: percentage display" />
   </component>
 </project>

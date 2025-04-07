@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ATTACKS, CHARACTERS } from '$lib/data/characters';
 	import { WEAPONS } from '$lib/data/weapons';
-	import { BASE_STATS, STAT_ICONS, type StatKey, STATS, type StatValue } from '$lib/data/stats';
+	import { STAT_ICONS, type StatKey, STATS, type StatValue } from '$lib/data/stats';
 	import { PRIMARY_MAIN_STATS } from '$lib/data/echoes/base_stats';
 	import { type SonataKey, SONATA_DATA, SONATAS } from '$lib/data/sonatas';
 
@@ -32,8 +32,6 @@
 	import { db } from '$lib/db';
 	import type { DamageResult } from '$lib/optimizer/build';
 
-	import DisplayDamage from './DisplayDamage.svelte';
-	import DisplayMotion from './DisplayMotion.svelte';
 	import DisplaySkill from './DisplaySkill.svelte';
 	import DisplayStat from './DisplayStat.svelte';
 
@@ -201,9 +199,10 @@
 		results = [];
 		optimizer_controller = optimize(await db.echoes.toArray(), $state.snapshot(input), {
 			on_progress: (data) => {
+				console.log('progress', data);
 				total_builds = data.total;
 				processed_count = data.processed;
-				tested_count = data.current.length + data.processed;
+				tested_count = data.progress.reduce((acc, count) => acc + count, 0);
 			},
 			on_batch: ({ batch }) => {
 				results = batch;
@@ -758,9 +757,9 @@
 		</div>
 	{/if}
 {:else}
-	{@const percentage = ((tested_count / total_builds) * 100).toFixed(2)}
+	{@const percentage = total_builds > 0 ? (tested_count / total_builds) * 100 : 0}
 	<div class="my-2">
-		<div>Tested {tested_count} builds out of {total_builds} ({percentage} %)</div>
+		<div>Tested {tested_count} builds out of {total_builds} ({percentage.toFixed(2)} %)</div>
 		<Progress value={tested_count} max={total_builds} />
 	</div>
 

@@ -6,11 +6,11 @@ import type {
 	OptimizerOptions
 } from '$lib/optimizer/index';
 import type { SonataKey } from '$lib/data/sonatas';
-import { type StatKey, STATS } from '$lib/data/stats';
+import { BASE_STATS, type StatKey, STATS } from '$lib/data/stats';
 import { type AttackKey, CHARACTERS, type SkillKey } from '$lib/data/characters';
 import { WEAPONS } from '$lib/data/weapons';
 import {
-	apply_echo_stats,
+	apply_echo_stats, get_base_stat_value,
 	get_base_stats,
 	get_default_stats,
 	get_display_stats,
@@ -88,7 +88,7 @@ export function compute_damage(build: Echo[], input: OptimizerInput, options: Op
 	const combat_stats = Object.fromEntries(
 		Object.entries(default_stats).map(([key, value]) => {
 			const stat = key as StatKey;
-			return [stat, value + (base_stats[stat] ?? 0) + (input.character.extra_stats[stat].value ?? 0)];
+			return [stat, value + (input.character.extra_stats[stat].value ?? 0)];
 		})
 	) as Record<StatKey, number>;
 

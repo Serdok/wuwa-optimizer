@@ -18,18 +18,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="fix: combat stats calculation yielding wrong results">
-      <change afterPath="$PROJECT_DIR$/src/lib/data/sonatas/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/optimize/SonataSelector.svelte" afterDir="false" />
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: add support bonus set for 2p and 5p">
+      <change afterPath="$PROJECT_DIR$/src/routes/optimize/Result.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.inlang/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.inlang/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/stats/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/stats/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/stats/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/stats/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/build.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/build.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/optimize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/optimize.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/worker.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +45,7 @@
         <option value="TypeScript File" />
         <option value="SonataSelector" />
         <option value="SonataSelectorList" />
+        <option value="Result" />
       </list>
     </option>
   </component>
@@ -131,8 +123,8 @@
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="npm" side_tool="true" />
       <window_info id="Pull Requests" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.13549805" />
-      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.091552734" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.17456055" />
+      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.21606445" />
       <window_info id="Structure" order="2" sideWeight="0.49935067" side_tool="true" weight="0.14477539" />
       <window_info anchor="bottom" id="NextEditPredictionSettingsToolwindow" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -272,7 +264,7 @@
       <workItem from="1745261005069" duration="1077000" />
       <workItem from="1746178750069" duration="2914000" />
       <workItem from="1746209558375" duration="11893000" />
-      <workItem from="1746371510328" duration="6457000" />
+      <workItem from="1746371510328" duration="10804000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -410,7 +402,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744062136113</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="feat: add support bonus set for 2p and 5p">
+      <option name="closed" value="true" />
+      <created>1746380767069</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1746380767069</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -455,6 +455,7 @@
     <MESSAGE value="feat: phoebe" />
     <MESSAGE value="fix: percentage display" />
     <MESSAGE value="fix: combat stats calculation yielding wrong results" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: combat stats calculation yielding wrong results" />
+    <MESSAGE value="feat: add support bonus set for 2p and 5p" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add support bonus set for 2p and 5p" />
   </component>
 </project>

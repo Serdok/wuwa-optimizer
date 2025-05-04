@@ -35,6 +35,7 @@
 	import DisplaySkill from './DisplaySkill.svelte';
 	import DisplayStat from './DisplayStat.svelte';
 	import SonataSelector from './SonataSelector.svelte';
+	import Result from './Result.svelte';
 
 	const first_character = $derived(Object.values(CHARACTERS)[0]);
 
@@ -785,51 +786,7 @@
 	</div>
 	<div class="px-2 flex flex-col space-y-4 divide-y-2">
 		{#each results as result, i (i)}
-			{@const total_cost = result.build.reduce((acc, echo) => acc + echo.cost, 0)}
-			<div class="flex flex-col space-y-2">
-				<div>build {i + 1}/{results.length} - total cost: {total_cost}/12</div>
-				<div class="grid grid-cols-5 gap-1 justify-around">
-					{#each result.build as echo (echo.id)}
-						<!-- build -->
-						<div class="border rounded-lg flex flex-col gap-3">
-							<div class="flex flex-row">
-								<img src={get_echo_image(echo.key)} alt={echo.key} class="size-36" />
-								<div class="flex flex-col gap-2 ml-2">
-									<div>
-										<span class="font-bold">{echo.key}</span>
-										<span>(+{echo.level})</span>
-									</div>
-									<div class="flex flex-row gap-2 items-center">
-										<img src={SONATA_DATA[echo.sonata].image} alt="{echo.sonata}" class="w-8" />
-										<span>{echo.sonata}</span>
-									</div>
-									<div class="flex flex-col">
-										<DisplayStat key={echo.primary_stat.stat} value={echo.primary_stat.value} />
-										<DisplayStat key={echo.secondary_stat.stat} value={echo.secondary_stat.value} />
-									</div>
-								</div>
-							</div>
-							<div class="flex flex-row flex-wrap space-x-2 justify-evenly my-2">
-								{#each echo.sub_stats as sub_stat}
-									<DisplayStat key={sub_stat.stat} value={sub_stat.value} />
-								{/each}
-							</div>
-						</div>
-					{/each}
-				</div>
-				<div class="columns-3">
-					<!-- damage + stats -->
-					<div class="break-inside-avoid flex flex-col gap-1 px-2">
-						<div class="text-xl">Stats</div>
-						{#each Object.entries(result.display_stats) as [key, value] (key)}
-							<DisplayStat key={key as StatKey} {value} />
-						{/each}
-					</div>
-					{#each Object.values(result.skills) as skill (skill.type)}
-						<DisplaySkill {skill} {damage_selection} />
-					{/each}
-				</div>
-			</div>
+			<Result {result} {i} total_results={results.length} {damage_selection} />
 		{/each}
 	</div>
 {/if}

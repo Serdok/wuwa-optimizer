@@ -5,7 +5,7 @@ import type {
 	OptimizerInput,
 	OptimizerOptions
 } from '$lib/optimizer/index';
-import type { SonataKey } from '$lib/data/sonatas';
+import { SONATA_DATA, type SonataKey } from '$lib/data/sonatas';
 import { BASE_STATS, type StatKey, STATS } from '$lib/data/stats';
 import { type AttackKey, CHARACTERS, type SkillKey } from '$lib/data/characters';
 import { WEAPONS } from '$lib/data/weapons';
@@ -42,42 +42,6 @@ export type DamageResult = {
 	target_value: number;
 };
 
-export function is_valid_combination(build: Echo[], filter: EchoFilter): boolean {
-	// ensure the total weight did not exceed the max weight (12)
-	const total_weight = build.reduce<number>((weight, echo) => weight + echo.cost, 0);
-	if (total_weight > 12) {
-		return false;
-	}
-
-	// ensure build main stats follows the filter
-	const is_main_valid = (cost: number, stat: StatKey) => filter.allowed_primary_stats[cost].includes(stat) || false;
-	const main_stats_valid = build.some(e => is_main_valid(e.cost, e.primary_stat.stat));
-	if (!main_stats_valid) {
-		return false;
-	}
-
-	// ensure the combination follows the given filter array
-	const sets_count = Object.groupBy(build, e => e.sonata);
-
-	const filter_validator = (sonata: SonataKey, count: number) => {
-		return filter.allow_rainbow || (filter.allowed_2p.includes(sonata) && count >= 2) || (filter.allowed_5p.includes(sonata) && count == 5);
-	}
-	if (!Object.entries(sets_count).every(([key, echoes]) => { return filter_validator(key as SonataKey, echoes.length); })) {
-		return false;
-	}
-
-	// ensure all names are unique within each set
-	const sonatas = [...filter.allowed_2p, ...filter.allowed_5p.filter(set => !filter.allowed_2p.includes(set))];
-	const sets = Object.fromEntries(sonatas.map(sonata => [sonata, build.filter(e => e.sonata === sonata)]));
-	const unique_names_in_sets = Object.values(sets).map(set => set.every((echo, idx, self) => self.findIndex(e => e.key === echo.key) === idx));
-	if (unique_names_in_sets.some(v => !v)) {
-		// at least one set does not have a unique name combination
-		return false;
-	}
-
-	return true;
-}
-
 export function compute_damage(build: Echo[], input: OptimizerInput, options: OptimizerOptions): DamageResult {
 	const character = CHARACTERS[input.character.key];
 	const weapon = WEAPONS[character.weapon_type][input.weapon.key];
@@ -92,7 +56,7 @@ export function compute_damage(build: Echo[], input: OptimizerInput, options: Op
 		})
 	) as Record<StatKey, number>;
 
-	const context: OptimizerContext = { character, };
+	const context: OptimizerContext = { character, build, };
 
 	character.apply_effects(input, combat_stats, context);
 	weapon.apply_effects(input, combat_stats, context);
@@ -100,6 +64,17 @@ export function compute_damage(build: Echo[], input: OptimizerInput, options: Op
 
 	const build_stats = structuredClone(combat_stats);
 	build.forEach((echo) => apply_echo_stats(build_stats, echo));
+
+	const sets = Object.groupBy(build, e => e.sonata);
+	for (const [key, echoes] of Object.entries(sets)) {
+		const sonata = key as SonataKey;
+		if (echoes.length >= 2) {
+			SONATA_DATA[sonata].apply_2p_effects(input, build_stats, context);
+		}
+		if (echoes.length >= 5) {
+			SONATA_DATA[sonata].apply_5p_effects(input, build_stats, context);
+		}
+	}
 
 	const skills = Object.fromEntries(
 		Object.values(character.skills)

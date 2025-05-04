@@ -2,7 +2,6 @@ import { generate_combinations } from '$lib/math';
 import type { Echo } from '$lib/data/echoes/types';
 import type { CostCombo } from './optimize';
 import type { OptimizerInput, OptimizerOptions } from '$lib/optimizer/index';
-import type { SonataKey } from '$lib/data/sonatas';
 
 type Data = {
 	echoes: { cost_4: Echo[], cost_3: Echo[], cost_1: Echo[] },
@@ -41,10 +40,10 @@ self.onmessage = async function (event: MessageEvent) {
 
 				const sonatas = Object.groupBy(build, e => e.sonata);
 
-				const passes_2p_filter = input.filter.allowed_2p.some(sonata => (sonatas[sonata]?.length || 0) >= 2);
-				const passes_5p_filter = input.filter.allowed_5p.some(sonata => (sonatas[sonata]?.length || 0) >= 5);
+				const passes_2p_filter = input.echo.filter.allowed_2p.some(sonata => (sonatas[sonata]?.length || 0) >= 2);
+				const passes_5p_filter = input.echo.filter.allowed_5p.some(sonata => (sonatas[sonata]?.length || 0) >= 5);
 
-				if (input.filter.allow_rainbow || passes_2p_filter || passes_5p_filter) {
+				if (input.echo.allow_rainbow || passes_2p_filter || passes_5p_filter) {
 					// todo: filter unique echo within same sonata
 					for (const partial of Object.values(sonatas)) {
 						if (partial.every((echo, i, arr) => arr.findIndex(e => e.key === echo.key) === i)) {

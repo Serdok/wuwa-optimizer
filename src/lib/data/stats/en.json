@@ -47,6 +47,7 @@
   "spectro_amplify": "Spectro DMG Amplify",
   "havoc_amplify": "Havoc DMG Amplify",
 
+  "coordinated_attack": "Coordinated Attack DMG",
   "skill_multiplier": "Skill Multiplier",
   "enemy_resistance": "Enemy Resistance",
   "enemy_def_ignore": "Enemy DEF Ignore"

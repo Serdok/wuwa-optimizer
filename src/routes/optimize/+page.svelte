@@ -34,6 +34,7 @@
 
 	import DisplaySkill from './DisplaySkill.svelte';
 	import DisplayStat from './DisplayStat.svelte';
+	import SonataSelector from './SonataSelector.svelte';
 
 	const first_character = $derived(Object.values(CHARACTERS)[0]);
 
@@ -77,7 +78,6 @@
 	let optimizer_running = $state(false);
 	let start_time = $state(0);
 	let total_builds = $state(0);
-	let processed_count = $state(0);
 	let tested_count = $state(0);
 
 	let damage_selection: 'non-crit' | 'average' | 'forced-crit' = $state('average');
@@ -183,12 +183,15 @@
 				rank: rank,
 				buffs: weapon_buffs
 			},
-			filter: {
-				allowed_primary_stats: echo_primaries,
-				allowed_2p: allowed_sonatas['2-p'],
-				allowed_5p: allowed_sonatas['5-p'],
+			echo: {
+				filter: {
+					allowed_primary_stats: echo_primaries,
+					allowed_2p: allowed_sonatas['2-p'],
+					allowed_5p: allowed_sonatas['5-p'],
+				},
 				allow_rainbow,
 				allow_partial,
+				buffs: Object.fromEntries(SONATAS.map(s => [s, false])),
 			},
 			target_key,
 			keep_count,
@@ -201,7 +204,6 @@
 			on_progress: (data) => {
 				console.log('progress', data);
 				total_builds = data.total;
-				processed_count = data.processed;
 				tested_count = data.progress.reduce((acc, count) => acc + count, 0);
 			},
 			on_batch: ({ batch }) => {
@@ -724,7 +726,7 @@
 			</div>
 
 			<div class="p-2 border rounded-lg flex flex-col space-y-2">
-				more coming soon
+				<SonataSelector />
 			</div>
 		</div>
 	</Tabs.Content>

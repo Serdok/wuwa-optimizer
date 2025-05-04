@@ -23,7 +23,7 @@ export const ELEMENT_AMPLIFY = ['general_amplify', 'physical_amplify', 'glacio_a
 export type ElementAmplifyKey = typeof ELEMENT_AMPLIFY[number];
 export type AsElementAmplifyKey<T extends ElementKey> = `${T}_amplify` extends ElementAmplifyKey ? `${T}_amplify` : never;
 
-export const EXTRA_STATS = ['skill_multiplier', 'enemy_level', 'enemy_resistance', 'enemy_def_ignore'] as const;
+export const EXTRA_STATS = ['coordinated_attack', 'skill_multiplier', 'enemy_level', 'enemy_resistance', 'enemy_def_ignore'] as const;
 export type ExtraStatKey = typeof EXTRA_STATS[number];
 
 export const STATS = [...BASE_STATS, ...COMBAT_STATS, ...ATTACK_BONUS, ...ELEMENT_BONUS, ...ATTACK_AMPLIFY, ...ELEMENT_AMPLIFY, ...EXTRA_STATS, ] as const;

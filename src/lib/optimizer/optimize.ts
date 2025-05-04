@@ -38,7 +38,7 @@ function generate_cost_combinations(input: OptimizerInput) {
 				const total_cost = count_4 * 4 + count_3 * 3 + count_1;
 
 				if (total_cost < 0 || total_cost > 12) continue;
-				if (!input.filter.allow_partial && total_items !== 5) continue;
+				if (!input.echo.allow_partial && total_items !== 5) continue;
 
 				cost_combos.push({
 					count_4,
@@ -65,9 +65,9 @@ export function optimize(echoes: Echo[], input: OptimizerInput, options: Optimiz
 	const settings = { ...defaults, ...options };
 	const max_workers = options.max_workers || Math.max(12, (navigator.hardwareConcurrency || 4) - 1);
 
-	const cost_4 = echoes.filter(e => e.cost === 4 && input.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
-	const cost_3 = echoes.filter(e => e.cost === 3 && input.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
-	const cost_1 = echoes.filter(e => e.cost === 1 && input.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
+	const cost_4 = echoes.filter(e => e.cost === 4 && input.echo.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
+	const cost_3 = echoes.filter(e => e.cost === 3 && input.echo.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
+	const cost_1 = echoes.filter(e => e.cost === 1 && input.echo.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
 
 	const cost_combos = generate_cost_combinations(input);
 	cost_combos.sort((a, b) => b.total_cost - a.total_cost);

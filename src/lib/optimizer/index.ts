@@ -8,8 +8,6 @@ export type EchoFilter = {
 	allowed_primary_stats: Record<number, StatKey[]>,
 	allowed_2p: SonataKey[],
 	allowed_5p: SonataKey[],
-	allow_rainbow: boolean,
-	allow_partial: boolean,
 };
 
 export type OptimizerInput = {
@@ -24,34 +22,19 @@ export type OptimizerInput = {
 		rank: number,
 		buffs: Record<string, number>,
 	},
-	filter: EchoFilter,
+	echo: {
+		filter: EchoFilter,
+		allow_rainbow: boolean,
+		allow_partial: boolean,
+		buffs: Record<SonataKey, Record<string, number>>,
+	},
 	target_key: StatKey | `${string}-${string}`,
 	keep_count: number,
 };
 
 export type OptimizerContext = {
 	character: CharacterData,
-};
-
-export type WorkerResult = {
-	build: Echo[];
-	skills: {
-		[S in SkillKey]: {
-			type: S;
-			key: string;
-			motions: {
-				type: AttackKey;
-				key: string;
-				non_crit: number[],
-				average: number[],
-				forced_crit: number[],
-			}[];
-		};
-	};
-	build_stats: Record<StatKey, number>;
-	display_stats: Record<StatKey, number>;
-	final_stats: Record<StatKey, number>;
-	target_value: number;
+	build: Echo[],
 };
 
 type ProgressData = {

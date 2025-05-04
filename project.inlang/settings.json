@@ -15,6 +15,7 @@
       "./messages/{locale}.json",
 
       "./src/lib/data/stats/{locale}.json",
+      "./src/lib/data/sonatas/{locale}.json",
 
       "./src/lib/data/characters/{locale}.json",
       "./src/lib/data/characters/changli/{locale}.json",

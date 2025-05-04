@@ -1,0 +1,30 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "freezing_frost": "Freezing Frost",
+  "molten_rift": "Molten Rift",
+  "void_thunder": "Void Thunder",
+  "sierra_gale": "Sierra Gale",
+  "celestial_light": "Celestial Light",
+  "sun_sinking_eclipse": "Sun-Sinking Eclipse",
+  "rejuvenating_glow": "Rejuvenating Glow",
+  "moonlit_clouds": "Moonlit Clouds",
+  "lingering_tunes": "Lingering Tunes",
+  "frosty_resolve": "Frosty Resolve",
+  "eternal_radiance": "Eternal Radiance",
+  "midnight_veil": "Midnight Veil",
+  "empyrean_anthem": "Empyrean Anthem",
+  "tidebreaking_courage": "Tidebreaking Courage",
+  "gusts_of_welkin": "Gusts of Welkin",
+
+  "basic_released": "Basic Attack Released",
+  "heavy_released": "Heavy Attack Released",
+  "skill_released": "Resonance Skill Released",
+  "burst_released": "Resonance Liberation Released",
+  "intro_released": "Intro Skill Released",
+  "outro_released": "Outro Skill Released",
+
+  "healing_allies": "Healing Allies",
+  "on_field": "Time on field",
+  "coordinated_crit": "Coordinated Attack Crit. Hit"
+}

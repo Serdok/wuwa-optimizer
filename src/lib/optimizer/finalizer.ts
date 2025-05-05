@@ -10,8 +10,9 @@ export function default_finalizer(motion: MotionData, base_stats: Record<BaseSta
 	const skill_hits: number[] = motion.values.map((v: number) => v * combat_stats.skill_multiplier * get_base_stat_value(motion.related_stat, base_stats[motion.related_stat], combat_stats));
 
 	// hit * (element bonus + skill bonus) * skill amplify
-	const bonus: number = combat_stats.general_bonus + combat_stats[`${motion.element}_bonus`] + combat_stats[`${motion.type}_bonus`];
-	const amplify: number = combat_stats.general_amplify + combat_stats[`${motion.element}_amplify`] + combat_stats[`${motion.type}_amplify`];
+	const bonus = combat_stats.general_bonus + motion.element.reduce((acc, e) => acc + combat_stats[`${e}_bonus`], 0) + motion.type.reduce((acc, t) => acc + combat_stats[`${t}_bonus`], 0);
+	const amplify = combat_stats.general_amplify + motion.element.reduce((acc, e) => acc + combat_stats[`${e}_amplify`], 0) + motion.type.reduce((acc, t) => acc + combat_stats[`${t}_amplify`], 0);
+
 	const expected_hits = skill_hits.map(v => v * (1 + bonus) * (1 + amplify));
 
 	// res * def * dmg reduction * element reduction

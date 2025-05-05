@@ -15,9 +15,9 @@ export const ATTACKS = ['basic', 'heavy', 'skill', 'burst', 'intro', 'outro'] as
 export type AttackKey = typeof ATTACKS[number];
 
 export type MotionData = GameplayEffect & {
-	type: AttackKey,
+	type: AttackKey[],
 	key: string,
-	element: ElementKey,
+	element: ElementKey[],
 	related_stat: BaseStatKey,
 	values: number[],
 };

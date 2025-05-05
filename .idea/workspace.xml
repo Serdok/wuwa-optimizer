@@ -18,10 +18,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: add support bonus set for 2p and 5p">
-      <change afterPath="$PROJECT_DIR$/src/routes/optimize/Result.svelte" afterDir="false" />
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: add a dedicated component for results - display which echo sets are active (2p/5p)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/carlotta/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/carlotta/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/changli/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/changli/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/jinhsi/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/jinhsi/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/phoebe/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/phoebe/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/elements.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/elements.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/stats/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/stats/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/finalizer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/finalizer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,10 +48,10 @@
         <option value="DisplayMotion" />
         <option value="DisplaySkill" />
         <option value="DisplayStats" />
-        <option value="TypeScript File" />
         <option value="SonataSelector" />
         <option value="SonataSelectorList" />
         <option value="Result" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -91,7 +97,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/serdok/projects/wuwa-optimizer/.svelte.llms-full.txt&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/serdok/projects/wuwa-optimizer/src/lib/data/characters/zani&quot;,
     &quot;llm.McpServerEditPanel.switcher&quot;: &quot;1&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -123,8 +129,8 @@
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="npm" side_tool="true" />
       <window_info id="Pull Requests" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.17456055" />
-      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.21606445" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" />
+      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.17456055" />
       <window_info id="Structure" order="2" sideWeight="0.49935067" side_tool="true" weight="0.14477539" />
       <window_info anchor="bottom" id="NextEditPredictionSettingsToolwindow" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -143,21 +149,22 @@
       <window_info anchor="right" id="documentation.v2" show_stripe_button="false" side_tool="true" />
       <window_info anchor="right" id="Coverage" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
-      <window_info anchor="right" id="AIAssistant" order="1" weight="0.22338867" />
+      <window_info anchor="right" id="AIAssistant" order="1" weight="0.32983398" />
       <window_info anchor="right" id="Database" order="2" weight="0.25" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
       <window_info anchor="right" id="Maven" order="4" weight="0.25" />
       <window_info anchor="right" id="shadcn/ui" order="5" weight="0.22338867" />
       <window_info anchor="right" id="Endpoints" order="6" weight="0.22338867" />
+      <window_info anchor="right" id="Hierarchy" order="7" weight="0.32983398" />
     </layout>
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/lib/data/characters/zani" />
       <recent name="$PROJECT_DIR$/src/lib/data/weapons/rectifier/luminous_hymn" />
       <recent name="$PROJECT_DIR$/src/lib/data/characters/phoebe" />
       <recent name="$PROJECT_DIR$/src/lib/optimizer" />
       <recent name="$PROJECT_DIR$/src/lib/data/echoes/images" />
-      <recent name="$PROJECT_DIR$/src/lib/data/weapons/pistols/the_last_dance" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/lib/optimizer" />
@@ -264,7 +271,8 @@
       <workItem from="1745261005069" duration="1077000" />
       <workItem from="1746178750069" duration="2914000" />
       <workItem from="1746209558375" duration="11893000" />
-      <workItem from="1746371510328" duration="10804000" />
+      <workItem from="1746371510328" duration="16638000" />
+      <workItem from="1746471502755" duration="2423000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -410,7 +418,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746380767069</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="feat: add a dedicated component for results - display which echo sets are active (2p/5p)">
+      <option name="closed" value="true" />
+      <created>1746385127376</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1746385127376</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -456,6 +472,7 @@
     <MESSAGE value="fix: percentage display" />
     <MESSAGE value="fix: combat stats calculation yielding wrong results" />
     <MESSAGE value="feat: add support bonus set for 2p and 5p" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add support bonus set for 2p and 5p" />
+    <MESSAGE value="feat: add a dedicated component for results - display which echo sets are active (2p/5p)" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add a dedicated component for results - display which echo sets are active (2p/5p)" />
   </component>
 </project>

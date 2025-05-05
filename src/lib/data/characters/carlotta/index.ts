@@ -49,9 +49,9 @@ const data: CharacterData = {
 
 		if (input.character.sequence >= 3) {
 			context.character.skills.outro.motions.push({
-				type: 'outro',
+				type: ['outro'],
 				key: 'kaleidoscope_sparks',
-				element: 'glacio',
+				element: ['glacio'],
 				related_stat: 'atk',
 				values: [10.3218],
 				apply_effects: () => {}
@@ -69,81 +69,81 @@ const data: CharacterData = {
 			apply_effects: () => {},
 			motions: [
 				{
-					type: 'basic',
+					type: ['basic'],
 					key: 'basic_attack_stage_1',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [0.5408],
 					apply_effects: () => {},
 				},
 				{
-					type: 'basic',
+					type: ['basic'],
 					key: 'basic_attack_stage_2',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [0.3955, 0.3955, 0.5273],
 					apply_effects: () => {},
 				},
 				{
-					type: 'basic',
+					type: ['basic'],
 					key: 'necessary_measures_stage_1_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [0.6591],
 					apply_effects: () => {},
 				},
 				{
-					type: 'basic',
+					type: ['basic'],
 					key: 'necessary_measures_stage_2_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [0.6008, 0.7343],
 					apply_effects: () => {},
 				},
 				{
-					type: 'basic',
+					type: ['basic'],
 					key: 'necessary_measures_stage_3_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [1.3993, 0.2333, 0.2333, 0.2333, 0.2333],
 					apply_effects: () => {},
 				},
 				{
-					type: 'heavy',
+					type: ['heavy'],
 					key: 'heavy_attack_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [0.2282, 0.2282, 0.2282, 0.2282, 0.6084],
 					apply_effects: () => {},
 				},
 				{
-					type: 'heavy',
+					type: ['heavy'],
 					key: 'containment_tactics_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [0.3423, 0.3423, 0.3423, 0.3423, 0.9126],
 					apply_effects: () => {},
 				},
 				{
-					type: 'basic',
+					type: ['basic'],
 					key: 'mid_air_attack_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [1.0478],
 					apply_effects: () => {},
 				},
 				{
-					type: 'basic',
+					type: ['basic'],
 					key: 'customary_greetings_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [1.0799, 1.3199],
 					apply_effects: () => {},
 				},
 				{
-					type: 'basic',
+					type: ['basic'],
 					key: 'dodge_counter',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [1.0377, 1.3755],
 					apply_effects: () => {},
@@ -160,34 +160,32 @@ const data: CharacterData = {
 			},
 			motions: [
 				{
-					type: 'skill',
+					type: ['skill'],
 					key: 'skill_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [1.4411, 1.4411],
 					apply_effects: () => {},
 				},
 				{
-					type: 'skill',
+					type: ['skill'],
 					key: 'chromatic_splendor_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [1.1273, 1.1273, 3.3818],
-					apply_effects: (input, combat_stats) => {
-					},
+					apply_effects: () => {},
 				},
 			],
 		},
 		'forte': {
 			type: 'forte',
 			key: 'lethal_repertoire',
-			apply_effects: (input, combat_stats) => {
-			},
+			apply_effects: () => {},
 			motions: [
 				{
-					type: 'skill',
+					type: ['skill'],
 					key: 'imminent_oblivion',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [0.6683, 0.6683, 0.6683, 0.6683, 0.6683, 5.0121],
 					apply_effects: (input, combat_stats) => {
@@ -206,18 +204,17 @@ const data: CharacterData = {
 			},
 			motions: [
 				{
-					type: 'skill',
+					type: ['skill'],
 					key: 'skill_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [4.0271],
-					apply_effects: (input, combat_stats) => {
-					},
+					apply_effects: () => {},
 				},
 				{
-					type: 'skill',
+					type: ['skill'],
 					key: 'death_knell_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [1.8364, 0.145, 0.145, 0.145, 0.145],
 					apply_effects: (input, combat_stats) => {
@@ -227,9 +224,9 @@ const data: CharacterData = {
 					},
 				},
 				{
-					type: 'skill',
+					type: ['skill'],
 					key: 'fatal_finale_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [6.4433],
 					apply_effects: (input, combat_stats) => {
@@ -246,9 +243,9 @@ const data: CharacterData = {
 			apply_effects: () => {},
 			motions: [
 				{
-					type: 'intro',
+					type: ['intro'],
 					key: 'skill_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [1.7893, 0.5965, 0.5965],
 					apply_effects: () => {},
@@ -261,9 +258,9 @@ const data: CharacterData = {
 			apply_effects: () => {},
 			motions: [
 				{
-					type: 'outro',
+					type: ['outro'],
 					key: 'skill_dmg',
-					element: 'glacio',
+					element: ['glacio'],
 					related_stat: 'atk',
 					values: [7.942],
 					apply_effects: () => {}

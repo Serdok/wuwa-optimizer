@@ -19,11 +19,11 @@
 
 	const { result, i, total_results, damage_selection }: Props = $props();
 
-	const total_cost = result.build.reduce((acc, echo) => acc + echo.cost, 0);
-	const build_sets = result.build.reduce<{ [s in SonataKey]?: number }>((freq, e) => {
+	const total_cost = $derived.by(() => result.build.reduce((acc, echo) => acc + echo.cost, 0));
+	const build_sets = $derived.by(() => result.build.reduce<{ [s in SonataKey]?: number }>((freq, e) => {
 		freq[e.sonata] = (freq[e.sonata] || 0) + 1;
 		return freq;
-	}, {});
+	}, {}));
 </script>
 
 <div class="flex flex-col space-y-2">

@@ -62,7 +62,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="basis-1/4 border-l-2 pl-2 pt-2 flex flex-col">
+		<div class="basis-1/5 border-l-2 pl-2 pt-2 flex flex-col">
 			{#each echo.sub_stats as sub_stat}
 				<div class="flex flex-row items-center space-x-2">
 					{#if sub_stat.stat in STAT_ICONS}

@@ -18,54 +18,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: add a dedicated component for results - display which echo sets are active (2p/5p)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postcss.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/accordion/accordion-trigger.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/accordion/accordion-trigger.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/button/button.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/button/button.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/checkbox/checkbox.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/checkbox/checkbox.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-content.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-content.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-footer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-footer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/dialog/dialog-header.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/input/input.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/input/input.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/progress/progress.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/progress/progress.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/radio-group/radio-group-item.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/radio-group/radio-group-item.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/scroll-area/scroll-area-scrollbar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/scroll-area/scroll-area-scrollbar.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/scroll-area/scroll-area.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/scroll-area/scroll-area.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/select/select-content.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-content.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/select/select-item.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-item.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/select/select-scroll-down-button.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-scroll-down-button.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/select/select-scroll-up-button.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-scroll-up-button.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/select/select-trigger.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/select/select-trigger.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sheet/sheet-footer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sheet/sheet-footer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sheet/sheet-header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sheet/sheet-header.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-content.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-content.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-footer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-footer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-group-action.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-group-action.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-group-content.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-group-content.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-group-label.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-group-label.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-group.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-group.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-header.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-header.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-inset.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-inset.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-action.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-action.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-badge.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-badge.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-item.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-item.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-skeleton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-skeleton.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-sub-button.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-sub-button.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-sub-item.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-sub-item.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-sub.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu-sub.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-menu.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-provider.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-provider.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-rail.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar-rail.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/sidebar/sidebar.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/skeleton/skeleton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/skeleton/skeleton.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/utils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
-    </list>
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: add a dedicated component for results - display which echo sets are active (2p/5p)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -128,37 +81,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.vite.config.ts.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "migration/tailwind-v4",
-    "last_opened_file_path": "/home/serdok/projects/wuwa-optimizer/src/lib/data/characters/zani",
-    "llm.McpServerEditPanel.switcher": "1",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "/home/serdok/.nvm/versions/node/v22.8.0/bin/node",
-    "nodejs_package_manager_path": "npm",
-    "npm.build.executor": "Run",
-    "npm.dev.executor": "Run",
-    "npm.preview.executor": "Run",
-    "npm.test.executor": "Run",
-    "npm.test:unit.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "/home/serdok/projects/wuwa-optimizer/node_modules/prettier",
-    "settings.editor.selected.configurable": "ml.llm.LLMProjectConfigurable",
-    "ts.external.directory.path": "/home/serdok/projects/wuwa-optimizer/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.vite.config.ts.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;migration/tailwind-v4&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/serdok/projects/wuwa-optimizer/src/lib/data/characters/zani&quot;,
+    &quot;llm.McpServerEditPanel.switcher&quot;: &quot;1&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/serdok/.nvm/versions/node/v22.8.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.preview.executor&quot;: &quot;Run&quot;,
+    &quot;npm.test.executor&quot;: &quot;Run&quot;,
+    &quot;npm.test:unit.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/serdok/projects/wuwa-optimizer/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMProjectConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/serdok/projects/wuwa-optimizer/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "JavaScript",
-      "TypeScript"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JavaScript&quot;,
+      &quot;TypeScript&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Bookmarks" side_tool="true" />
@@ -481,7 +434,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="migration/tailwind-v4" />
                       </list>
                     </value>
                   </entry>

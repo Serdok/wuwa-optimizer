@@ -18,10 +18,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="fix: ui got shifted a bit due to the migration">
-      <change beforePath="$PROJECT_DIR$/src/lib/data/echoes/cost_1.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_1.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/echoes/cost_3.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_3.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/echoes/cost_4.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/echoes/cost_4.ts" afterDir="false" />
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="fix: remove image key from echo">
+      <change beforePath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,7 +267,7 @@
       <workItem from="1746209558375" duration="11893000" />
       <workItem from="1746371510328" duration="16638000" />
       <workItem from="1746471502755" duration="2423000" />
-      <workItem from="1751742178501" duration="8549000" />
+      <workItem from="1751742178501" duration="8708000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -455,7 +453,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751750888252</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="fix: remove image key from echo">
+      <option name="closed" value="true" />
+      <created>1751751244914</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1751751244914</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -505,6 +511,7 @@
     <MESSAGE value="feat: shadcn components migration" />
     <MESSAGE value="feat: ui correction following the migration" />
     <MESSAGE value="fix: ui got shifted a bit due to the migration" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: ui got shifted a bit due to the migration" />
+    <MESSAGE value="fix: remove image key from echo" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: remove image key from echo" />
   </component>
 </project>

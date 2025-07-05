@@ -5,6 +5,8 @@
 	import { Button } from '$lib/components/ui/button';
 	import * as ToggleGroup from '$lib/components/ui/toggle-group';
 
+	import { get_message } from '$lib/messages';
+
 	import { Star } from 'lucide-svelte';
 
 	import EchoCard from './EchoCard.svelte';
@@ -77,7 +79,7 @@
 				<ToggleGroup.Item value={sonata} class="min-w-fit grow-0">
 					<div class="flex flex-row items-center gap-x-2">
 						<img src={SONATA_DATA[sonata].image} alt={sonata} class="size-8" />
-						<span>{sonata}</span>
+						<span>{get_message(sonata)}</span>
 					</div>
 				</ToggleGroup.Item>
 			{/each}

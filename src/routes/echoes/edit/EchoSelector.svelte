@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Input } from '$lib/components/ui/input';
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
 
-	import { COST_1, COST_3, COST_4, type EchoData } from '$lib/data/echoes';
+	import { COST_1, COST_3, COST_4 } from '$lib/data/echoes';
+	import type { EchoData } from '$lib/data/echoes/types';
 	import { SONATA_DATA } from '$lib/data/sonatas';
 	import { get_echo_image } from '$lib/data/echoes/images';
 
@@ -15,7 +14,7 @@
 		selected: EchoData;
 	}
 
-	let { key = $bindable(), open = false, selected }: Props = $props();
+	let { key = $bindable(), open = $bindable(false), selected }: Props = $props();
 
 	let filter = $state('');
 
@@ -27,16 +26,21 @@
 {#snippet selector(title, echoes)}
 	<div class="px-3 flex flex-col items-center gap-2">
 		<span class="font-semibold text-xl">{title}</span>
-		<ScrollArea>
-			<div class="flex flex-row flex-wrap gap-2 pt-2">
+		<ScrollArea orientation="vertical" class="h-full">
+			<div class="grid grid-cols-3 gap-2 pt-2 px-3">
 				{#each echoes as echo}
+					{@const sonata = echo.possible_sonatas.slice(0, 3)}
+					{@const remaining = echo.possible_sonatas.length - sonata.length}
 					<button type="button" class="relative size-36 rounded-xl aspect-square {key === echo.key ? 'ring-2 ring-white' : ''}" onclick={() => { key = echo.key; open = false; }}>
 						<img src={get_echo_image(echo.key)} alt={echo.key} class="rounded-xl" />
 						<span class="sr-only">{echo.key}</span>
-						<span class="absolute bottom-0 right-0 flex flex-row space-x-1">
-							{#each echo.possible_sonatas as s}
-								<img src={SONATA_DATA[s].image} alt={s} class="backdrop-blur-lg w-8" />
+						<span class="absolute bottom-0 right-0 flex flex-row items-center">
+							{#each sonata as s}
+								<img src={SONATA_DATA[s].image} alt={s} class="backdrop-blur-lg size-8 -ml-3 first:ml-0 " />
 							{/each}
+							{#if remaining > 0}
+								<span class="bg-gray-700 size-8 rounded-full flex items-center justify-center border-2 border-white -ml-3 z-10">+{remaining}</span>
+							{/if}
 						</span>
 					</button>
 				{/each}
@@ -49,13 +53,13 @@
 	<Dialog.Trigger type="button">
 		<img src={get_echo_image(selected.key)} alt={selected.key} class="rounded-xl size-72" />
 	</Dialog.Trigger>
-	<Dialog.Content class="max-w-[80%] h-3/4 flex flex-col gap-2">
+	<Dialog.Content class="w-4/5 h-3/4 flex flex-col gap-2">
 		<Dialog.Header>
 			<Dialog.Title>
-				<Input bind:value={filter} placeholder='search...' class="mx-auto w-2/3" />
+				<Input bind:value={filter} placeholder='Search...' class="mx-auto w-2/3" />
 			</Dialog.Title>
 		</Dialog.Header>
-		<div class="flex-1 grid grid-cols-3 auto-rows-fr divide-x-2 space-x-2 overflow-y-hidden">
+		<div class="flex-1 grid grid-cols-3 auto-rows-fr divide-x-2 gap-x-2 overflow-y-hidden">
 			{@render selector('4-cost', cost_4)}
 			{@render selector('3-cost', cost_3)}
 			{@render selector('1-cost', cost_1)}

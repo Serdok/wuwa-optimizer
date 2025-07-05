@@ -19,6 +19,9 @@
 	import { toast } from 'svelte-sonner';
 	import type { Echo } from '$lib/data/echoes/types';
 
+	import { m } from '$lib/paraglide/messages';
+	import { get_message } from '$lib/messages';
+
 	const { data }: PageProps = $props();
 
 	let key: string = $state(data.echo?.key || ALL_ECHOES[0].key);
@@ -114,13 +117,13 @@
 	})
 </script>
 
-<div class="flex flex-col space-y-2">
+<div class="flex flex-col gap-y-2">
 	<div class="flex flex-row gap-2">
 		<EchoSelector bind:key bind:open={echo_dialog_open} {selected} />
 
 		<div class="flex-1 flex flex-col gap-6">
-			<div class="flex flex-row items-center space-x-2">
-				<Button variant="outline" class="flex-1" onclick={() => echo_dialog_open = true}>{selected.key}</Button>
+			<div class="flex flex-row items-center gap-x-2">
+				<Button variant="outline" class="flex-1" onclick={() => echo_dialog_open = true}>{get_message(selected.key)}</Button>
 				<RadioGroup.Root name="rank" orientation="horizontal" bind:value={rank} class="flex flex-row">
 					<Star class="size-6 fill-white" />
 					{#each [2, 3, 4, 5] as r}
@@ -136,26 +139,26 @@
 
 			<Select.Root type="single" bind:value={sonata} allowDeselect={false}>
 				<Select.Trigger>
-					<div class="flex flex-row items-center space-x-2">
+					<div class="flex flex-row items-center gap-x-2">
 						<img src={SONATA_DATA[sonata].image} alt={sonata} class="size-8" />
-						<span class="font-medium">{sonata}</span>
+						<span class="font-medium">{get_message(sonata)}</span>
 					</div>
 				</Select.Trigger>
 				<Select.Content>
 					{#each selected.possible_sonatas as s}
 						<Select.Item value={s} label={s}>
-							<div class="flex flex-row items-center space-x-2">
+							<div class="flex flex-row items-center gap-x-2">
 								<img src={SONATA_DATA[s].image} alt={s} class="size-8" />
-								<span class="font-medium">{s}</span>
+								<span class="font-medium">{get_message(s)}</span>
 							</div>
 						</Select.Item>
 					{/each}
 				</Select.Content>
 			</Select.Root>
 
-			<div class="flex flex-row items-center space-x-2">
+			<div class="flex flex-row items-center gap-x-2">
 				<Input name="level" bind:value={level} class="flex-1" />
-				<div class="flex flex-row space-x-0 divide-x-2">
+				<div class="flex flex-row gap-x-0 divide-x-2">
 					<Button onclick={() => level = 0} class="rounded-r-none" disabled={level === 0}>0</Button>
 					<Button onclick={() => level = Math.max(level - 5, 0)} disabled={level === 0} class="rounded-l-none rounded-r-none" >-5</Button>
 					<Button onclick={() => level = Math.min(level + 5, max_level)} disabled={level === max_level} class="rounded-l-none rounded-r-none">+5</Button>
@@ -163,13 +166,13 @@
 				</div>
 			</div>
 
-			<div class="flex flex-col space-y-1">
+			<div class="flex flex-col gap-y-1">
 				<Select.Root type="single" bind:value={primary_key} allowDeselect={false}>
 					<Select.Trigger>
-						<div class="flex flex-row items-center space-x-2">
+						<div class="flex flex-row items-center gap-x-2">
 							{#if primary_key in STAT_ICONS}
 								<img src={STAT_ICONS[primary_key]} alt={primary_key} class="size-8" />
-								<span class="text-lg">{primary_key}</span>
+								<span class="text-lg">{get_message(primary_key)}</span>
 								<span
 									class="text-lg">{BASE_STATS.includes(primary_key) ? primary_value.toFixed(0) : (primary_value * 100).toFixed(1) + '%'}</span>
 							{/if}
@@ -179,12 +182,11 @@
 						{#each Object.values(primary_stats) as s}
 							{@const value = primary_stats[s.stat].values[rank].base * (1 + level * 0.16)}
 							<Select.Item value={s.stat} label={s.stat}>
-								<div class="flex flex-row items-center space-x-2">
+								<div class="flex flex-row items-center gap-x-2">
 									{#if s.stat in STAT_ICONS}
 										<img src={STAT_ICONS[s.stat]} alt={s.stat} class="size-8" />
-										<span class="text-lg">{s.stat}</span>
-										<span
-											class="text-lg">{BASE_STATS.includes(s.stat) ? value.toFixed(0) : (value * 100).toFixed(1) + '%'}</span>
+										<span class="text-lg">{get_message(s.stat)}</span>
+										<span class="text-lg">{BASE_STATS.includes(s.stat) ? value.toFixed(0) : (value * 100).toFixed(1) + '%'}</span>
 									{/if}
 								</div>
 							</Select.Item>
@@ -194,10 +196,10 @@
 
 				<Select.Root type="single" bind:value={secondary_key} allowDeselect={false} >
 					<Select.Trigger>
-						<div class="flex flex-row items-center space-x-2">
+						<div class="flex flex-row items-center gap-x-2">
 							{#if secondary_key in STAT_ICONS}
 								<img src={STAT_ICONS[secondary_key]} alt={secondary_key} class="size-6" />
-								<span class="font-light">{secondary_key}</span>
+								<span class="font-light">{get_message(secondary_key)}</span>
 								<span class="font-light">{BASE_STATS.includes(secondary_key) ? secondary_value.toFixed(0) : (secondary_value * 100).toFixed(1) + '%'}</span>
 							{/if}
 						</div>
@@ -206,10 +208,10 @@
 						{#each Object.values(secondary_stats) as s}
 							{@const value = secondary_stats[s.stat].values[rank].base * (1 + level * 0.16)}
 							<Select.Item value={s.stat} label={s.stat}>
-								<div class="flex flex-row items-center space-x-2">
+								<div class="flex flex-row items-center gap-x-2">
 									{#if s.stat in STAT_ICONS}
 										<img src={STAT_ICONS[s.stat]} alt={s.stat} class="size-6" />
-										<span class="font-light">{s.stat}</span>
+										<span class="font-light">{get_message(s.stat)}</span>
 										<span class="font-light">{BASE_STATS.includes(s.stat) ? value.toFixed(0) : (value * 100).toFixed(1) + '%'}</span>
 									{/if}
 								</div>
@@ -222,26 +224,26 @@
 
 		<div class="border-l-4 pl-2 basis-1/3 flex flex-col gap-2">
 			<Button onclick={() => sub_stats.push({ stat: '', value: 0 })} disabled={sub_stats.length >= max_tuning}>add a tuning level</Button>
-			<div class="flex flex-col justify-between space-y-4">
+			<div class="flex flex-col justify-between gap-y-4">
 				{#each sub_stats as sub, i}
 					<div class="flex flex-row items-center">
-						<div class="flex-1 flex flex-row space-x-2">
+						<div class="flex-1 flex flex-row gap-x-2">
 							<Select.Root type="single" bind:value={sub_stats[i].stat}>
-								<Select.Trigger>
-									<div class="flex flex-row items-center space-x-2">
+								<Select.Trigger class="flex-1">
+									<div class="flex flex-row items-center gap-x-2">
 										{#if sub.stat in STAT_ICONS}
 											<img src={STAT_ICONS[sub.stat]} alt={sub.stat} class="size-8" />
-											<span class="font-medium">{sub.stat}</span>
+											<span class="font-medium">{get_message(sub.stat)}</span>
 										{/if}
 									</div>
 								</Select.Trigger>
 								<Select.Content>
 									{#each Object.values(SUB_STATS) as item}
 										<Select.Item value={item.stat} label={item.stat} disabled={is_sub_stat_present(item.stat, i)}>
-											<div class="flex flex-row items-center space-x-2">
+											<div class="flex flex-row items-center gap-x-2">
 												{#if item.stat in STAT_ICONS}
 													<img src={STAT_ICONS[item.stat]} alt={item.stat} class="size-8" />
-													<span class="font-medium">{item.stat}</span>
+													<span class="font-medium">{get_message(item.stat)}</span>
 												{/if}
 											</div>
 										</Select.Item>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn, type WithElementRef } from '$lib/utils.js';
+	import { cn, type WithElementRef } from "$lib/utils.js";
 	import type { HTMLAttributes } from "svelte/elements";
 
 	let {
@@ -12,6 +12,7 @@
 
 <li
 	bind:this={ref}
+	data-slot="sidebar-menu-item"
 	data-sidebar="menu-item"
 	class={cn("group/menu-item relative", className)}
 	{...restProps}

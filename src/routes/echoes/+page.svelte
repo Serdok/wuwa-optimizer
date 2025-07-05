@@ -72,10 +72,10 @@
 
 <div class="flex flex-col gap-2">
 	<div>
-		<ToggleGroup.Root type="multiple" bind:value={sonata_filter} class="flex flex-row flex-wrap space-x-3">
+		<ToggleGroup.Root type="multiple" bind:value={sonata_filter} class="flex flex-row flex-wrap gap-x-3">
 			{#each SONATAS as sonata}
-				<ToggleGroup.Item value={sonata}>
-					<div class="flex flex-row items-center space-x-2">
+				<ToggleGroup.Item value={sonata} class="min-w-fit grow-0">
+					<div class="flex flex-row items-center gap-x-2">
 						<img src={SONATA_DATA[sonata].image} alt={sonata} class="size-8" />
 						<span>{sonata}</span>
 					</div>
@@ -84,7 +84,7 @@
 		</ToggleGroup.Root>
 		<ToggleGroup.Root type="multiple" bind:value={rank_filter}>
 			{#each [2, 3, 4, 5] as rank}
-				<ToggleGroup.Item value={rank.toString()} class="flex flex-row items-center gap-0">{#each {length: rank} as _}<Star class="fill-white size-4" />{/each}</ToggleGroup.Item>
+				<ToggleGroup.Item value={rank.toString()} class="flex flex-row items-center gap-0 min-w-max">{#each {length: rank} as _}<Star class="fill-white size-4" />{/each}</ToggleGroup.Item>
 			{/each}
 		</ToggleGroup.Root>
 		<ToggleGroup.Root type="multiple" bind:value={cost_filter}>

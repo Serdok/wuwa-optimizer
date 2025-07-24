@@ -15,9 +15,10 @@
 		i: number,
 		total_results: number,
 		damage_selection: 'non-crit' | 'average' | 'forced-crit',
+		target: string,
 	}
 
-	const { result, i, total_results, damage_selection }: Props = $props();
+	const { result, i, total_results, damage_selection, target }: Props = $props();
 
 	const total_cost = $derived.by(() => result.build.reduce((acc, echo) => acc + echo.cost, 0));
 	const build_sets = $derived.by(() => result.build.reduce<{ [s in SonataKey]?: number }>((freq, e) => {
@@ -80,11 +81,12 @@
 		<div class="break-inside-avoid flex flex-col gap-1 px-2">
 			<div class="text-xl">Stats</div>
 			{#each Object.entries(result.display_stats) as [key, value] (key)}
-				<DisplayStat key={key as StatKey} {value} />
+				{@const selected = target === key}
+				<DisplayStat key={key as StatKey} {value} class={selected ? 'border-2 border-red-400' : ''} />
 			{/each}
 		</div>
 		{#each Object.values(result.skills) as skill (skill.type)}
-			<DisplaySkill {skill} {damage_selection} />
+			<DisplaySkill {skill} {damage_selection} {target} />
 		{/each}
 	</div>
 </div>

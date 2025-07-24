@@ -13,16 +13,18 @@
 	interface Props {
 		skill: SkillDamage<S>,
 		damage_selection: 'non-crit' | 'average' | 'forced-crit',
+		target: string
 	}
 
-	const { skill, damage_selection }: Props = $props();
+	const { skill, damage_selection, target }: Props = $props();
 </script>
 
 <div class="w-full break-inside-avoid flex flex-col pt-2 px-2">
 	<div class="text-xl">{m[skill.key]?.() || skill.key}</div>
 	<div>
 		{#each skill.motions as motion (motion.key)}
-			<DisplayMotion {motion} {damage_selection} />
+			{@const selected = target === `${skill.key}-${motion.key}`}
+			<DisplayMotion {motion} {damage_selection} {selected} />
 		{/each}
 	</div>
 </div>

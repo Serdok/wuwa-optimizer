@@ -784,7 +784,7 @@
 	</div>
 	<div class="px-2 flex flex-col gap-4 divide-y-2">
 		{#each results as result, i (i)}
-			<Result {result} {i} total_results={results.length} {damage_selection} />
+			<Result {result} {i} total_results={results.length} {damage_selection} target={target_key} />
 		{/each}
 	</div>
 {/if}

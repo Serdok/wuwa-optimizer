@@ -28,12 +28,9 @@
 	import { optimize } from '$lib/optimizer/optimize';
 
 	import { m } from '$lib/paraglide/messages';
-	import { get_echo_image } from '$lib/data/echoes/images';
 	import { db } from '$lib/db';
 	import type { DamageResult } from '$lib/optimizer/build';
 
-	import DisplaySkill from './DisplaySkill.svelte';
-	import DisplayStat from './DisplayStat.svelte';
 	import SonataSelector from './SonataSelector.svelte';
 	import Result from './Result.svelte';
 

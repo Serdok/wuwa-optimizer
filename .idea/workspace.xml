@@ -18,10 +18,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: separate target from optimizer options">
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: change how sonata effects are applied">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/build.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/build.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +46,7 @@
         <option value="Result" />
         <option value="AppSidebar" />
         <option value="TypeScript File" />
+        <option value="CharacterBuffs" />
       </list>
     </option>
   </component>
@@ -270,7 +270,7 @@
       <workItem from="1746371510328" duration="16638000" />
       <workItem from="1746471502755" duration="2423000" />
       <workItem from="1751742178501" duration="8708000" />
-      <workItem from="1753358933288" duration="5292000" />
+      <workItem from="1753358933288" duration="9481000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -472,7 +472,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753360012747</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="feat: change how sonata effects are applied">
+      <option name="closed" value="true" />
+      <created>1753365429971</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1753365429971</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -524,6 +532,7 @@
     <MESSAGE value="fix: ui got shifted a bit due to the migration" />
     <MESSAGE value="fix: remove image key from echo" />
     <MESSAGE value="feat: separate target from optimizer options" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: separate target from optimizer options" />
+    <MESSAGE value="feat: change how sonata effects are applied" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: change how sonata effects are applied" />
   </component>
 </project>

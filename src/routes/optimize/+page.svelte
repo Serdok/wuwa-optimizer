@@ -296,6 +296,7 @@
 									{/each}
 								</Select.Content>
 							</Select.Root>
+							<div>Target</div>
 							<Dialog.Root bind:open={target_dialog_open}>
 								<Dialog.Trigger class={buttonVariants({ variant: 'secondary', class: 'justify-start px-3' })}>
 									{#if STATS.includes(target_key)}

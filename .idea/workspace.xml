@@ -19,7 +19,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="fix: remove image key from echo">
-      <change beforePath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/echoes/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +90,7 @@
     &quot;Node.js.vite.config.ts.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;migration/tailwind-v4&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/serdok/projects/wuwa-optimizer/src/lib/data/characters/zani&quot;,
     &quot;llm.McpServerEditPanel.switcher&quot;: &quot;1&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -121,7 +122,7 @@
       <window_info id="Merge Requests" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="npm" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.15551758" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.12963867" />
       <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.15551758" />
       <window_info id="Structure" order="2" sideWeight="0.49935067" side_tool="true" weight="0.14477539" />
       <window_info id="VcsChanges" order="3" weight="0.32983398" />
@@ -136,7 +137,7 @@
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" weight="0.26582792" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.3299513" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.3299513" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" />
       <window_info anchor="bottom" id="Services" order="5" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.56290585" />
       <window_info anchor="right" id="PR AI Assistant" />
@@ -268,6 +269,7 @@
       <workItem from="1746371510328" duration="16638000" />
       <workItem from="1746471502755" duration="2423000" />
       <workItem from="1751742178501" duration="8708000" />
+      <workItem from="1753358933288" duration="1046000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />

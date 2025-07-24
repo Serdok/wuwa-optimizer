@@ -18,22 +18,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="cleanup imports">
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/zani/T_IconRole_Pile_zanni_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/zani/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/zani/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/gauntlets/blazing_justice/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/gauntlets/blazing_justice/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/gauntlets/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.inlang/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.inlang/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/optimize/DisplayMotion.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/DisplayMotion.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/optimize/DisplaySkill.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/DisplaySkill.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/optimize/DisplayStat.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/DisplayStat.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/optimize/Result.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/Result.svelte" afterDir="false" />
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: zani + blazing brilliance">
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/en.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,8 +122,8 @@
       <window_info id="Merge Requests" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="npm" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.18041992" />
-      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.12963867" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.32983398" />
+      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.32983398" />
       <window_info id="Structure" order="2" sideWeight="0.49935067" side_tool="true" weight="0.14477539" />
       <window_info id="VcsChanges" order="3" weight="0.32983398" />
       <window_info id="Pull Requests" order="4" weight="0.32983398" />
@@ -284,7 +270,8 @@
       <workItem from="1746471502755" duration="2423000" />
       <workItem from="1751742178501" duration="8708000" />
       <workItem from="1753358933288" duration="10147000" />
-      <workItem from="1753385486854" duration="9598000" />
+      <workItem from="1753385486854" duration="10492000" />
+      <workItem from="1753397614257" duration="470000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -502,7 +489,47 @@
       <option name="project" value="LOCAL" />
       <updated>1753372208147</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="feat: highlight target">
+      <option name="closed" value="true" />
+      <created>1753396449652</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1753396449652</updated>
+    </task>
+    <task id="LOCAL-00029" summary="feat: zani + blazing brilliance">
+      <option name="closed" value="true" />
+      <created>1753396896014</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1753396896014</updated>
+    </task>
+    <task id="LOCAL-00030" summary="feat: zani + blazing brilliance">
+      <option name="closed" value="true" />
+      <created>1753397848510</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1753397848510</updated>
+    </task>
+    <task id="LOCAL-00031" summary="feat: zani + blazing brilliance">
+      <option name="closed" value="true" />
+      <created>1753397898467</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1753397898467</updated>
+    </task>
+    <task id="LOCAL-00032" summary="feat: zani + blazing brilliance">
+      <option name="closed" value="true" />
+      <created>1753398058872</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1753398058872</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -532,7 +559,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add CD" />
     <MESSAGE value="optimizer page up and running" />
     <MESSAGE value="complete characters and weapons" />
     <MESSAGE value="add carlotta and pistols" />
@@ -556,6 +582,8 @@
     <MESSAGE value="feat: separate target from optimizer options" />
     <MESSAGE value="feat: change how sonata effects are applied" />
     <MESSAGE value="cleanup imports" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleanup imports" />
+    <MESSAGE value="feat: highlight target" />
+    <MESSAGE value="feat: zani + blazing brilliance" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: zani + blazing brilliance" />
   </component>
 </project>

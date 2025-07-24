@@ -24,6 +24,8 @@
   "mid_air_attack_3_dmg": "Mid-air Attack 3 DMG",
   "mid_air_attack_4_dmg": "Mid-air Attack 4 DMG",
 
+  "plunging_attack_dmg": "Plunging Attack DMG",
+
   "heavy_attack": "Heavy Attack",
   "heavy_attack_dmg": "Heavy Attack DMG",
 
@@ -32,5 +34,7 @@
   "dodge_counter": "Dodge Counter",
   "dodge_counter_dmg": "Dodge Counter DMG",
 
-  "skill_dmg": "Skill DMG"
+  "skill_dmg": "Skill DMG",
+
+  "intro_skill": "Intro Skill"
 }

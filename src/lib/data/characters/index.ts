@@ -7,6 +7,7 @@ import changli from './changli';
 import jinhsi from './jinhsi';
 import carlotta from './carlotta';
 import phoebe from './phoebe';
+import zani from './zani';
 
 export const SKILLS = ['normal', 'skill', 'forte', 'burst', 'intro', 'outro'] as const;
 export type SkillKey = typeof SKILLS[number];
@@ -48,4 +49,5 @@ export const CHARACTERS: Record<string, CharacterData> = {
 	jinhsi,
 	carlotta,
 	phoebe,
+	zani,
 } as const;

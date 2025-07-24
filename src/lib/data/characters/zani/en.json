@@ -1,0 +1,34 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "zani": "Zani",
+
+  "sunburst": "Sunburst",
+  "inferno_mode": "Inferno Mode",
+  "nightfall_blaze_consumed": "Blaze Consumed by Nightfall",
+  "heliacal_ember": "Heliacal Ember",
+  "total_blaze_consumed": "Total Blaze Consumed",
+
+  "routine_negotiation": "Routine Negotiation",
+  "breakthrough_dmg": "Breakthrough DMG",
+
+  "restless_watch": "Restless Watch",
+  "standard_defense_protocol_dmg": "Standard Defense Protocol DMG",
+  "pinpoint_strike_dmg": "Pinpoint Strike DMG",
+  "targeted_action_dmg": "Targeted Action DMG",
+  "forcible_riposte_dmg": "Forcible Riposte DMG",
+
+  "there_will_be_a_light": "There Will Be A Light",
+  "heavy_slash_daybreak_dmg": "Heavy Slash - Daybreak DMG",
+  "heavy_slash_dawning_dmg": "Heavy Slash - Dawning DMG",
+  "heavy_slash_nightfall_dmg": "Heavy Slash - Nightfall DMG",
+  "heavy_slash_lightsmash_dmg": "Heavy Slash - Lightsmash DMG",
+
+  "between_dawn_and_dusk": "Between Dawn and Dusk",
+  "rekindle_dmg": "Rekindle DMG",
+  "the_last_stand_dmg": "The Last Stand DMG",
+
+  "immediate_execution": "Immediate Execution",
+
+  "beacon_for_the_future": "Beacon For The Future"
+}

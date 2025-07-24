@@ -40,8 +40,7 @@ export type SonataData = {
 	key: SonataKey;
 	image: string;
 	buffs: Record<string, Buff>,
-	apply_2p_effects: (input: OptimizerInput, combat_stats: Record<StatKey, number>, context: OptimizerContext) => void;
-	apply_5p_effects: (input: OptimizerInput, combat_stats: Record<StatKey, number>, context: OptimizerContext) => void;
+	apply_effects: (input: OptimizerInput, combat_stats: Record<StatKey, number>, context: OptimizerContext) => void;
 };
 
 export const SONATA_DATA: Record<SonataKey, SonataData> = {
@@ -64,12 +63,16 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 3,
 			},
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
-			combat_stats.glacio_bonus += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { basic_released = 0, heavy_released = 0 } = input.echo.buffs.freezing_frost;
-			combat_stats.glacio_bonus += 0.1 * Math.min(3, basic_released + heavy_released);
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'freezing_frost').length;
+
+			if (echo_count >= 2)
+				combat_stats.glacio_bonus += 0.1;
+
+			if (echo_count >= 5) {
+				const { basic_released = 0, heavy_released = 0 } = input.echo.buffs.freezing_frost;
+				combat_stats.glacio_bonus += 0.1 * Math.min(3, basic_released + heavy_released);
+			}
 		}
 	},
 	molten_rift: {
@@ -82,12 +85,16 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
-			combat_stats.fusion_bonus += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { skill_released = 0 } = input.echo.buffs.molten_rift;
-			combat_stats.fusion_bonus += 0.3 * skill_released;
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'freezing_frost').length;
+
+			if (echo_count >= 2)
+				combat_stats.fusion_bonus += 0.1;
+
+			if (echo_count >= 5) {
+				const { skill_released = 0 } = input.echo.buffs.molten_rift;
+				combat_stats.fusion_bonus += 0.3 * skill_released;
+			}
 		}
 	},
 	void_thunder: {
@@ -109,12 +116,18 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 2,
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'freezing_frost').length;
+
+			if (echo_count >= 2)
+				combat_stats.electro_bonus += 0.1;
+
+			if (echo_count >= 5) {
+				const { heavy_released = 0, skill_released = 0 } = input.echo.buffs.void_thunder;
+				combat_stats.electro_bonus += 0.15 * Math.min(2, heavy_released + skill_released);
+			}
+
 			combat_stats.electro_bonus += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { heavy_released = 0, skill_released = 0 } = input.echo.buffs.void_thunder;
-			combat_stats.electro_bonus += 0.15 * Math.min(2, heavy_released + skill_released);
 		}
 	},
 	sierra_gale: {
@@ -127,12 +140,16 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
-			combat_stats.aero_bonus += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { intro_released = 0 } = input.echo.buffs.sierra_gale;
-			combat_stats.aero_bonus += 0.3 * intro_released;
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'sierra_gale').length;
+
+			if (echo_count >= 2)
+				combat_stats.aero_bonus += 0.1;
+
+			if (echo_count >= 5) {
+				const { intro_released = 0 } = input.echo.buffs.sierra_gale;
+				combat_stats.aero_bonus += 0.3 * intro_released;
+			}
 		}
 	},
 	celestial_light: {
@@ -145,12 +162,18 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'celestial_light').length;
+
+			if (echo_count >= 2)
+				combat_stats.spectro_bonus += 0.1;
+
+			if (echo_count >= 5) {
+				const { intro_released = 0 } = input.echo.buffs.celestial_light;
+				combat_stats.spectro_bonus += 0.3 * intro_released;
+			}
+
 			combat_stats.spectro_bonus += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { intro_released = 0 } = input.echo.buffs.celestial_light;
-			combat_stats.spectro_bonus += 0.3 * intro_released;
 		}
 	},
 	sun_sinking_eclipse: {
@@ -172,12 +195,16 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 4,
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
-			combat_stats.havoc_bonus += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { basic_released = 0, heavy_released = 0 } = input.echo.buffs.sun_sinking_eclipse;
-			combat_stats.havoc_bonus += 0.075 * Math.min(4, basic_released + heavy_released);
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'sun_sinking_eclipse').length;
+
+			if (echo_count >= 2)
+				combat_stats.havoc_bonus += 0.1;
+
+			if (echo_count >= 5) {
+				const { basic_released = 0, heavy_released = 0 } = input.echo.buffs.sun_sinking_eclipse;
+				combat_stats.havoc_bonus += 0.075 * Math.min(4, basic_released + heavy_released);
+			}
 		}
 	},
 	rejuvenating_glow: {
@@ -190,13 +217,19 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'rejuvenating_glow').length;
+
+			if (echo_count >= 2)
+				combat_stats.healing_bonus += 0.1;
+
+			if (echo_count >= 5) {
+				const { healing_allies = 0 } = input.echo.buffs.rejuvenating_glow;
+				combat_stats.atk_p += 0.15 * healing_allies;
+				// todo: +15% ATK for all party members
+			}
+
 			combat_stats.healing_bonus += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { healing_allies = 0 } = input.echo.buffs.rejuvenating_glow;
-			combat_stats.atk_p += 0.15 * healing_allies;
-			// todo: +15% ATK for all party members
 		}
 	},
 	moonlit_clouds: {
@@ -209,12 +242,18 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'moonlit_clouds').length;
+
+			if (echo_count >= 2)
+				combat_stats.energy_regen += 0.1;
+
+			if (echo_count >= 5) {
+				const { outro_released = 0 } = input.echo.buffs.moonlit_clouds;
+				// todo: +22.5% ATK for the next character
+			}
+
 			combat_stats.energy_regen += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { outro_released = 0 } = input.echo.buffs.moonlit_clouds;
-			// todo: +22.5% ATK for the next character
 		}
 	},
 	lingering_tunes: {
@@ -229,13 +268,17 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 4,
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
-			combat_stats.atk_p += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { on_field = 0 } = input.echo.buffs.lingering_tunes;
-			combat_stats.atk_p += 0.05 * Math.min(4, on_field);
-			combat_stats.outro_bonus += 0.6;
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'lingering_tunes').length;
+
+			if (echo_count >= 2)
+				combat_stats.atk_p += 0.1;
+
+			if (echo_count >= 5) {
+				const { on_field = 0 } = input.echo.buffs.lingering_tunes;
+				combat_stats.atk_p += 0.05 * Math.min(4, on_field);
+				combat_stats.outro_bonus += 0.6;
+			}
 		}
 	},
 	frosty_resolve: {
@@ -257,13 +300,17 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 2,
 			},
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
-			combat_stats.skill_bonus += 0.12;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { skill_released = 0, burst_released = 0 } = input.echo.buffs.frosty_resolve;
-			combat_stats.glacio_bonus += 0.225 * Math.min(2, skill_released);
-			combat_stats.skill_bonus += 0.18 * Math.min(2, burst_released);
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'frosty_resolve').length;
+
+			if (echo_count >= 2)
+				combat_stats.skill_bonus += 0.12;
+
+			if (echo_count >= 5) {
+				const { skill_released = 0, burst_released = 0 } = input.echo.buffs.frosty_resolve;
+				combat_stats.glacio_bonus += 0.225 * Math.min(2, skill_released);
+				combat_stats.skill_bonus += 0.18 * Math.min(2, burst_released);
+			}
 		}
 	},
 	eternal_radiance: {
@@ -278,13 +325,17 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 10
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
-			combat_stats.spectro_bonus += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { spectro_frazzle = 0 } = input.echo.buffs.eternal_radiance;
-			combat_stats.crit_rate += 0.2 * +(spectro_frazzle > 0);
-			combat_stats.spectro_bonus += 0.15 * +(spectro_frazzle >= 10);
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'eternal_radiance').length;
+
+			if (echo_count >= 2)
+				combat_stats.spectro_bonus += 0.1;
+
+			if (echo_count >= 5) {
+				const { spectro_frazzle = 0 } = input.echo.buffs.eternal_radiance;
+				combat_stats.crit_rate += 0.2 * +(spectro_frazzle > 0);
+				combat_stats.spectro_bonus += 0.15 * +(spectro_frazzle >= 10);
+			}
 		}
 	},
 	midnight_veil: {
@@ -297,21 +348,25 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
-			combat_stats.havoc_bonus += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { outro_released = 0 } = input.echo.buffs.midnight_veil;
-			// todo: +15% havoc bonus for the next character
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'midnight_veil').length;
 
-			context.character.skills.outro.motions.push({
-				key: 'midnight_veil',
-				type: 'outro',
-				element: 'havoc',
-				related_stat: 'atk',
-				values: [4.8],
-				apply_effects: () => {}
-			});
+			if (echo_count >= 2)
+				combat_stats.havoc_bonus += 0.1;
+
+			if (echo_count >= 5) {
+				const { outro_released = 0 } = input.echo.buffs.midnight_veil;
+				// todo: +15% havoc bonus for the next character
+
+				context.character.skills.outro.motions.push({
+					key: 'midnight_veil',
+					type: 'outro',
+					element: 'havoc',
+					related_stat: 'atk',
+					values: [4.8],
+					apply_effects: () => {}
+				});
+			}
 		}
 	},
 	empyrean_anthem: {
@@ -324,26 +379,34 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
-			combat_stats.energy_regen += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { coordinated_crit = 0 } = input.echo.buffs.empyrean_anthem;
-			combat_stats.coordinated_attack += 0.8;
-			combat_stats.atk_p += 0.2 * coordinated_crit;
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'empyrean_anthem').length;
+
+			if (echo_count >= 2)
+				combat_stats.energy_regen += 0.1;
+
+			if (echo_count >= 5) {
+				const { coordinated_crit = 0 } = input.echo.buffs.empyrean_anthem;
+				combat_stats.coordinated_attack += 0.8;
+				combat_stats.atk_p += 0.2 * coordinated_crit;
+			}
 		}
 	},
 	tidebreaking_courage: {
 		key: 'tidebreaking_courage',
 		image: tidebreaking_courage,
 		buffs: {},
-		apply_2p_effects: (input, combat_stats, context) => {
-			combat_stats.energy_regen += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			combat_stats.atk_p += 0.15;
-			if (combat_stats.energy_regen >= 2.5) {
-				combat_stats.general_bonus += 0.3;
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'tidebreaking_courage').length;
+
+			if (echo_count >= 2)
+				combat_stats.energy_regen += 0.1;
+
+			if (echo_count >= 5) {
+				combat_stats.atk_p += 0.15;
+				if (combat_stats.energy_regen >= 2.5) {
+					combat_stats.general_bonus += 0.3;
+				}
 			}
 		}
 	},
@@ -357,13 +420,17 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
-		apply_2p_effects: (input, combat_stats, context) => {
-			combat_stats.aero_bonus += 0.1;
-		},
-		apply_5p_effects: (input, combat_stats, context) => {
-			const { aero_erosion = 0 } = input.echo.buffs.gusts_of_welkin;
-			// todo: +15% team aero bonus
-			combat_stats.aero_bonus += 0.3 * aero_erosion;
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'gusts_of_welkin').length;
+
+			if (echo_count >= 2)
+				combat_stats.aero_bonus += 0.1;
+
+			if (echo_count >= 5) {
+				const { aero_erosion = 0 } = input.echo.buffs.gusts_of_welkin;
+				// todo: +15% team aero bonus
+				combat_stats.aero_bonus += 0.3 * aero_erosion;
+			}
 		}
 	}
 } as const;

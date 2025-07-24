@@ -18,9 +18,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="fix: remove image key from echo">
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: separate target from optimizer options">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/build.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/build.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +124,7 @@
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="npm" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.12963867" />
-      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.15551758" />
+      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.12963867" />
       <window_info id="Structure" order="2" sideWeight="0.49935067" side_tool="true" weight="0.14477539" />
       <window_info id="VcsChanges" order="3" weight="0.32983398" />
       <window_info id="Pull Requests" order="4" weight="0.32983398" />
@@ -269,7 +270,7 @@
       <workItem from="1746371510328" duration="16638000" />
       <workItem from="1746471502755" duration="2423000" />
       <workItem from="1751742178501" duration="8708000" />
-      <workItem from="1753358933288" duration="1046000" />
+      <workItem from="1753358933288" duration="5292000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -463,7 +464,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751751244914</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="feat: separate target from optimizer options">
+      <option name="closed" value="true" />
+      <created>1753360012747</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1753360012747</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -514,6 +523,7 @@
     <MESSAGE value="feat: ui correction following the migration" />
     <MESSAGE value="fix: ui got shifted a bit due to the migration" />
     <MESSAGE value="fix: remove image key from echo" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: remove image key from echo" />
+    <MESSAGE value="feat: separate target from optimizer options" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: separate target from optimizer options" />
   </component>
 </project>

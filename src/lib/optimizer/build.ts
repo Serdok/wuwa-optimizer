@@ -1,16 +1,15 @@
 import type { Echo } from '$lib/data/echoes/types';
 import type {
-	EchoFilter,
 	OptimizerContext,
 	OptimizerInput,
 	OptimizerOptions
 } from '$lib/optimizer/index';
 import { SONATA_DATA, type SonataKey } from '$lib/data/sonatas';
-import { BASE_STATS, type StatKey, STATS } from '$lib/data/stats';
+import { type StatKey, STATS } from '$lib/data/stats';
 import { type AttackKey, CHARACTERS, type SkillKey } from '$lib/data/characters';
 import { WEAPONS } from '$lib/data/weapons';
 import {
-	apply_echo_stats, get_base_stat_value,
+	apply_echo_stats,
 	get_base_stats,
 	get_default_stats,
 	get_display_stats,
@@ -68,12 +67,7 @@ export function compute_damage(build: Echo[], input: OptimizerInput, options: Op
 	const sets = Object.groupBy(build, e => e.sonata);
 	for (const [key, echoes] of Object.entries(sets)) {
 		const sonata = key as SonataKey;
-		if (echoes.length >= 2) {
-			SONATA_DATA[sonata].apply_2p_effects(input, build_stats, context);
-		}
-		if (echoes.length >= 5) {
-			SONATA_DATA[sonata].apply_5p_effects(input, build_stats, context);
-		}
+		SONATA_DATA[sonata].apply_effects(input, build_stats, context);
 	}
 
 	const skills = Object.fromEntries(

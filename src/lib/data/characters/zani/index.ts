@@ -96,6 +96,7 @@ const data: CharacterData = {
 					type: ['basic'],
 					key: 'stage_1_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.5885],
 					apply_effects: () => {}
@@ -104,6 +105,7 @@ const data: CharacterData = {
 					type: ['basic'],
 					key: 'stage_2_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.7953],
 					apply_effects: () => {}
@@ -112,6 +114,7 @@ const data: CharacterData = {
 					type: ['basic'],
 					key: 'stage_3_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.4242, 0.4242, 0.4242],
 					apply_effects: () => {}
@@ -120,6 +123,7 @@ const data: CharacterData = {
 					type: ['basic'],
 					key: 'stage_4_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.676, 0.676, 0.676, 0.676],
 					apply_effects: () => {}
@@ -128,6 +132,7 @@ const data: CharacterData = {
 					type: ['basic'],
 					key: 'breakthrough_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.615, 0.1758, 0.1758, 0.1758, 0.1758, 0.1758, 0.1758, 0.1758,],
 					apply_effects: () => {}
@@ -136,6 +141,7 @@ const data: CharacterData = {
 					type: ['heavy'],
 					key: 'heavy_attack_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.4108, 0.4108, 0.4108, 0.4108],
 					apply_effects: () => {}
@@ -144,6 +150,7 @@ const data: CharacterData = {
 					type: ['basic'],
 					key: 'plunging_attack_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [1.0498],
 					apply_effects: () => {}
@@ -152,6 +159,7 @@ const data: CharacterData = {
 					type: ['basic'],
 					key: 'dodge_counter_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.7423, 0.7423, 0.7423],
 					apply_effects: () => {}
@@ -167,6 +175,7 @@ const data: CharacterData = {
 					type: ['skill'],
 					key: 'standard_defense_protocol_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.6394],
 					apply_effects: () => {}
@@ -175,6 +184,7 @@ const data: CharacterData = {
 					type: ['skill'],
 					key: 'pinpoint_strike_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.61, 1.2199],
 					apply_effects: () => {}
@@ -183,6 +193,7 @@ const data: CharacterData = {
 					type: ['skill'],
 					key: 'targeted_action_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.8619, 0.2873, 1.7237],
 					apply_effects: (input, combat_stats) => {
@@ -195,6 +206,7 @@ const data: CharacterData = {
 					type: ['skill'],
 					key: 'forcible_riposte_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.8619, 0.2873, 1.7237],
 					apply_effects: (input, combat_stats) => {
@@ -220,6 +232,7 @@ const data: CharacterData = {
 					type: ['heavy'],
 					key: 'heavy_slash_daybreak_dmg',
 					element: ['spectro', 'spectro_frazzle'],
+					tags: [],
 					related_stat: 'atk',
 					values: [1.9881],
 					apply_effects: (input, combat_stats) => {
@@ -232,6 +245,7 @@ const data: CharacterData = {
 					type: ['heavy'],
 					key: 'heavy_slash_dawning_dmg',
 					element: ['spectro', 'spectro_frazzle'],
+					tags: [],
 					related_stat: 'atk',
 					values: [4.2407],
 					apply_effects: (input, combat_stats) => {
@@ -244,6 +258,7 @@ const data: CharacterData = {
 					type: ['heavy'],
 					key: 'heavy_slash_nightfall_dmg',
 					element: ['spectro', 'spectro_frazzle'],
+					tags: [],
 					related_stat: 'atk',
 					values: [1.352, 2.6243],
 					apply_effects: (input, combat_stats) => {
@@ -262,6 +277,7 @@ const data: CharacterData = {
 					type: ['heavy'],
 					key: 'heavy_slash_lightsmash_dmg',
 					element: ['spectro', 'spectro_frazzle'],
+					tags: [],
 					related_stat: 'atk',
 					values: [4.2407],
 					apply_effects: () => {}
@@ -277,6 +293,7 @@ const data: CharacterData = {
 					type: ['burst'],
 					key: 'rekindle_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [3.1852],
 					apply_effects: (input, combat_stats) => {
@@ -289,6 +306,7 @@ const data: CharacterData = {
 					type: ['burst'],
 					key: 'the_last_stand_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [1.9112, 10.8296],
 					apply_effects: (input, combat_stats) => {
@@ -309,6 +327,7 @@ const data: CharacterData = {
 					type: ['intro'],
 					key: 'skill_dmg',
 					element: ['spectro'],
+					tags: [],
 					related_stat: 'atk',
 					values: [0.2424, 0.2424, 0.2424, 0.2424, 0.2424, 0.808],
 					apply_effects: () => {}
@@ -324,6 +343,7 @@ const data: CharacterData = {
 					type: ['outro'],
 					key: 'skill_dmg',
 					element: ['spectro', 'spectro_frazzle'],
+					tags: [],
 					related_stat: 'atk',
 					values: [1.5],
 					apply_effects: (input, combat_stats) => {

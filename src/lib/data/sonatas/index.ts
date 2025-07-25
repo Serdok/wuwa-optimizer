@@ -360,8 +360,9 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 
 				context.character.skills.outro.motions.push({
 					key: 'midnight_veil',
-					type: 'outro',
-					element: 'havoc',
+					type: ['outro'],
+					element: ['havoc'],
+					tags: [],
 					related_stat: 'atk',
 					values: [4.8],
 					apply_effects: () => {}

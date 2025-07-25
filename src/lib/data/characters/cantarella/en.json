@@ -1,0 +1,34 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "cantarella": "Cantarella",
+
+  "poison": "Poison",
+  "flowing_suffocation": "Flowing Suffocation",
+
+  "illusion_collapse": "Illusion Collapse",
+  "delusive_dive": "Delusive Dive",
+
+  "dance_with_shadows": "Dance with Shadows",
+  "graceful_step_dmg": "Graceful Step DMG",
+  "flickering_reverie_dmg": "Flickering Reverie DMG",
+  "jolt_dmg": "Jolt DMG",
+
+  "between_illusion_and_reality": "Between Illusion and Reality",
+  "phantom_sting_stage_1_dmg": "Phantom Sting Stage 1 DMG",
+  "phantom_sting_stage_2_dmg": "Phantom Sting Stage 2 DMG",
+  "phantom_sting_stage_3_dmg": "Phantom Sting Stage 3 DMG",
+  "abysmal_vortex_dmg": "Abysmal Vortex DMG",
+  "perception_drain_dmg": "Perception Drain DMG",
+  "shadowy_sweep_dmg": "Shadowy Sweep DMG",
+
+  "beneath_the_sea": "Beneath the Sea",
+  "flowing_suffocation_dmg": "Flowing Suffocation DMG",
+  "diffusion_dmg": "Diffusion DMG",
+
+  "cruise": "Cruise",
+  "ripple_dmg": "Ripple DMG",
+  "tidal_surge_dmg": "Tidal Surge DMG",
+
+  "gentle_tentacles": "Gentle Tentacles"
+}

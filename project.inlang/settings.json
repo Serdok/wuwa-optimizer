@@ -23,6 +23,7 @@
       "./src/lib/data/characters/carlotta/{locale}.json",
       "./src/lib/data/characters/phoebe/{locale}.json",
       "./src/lib/data/characters/zani/{locale}.json",
+      "./src/lib/data/characters/cantarella/{locale}.json",
 
       "./src/lib/data/weapons/{locale}.json",
 
@@ -35,6 +36,7 @@
       "./src/lib/data/weapons/pistols/the_last_dance/{locale}.json",
 
       "./src/lib/data/weapons/rectifier/luminous_hymn/{locale}.json",
+      "./src/lib/data/weapons/rectifier/whispers_of_sirens/{locale}.json",
 
       "./src/lib/data/weapons/swords/blazing_brilliance/{locale}.json",
       "./src/lib/data/weapons/swords/emerald_of_genesis/{locale}.json"

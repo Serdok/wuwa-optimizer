@@ -265,7 +265,8 @@ const data: CharacterData = {
 					related_stat: 'atk',
 					apply_effects: (input, combat_stats, context) => {
 						if (input.character.sequence >= 5) {
-							context.character.skills.burst.motions.find(m => m.key === 'diffusion_dmg')!.values.concat([0.1454, 0.1454, 0.1454, 0.1454, 0.1454]);
+							const diffusion = context.character.skills.burst.motions.find(m => m.key === 'diffusion_dmg')!;
+							diffusion.values = Array(26).fill(0.1454)
 						}
 					},
 					values: Array(21).fill(0.1454)

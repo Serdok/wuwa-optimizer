@@ -18,23 +18,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: zani + blazing brilliance">
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/cantarella/T_IconRole_Pile_kanteleila_UI.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/cantarella/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/cantarella/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/rectifier/whispers_of_sirens/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/rectifier/whispers_of_sirens/index.ts" afterDir="false" />
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: cartethyia">
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/cartethyia/T_IconRole_Pile_katixiya_UI.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/cartethyia/en.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/characters/cartethyia/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/swords/defiers_thorn/en.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/data/weapons/swords/defiers_thorn/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.inlang/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.inlang/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/carlotta/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/carlotta/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/changli/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/changli/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/data/characters/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/jinhsi/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/jinhsi/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/phoebe/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/phoebe/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/zani/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/zani/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/data/stats/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/stats/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/rectifier/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/rectifier/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/swords/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/swords/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/optimizer/finalizer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/finalizer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,6 +68,7 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -106,8 +102,8 @@
     "Node.js.vite.config.ts.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feat/cantarella",
-    "last_opened_file_path": "/home/serdok/projects/wuwa-optimizer/src/lib/data/characters/cantarella",
+    "git-widget-placeholder": "feat/cartethyia",
+    "last_opened_file_path": "/home/serdok/projects/wuwa-optimizer/src/lib/data/weapons/swords/defiers_thorn",
     "llm.McpServerEditPanel.switcher": "1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -138,8 +134,8 @@
       <window_info id="Merge Requests" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="npm" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.1940918" />
-      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.32983398" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.50064933" weight="0.17944336" />
+      <window_info active="true" id="Commit" order="1" sideWeight="0.50064933" visible="true" weight="0.17944336" />
       <window_info id="Structure" order="2" sideWeight="0.49935067" side_tool="true" weight="0.14477539" />
       <window_info id="VcsChanges" order="3" weight="0.32983398" />
       <window_info id="Pull Requests" order="4" weight="0.32983398" />
@@ -151,9 +147,9 @@
       <window_info anchor="bottom" id="Find" />
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.3299513" />
       <window_info anchor="bottom" id="Problems" order="1" />
-      <window_info anchor="bottom" id="Problems View" order="2" weight="0.26582792" />
+      <window_info active="true" anchor="bottom" id="Problems View" order="2" visible="true" weight="0.3299513" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.3299513" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" />
+      <window_info anchor="bottom" id="Run" order="4" />
       <window_info anchor="bottom" id="Services" order="5" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.56290585" />
       <window_info anchor="right" id="PR AI Assistant" />
@@ -171,11 +167,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/lib/data/weapons/swords/defiers_thorn" />
+      <recent name="$PROJECT_DIR$/src/lib/data/characters/cartethyia" />
       <recent name="$PROJECT_DIR$/src/lib/data/characters/cantarella" />
       <recent name="$PROJECT_DIR$/src/lib/data/characters/zani" />
       <recent name="$PROJECT_DIR$/src/lib/data/weapons/rectifier/luminous_hymn" />
-      <recent name="$PROJECT_DIR$/src/lib/data/characters/phoebe" />
-      <recent name="$PROJECT_DIR$/src/lib/optimizer" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/lib/optimizer" />
@@ -288,6 +284,8 @@
       <workItem from="1753358933288" duration="10147000" />
       <workItem from="1753385486854" duration="10492000" />
       <workItem from="1753397614257" duration="8290000" />
+      <workItem from="1753882314055" duration="6727000" />
+      <workItem from="1753905950540" duration="2658000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -553,7 +551,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753398122848</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="fix: cantarella s5 not properly adding 5 more instances of Diffusion DMG">
+      <option name="closed" value="true" />
+      <created>1753413508857</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1753413508857</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -570,7 +576,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="migration/tailwind-v4" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -583,8 +589,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="optimizer page up and running" />
-    <MESSAGE value="complete characters and weapons" />
     <MESSAGE value="add carlotta and pistols" />
     <MESSAGE value="fix carlotta typo" />
     <MESSAGE value="fix changli typo" />
@@ -608,6 +612,8 @@
     <MESSAGE value="cleanup imports" />
     <MESSAGE value="feat: highlight target" />
     <MESSAGE value="feat: zani + blazing brilliance" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: zani + blazing brilliance" />
+    <MESSAGE value="fix: cantarella s5 not properly adding 5 more instances of Diffusion DMG" />
+    <MESSAGE value="feat: cartethyia" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: cartethyia" />
   </component>
 </project>

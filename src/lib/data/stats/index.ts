@@ -56,7 +56,7 @@ export type AsElementAmplifyKey<T extends ElementKey> = `${T}_amplify` extends E
 export const TAG_STATS = ['coordinated_attack', 'echo_skill'] as const;
 export type TagStatKey = typeof TAG_STATS[number];
 
-export const EXTRA_STATS = ['skill_multiplier', 'enemy_level', 'enemy_resistance', 'enemy_def_ignore'] as const;
+export const EXTRA_STATS = ['skill_multiplier', 'enemy_level', 'enemy_resistance', 'enemy_damage_vulnerability', 'enemy_def_ignore'] as const;
 export type ExtraStatKey = typeof EXTRA_STATS[number];
 
 export const STATS = [...BASE_STATS, ...COMBAT_STATS, ...ATTACK_BONUS, ...ELEMENT_BONUS, ...ATTACK_AMPLIFY, ...ELEMENT_AMPLIFY, ...TAG_STATS, ...EXTRA_STATS, ] as const;

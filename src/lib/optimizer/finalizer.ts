@@ -12,10 +12,13 @@ export function default_finalizer(motion: MotionData, base_stats: Record<BaseSta
 	// hit * (element bonus + skill bonus) * skill amplify
 	const bonus = combat_stats.general_bonus + motion.element.reduce((acc, e) => acc + combat_stats[`${e}_bonus`], 0) + motion.type.reduce((acc, t) => acc + combat_stats[`${t}_bonus`], 0);
 	const amplify = combat_stats.general_amplify + motion.element.reduce((acc, e) => acc + combat_stats[`${e}_amplify`], 0) + motion.type.reduce((acc, t) => acc + combat_stats[`${t}_amplify`], 0);
-	// coordinated attacks, echo skill damage, ... count as bonus damage
+
+	// fixme: find where these apply? for the moment they will apply as bonus damage
 	const tags = motion.tags.reduce((acc, e) => acc + combat_stats[e], 0);
 
-	const expected_hits = skill_hits.map(v => v * (1 + bonus + tags) * (1 + amplify));
+	const dmg_vulnerability = combat_stats.enemy_damage_vulnerability;
+
+	const expected_hits = skill_hits.map(v => v * (1 + bonus + tags) * (1 + amplify) * (1 + dmg_vulnerability));
 
 	// res * def * dmg reduction * element reduction
 	const resistance = combat_stats.enemy_resistance;

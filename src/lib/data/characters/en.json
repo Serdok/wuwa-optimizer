@@ -7,17 +7,24 @@
   "basic_attack_1_dmg": "Basic Attack 1 DMG",
   "stage_1_dmg": "Stage 1 DMG",
   "basic_attack_stage_1": "Basic Attack Stage 1",
+  "basic_attack_stage_1_dmg": "Basic Attack Stage 1 DMG",
 
   "basic_attack_2_dmg": "Basic Attack 2 DMG",
   "stage_2_dmg": "Stage 2 DMG",
   "basic_attack_stage_2": "Basic Attack Stage 2",
+  "basic_attack_stage_2_dmg": "Basic Attack Stage 2 DMG",
 
   "basic_attack_3_dmg": "Basic Attack 3 DMG",
   "stage_3_dmg": "Stage 3 DMG",
+  "basic_attack_stage_3_dmg": "Basic Attack Stage 3 DMG",
 
   "basic_attack_4_dmg": "Basic Attack 4 DMG",
   "stage_4_dmg": "Stage 4 DMG",
+  "basic_attack_stage_4_dmg": "Basic Attack Stage 4 DMG",
 
+  "basic_attack_stage_5_dmg": "Basic Attack Stage 5 DMG",
+
+  "mid_air_attack": "Mid-air Attack",
   "mid_air_attack_dmg": "Mid-air Attack DMG",
   "mid_air_attack_1_dmg": "Mid-air Attack 1 DMG",
   "mid_air_attack_2_dmg": "Mid-air Attack 2 DMG",
@@ -28,6 +35,7 @@
 
   "heavy_attack": "Heavy Attack",
   "heavy_attack_dmg": "Heavy Attack DMG",
+  "enhanced_heavy_attack_dmg": "Enhanced Heavy Attack DMG",
 
   "mid_air_heavy_attack": "Mid-air Heavy Attack",
 

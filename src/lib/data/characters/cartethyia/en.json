@@ -1,0 +1,32 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "cartethyia": "Cartethyia",
+
+  "manifest": "Manifest (Fleurdelys mode)",
+  "mandate_of_divinity": "Mandate of Divinity",
+  "aero_erosion": "Aero Erosion",
+  "conviction": "Conviction Points",
+  "debuff_effect": "Debuff applied",
+
+  "sword_to_carve_my_forms": "Sword to Carve My Forms",
+  "mid_air_attack_1_sword_shadow_recalled": "Mid-air Attack 1 Sword Shadow Recalled",
+  "mid_air_attack_2_sword_shadow_recalled": "Mid-air Attack 2 Sword Shadow Recalled",
+  "mid_air_attack_3_sword_shadow_recalled": "Mid-air Attack 3 Sword Shadow Recalled",
+
+  "sword_to_bear_their_names": "Sword to Bear Their Names",
+
+  "tempest": "Tempest",
+  "upward_cut_dmg": "Upward Cut DMG",
+  "sword_to_answer_waves_call_dmg": "Sword to Answer Waves' Call DMG",
+  "may_tempest_break_the_tides_dmg": "May Tempest Break the Tides DMG",
+
+  "a_knights_heartfelt_prayers": "A Knight's Heartfelt Prayers",
+  "blade_of_howling_squall_dmg": "Blade of Howling Squall DMG",
+
+  "sword_to_mark_tides_trace": "Sword to Mark Tides' Trace",
+  "sword_to_mark_tides_trace_dmg": "Sword to Mark Tides' Trace DMG",
+  "sword_to_call_for_freedom_dmg": "Sword to Call for Freedom DMG",
+
+  "winds_divine_blessing": "Winds Divine Blessing"
+}

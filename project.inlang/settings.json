@@ -14,6 +14,7 @@
     "pathPattern": [
       "./messages/{locale}.json",
 
+      "./src/lib/data/echoes/{locale}.json",
       "./src/lib/data/stats/{locale}.json",
       "./src/lib/data/sonatas/{locale}.json",
 

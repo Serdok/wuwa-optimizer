@@ -13,37 +13,23 @@ import midnight_veil from './T_IconElementAttriDarkAssist.png';
 import empyrean_anthem from './T_IconElementAttriCooperate.png';
 import tidebreaking_courage from './T_IconElementAttriEnergy.png';
 import gusts_of_welkin from './T_IconElementAttriWind.png';
+import windward_pilgrimage from './T_IconElementAttriWindErrorA.png';
+import flaming_clawprint from './T_IconElementAttriFireUltimateSkill.png';
+import dream_of_the_lost from './T_IconElementAttriDarkVision.png';
 
 import type { Buff, OptimizerContext, OptimizerInput } from '$lib/optimizer';
 import type { StatKey } from '$lib/data/stats';
 
-export const SONATAS = [
-	'freezing_frost',
-	'molten_rift',
-	'void_thunder',
-	'sierra_gale',
-	'celestial_light',
-	'sun_sinking_eclipse',
-	'rejuvenating_glow',
-	'moonlit_clouds',
-	'lingering_tunes',
-	'frosty_resolve',
-	'eternal_radiance',
-	'midnight_veil',
-	'empyrean_anthem',
-	'tidebreaking_courage',
-	'gusts_of_welkin'
-] as const;
-export type SonataKey = (typeof SONATAS)[number];
 
 export type SonataData = {
-	key: SonataKey;
+	key: string;
 	image: string;
-	buffs: Record<string, Buff>,
+	buffs: Record<string, Buff>;
+	piece_effects: number[];
 	apply_effects: (input: OptimizerInput, combat_stats: Record<StatKey, number>, context: OptimizerContext) => void;
 };
 
-export const SONATA_DATA: Record<SonataKey, SonataData> = {
+export const SONATA_DATA: Record<string, SonataData> = {
 	freezing_frost: {
 		key: 'freezing_frost',
 		image: freezing_frost,
@@ -63,6 +49,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 3,
 			},
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'freezing_frost').length;
 
@@ -85,6 +72,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'freezing_frost').length;
 
@@ -116,6 +104,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 2,
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'freezing_frost').length;
 
@@ -140,6 +129,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'sierra_gale').length;
 
@@ -162,6 +152,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'celestial_light').length;
 
@@ -195,6 +186,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 4,
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'sun_sinking_eclipse').length;
 
@@ -217,6 +209,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'rejuvenating_glow').length;
 
@@ -242,6 +235,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'moonlit_clouds').length;
 
@@ -268,6 +262,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 4,
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'lingering_tunes').length;
 
@@ -300,6 +295,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 2,
 			},
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'frosty_resolve').length;
 
@@ -325,6 +321,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				max_value: 10
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'eternal_radiance').length;
 
@@ -348,6 +345,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'midnight_veil').length;
 
@@ -380,6 +378,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'empyrean_anthem').length;
 
@@ -397,6 +396,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 		key: 'tidebreaking_courage',
 		image: tidebreaking_courage,
 		buffs: {},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'tidebreaking_courage').length;
 
@@ -421,6 +421,7 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				value: 1,
 			}
 		},
+		piece_effects: [2, 5],
 		apply_effects: (input, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'gusts_of_welkin').length;
 
@@ -433,5 +434,88 @@ export const SONATA_DATA: Record<SonataKey, SonataData> = {
 				combat_stats.aero_bonus += 0.3 * aero_erosion;
 			}
 		}
-	}
+	},
+	windward_pilgrimage: {
+		key: 'windward_pilgrimage',
+		image: windward_pilgrimage,
+		buffs: {
+			aero_erosion: {
+				key: 'aero_erosion',
+				kind: 'switch',
+				value: 1,
+			}
+		},
+		piece_effects: [2, 5],
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'windward_pilgrimage').length;
+
+			if (echo_count >= 2) {
+				combat_stats.aero_bonus += 0.1;
+			}
+
+			if (echo_count >= 5) {
+				const { aero_erosion } = input.echo.buffs.windward_pilgrimage;
+				combat_stats.crit_rate += 0.1 * aero_erosion;
+				combat_stats.aero_bonus += 0.3 * aero_erosion;
+			}
+		},
+	},
+	flaming_clawprint: {
+		key: 'flaming_clawprint',
+		image: flaming_clawprint,
+		buffs: {
+			burst_released: {
+				key: 'burst_released',
+				kind: 'switch',
+				value: 1,
+			}
+		},
+		piece_effects: [2, 5],
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'flaming_clawprint').length;
+
+			if (echo_count >= 2) {
+				combat_stats.fusion_bonus += 0.1;
+			}
+
+			if (echo_count >= 5) {
+				const { burst_released } = input.echo.buffs.flaming_clawprint;
+				// todo: +15% team fusion bonus
+				combat_stats.fusion_bonus += 0.15 * burst_released;
+				combat_stats.burst_bonus += 0.2 * burst_released;
+			}
+		},
+	},
+	dream_of_the_lost: {
+		key: 'dream_of_the_lost',
+		image: dream_of_the_lost,
+		buffs: {
+			no_energy: {
+				key: 'no_energy',
+				kind: 'switch',
+				value: 1,
+			}
+		},
+		piece_effects: [3],
+		apply_effects: (input, combat_stats, context) => {
+			const echo_count = context.build.filter(e => e.sonata === 'dream_of_the_lost').length;
+
+			if (echo_count >= 3) {
+				const { no_energy } = input.echo.buffs.dream_of_the_lost;
+				if (no_energy) {
+					combat_stats.crit_rate += 0.2;
+					combat_stats.echo_skill += 0.35;
+				}
+			}
+		},
+	},
 } as const;
+
+
+export const SONATAS = Object.keys(SONATA_DATA) as (keyof typeof SONATA_DATA)[];
+export type SonataKey = (typeof SONATAS)[number];
+
+export type SonataBuff<T extends SonataKey> = {
+	[K in keyof typeof SONATA_DATA[T]['buffs']]: number
+};
+

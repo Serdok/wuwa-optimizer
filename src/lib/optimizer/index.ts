@@ -1,13 +1,12 @@
 import type { StatKey, StatValue } from '$lib/data/stats';
 import type { AttackKey, CharacterData, SkillKey } from '$lib/data/characters';
-import type { SonataKey } from '$lib/data/sonatas';
+import type { SonataBuff, SonataKey } from '$lib/data/sonatas';
 import type { Echo } from '$lib/data/echoes/types';
 import type { DamageResult } from '$lib/optimizer/build';
 
 export type EchoFilter = {
 	allowed_primary_stats: Record<number, StatKey[]>,
-	allowed_2p: SonataKey[],
-	allowed_5p: SonataKey[],
+	activated_effects: Record<SonataKey, number[]>,
 };
 
 export type OptimizerInput = {
@@ -26,7 +25,7 @@ export type OptimizerInput = {
 		filter: EchoFilter,
 		allow_rainbow: boolean,
 		allow_partial: boolean,
-		buffs: Record<SonataKey, Record<string, number>>,
+		buffs: Record<SonataKey, SonataBuff<SonataKey>>,
 	},
 	target_key: StatKey | `${string}-${string}`,
 	keep_count: number,

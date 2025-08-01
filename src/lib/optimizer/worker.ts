@@ -40,10 +40,14 @@ self.onmessage = async function (event: MessageEvent) {
 
 				const sonatas = Object.groupBy(build, e => e.sonata);
 
-				const passes_2p_filter = input.echo.filter.allowed_2p.some(sonata => (sonatas[sonata]?.length || 0) >= 2);
-				const passes_5p_filter = input.echo.filter.allowed_5p.some(sonata => (sonatas[sonata]?.length || 0) >= 5);
+				let set_ok = false;
+				for (const sonata in sonatas) {
+					if (input.echo.filter.activated_effects[sonata].some(n => (sonatas[sonata]?.length || 0) >= n)) {
+						set_ok = true;
+					}
+				}
 
-				if (input.echo.allow_rainbow || passes_2p_filter || passes_5p_filter) {
+				if (input.echo.allow_rainbow || set_ok) {
 					// todo: filter unique echo within same sonata
 					for (const partial of Object.values(sonatas)) {
 						if (partial.every((echo, i, arr) => arr.findIndex(e => e.key === echo.key) === i)) {

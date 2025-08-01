@@ -3,7 +3,7 @@
 	import { WEAPONS } from '$lib/data/weapons';
 	import { STAT_ICONS, type StatKey, STATS, type StatValue } from '$lib/data/stats';
 	import { PRIMARY_MAIN_STATS } from '$lib/data/echoes/base_stats';
-	import { type SonataKey, SONATA_DATA, SONATAS } from '$lib/data/sonatas';
+	import { type SonataKey, SONATA_DATA, SONATAS, type SonataBuff } from '$lib/data/sonatas';
 
 	import * as Accordion from '$lib/components/ui/accordion';
 	import { Badge } from '$lib/components/ui/badge';
@@ -31,7 +31,7 @@
 	import { db } from '$lib/db';
 	import type { DamageResult } from '$lib/optimizer/build';
 
-	import SonataSelector from './SonataSelector.svelte';
+	import SonataItem from './sonata-item.svelte';
 	import Result from './Result.svelte';
 
 	const first_character = $derived(Object.values(CHARACTERS)[0]);
@@ -64,11 +64,13 @@
 		value: 0
 	}])) as Record<StatKey, StatValue>);
 
-	let allowed_sonatas: { '2-p': SonataKey[], '5-p': SonataKey[] } = $state({ '2-p': [], '5-p': [] });
 	let allow_rainbow = $state(false);
 	let allow_partial = $state(false);
 
 	let echo_primaries: { 4: StatKey[], 3: StatKey[], 1: StatKey[] } = $state({ 4: [], 3: [], 1: [] });
+	let echo_buffs: Record<SonataKey, SonataBuff<SonataKey>> = $state({});
+	let activated_effects: Record<SonataKey, number[]> = $state({});
+	$inspect(activated_effects);
 
 	let results = $state([] as DamageResult[]);
 
@@ -89,14 +91,15 @@
 		keep_count = 3;
 		target_key = 'atk';
 
-		allowed_sonatas['2-p'] = [];
-		allowed_sonatas['5-p'] = Object.values(SONATA_DATA).map(s => s.key);
 		allow_rainbow = false;
 		allow_partial = false;
 
 		echo_primaries['4'] = Object.values(PRIMARY_MAIN_STATS['4'].stats).map(s => s.stat);
 		echo_primaries['3'] = Object.values(PRIMARY_MAIN_STATS['3'].stats).map(s => s.stat);
 		echo_primaries['1'] = Object.values(PRIMARY_MAIN_STATS['1'].stats).map(s => s.stat);
+
+		echo_buffs = Object.fromEntries(Object.values(SONATA_DATA).map(d => [d.key, Object.fromEntries(Object.values(d.buffs).map(b => [b.key, b.value]))]));
+		activated_effects = Object.fromEntries(Object.values(SONATA_DATA).map(s => [s.key, []]));
 
 		world_level = 8;
 	}
@@ -149,12 +152,12 @@
 		stat_bonuses[idx] = null;
 	}
 
-	function add_sonata(pc: '2-p' | '5-p', key: SonataKey) {
-		allowed_sonatas[pc].push(key);
+	function on_buff_change(buff: {sonata: SonataKey, key: string, value: number}) {
+		echo_buffs[buff.sonata][buff.key] = buff.value;
 	}
 
-	function remove_sonata(pc: '2-p' | '5-p', key: SonataKey) {
-		allowed_sonatas[pc] = allowed_sonatas[pc].filter((s) => s !== key);
+	function on_allow_change(allow: {sonata: SonataKey, allowed: number[]}) {
+		activated_effects[allow.sonata] = allow.allowed;
 	}
 
 	async function launch_optimizer() {
@@ -184,12 +187,11 @@
 			echo: {
 				filter: {
 					allowed_primary_stats: echo_primaries,
-					allowed_2p: allowed_sonatas['2-p'],
-					allowed_5p: allowed_sonatas['5-p'],
+					activated_effects,
 				},
 				allow_rainbow,
 				allow_partial,
-				buffs: Object.fromEntries(SONATAS.map(s => [s, false])),
+				buffs: echo_buffs,
 			},
 			target_key,
 			keep_count,
@@ -229,7 +231,7 @@
 <Tabs.Root value="character" class="">
 	<Tabs.List>
 		<Tabs.Trigger value="character">{m.character()}</Tabs.Trigger>
-		<Tabs.Trigger value="echoes">echoes</Tabs.Trigger>
+		<Tabs.Trigger value="echoes">{m.echoes()}</Tabs.Trigger>
 	</Tabs.List>
 
 	<Tabs.Content value="character">
@@ -600,89 +602,8 @@
 	</Tabs.Content>
 
 	<Tabs.Content value="echoes">
-		<div class="grid grid-cols-2 auto-cols-fr gap-2">
+		<div class="grid grid-cols-3 auto-cols-fr gap-2">
 			<div class="p-2 border rounded-lg flex flex-col divide-y gap-4">
-				<div class="p-2 flex flex-row items-center">
-					<div class="px-2 flex-1 grid grid-cols-2 gap-2 items-start">
-						<div>allowed 2-p: {allowed_sonatas['2-p'].length}/{SONATAS.length}</div>
-						<div>allowed 5-p: {allowed_sonatas['5-p'].length}/{SONATAS.length}</div>
-						<div>allow rainbow builds: {allow_rainbow}</div>
-						<div>allow partial builds: {allow_partial}</div>
-					</div>
-					<Dialog.Root>
-						<Dialog.Trigger class={buttonVariants({ variant: 'secondary', class: 'self-stretch h-auto' })}>
-							<Settings />
-						</Dialog.Trigger>
-						<Dialog.Content class="min-w-[40%]">
-							<Dialog.Header>
-								<Dialog.Title>sonata selection</Dialog.Title>
-							</Dialog.Header>
-							<div class="flex flex-col gap-8">
-								<div class="flex flex-row justify-stretch gap-4">
-									<div class="w-full flex flex-col gap-2">
-										<div class="px-2">2-p</div>
-										<div>
-											<Button type="button" variant="secondary"
-															onclick={() => { allowed_sonatas['2-p'] = Object.values(SONATA_DATA).map(s => s.key); }}>
-												include all
-											</Button>
-											<Button type="button" variant="secondary" onclick={() => { allowed_sonatas['2-p'] = [] }}>exclude
-												all
-											</Button>
-										</div>
-									</div>
-									<div class="w-full flex flex-col gap-2">
-										<div class="px-2">5-p</div>
-										<div>
-											<Button type="button" variant="secondary"
-															onclick={() => { allowed_sonatas['5-p'] = Object.values(SONATA_DATA).map(s => s.key); }}>
-												include all
-											</Button>
-											<Button type="button" variant="secondary" onclick={() => { allowed_sonatas['5-p'] = [] }}>exclude
-												all
-											</Button>
-										</div>
-									</div>
-									<div class="w-full flex flex-col gap-2">
-										<div class="flex flex-row items-center gap-1">
-											<Checkbox id="allow-rainbow" bind:checked={allow_rainbow} />
-											<Label for="allow-rainbow">allow rainbow builds</Label>
-										</div>
-										<div>
-											<Checkbox id="allow-partial" bind:checked={allow_partial} />
-											<Label for="allow-partial">allow partial builds</Label>
-										</div>
-									</div>
-								</div>
-								<div class="flex flex-row flex-wrap gap-2">
-									{#each SONATAS as s (s)}
-										{@const checked_2 = allowed_sonatas['2-p'].includes(s)}
-										{@const checked_5 = allowed_sonatas['5-p'].includes(s)}
-										<div class="min-w-60 border rounded-lg p-2 flex flex-col gap-4">
-											<div class="flex flex-row items-center gap-1">
-												<img src={SONATA_DATA[s].image} alt={s} class="w-8" />
-												<span>{s}</span>
-											</div>
-											<div class="px-2 flex flex-row items-center justify-stretch gap-2">
-												<div class="w-full flex flex-row items-center gap-2">
-													<Checkbox id="sonata-{s}-2pc" checked={checked_2}
-																		onCheckedChange={v => v ? add_sonata('2-p', s) : remove_sonata('2-p', s)} />
-													<Label for="sonata-{s}-2pc">2-p</Label>
-												</div>
-												<div class="w-full flex flex-row items-center gap-2">
-													<Checkbox id="sonata-{s}-5pc" checked={checked_5}
-																		onCheckedChange={v => v ? add_sonata('5-p', s) : remove_sonata('5-p', s)} />
-													<Label for="sonata-{s}-5pc">5-p</Label>
-												</div>
-											</div>
-										</div>
-									{/each}
-								</div>
-							</div>
-						</Dialog.Content>
-					</Dialog.Root>
-				</div>
-
 				<div class="px-2 flex flex-col gap-2">
 					<div>4 costs</div>
 					<ToggleGroup.Root type="multiple" class="px-2 flex flex-row flex-wrap gap-1" bind:value={echo_primaries['4']}>
@@ -724,8 +645,12 @@
 				</div>
 			</div>
 
-			<div class="p-2 border rounded-lg flex flex-col gap-2">
-				<SonataSelector />
+			<div class="col-span-2 p-2 border rounded-lg flex flex-col gap-2">
+				<div class="grid grid-cols-3 gap-2">
+					{#each SONATAS as sonata (sonata)}
+						<SonataItem {sonata} {on_buff_change} {on_allow_change} />
+					{/each}
+				</div>
 			</div>
 		</div>
 	</Tabs.Content>

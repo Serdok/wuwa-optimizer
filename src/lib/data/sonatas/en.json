@@ -16,6 +16,9 @@
   "empyrean_anthem": "Empyrean Anthem",
   "tidebreaking_courage": "Tidebreaking Courage",
   "gusts_of_welkin": "Gusts of Welkin",
+  "windward_pilgrimage": "Windward Pilgrimage",
+  "flaming_clawprint": "Flaming Clawprint",
+  "dream_of_the_lost": "Dream of the Lost",
 
   "basic_released": "Basic Attack Released",
   "heavy_released": "Heavy Attack Released",
@@ -26,5 +29,6 @@
 
   "healing_allies": "Healing Allies",
   "on_field": "Time on field",
-  "coordinated_crit": "Coordinated Attack Crit. Hit"
+  "coordinated_crit": "Coordinated Attack Crit. Hit",
+  "no_energy": "No Energy"
 }

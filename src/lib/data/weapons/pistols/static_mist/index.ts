@@ -10,15 +10,10 @@ export default {
 		primary: { stat: 'atk', value: 47 },
 		secondary: { stat: 'crit_rate', value: 0.054 },
 	},
-	buffs: {
-		// 'stormy_resolution': {
-		// 	key: 'stormy_resolution',
-		// 	kind: 'switch',
-		// 	value: 1,
-		// }
-	},
+	buffs: {},
 	apply_effects: (request, combat_stats) => {
 		combat_stats['energy_regen'] += ranks[request.weapon.rank - 1];
-		// combat_stats['atk_p'] += attack_bonus[request.weapon.rank - 1] * (request.character.buffs['stormy_resolution'] || 0);
+
+		// todo: next character +atk% buff on outro
 	},
 } as const satisfies WeaponData;

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { ATTACKS, CHARACTERS } from '$lib/data/characters';
 	import { WEAPONS } from '$lib/data/weapons';
-	import { STAT_ICONS, type StatKey, STATS, type StatValue } from '$lib/data/stats';
+	import { STAT_ICONS, STATS, type StatValue } from '$lib/data/stats';
 	import { PRIMARY_MAIN_STATS } from '$lib/data/echoes/base_stats';
-	import { type SonataKey, SONATA_DATA, SONATAS, type SonataBuff } from '$lib/data/sonatas';
+	import { type SonataKey, SONATA_DATA, SONATAS } from '$lib/data/sonatas';
 
 	import * as Accordion from '$lib/components/ui/accordion';
 	import { Badge } from '$lib/components/ui/badge';
@@ -61,19 +61,17 @@
 	let target_dialog_open = $state(false);
 
 	let world_level = $state(0);
-	let extra_stats = $state(Object.fromEntries(STATS.map(s => [s, {
-		stat: s,
-		value: 0
-	}])) as Record<StatKey, StatValue>);
+	let extra_stats = $state(Object.fromEntries(STATS.map(s => [s, { stat: s, value: 0 }])) as OptimizerRequest['character']['extra_stats']);
 
 	let allow_rainbow = $state(false);
 	let allow_partial = $state(false);
 
-	let echo_primaries: { 4: StatKey[], 3: StatKey[], 1: StatKey[] } = $state({ 4: [], 3: [], 1: [] });
-	let echo_buffs: Record<SonataKey, SonataBuff<SonataKey>> = $state({});
-	let activated_effects: Record<SonataKey, number[]> = $state({});
+	let echo_primaries: OptimizerRequest['echo']['filter']['allowed_primary_stats'] = $state({ 4: [], 3: [], 1: [] });
+	let echo_buffs: OptimizerRequest['echo']['buffs'] = $state({});
+	let activated_effects: OptimizerRequest['echo']['filter']['activated_effects'] = $state({});
+	$inspect(activated_effects);
 
-	let results = $state([] as DamageResult[]);
+	let results: DamageResult[] = $state([]);
 
 	let optimizer_controller = $state();
 	let optimizer_running = $state(false);
@@ -86,21 +84,11 @@
 	function init_form() {
 		key = first_character.key;
 		sequence = 0;
-		weapon_key = first_weapon.key;
-		rank = 1;
 
-		keep_count = 3;
-		target_key = { kind: 'stat', stat: 'atk' };
+		set_character_defaults();
 
 		allow_rainbow = false;
 		allow_partial = false;
-
-		echo_primaries['4'] = Object.values(PRIMARY_MAIN_STATS['4'].stats).map(s => s.stat);
-		echo_primaries['3'] = Object.values(PRIMARY_MAIN_STATS['3'].stats).map(s => s.stat);
-		echo_primaries['1'] = Object.values(PRIMARY_MAIN_STATS['1'].stats).map(s => s.stat);
-
-		echo_buffs = Object.fromEntries(Object.values(SONATA_DATA).map(d => [d.key, Object.fromEntries(Object.values(d.buffs).map(b => [b.key, b.value]))]));
-		activated_effects = Object.fromEntries(Object.values(SONATA_DATA).map(s => [s.key, []]));
 
 		world_level = 8;
 	}
@@ -113,6 +101,23 @@
 
 		reset_character_buffs();
 		reset_weapon_buffs();
+
+		set_character_defaults();
+	}
+
+	function set_character_defaults() {
+		weapon_key = character.defaults?.weapon?.key || first_weapon.key;
+		rank = character.defaults?.weapon?.rank || 1;
+
+		keep_count = character.defaults?.keep_count || 3;
+		target_key = character.defaults?.target_key || { kind: 'stat', stat: 'atk' };
+
+		echo_primaries['4'] = character.defaults?.echo?.filter.allowed_primary_stats['4'] || Object.values(PRIMARY_MAIN_STATS['4'].stats).map(s => s.stat);
+		echo_primaries['3'] = character.defaults?.echo?.filter.allowed_primary_stats['3'] || Object.values(PRIMARY_MAIN_STATS['3'].stats).map(s => s.stat);
+		echo_primaries['1'] = character.defaults?.echo?.filter.allowed_primary_stats['1'] || Object.values(PRIMARY_MAIN_STATS['1'].stats).map(s => s.stat);
+
+		echo_buffs = character.defaults?.echo?.buffs || Object.fromEntries(Object.values(SONATA_DATA).map(d => [d.key, Object.fromEntries(Object.values(d.buffs).map(b => [b.key, b.value]))]));
+		activated_effects = Object.fromEntries(Object.values(SONATA_DATA).map(s => [s.key, character.defaults?.echo?.filter.activated_effects[s.key] || []]));
 	}
 
 	function reset_character_buffs() {
@@ -160,10 +165,6 @@
 
 	function on_buff_change(buff: {sonata: SonataKey, key: string, value: number}) {
 		echo_buffs[buff.sonata][buff.key] = buff.value;
-	}
-
-	function on_allow_change(allow: {sonata: SonataKey, allowed: number[]}) {
-		activated_effects[allow.sonata] = allow.allowed;
 	}
 
 	async function launch_optimizer() {
@@ -635,7 +636,7 @@
 			<div class="col-span-2 p-2 border rounded-lg flex flex-col gap-2">
 				<div class="grid grid-cols-3 gap-2">
 					{#each SONATAS as sonata (sonata)}
-						<SonataItem {sonata} {on_buff_change} {on_allow_change} />
+						<SonataItem {sonata} {on_buff_change} bind:allow_list={activated_effects[sonata]} />
 					{/each}
 				</div>
 			</div>

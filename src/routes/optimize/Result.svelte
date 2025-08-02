@@ -9,13 +9,14 @@
 
 	import { Separator } from '$lib/components/ui/separator';
 	import { m } from '$lib/paraglide/messages';
+	import type { Target } from '$lib/data/optimizer';
 
 	interface Props {
 		result: DamageResult,
 		i: number,
 		total_results: number,
 		damage_selection: 'non-crit' | 'average' | 'forced-crit',
-		target: string,
+		target: Target,
 	}
 
 	const { result, i, total_results, damage_selection, target }: Props = $props();
@@ -81,7 +82,7 @@
 		<div class="break-inside-avoid flex flex-col gap-1 px-2">
 			<div class="text-xl">Stats</div>
 			{#each Object.entries(result.display_stats) as [key, value] (key)}
-				{@const selected = target === key}
+				{@const selected = target.kind === 'stat' && target.stat === key}
 				<DisplayStat key={key as StatKey} {value} class={selected ? 'border-2 border-red-400' : ''} />
 			{/each}
 		</div>

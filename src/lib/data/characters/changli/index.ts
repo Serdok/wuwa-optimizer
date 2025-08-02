@@ -6,41 +6,41 @@ const data: CharacterData = {
 	element: 'fusion',
 	weapon_type: 'sword',
 	base_stats: {
-		'hp': { stat: 'hp', value: 831, },
-		'atk': { stat: 'atk', value: 37, },
-		'def': { stat: 'def', value: 90, },
+		hp: { stat: 'hp', value: 831 },
+		atk: { stat: 'atk', value: 37 },
+		def: { stat: 'def', value: 90 }
 	},
 	stat_bonuses: [
-		{ stat: 'crit_rate', value: 0.012, },
-		{ stat: 'crit_rate', value: 0.028, },
-		{ stat: 'atk_p', value: 0.018, },
-		{ stat: 'atk_p', value: 0.042, },
-		{ stat: 'crit_rate', value: 0.012, },
-		{ stat: 'crit_rate', value: 0.028, },
-		{ stat: 'atk_p', value: 0.018, },
-		{ stat: 'atk_p', value: 0.042, },
+		{ stat: 'crit_rate', value: 0.012 },
+		{ stat: 'crit_rate', value: 0.028 },
+		{ stat: 'atk_p', value: 0.018 },
+		{ stat: 'atk_p', value: 0.042 },
+		{ stat: 'crit_rate', value: 0.012 },
+		{ stat: 'crit_rate', value: 0.028 },
+		{ stat: 'atk_p', value: 0.018 },
+		{ stat: 'atk_p', value: 0.042 }
 	],
 	buffs: {
-		'enflamement': {
+		enflamement: {
 			key: 'enflamement',
 			kind: 'slider',
 			sequence: 0,
 			value: 4,
 			min_value: 0,
-			max_value: 4,
+			max_value: 4
 		},
-		'fiery_feather': {
+		fiery_feather: {
 			key: 'fiery_feather',
 			kind: 'switch',
 			sequence: 0,
-			value: 1,
+			value: 1
 		},
-		'polished_words': {
+		polished_words: {
 			key: 'polished_words',
 			kind: 'switch',
 			sequence: 4,
-			value: 1,
-		},
+			value: 1
+		}
 	},
 	apply_effects: (request, combat_stats) => {
 		if (request.character.buffs['fiery_feather'] > 0) {
@@ -56,7 +56,7 @@ const data: CharacterData = {
 		}
 	},
 	skills: {
-		'normal': {
+		normal: {
 			type: 'normal',
 			key: 'blazing_enlightment',
 			apply_effects: () => {},
@@ -68,7 +68,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.2949, 0.2949],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				},
 				{
 					type: ['basic'],
@@ -77,7 +77,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.3549, 0.3549],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				},
 				{
 					type: ['basic'],
@@ -86,7 +86,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.3645, 0.3645, 0.3645],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				},
 				{
 					type: ['basic'],
@@ -95,7 +95,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.507, 0.2958, 0.2958, 0.2958],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				},
 				{
 					type: ['basic'],
@@ -104,7 +104,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.6135],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				},
 				{
 					type: ['basic'],
@@ -113,7 +113,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.5087, 0.5087],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				},
 				{
 					type: ['basic'],
@@ -122,7 +122,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.44, 0.44, 0.44],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				},
 				{
 					type: ['basic'],
@@ -131,7 +131,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.3803, 0.2218, 0.2218, 0.2218, 0.2218],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				},
 				{
 					type: ['heavy'],
@@ -140,7 +140,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.2899, 0.2899, 0.2899, 0.3727],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				},
 				{
 					type: ['heavy'],
@@ -149,7 +149,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [1.2327],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				},
 				{
 					type: ['basic'],
@@ -158,11 +158,11 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.8264, 0.8264, 0.8264],
-					apply_effects: () => {},
-				},
-			],
+					apply_effects: () => {}
+				}
+			]
 		},
-		'skill': {
+		skill: {
 			type: 'skill',
 			key: 'tripartite_flames',
 			apply_effects: (request, combat_stats) => {
@@ -182,7 +182,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.8188, 0.8188, 0.8188, 1.6376],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				},
 				{
 					type: ['skill'],
@@ -194,7 +194,7 @@ const data: CharacterData = {
 					apply_effects: (request, combat_stats) => {
 						// secret strategist
 						combat_stats['fusion_bonus'] += 0.05 * (request.character.buffs['enflamement'] ?? 0);
-					},
+					}
 				},
 				{
 					type: ['skill'],
@@ -206,11 +206,11 @@ const data: CharacterData = {
 					apply_effects: (request, combat_stats) => {
 						// secret strategist
 						combat_stats['fusion_bonus'] += 0.05 * (request.character.buffs['enflamement'] ?? 0);
-					},
-				},
-			],
+					}
+				}
+			]
 		},
-		'forte': {
+		forte: {
 			type: 'forte',
 			key: 'flaming_sacrifice',
 			apply_effects: (request, combat_stats) => {
@@ -239,11 +239,11 @@ const data: CharacterData = {
 						// sweeping force
 						combat_stats['fusion_bonus'] += 0.2;
 						combat_stats['enemy_def_ignore'] += 0.15;
-					},
+					}
 				}
-			],
+			]
 		},
-		'burst': {
+		burst: {
 			type: 'burst',
 			key: 'radiance_of_fealty',
 			apply_effects: (request, combat_stats) => {
@@ -267,11 +267,11 @@ const data: CharacterData = {
 						// sweeping force
 						combat_stats['fusion_bonus'] += 0.2;
 						combat_stats['enemy_def_ignore'] += 0.15;
-					},
+					}
 				}
-			],
+			]
 		},
-		'intro': {
+		intro: {
 			type: 'intro',
 			key: 'obedience_of_rules',
 			apply_effects: () => {},
@@ -283,18 +283,44 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.445, 0.2596, 0.2596, 0.2596, 0.2596],
-					apply_effects: () => {},
+					apply_effects: () => {}
 				}
-			],
+			]
 		},
-		'outro': {
+		outro: {
 			type: 'outro',
 			key: 'strategy_of_duality',
 			apply_effects: () => {},
-			motions: [],
-		},
+			motions: []
+		}
 	},
-	image: { portrait },
+	defaults: {
+		weapon: {
+			key: 'blazing_brilliance',
+			rank: 1,
+			buffs: {}
+		},
+		echo: {
+			filter: {
+				allowed_primary_stats: {
+					4: ['crit_rate', 'crit_dmg'],
+					3: ['fusion_bonus', 'atk_p'],
+					1: ['atk_p']
+				},
+				activated_effects: {
+					molten_rift: [2, 5],
+					lingering_tunes: [2, 5],
+					flaming_clawprint: [2, 5]
+				}
+			},
+			buffs: {},
+			allow_rainbow: false,
+			allow_partial: false
+		},
+		// keep_count: 3,
+		target_key: { kind: 'motion', skill: 'flaming_sacrifice', motion: 'flaming_sacrifice_dmg' }
+	},
+	image: { portrait }
 } as const;
 
 export default data;

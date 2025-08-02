@@ -110,19 +110,19 @@
 		weapon_key = character.defaults?.weapon?.key || first_weapon.key;
 		rank = character.defaults?.weapon?.rank || 1;
 
-		keep_count = character.defaults?.keep_count || 3;
+		keep_count = 3;
 		target_key = character.defaults?.target_key || { kind: 'stat', stat: 'atk' };
 
-		echo_primaries['4'] = character.defaults?.echo?.filter?.allowed_primary_stats['4'] || Object.values(PRIMARY_MAIN_STATS['4'].stats).map(s => s.stat);
-		echo_primaries['3'] = character.defaults?.echo?.filter?.allowed_primary_stats['3'] || Object.values(PRIMARY_MAIN_STATS['3'].stats).map(s => s.stat);
-		echo_primaries['1'] = character.defaults?.echo?.filter?.allowed_primary_stats['1'] || Object.values(PRIMARY_MAIN_STATS['1'].stats).map(s => s.stat);
+		echo_primaries['4'] = character.defaults?.echo?.allowed_primary_stats?.['4'] || Object.values(PRIMARY_MAIN_STATS['4'].stats).map(s => s.stat);
+		echo_primaries['3'] = character.defaults?.echo?.allowed_primary_stats?.['3'] || Object.values(PRIMARY_MAIN_STATS['3'].stats).map(s => s.stat);
+		echo_primaries['1'] = character.defaults?.echo?.allowed_primary_stats?.['1'] || Object.values(PRIMARY_MAIN_STATS['1'].stats).map(s => s.stat);
 
 		echo_buffs = Object.fromEntries(Object.values(SONATA_DATA).map(d =>
 			[d.key, Object.fromEntries(Object.values(d.buffs).map(b =>
 				[b.key, character.defaults?.echo?.buffs?.[d.key]?.[b.key] || 0]
 			))]
 		));
-		activated_effects = Object.fromEntries(Object.values(SONATA_DATA).map(s => [s.key, character.defaults?.echo?.filter?.activated_effects[s.key] || []]));
+		activated_effects = Object.fromEntries(Object.values(SONATA_DATA).map(s => [s.key, character.defaults?.echo?.activated_effects?.[s.key] || []]));
 	}
 
 	function reset_character_buffs() {
@@ -166,10 +166,6 @@
 	function on_target_change(target: Target) {
 		target_key = target;
 		target_dialog_open = false;
-	}
-
-	function on_buff_change(buff: {sonata: SonataKey, key: string, value: number}) {
-		echo_buffs[buff.sonata][buff.key] = buff.value;
 	}
 
 	async function launch_optimizer() {

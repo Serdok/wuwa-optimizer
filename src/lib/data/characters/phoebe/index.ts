@@ -317,17 +317,15 @@ const data: CharacterData = {
 			}
 		},
 		echo: {
-			filter: {
-				allowed_primary_stats: {
-					4: ['crit_rate', 'crit_dmg'],
-					3: ['spectro_bonus', 'atk_p'],
-					1: ['atk_p']
-				},
-				activated_effects: {
-					celestial_light: [2, 5],
-					moonlit_clouds: [5],
-					eternal_radiance: [2, 5],
-				}
+			allowed_primary_stats: {
+				4: ['crit_rate', 'crit_dmg'],
+				3: ['spectro_bonus', 'atk_p'],
+				1: ['atk_p']
+			},
+			activated_effects: {
+				celestial_light: [2, 5],
+				moonlit_clouds: [5],
+				eternal_radiance: [2, 5],
 			},
 			buffs: {
 				celestial_light: { intro_released: 1 },

@@ -308,23 +308,19 @@ const data: CharacterData = {
 			}
 		},
 		echo: {
-			filter: {
-				allowed_primary_stats: {
-					4: ['crit_rate', 'crit_dmg'],
-					3: ['fusion_bonus', 'atk_p'],
-					1: ['atk_p']
-				},
-				activated_effects: {
-					molten_rift: [2, 5],
-					flaming_clawprint: [2, 5]
-				}
+			allowed_primary_stats: {
+				4: ['crit_rate', 'crit_dmg'],
+				3: ['fusion_bonus', 'atk_p'],
+				1: ['atk_p']
+			},
+			activated_effects: {
+				molten_rift: [2, 5],
+				flaming_clawprint: [2, 5]
 			},
 			buffs: {
 				molten_rift: { skill_released: 1 },
 				flaming_clawprint: { burst_released: 1 }
 			},
-			allow_rainbow: false,
-			allow_partial: false
 		},
 		// keep_count: 3,
 		target_key: { kind: 'motion', skill: 'flaming_sacrifice', motion: 'flaming_sacrifice_dmg' }

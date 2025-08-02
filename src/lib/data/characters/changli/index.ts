@@ -42,16 +42,16 @@ const data: CharacterData = {
 			value: 1,
 		},
 	},
-	apply_effects: (input, combat_stats) => {
-		if (input.character.buffs['fiery_feather'] > 0) {
+	apply_effects: (request, combat_stats) => {
+		if (request.character.buffs['fiery_feather'] > 0) {
 			combat_stats['atk_p'] += 0.25;
 		}
 
-		if (input.character.sequence >= 2 && input.character.buffs['enflamement'] > 0) {
+		if (request.character.sequence >= 2 && request.character.buffs['enflamement'] > 0) {
 			combat_stats['crit_rate'] += 0.25;
 		}
 
-		if (input.character.sequence >= 4 && input.character.buffs['polished_words'] > 0) {
+		if (request.character.sequence >= 4 && request.character.buffs['polished_words'] > 0) {
 			combat_stats['atk_p'] += 0.2;
 		}
 	},
@@ -165,12 +165,12 @@ const data: CharacterData = {
 		'skill': {
 			type: 'skill',
 			key: 'tripartite_flames',
-			apply_effects: (input, combat_stats) => {
-				if (input.character.sequence >= 1) {
+			apply_effects: (request, combat_stats) => {
+				if (request.character.sequence >= 1) {
 					combat_stats['general_bonus'] += 0.1;
 				}
 
-				if (input.character.sequence >= 6) {
+				if (request.character.sequence >= 6) {
 					combat_stats['enemy_def_ignore'] += 0.4;
 				}
 			},
@@ -191,9 +191,9 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.5895, 0.5895, 0.8252, 0.9431],
-					apply_effects: (input, combat_stats) => {
+					apply_effects: (request, combat_stats) => {
 						// secret strategist
-						combat_stats['fusion_bonus'] += 0.05 * (input.character.buffs['enflamement'] ?? 0);
+						combat_stats['fusion_bonus'] += 0.05 * (request.character.buffs['enflamement'] ?? 0);
 					},
 				},
 				{
@@ -203,9 +203,9 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.7268, 1.0902],
-					apply_effects: (input, combat_stats) => {
+					apply_effects: (request, combat_stats) => {
 						// secret strategist
-						combat_stats['fusion_bonus'] += 0.05 * (input.character.buffs['enflamement'] ?? 0);
+						combat_stats['fusion_bonus'] += 0.05 * (request.character.buffs['enflamement'] ?? 0);
 					},
 				},
 			],
@@ -213,17 +213,17 @@ const data: CharacterData = {
 		'forte': {
 			type: 'forte',
 			key: 'flaming_sacrifice',
-			apply_effects: (input, combat_stats) => {
-				if (input.character.sequence >= 1) {
+			apply_effects: (request, combat_stats) => {
+				if (request.character.sequence >= 1) {
 					combat_stats['general_bonus'] += 0.1;
 				}
 
-				if (input.character.sequence >= 4) {
+				if (request.character.sequence >= 4) {
 					combat_stats['skill_multiplier'] += 0.5;
 					combat_stats['skill_bonus'] += 0.5;
 				}
 
-				if (input.character.sequence >= 6) {
+				if (request.character.sequence >= 6) {
 					combat_stats['enemy_def_ignore'] += 0.4;
 				}
 			},
@@ -235,7 +235,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.3925, 0.3925, 0.3925, 0.3925, 0.3925, 4.5785],
-					apply_effects: (input, combat_stats) => {
+					apply_effects: (request, combat_stats) => {
 						// sweeping force
 						combat_stats['fusion_bonus'] += 0.2;
 						combat_stats['enemy_def_ignore'] += 0.15;
@@ -246,12 +246,12 @@ const data: CharacterData = {
 		'burst': {
 			type: 'burst',
 			key: 'radiance_of_fealty',
-			apply_effects: (input, combat_stats) => {
-				if (input.character.sequence >= 3) {
+			apply_effects: (request, combat_stats) => {
+				if (request.character.sequence >= 3) {
 					combat_stats['burst_bonus'] += 0.8;
 				}
 
-				if (input.character.sequence >= 6) {
+				if (request.character.sequence >= 6) {
 					combat_stats['enemy_def_ignore'] += 0.4;
 				}
 			},
@@ -263,7 +263,7 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [12.1275],
-					apply_effects: (input, combat_stats) => {
+					apply_effects: (request, combat_stats) => {
 						// sweeping force
 						combat_stats['fusion_bonus'] += 0.2;
 						combat_stats['enemy_def_ignore'] += 0.15;

@@ -3,7 +3,7 @@ import { combination_count } from '$lib/math';
 import OptimizerWorker from './worker?worker';
 import type { Echo } from '$lib/data/echoes/types';
 import { compute_damage, type DamageResult } from '$lib/optimizer/build';
-import type { OptimizerInput, OptimizerOptions } from '$lib/data/optimizer';
+import type { OptimizerRequest, OptimizerOptions } from '$lib/data/optimizer';
 import { BoundedMaxPriorityQueue } from '$lib/optimizer/bounded_max_priority_queue';
 
 type BatchResult = { combinations: Echo[][]; processed: number };
@@ -20,11 +20,11 @@ export type CostCombo = {
 type WorkerData = {
 	echoes: { cost_4: Echo[], cost_3: Echo[], cost_1: Echo[] },
 	cost_combo: CostCombo,
-	input: OptimizerInput,
+	input: OptimizerRequest,
 	options: { batch_size: number, report_size: number, total_workers: number, worker_id: number },
 }
 
-function generate_cost_combinations(input: OptimizerInput) {
+function generate_cost_combinations(input: OptimizerRequest) {
 	const cost_combos: CostCombo[] = [];
 
 	for (let count_4 = 0; count_4 <= 3; count_4 += 1) {
@@ -55,7 +55,7 @@ function generate_cost_combinations(input: OptimizerInput) {
 	return cost_combos;
 }
 
-export function optimize(echoes: Echo[], input: OptimizerInput, options: OptimizerOptions) {
+export function optimize(echoes: Echo[], input: OptimizerRequest, options: OptimizerOptions) {
 	const defaults = {
 		batch_size: 50,
 		report_size: 10000,

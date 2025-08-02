@@ -18,9 +18,9 @@ export default {
 			value: 1,
 		}
 	},
-	apply_effects: (input, combat_stats) => {
-		combat_stats.atk_p += ranks[input.weapon.rank - 1];
-		combat_stats.enemy_def_ignore += def_ignore[input.weapon.rank - 1];
-		combat_stats.spectro_frazzle_amplify += sfrazzle_amp[input.weapon.rank - 1];
+	apply_effects: (request, combat_stats) => {
+		combat_stats.atk_p += ranks[request.weapon.rank - 1];
+		combat_stats.enemy_def_ignore += def_ignore[request.weapon.rank - 1];
+		combat_stats.spectro_frazzle_amplify += sfrazzle_amp[request.weapon.rank - 1];
 	},
 } as const satisfies WeaponData;

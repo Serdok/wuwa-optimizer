@@ -17,7 +17,7 @@ import windward_pilgrimage from './T_IconElementAttriWindErrorA.png';
 import flaming_clawprint from './T_IconElementAttriFireUltimateSkill.png';
 import dream_of_the_lost from './T_IconElementAttriDarkVision.png';
 
-import type { Buff, OptimizerContext, OptimizerInput } from '$lib/data/optimizer';
+import type { Buff, OptimizerContext, OptimizerRequest } from '$lib/data/optimizer';
 import type { StatKey } from '$lib/data/stats';
 
 
@@ -26,7 +26,7 @@ export type SonataData = {
 	image: string;
 	buffs: Record<string, Buff>;
 	piece_effects: number[];
-	apply_effects: (input: OptimizerInput, combat_stats: Record<StatKey, number>, context: OptimizerContext) => void;
+	apply_effects: (request: OptimizerRequest, combat_stats: Record<StatKey, number>, context: OptimizerContext) => void;
 };
 
 export const SONATA_DATA: Record<string, SonataData> = {
@@ -50,14 +50,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			},
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'freezing_frost').length;
 
 			if (echo_count >= 2)
 				combat_stats.glacio_bonus += 0.1;
 
 			if (echo_count >= 5) {
-				const { basic_released = 0, heavy_released = 0 } = input.echo.buffs.freezing_frost;
+				const { basic_released = 0, heavy_released = 0 } = request.echo.buffs.freezing_frost;
 				combat_stats.glacio_bonus += 0.1 * Math.min(3, basic_released + heavy_released);
 			}
 		}
@@ -73,14 +73,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'freezing_frost').length;
 
 			if (echo_count >= 2)
 				combat_stats.fusion_bonus += 0.1;
 
 			if (echo_count >= 5) {
-				const { skill_released = 0 } = input.echo.buffs.molten_rift;
+				const { skill_released = 0 } = request.echo.buffs.molten_rift;
 				combat_stats.fusion_bonus += 0.3 * skill_released;
 			}
 		}
@@ -105,14 +105,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'freezing_frost').length;
 
 			if (echo_count >= 2)
 				combat_stats.electro_bonus += 0.1;
 
 			if (echo_count >= 5) {
-				const { heavy_released = 0, skill_released = 0 } = input.echo.buffs.void_thunder;
+				const { heavy_released = 0, skill_released = 0 } = request.echo.buffs.void_thunder;
 				combat_stats.electro_bonus += 0.15 * Math.min(2, heavy_released + skill_released);
 			}
 
@@ -130,14 +130,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'sierra_gale').length;
 
 			if (echo_count >= 2)
 				combat_stats.aero_bonus += 0.1;
 
 			if (echo_count >= 5) {
-				const { intro_released = 0 } = input.echo.buffs.sierra_gale;
+				const { intro_released = 0 } = request.echo.buffs.sierra_gale;
 				combat_stats.aero_bonus += 0.3 * intro_released;
 			}
 		}
@@ -153,14 +153,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'celestial_light').length;
 
 			if (echo_count >= 2)
 				combat_stats.spectro_bonus += 0.1;
 
 			if (echo_count >= 5) {
-				const { intro_released = 0 } = input.echo.buffs.celestial_light;
+				const { intro_released = 0 } = request.echo.buffs.celestial_light;
 				combat_stats.spectro_bonus += 0.3 * intro_released;
 			}
 
@@ -187,14 +187,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'sun_sinking_eclipse').length;
 
 			if (echo_count >= 2)
 				combat_stats.havoc_bonus += 0.1;
 
 			if (echo_count >= 5) {
-				const { basic_released = 0, heavy_released = 0 } = input.echo.buffs.sun_sinking_eclipse;
+				const { basic_released = 0, heavy_released = 0 } = request.echo.buffs.sun_sinking_eclipse;
 				combat_stats.havoc_bonus += 0.075 * Math.min(4, basic_released + heavy_released);
 			}
 		}
@@ -210,14 +210,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'rejuvenating_glow').length;
 
 			if (echo_count >= 2)
 				combat_stats.healing_bonus += 0.1;
 
 			if (echo_count >= 5) {
-				const { healing_allies = 0 } = input.echo.buffs.rejuvenating_glow;
+				const { healing_allies = 0 } = request.echo.buffs.rejuvenating_glow;
 				combat_stats.atk_p += 0.15 * healing_allies;
 				// todo: +15% ATK for all party members
 			}
@@ -236,14 +236,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'moonlit_clouds').length;
 
 			if (echo_count >= 2)
 				combat_stats.energy_regen += 0.1;
 
 			if (echo_count >= 5) {
-				const { outro_released = 0 } = input.echo.buffs.moonlit_clouds;
+				const { outro_released = 0 } = request.echo.buffs.moonlit_clouds;
 				// todo: +22.5% ATK for the next character
 			}
 
@@ -263,14 +263,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'lingering_tunes').length;
 
 			if (echo_count >= 2)
 				combat_stats.atk_p += 0.1;
 
 			if (echo_count >= 5) {
-				const { on_field = 0 } = input.echo.buffs.lingering_tunes;
+				const { on_field = 0 } = request.echo.buffs.lingering_tunes;
 				combat_stats.atk_p += 0.05 * Math.min(4, on_field);
 				combat_stats.outro_bonus += 0.6;
 			}
@@ -296,14 +296,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			},
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'frosty_resolve').length;
 
 			if (echo_count >= 2)
 				combat_stats.skill_bonus += 0.12;
 
 			if (echo_count >= 5) {
-				const { skill_released = 0, burst_released = 0 } = input.echo.buffs.frosty_resolve;
+				const { skill_released = 0, burst_released = 0 } = request.echo.buffs.frosty_resolve;
 				combat_stats.glacio_bonus += 0.225 * Math.min(2, skill_released);
 				combat_stats.skill_bonus += 0.18 * Math.min(2, burst_released);
 			}
@@ -322,14 +322,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'eternal_radiance').length;
 
 			if (echo_count >= 2)
 				combat_stats.spectro_bonus += 0.1;
 
 			if (echo_count >= 5) {
-				const { spectro_frazzle = 0 } = input.echo.buffs.eternal_radiance;
+				const { spectro_frazzle = 0 } = request.echo.buffs.eternal_radiance;
 				combat_stats.crit_rate += 0.2 * +(spectro_frazzle > 0);
 				combat_stats.spectro_bonus += 0.15 * +(spectro_frazzle >= 10);
 			}
@@ -346,14 +346,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'midnight_veil').length;
 
 			if (echo_count >= 2)
 				combat_stats.havoc_bonus += 0.1;
 
 			if (echo_count >= 5) {
-				const { outro_released = 0 } = input.echo.buffs.midnight_veil;
+				const { outro_released = 0 } = request.echo.buffs.midnight_veil;
 				// todo: +15% havoc bonus for the next character
 
 				context.character.skills.outro.motions.push({
@@ -379,14 +379,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'empyrean_anthem').length;
 
 			if (echo_count >= 2)
 				combat_stats.energy_regen += 0.1;
 
 			if (echo_count >= 5) {
-				const { coordinated_crit = 0 } = input.echo.buffs.empyrean_anthem;
+				const { coordinated_crit = 0 } = request.echo.buffs.empyrean_anthem;
 				combat_stats.coordinated_attack += 0.8;
 				combat_stats.atk_p += 0.2 * coordinated_crit;
 			}
@@ -397,7 +397,7 @@ export const SONATA_DATA: Record<string, SonataData> = {
 		image: tidebreaking_courage,
 		buffs: {},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'tidebreaking_courage').length;
 
 			if (echo_count >= 2)
@@ -422,14 +422,14 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'gusts_of_welkin').length;
 
 			if (echo_count >= 2)
 				combat_stats.aero_bonus += 0.1;
 
 			if (echo_count >= 5) {
-				const { aero_erosion = 0 } = input.echo.buffs.gusts_of_welkin;
+				const { aero_erosion = 0 } = request.echo.buffs.gusts_of_welkin;
 				// todo: +15% team aero bonus
 				combat_stats.aero_bonus += 0.3 * aero_erosion;
 			}
@@ -446,7 +446,7 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'windward_pilgrimage').length;
 
 			if (echo_count >= 2) {
@@ -454,7 +454,7 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 
 			if (echo_count >= 5) {
-				const { aero_erosion } = input.echo.buffs.windward_pilgrimage;
+				const { aero_erosion } = request.echo.buffs.windward_pilgrimage;
 				combat_stats.crit_rate += 0.1 * aero_erosion;
 				combat_stats.aero_bonus += 0.3 * aero_erosion;
 			}
@@ -471,7 +471,7 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [2, 5],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'flaming_clawprint').length;
 
 			if (echo_count >= 2) {
@@ -479,7 +479,7 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 
 			if (echo_count >= 5) {
-				const { burst_released } = input.echo.buffs.flaming_clawprint;
+				const { burst_released } = request.echo.buffs.flaming_clawprint;
 				// todo: +15% team fusion bonus
 				combat_stats.fusion_bonus += 0.15 * burst_released;
 				combat_stats.burst_bonus += 0.2 * burst_released;
@@ -497,11 +497,11 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			}
 		},
 		piece_effects: [3],
-		apply_effects: (input, combat_stats, context) => {
+		apply_effects: (request, combat_stats, context) => {
 			const echo_count = context.build.filter(e => e.sonata === 'dream_of_the_lost').length;
 
 			if (echo_count >= 3) {
-				const { no_energy } = input.echo.buffs.dream_of_the_lost;
+				const { no_energy } = request.echo.buffs.dream_of_the_lost;
 				if (no_energy) {
 					combat_stats.crit_rate += 0.2;
 					combat_stats.echo_skill += 0.35;

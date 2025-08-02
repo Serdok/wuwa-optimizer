@@ -20,15 +20,15 @@ export default {
 			max_value: 2,
 		},
 	},
-	apply_effects: (input, combat_stats) => {
-		const { from_the_deep } = input.weapon.buffs;
+	apply_effects: (request, combat_stats) => {
+		const { from_the_deep } = request.weapon.buffs;
 
-		combat_stats.atk_p += ranks[input.weapon.rank - 1];
+		combat_stats.atk_p += ranks[request.weapon.rank - 1];
 		if (from_the_deep >= 1) {
-			combat_stats.basic_bonus += basic_bonuses[input.weapon.rank - 1];
+			combat_stats.basic_bonus += basic_bonuses[request.weapon.rank - 1];
 		}
 		if (from_the_deep >= 2) {
-			combat_stats.enemy_resistance -= res_bonuses[input.weapon.rank - 1];
+			combat_stats.enemy_resistance -= res_bonuses[request.weapon.rank - 1];
 		}
 	},
 } as const satisfies WeaponData;

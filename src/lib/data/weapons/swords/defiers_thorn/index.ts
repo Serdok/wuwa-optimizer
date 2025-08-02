@@ -20,13 +20,13 @@ export default {
 			max_value: 2,
 		}
 	},
-	apply_effects: (input, combat_stats) => {
-		const { a_free_knights_tarantella } = input.weapon.buffs;
+	apply_effects: (request, combat_stats) => {
+		const { a_free_knights_tarantella } = request.weapon.buffs;
 
-		combat_stats.hp_p += ranks[input.weapon.rank - 1];
+		combat_stats.hp_p += ranks[request.weapon.rank - 1];
 		if (a_free_knights_tarantella) {
-			combat_stats.enemy_def_ignore += def_ignore[input.weapon.rank - 1];
-			combat_stats.enemy_damage_vulnerability += enemy_dmg_amp[input.weapon.rank - 1];
+			combat_stats.enemy_def_ignore += def_ignore[request.weapon.rank - 1];
+			combat_stats.enemy_damage_vulnerability += enemy_dmg_amp[request.weapon.rank - 1];
 		}
 	},
 } as const satisfies WeaponData;

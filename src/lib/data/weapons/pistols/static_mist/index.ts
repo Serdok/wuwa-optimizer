@@ -17,8 +17,8 @@ export default {
 		// 	value: 1,
 		// }
 	},
-	apply_effects: (input, combat_stats) => {
-		combat_stats['energy_regen'] += ranks[input.weapon.rank - 1];
-		// combat_stats['atk_p'] += attack_bonus[input.weapon.rank - 1] * (input.character.buffs['stormy_resolution'] || 0);
+	apply_effects: (request, combat_stats) => {
+		combat_stats['energy_regen'] += ranks[request.weapon.rank - 1];
+		// combat_stats['atk_p'] += attack_bonus[request.weapon.rank - 1] * (request.character.buffs['stormy_resolution'] || 0);
 	},
 } as const satisfies WeaponData;

@@ -22,7 +22,7 @@ export type MotionTarget = {
 
 export type Target = StatTarget | MotionTarget;
 
-export type OptimizerInput = {
+export type OptimizerRequest = {
 	character: {
 		key: string,
 		sequence: number,
@@ -72,7 +72,7 @@ export type OptimizerOptions = {
 };
 
 export interface GameplayEffect {
-	apply_effects: (input: OptimizerInput, combat_stats: Record<StatKey, number>, context: OptimizerContext) => void;
+	apply_effects: (request: OptimizerRequest, combat_stats: Record<StatKey, number>, context: OptimizerContext) => void;
 }
 
 export type SwitchBuff = {

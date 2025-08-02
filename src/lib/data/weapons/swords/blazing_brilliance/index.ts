@@ -19,8 +19,8 @@ export default {
 			max_value: 14,
 		}
 	},
-	apply_effects: (input, combat_stats) => {
-		combat_stats['atk_p'] += ranks[input.weapon.rank - 1];
-		combat_stats['skill_bonus'] += skill_bonus[input.weapon.rank - 1] * (input.character.buffs['searing_feather'] || 0);
+	apply_effects: (request, combat_stats) => {
+		combat_stats['atk_p'] += ranks[request.weapon.rank - 1];
+		combat_stats['skill_bonus'] += skill_bonus[request.weapon.rank - 1] * (request.character.buffs['searing_feather'] || 0);
 	},
 } as const satisfies WeaponData;

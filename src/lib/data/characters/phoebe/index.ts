@@ -46,12 +46,12 @@ const data: CharacterData = {
 			value: 0,
 		}
 	},
-	apply_effects: (input, combat_stats) => {
-		if (input.character.buffs['absolution'] || input.character.buffs['confession']) {
+	apply_effects: (request, combat_stats) => {
+		if (request.character.buffs['absolution'] || request.character.buffs['confession']) {
 			combat_stats.spectro_bonus += 0.12;
 		}
 
-		if (input.character.sequence >= 6 && input.character.buffs['ring_of_mirrors']) {
+		if (request.character.sequence >= 6 && request.character.buffs['ring_of_mirrors']) {
 			combat_stats.atk_p += 0.1;
 		}
 	},
@@ -59,8 +59,8 @@ const data: CharacterData = {
 		'normal': {
 			type: 'normal',
 			key: 'o_come_divine_light',
-			apply_effects: (input, combat_stats) => {
-				if (input.character.sequence >= 4) {
+			apply_effects: (request, combat_stats) => {
+				if (request.character.sequence >= 4) {
 					combat_stats.enemy_resistance -= 0.1;
 				}
 			},
@@ -212,16 +212,16 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.8269, 0.8269, 0.8269],
-					apply_effects: (input, combat_stats) => {
-						if (input.character.buffs['spectro_frazzle']) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.buffs['spectro_frazzle']) {
 							combat_stats.general_amplify += 2.56;
 						}
 
-						if (input.character.sequence >= 3) {
-							if (input.character.buffs['absolution']) {
+						if (request.character.sequence >= 3) {
+							if (request.character.buffs['absolution']) {
 								combat_stats.skill_multiplier += 0.91;
 							}
-							if (input.character.buffs['confession']) {
+							if (request.character.buffs['confession']) {
 								combat_stats.skill_multiplier += 2.49;
 							}
 						}
@@ -232,17 +232,17 @@ const data: CharacterData = {
 		'burst': {
 			type: 'burst',
 			key: 'dawn_of_enlightenment',
-			apply_effects: (input, combat_stats) => {
+			apply_effects: (request, combat_stats) => {
 				let multiplier = 2.55;
-				if (input.character.sequence >= 1) {
+				if (request.character.sequence >= 1) {
 					multiplier = 4.8;
 				}
 
-				if (input.character.buffs['absolution']) {
+				if (request.character.buffs['absolution']) {
 					combat_stats.skill_multiplier += multiplier;
 				}
 
-				if (input.character.sequence >= 1 && input.character.buffs['confession']) {
+				if (request.character.sequence >= 1 && request.character.buffs['confession']) {
 					combat_stats.skill_multiplier += 0.9;
 				}
 			},
@@ -261,8 +261,8 @@ const data: CharacterData = {
 		'intro': {
 			type: 'intro',
 			key: 'golden_grace',
-			apply_effects: (input, combat_stats) => {
-				if (input.character.sequence >= 5) {
+			apply_effects: (request, combat_stats) => {
+				if (request.character.sequence >= 5) {
 					combat_stats.spectro_bonus += 0.12;
 				}
 			},
@@ -281,13 +281,13 @@ const data: CharacterData = {
 		'outro': {
 			type: 'outro',
 			key: 'attentive_heart',
-			apply_effects: (input, combat_stats) => {
-				if (input.character.buffs['absolution']) {
+			apply_effects: (request, combat_stats) => {
+				if (request.character.buffs['absolution']) {
 					combat_stats.skill_multiplier += 2.55;
 				}
 
-				if (input.character.sequence >= 2) {
-					if (input.character.buffs['absolution']) {
+				if (request.character.sequence >= 2) {
+					if (request.character.buffs['absolution']) {
 						combat_stats.general_amplify += 1.2;
 					}
 				}

@@ -18,17 +18,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="dev: ignore chrome devtools requests">
-      <change afterPath="$PROJECT_DIR$/src/lib/data/optimizer/en.json" afterDir="false" />
+    <list default="true" id="315a243f-33d4-4c82-aa05-a7173d8d9c7e" name="Changes" comment="feat: finish english translations, better target type support">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/wuwa-optimizer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wuwa-optimizer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.inlang/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.inlang/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/cantarella/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/cantarella/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/carlotta/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/carlotta/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/cartethyia/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/cartethyia/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/changli/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/changli/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/jinhsi/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/jinhsi/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/phoebe/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/phoebe/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/characters/zani/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/characters/zani/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/data/optimizer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/optimizer/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/sonatas/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/weapons/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/optimizer/build.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/build.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/optimizer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/data/optimizer/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/optimizer/optimize.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/optimize.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/optimizer/worker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/optimizer/worker.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/optimize/+page.svelte" afterDir="false" />
@@ -137,8 +138,8 @@
       <window_info id="Merge Requests" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="npm" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.16333008" />
-      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.15112305" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50064933" visible="true" weight="0.16088867" />
+      <window_info id="Commit" order="1" sideWeight="0.50064933" weight="0.20336914" />
       <window_info id="Structure" order="2" sideWeight="0.49935067" side_tool="true" weight="0.14477539" />
       <window_info id="VcsChanges" order="3" weight="0.32983398" />
       <window_info active="true" id="Pull Requests" order="4" weight="0.17944336" />
@@ -151,8 +152,8 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" weight="0.3299513" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3299513" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.3299513" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.3299513" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.3299513" />
       <window_info anchor="bottom" id="Services" order="5" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.3299513" />
       <window_info anchor="right" id="PR AI Assistant" />
@@ -297,7 +298,7 @@
       <workItem from="1754055059485" duration="7681000" />
       <workItem from="1754072172520" duration="808000" />
       <workItem from="1754074530056" duration="3129000" />
-      <workItem from="1754129817970" duration="7885000" />
+      <workItem from="1754129817970" duration="9591000" />
     </task>
     <task id="LOCAL-00001" summary="add CD">
       <option name="closed" value="true" />
@@ -579,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754059067022</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="feat: finish english translations, better target type support">
+      <option name="closed" value="true" />
+      <created>1754138907020</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1754138907020</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -609,7 +618,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix carlotta typo" />
     <MESSAGE value="fix changli typo" />
     <MESSAGE value="feat: localization" />
     <MESSAGE value="feat: import echoes from JSON" />
@@ -634,6 +642,7 @@
     <MESSAGE value="fix: cantarella s5 not properly adding 5 more instances of Diffusion DMG" />
     <MESSAGE value="feat: cartethyia" />
     <MESSAGE value="dev: ignore chrome devtools requests" />
-    <option name="LAST_COMMIT_MESSAGE" value="dev: ignore chrome devtools requests" />
+    <MESSAGE value="feat: finish english translations, better target type support" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: finish english translations, better target type support" />
   </component>
 </project>

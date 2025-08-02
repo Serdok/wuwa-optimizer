@@ -52,15 +52,15 @@ const data: CharacterData = {
 			value: 0,
 		}
 	},
-	apply_effects: (input, combat_stats) => {
+	apply_effects: (request, combat_stats) => {
 		// inherent skill 1 - radiant surge
 		combat_stats['spectro_bonus'] += 0.2;
 
-		if (input.character.sequence >= 3) {
-			combat_stats['atk_p'] += 0.25 * (input.character.buffs['immortal_s_descendancy'] || 0);
+		if (request.character.sequence >= 3) {
+			combat_stats['atk_p'] += 0.25 * (request.character.buffs['immortal_s_descendancy'] || 0);
 		}
-		if (input.character.sequence >= 4) {
-			combat_stats['general_bonus'] += 0.2 * (input.character.buffs['benevolent_grace'] || 0);
+		if (request.character.sequence >= 4) {
+			combat_stats['general_bonus'] += 0.2 * (request.character.buffs['benevolent_grace'] || 0);
 		}
 	},
 	skills: {
@@ -234,11 +234,11 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.1989, 0.1989, 0.1989, 0.1989, 0.1989, 0.1989],
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 1) {
-							combat_stats['skill_bonus'] += 0.2 * (input.character.buffs['herald_of_revival'] || 0);
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 1) {
+							combat_stats['skill_bonus'] += 0.2 * (request.character.buffs['herald_of_revival'] || 0);
 						}
-						if (input.character.sequence >= 6) {
+						if (request.character.sequence >= 6) {
 							combat_stats['skill_multiplier'] += 0.45;
 						}
 					},
@@ -250,17 +250,17 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [3.4792],
-					apply_effects: (input, combat_stats) => {
+					apply_effects: (request, combat_stats) => {
 						let incandescence_bonus = 0.4454;
-						if (input.character.sequence >= 6) {
+						if (request.character.sequence >= 6) {
 							incandescence_bonus += 0.45;
 							combat_stats['skill_multiplier'] += 0.45;
 						}
 
-						combat_stats['skill_multiplier'] += incandescence_bonus * (input.character.buffs['incandescence'] || 0);
+						combat_stats['skill_multiplier'] += incandescence_bonus * (request.character.buffs['incandescence'] || 0);
 
-						if (input.character.sequence >= 1) {
-							combat_stats['skill_bonus'] += 0.2 * (input.character.buffs['herald_of_revival'] || 0);
+						if (request.character.sequence >= 1) {
+							combat_stats['skill_bonus'] += 0.2 * (request.character.buffs['herald_of_revival'] || 0);
 						}
 					},
 				},
@@ -269,8 +269,8 @@ const data: CharacterData = {
 		'burst': {
 			type: 'burst',
 			key: 'purge_of_light',
-			apply_effects: (input, combat_stats) => {
-				if (input.character.sequence >= 5) {
+			apply_effects: (request, combat_stats) => {
+				if (request.character.sequence >= 5) {
 					combat_stats['skill_multiplier'] += 1.2;
 				}
 			},
@@ -289,7 +289,7 @@ const data: CharacterData = {
 		'intro': {
 			type: 'intro',
 			key: 'loong_s_halo',
-			apply_effects: (input, combat_stats) => {
+			apply_effects: (request, combat_stats) => {
 				combat_stats['skill_multiplier'] += 0.5;
 			},
 			motions: [

@@ -19,9 +19,9 @@ export default {
 			max_value: 3,
 		},
 	},
-	apply_effects: (input, combat_stats) => {
-		combat_stats.atk_p += ranks[input.weapon.rank - 1];
-		combat_stats.basic_bonus += (normal_bonuses[input.weapon.rank - 1] * (input.weapon.buffs['homebuilder_s_anthem'] || 0));
-		combat_stats.heavy_bonus += (normal_bonuses[input.weapon.rank - 1] * (input.weapon.buffs['homebuilder_s_anthem'] || 0));
+	apply_effects: (request, combat_stats) => {
+		combat_stats.atk_p += ranks[request.weapon.rank - 1];
+		combat_stats.basic_bonus += (normal_bonuses[request.weapon.rank - 1] * (request.weapon.buffs['homebuilder_s_anthem'] || 0));
+		combat_stats.heavy_bonus += (normal_bonuses[request.weapon.rank - 1] * (request.weapon.buffs['homebuilder_s_anthem'] || 0));
 	},
 } as const satisfies WeaponData;

@@ -22,9 +22,9 @@ export default {
 			value: 1,
 		}
 	},
-	apply_effects: (input, combat_stats) => {
-		combat_stats['general_bonus'] += ranks[input.weapon.rank - 1];
-		combat_stats['skill_bonus'] += (skill_bonuses[input.weapon.rank - 1] * (input.weapon.buffs['ageless_marking'] || 0));
-		combat_stats['skill_bonus'] += (skill_bonuses[input.weapon.rank - 1] * (input.weapon.buffs['ethereal_endowment'] || 0));
+	apply_effects: (request, combat_stats) => {
+		combat_stats['general_bonus'] += ranks[request.weapon.rank - 1];
+		combat_stats['skill_bonus'] += (skill_bonuses[request.weapon.rank - 1] * (request.weapon.buffs['ageless_marking'] || 0));
+		combat_stats['skill_bonus'] += (skill_bonuses[request.weapon.rank - 1] * (request.weapon.buffs['ethereal_endowment'] || 0));
 	},
 } as const satisfies WeaponData;

@@ -36,8 +36,8 @@ const data: CharacterData = {
 			value: 1,
 		}
 	},
-	apply_effects: (input, combat_stats) => {
-		const { poison = 0, flowing_suffocation } = input.character.buffs;
+	apply_effects: (request, combat_stats) => {
+		const { poison = 0, flowing_suffocation } = request.character.buffs;
 
 		combat_stats.havoc_bonus += 0.06 * poison;
 
@@ -127,8 +127,8 @@ const data: CharacterData = {
 					element: ['havoc'],
 					tags: [],
 					related_stat: 'atk',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 1) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 1) {
 							combat_stats.skill_multiplier += 0.5;
 						}
 					},
@@ -140,8 +140,8 @@ const data: CharacterData = {
 					element: ['havoc'],
 					tags: ['echo_skill'],
 					related_stat: 'atk',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 1) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 1) {
 							combat_stats.skill_multiplier += 0.5;
 						}
 					},
@@ -153,8 +153,8 @@ const data: CharacterData = {
 					element: ['havoc'],
 					tags: ['coordinated_attack'],
 					related_stat: 'atk',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 2.45;
 						}
 					},
@@ -173,8 +173,8 @@ const data: CharacterData = {
 					element: ['havoc'],
 					tags: [],
 					related_stat: 'atk',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 6) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 6) {
 							combat_stats.skill_multiplier += 0.8;
 						}
 					},
@@ -186,8 +186,8 @@ const data: CharacterData = {
 					element: ['havoc'],
 					tags: [],
 					related_stat: 'atk',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 6) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 6) {
 							combat_stats.skill_multiplier += 0.8;
 						}
 					},
@@ -199,8 +199,8 @@ const data: CharacterData = {
 					element: ['havoc'],
 					tags: [],
 					related_stat: 'atk',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 6) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 6) {
 							combat_stats.skill_multiplier += 0.8;
 						}
 					},
@@ -221,8 +221,8 @@ const data: CharacterData = {
 					element: ['havoc'],
 					tags: ['echo_skill'],
 					related_stat: 'atk',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 1) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 1) {
 							combat_stats.skill_multiplier += 0.5;
 						}
 					},
@@ -250,8 +250,8 @@ const data: CharacterData = {
 					element: ['havoc'],
 					tags: ['echo_skill'],
 					related_stat: 'atk',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 3) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 3) {
 							combat_stats.skill_multiplier += 3.7;
 						}
 					},
@@ -263,8 +263,8 @@ const data: CharacterData = {
 					element: ['havoc'],
 					tags: ['coordinated_attack'],
 					related_stat: 'atk',
-					apply_effects: (input, combat_stats, context) => {
-						if (input.character.sequence >= 5) {
+					apply_effects: (request, combat_stats, context) => {
+						if (request.character.sequence >= 5) {
 							const diffusion = context.character.skills.burst.motions.find(m => m.key === 'diffusion_dmg')!;
 							diffusion.values = Array(26).fill(0.1454)
 						}

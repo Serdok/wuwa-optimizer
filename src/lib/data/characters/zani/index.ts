@@ -64,9 +64,9 @@ const data: CharacterData = {
 			max_value: 150,
 		},
 	},
-	apply_effects: (input, combat_stats) => {
-		const { sunburst, immediate_execution } = input.character.buffs;
-		const sequence = input.character.sequence;
+	apply_effects: (request, combat_stats) => {
+		const { sunburst, immediate_execution } = request.character.buffs;
+		const sequence = request.character.sequence;
 
 		if (sunburst) {
 			combat_stats.spectro_frazzle_amplify += 0.2;
@@ -196,8 +196,8 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.8619, 0.2873, 1.7237],
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 0.8;
 						}
 					}
@@ -209,8 +209,8 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.8619, 0.2873, 1.7237],
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 0.8;
 						}
 					}
@@ -220,8 +220,8 @@ const data: CharacterData = {
 		'forte': {
 			type: 'forte',
 			key: 'there_will_be_a_light',
-			apply_effects: (input, combat_stats) => {
-				const { inferno_mode } = input.character.buffs;
+			apply_effects: (request, combat_stats) => {
+				const { inferno_mode } = request.character.buffs;
 
 				if (inferno_mode) {
 					combat_stats.skill_multiplier += 0.25;
@@ -235,8 +235,8 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [1.9881],
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 6) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 6) {
 							combat_stats.skill_multiplier += 0.4;
 						}
 					}
@@ -248,8 +248,8 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [4.2407],
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 6) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 6) {
 							combat_stats.skill_multiplier += 0.4;
 						}
 					}
@@ -261,11 +261,11 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [1.352, 2.6243],
-					apply_effects: (input, combat_stats) => {
-						const { nightfall_blaze_consumed } = input.character.buffs;
+					apply_effects: (request, combat_stats) => {
+						const { nightfall_blaze_consumed } = request.character.buffs;
 						let extra_multiplier = 0.095;
 
-						if (input.character.sequence >= 6) {
+						if (request.character.sequence >= 6) {
 							combat_stats.skill_multiplier += 0.4;
 							extra_multiplier += 0.4;
 						}
@@ -296,8 +296,8 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [3.1852],
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 5) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 5) {
 							combat_stats.skill_multiplier += 1.2;
 						}
 					}
@@ -309,9 +309,9 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [1.9112, 10.8296],
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 3) {
-							const { total_blaze_consumed } = input.character.buffs;
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 3) {
+							const { total_blaze_consumed } = request.character.buffs;
 							combat_stats.skill_multiplier += Math.min(0.08 * total_blaze_consumed, 12);
 						}
 					}
@@ -346,8 +346,8 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [1.5],
-					apply_effects: (input, combat_stats) => {
-						const { heliacal_ember } = input.character.buffs;
+					apply_effects: (request, combat_stats) => {
+						const { heliacal_ember } = request.character.buffs;
 						combat_stats.skill_multiplier += 0.1 * heliacal_ember;
 					}
 				},

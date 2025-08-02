@@ -24,7 +24,7 @@
 
 	import { ChartColumnBig, LoaderCircle, Settings } from 'lucide-svelte';
 
-	import type { OptimizerInput, Target } from '$lib/data/optimizer';
+	import type { OptimizerRequest, Target } from '$lib/data/optimizer';
 	import { optimize } from '$lib/optimizer/optimize';
 
 	import { db } from '$lib/db';
@@ -178,7 +178,7 @@
 			extra[stat].value += value;
 		}
 
-		const input: OptimizerInput = {
+		const input: OptimizerRequest = {
 			character: {
 				key,
 				sequence: sequence,
@@ -233,6 +233,10 @@
 	reset_weapon_buffs();
 	add_all_stats();
 </script>
+
+<svelte:head>
+	<title>{get_message(character.key)} - WuWa Optimizer</title>
+</svelte:head>
 
 <Tabs.Root value="character" class="">
 	<Tabs.List>

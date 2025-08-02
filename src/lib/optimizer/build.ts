@@ -1,7 +1,7 @@
 import type { Echo } from '$lib/data/echoes/types';
 import type {
 	OptimizerContext,
-	OptimizerInput,
+	OptimizerRequest,
 	OptimizerOptions
 } from '$lib/data/optimizer';
 import { SONATA_DATA, type SonataKey } from '$lib/data/sonatas';
@@ -41,7 +41,7 @@ export type DamageResult = {
 	target_value: number;
 };
 
-export function compute_damage(build: Echo[], input: OptimizerInput, options: OptimizerOptions): DamageResult {
+export function compute_damage(build: Echo[], input: OptimizerRequest, options: OptimizerOptions): DamageResult {
 	const character = CHARACTERS[input.character.key];
 	const weapon = WEAPONS[character.weapon_type][input.weapon.key];
 

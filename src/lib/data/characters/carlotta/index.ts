@@ -40,14 +40,14 @@ const data: CharacterData = {
 			value: 1,
 		},
 	},
-	apply_effects: (input, combat_stats, context) => {
-		combat_stats.enemy_def_ignore += 0.18 * (input.character.buffs['deconstruction'] ?? 0);
+	apply_effects: (request, combat_stats, context) => {
+		combat_stats.enemy_def_ignore += 0.18 * (request.character.buffs['deconstruction'] ?? 0);
 
-		if (input.character.sequence >= 1) {
-			combat_stats.crit_rate += 0.125 * (input.character.buffs['deconstruction'] ?? 0);
+		if (request.character.sequence >= 1) {
+			combat_stats.crit_rate += 0.125 * (request.character.buffs['deconstruction'] ?? 0);
 		}
 
-		if (input.character.sequence >= 3) {
+		if (request.character.sequence >= 3) {
 			context.character.skills.outro.motions.push({
 				type: ['outro'],
 				key: 'kaleidoscope_sparks',
@@ -59,8 +59,8 @@ const data: CharacterData = {
 			})
 		}
 
-		if (input.character.sequence >= 4) {
-			combat_stats.skill_bonus += 0.25 * (input.character.buffs['yesterday_s_raindrops_make_the_finest_wine'] ?? 0);
+		if (request.character.sequence >= 4) {
+			combat_stats.skill_bonus += 0.25 * (request.character.buffs['yesterday_s_raindrops_make_the_finest_wine'] ?? 0);
 		}
  	},
 	skills: {
@@ -164,8 +164,8 @@ const data: CharacterData = {
 		'skill': {
 			type: 'skill',
 			key: 'art_of_violence',
-			apply_effects: (input, combat_stats) => {
-				if (input.character.sequence >= 3) {
+			apply_effects: (request, combat_stats) => {
+				if (request.character.sequence >= 3) {
 					combat_stats.skill_multiplier += 0.93;
 				}
 			},
@@ -202,8 +202,8 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [0.6683, 0.6683, 0.6683, 0.6683, 0.6683, 5.0121],
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 5) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 5) {
 							combat_stats.skill_multiplier += 0.47;
 						}
 					},
@@ -213,8 +213,8 @@ const data: CharacterData = {
 		'burst': {
 			type: 'burst',
 			key: 'era_of_new_wave',
-			apply_effects: (input, combat_stats) => {
-				combat_stats.skill_multiplier += 0.8 * (input.character.buffs['final_bow'] ?? 0);
+			apply_effects: (request, combat_stats) => {
+				combat_stats.skill_multiplier += 0.8 * (request.character.buffs['final_bow'] ?? 0);
 			},
 			motions: [
 				{
@@ -233,8 +233,8 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [1.8364, 0.145, 0.145, 0.145, 0.145],
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 6) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 6) {
 							combat_stats.skill_multiplier += 1.866;
 						}
 					},
@@ -246,8 +246,8 @@ const data: CharacterData = {
 					tags: [],
 					related_stat: 'atk',
 					values: [6.4433],
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 1.26;
 						}
 					},

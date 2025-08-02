@@ -56,13 +56,13 @@ const data: CharacterData = {
 			value: 1,
 		},
 	},
-	apply_effects: (input, combat_stats) => {
-		const { manifest, mandate_of_divinity } = input.character.buffs;
+	apply_effects: (request, combat_stats) => {
+		const { manifest, mandate_of_divinity } = request.character.buffs;
 		if (manifest && mandate_of_divinity) {
 			combat_stats.aero_erosion_amplify += 0.5;
 		}
 
-		const { aero_erosion } = input.character.buffs;
+		const { aero_erosion } = request.character.buffs;
 		if (aero_erosion > 0) {
 			combat_stats.enemy_damage_vulnerability += 0.3;
 		}
@@ -70,17 +70,17 @@ const data: CharacterData = {
 			combat_stats.enemy_damage_vulnerability += 0.1 * Math.min(aero_erosion - 3, 3);
 		}
 
-		const { conviction } = input.character.buffs;
+		const { conviction } = request.character.buffs;
 		if (manifest) {
 			combat_stats.crit_dmg += 0.25 * Math.min(conviction, 4);
 		}
 
-		const { debuff_effect } = input.character.buffs;
+		const { debuff_effect } = request.character.buffs;
 		if (debuff_effect) {
 			combat_stats.general_bonus += 0.2;
 		}
 
-		if (input.character.sequence >= 6) {
+		if (request.character.sequence >= 6) {
 			combat_stats.enemy_damage_vulnerability += 0.4;
 		}
 	},
@@ -96,8 +96,8 @@ const data: CharacterData = {
 					element: ['aero'],
 					tags: [],
 					related_stat: 'hp',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 0.5;
 						}
 					},
@@ -109,8 +109,8 @@ const data: CharacterData = {
 					element: ['aero'],
 					tags: [],
 					related_stat: 'hp',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 0.5;
 						}
 					},
@@ -122,8 +122,8 @@ const data: CharacterData = {
 					element: ['aero'],
 					tags: [],
 					related_stat: 'hp',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 0.5;
 						}
 					},
@@ -135,8 +135,8 @@ const data: CharacterData = {
 					element: ['aero'],
 					tags: [],
 					related_stat: 'hp',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 0.5;
 						}
 					},
@@ -148,8 +148,8 @@ const data: CharacterData = {
 					element: ['aero'],
 					tags: [],
 					related_stat: 'hp',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 0.5;
 						}
 					},
@@ -161,8 +161,8 @@ const data: CharacterData = {
 					element: ['aero'],
 					tags: [],
 					related_stat: 'hp',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 0.5;
 						}
 					},
@@ -174,8 +174,8 @@ const data: CharacterData = {
 					element: ['aero'],
 					tags: [],
 					related_stat: 'hp',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 2;
 						}
 					},
@@ -187,8 +187,8 @@ const data: CharacterData = {
 					element: ['aero'],
 					tags: [],
 					related_stat: 'hp',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 2;
 						}
 					},
@@ -200,8 +200,8 @@ const data: CharacterData = {
 					element: ['aero'],
 					tags: [],
 					related_stat: 'hp',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 2;
 						}
 					},
@@ -213,8 +213,8 @@ const data: CharacterData = {
 					element: ['aero'],
 					tags: [],
 					related_stat: 'hp',
-					apply_effects: (input, combat_stats) => {
-						if (input.character.sequence >= 2) {
+					apply_effects: (request, combat_stats) => {
+						if (request.character.sequence >= 2) {
 							combat_stats.skill_multiplier += 2;
 						}
 					},
@@ -382,12 +382,12 @@ const data: CharacterData = {
 					element: ['aero'],
 					tags: [],
 					related_stat: 'hp',
-					apply_effects: (input, combat_stats) => {
-						const { aero_erosion } = input.character.buffs;
+					apply_effects: (request, combat_stats) => {
+						const { aero_erosion } = request.character.buffs;
 						// fixme: is it enemy damage amplify?
 						combat_stats.general_amplify += 0.2 * Math.min(5, aero_erosion);
 
-						if (input.character.sequence >= 3) {
+						if (request.character.sequence >= 3) {
 							combat_stats.skill_multiplier += 1;
 						}
 					},

@@ -25,25 +25,21 @@ const data: CharacterData = {
 			key: 'spectro_frazzle',
 			kind: 'switch',
 			sequence: 0,
-			value: 1,
 		},
 		'absolution': {
 			key: 'absolution',
 			kind: 'switch',
 			sequence: 0,
-			value: 1,
 		},
 		'confession': {
 			key: 'confession',
 			kind: 'switch',
 			sequence: 0,
-			value: 0,
 		},
 		'ring_of_mirrors': {
 			key: 'ring_of_mirrors',
 			kind: 'switch',
 			sequence: 6,
-			value: 0,
 		}
 	},
 	apply_effects: (request, combat_stats) => {
@@ -306,6 +302,40 @@ const data: CharacterData = {
 		},
 	},
 	image: { portrait },
+	defaults: {
+		character: {
+			buffs: {
+				spectro_frazzle: 1,
+				absolution: 1,
+			}
+		},
+		weapon: {
+			key: 'luminous_hymn',
+			rank: 1,
+			buffs: {
+				homebuilder_s_anthem: 3,
+			}
+		},
+		echo: {
+			filter: {
+				allowed_primary_stats: {
+					4: ['crit_rate', 'crit_dmg'],
+					3: ['spectro_bonus', 'atk_p'],
+					1: ['atk_p']
+				},
+				activated_effects: {
+					celestial_light: [2, 5],
+					moonlit_clouds: [5],
+					eternal_radiance: [2, 5],
+				}
+			},
+			buffs: {
+				celestial_light: { intro_released: 1 },
+				eternal_radiance: { spectro_frazzle: 10 }
+			}
+		},
+		target_key: { kind: 'motion', skill: 'radiant_invocation', motion: 'absolution_litany_dmg' }
+	}
 }
 
 export default data;

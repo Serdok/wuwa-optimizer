@@ -25,7 +25,6 @@ const data: CharacterData = {
 			key: 'incandescence',
 			kind: 'slider',
 			sequence: 0,
-			value: 50,
 			min_value: 0,
 			max_value: 50,
 		},
@@ -33,7 +32,6 @@ const data: CharacterData = {
 			key: 'herald_of_revival',
 			kind: 'slider',
 			sequence: 1,
-			value: 4,
 			min_value: 0,
 			max_value: 4,
 		},
@@ -41,7 +39,6 @@ const data: CharacterData = {
 			key: 'immortal_s_descendancy',
 			kind: 'slider',
 			sequence: 3,
-			value: 2,
 			min_value: 0,
 			max_value: 2,
 		},
@@ -49,7 +46,6 @@ const data: CharacterData = {
 			key: 'benevolent_grace',
 			kind: 'switch',
 			sequence: 4,
-			value: 0,
 		}
 	},
 	apply_effects: (request, combat_stats) => {
@@ -312,6 +308,37 @@ const data: CharacterData = {
 		},
 	},
 	image: { portrait },
+	defaults: {
+		character: {
+			buffs: {
+				incandescence: 50,
+			},
+		},
+		weapon: {
+			key: 'ages_of_harvest',
+			rank: 1,
+			buffs: {
+				ageless_marking: 1,
+				ethereal_endowment: 1,
+			}
+		},
+		echo: {
+			filter: {
+				allowed_primary_stats: {
+					4: ['crit_dmg', 'crit_rate'],
+					3: ['spectro_bonus', 'atk_p'],
+					1: ['atk_p']
+				},
+				activated_effects: {
+					celestial_light: [2, 5],
+				}
+			},
+			buffs: {
+				celestial_light: { intro_released: 1 }
+			}
+		},
+		target_key: { kind: 'motion', skill: 'luminal_synthesis', motion: 'illuminous_epiphany_stella_glamor_dmg' }
+	},
 } as const;
 
 export default data;

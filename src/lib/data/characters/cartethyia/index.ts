@@ -25,19 +25,16 @@ const data: CharacterData = {
 			key: 'manifest',
 			kind: 'switch',
 			sequence: 0,
-			value: 1,
 		},
 		mandate_of_divinity: {
 			key: 'mandate_of_divinity',
 			kind: 'switch',
 			sequence: 0,
-			value: 1,
 		},
 		aero_erosion: {
 			key: 'aero_erosion',
 			kind: 'slider',
 			sequence: 0,
-			value: 6,
 			min_value: 0,
 			max_value: 6,
 		},
@@ -45,7 +42,6 @@ const data: CharacterData = {
 			key: 'conviction',
 			kind: 'slider',
 			sequence: 1,
-			value: 4,
 			min_value: 0,
 			max_value: 4,
 		},
@@ -53,7 +49,6 @@ const data: CharacterData = {
 			key: 'debuff_effect',
 			kind: 'switch',
 			sequence: 4,
-			value: 1,
 		},
 	},
 	apply_effects: (request, combat_stats) => {
@@ -428,6 +423,37 @@ const data: CharacterData = {
 		},
 	},
 	image: { portrait },
+	defaults: {
+		character: {
+			buffs: {
+				manifest: 1,
+				mandate_of_divinity: 1,
+				aero_erosion: 6,
+			}
+		},
+		weapon: {
+			key: 'defiers_thorn',
+			rank: 1,
+			buffs: {
+				a_free_knights_tarantella: 2,
+			}
+		},
+		echo: {
+			filter: {
+				allowed_primary_stats: {
+					4: ['crit_rate', 'crit_dmg'],
+					3: ['aero_bonus', 'hp_p'],
+					1: ['hp_p']
+				},
+				activated_effects: {
+					sierra_gale: [2, 5],
+					gusts_of_welkin: [2, 5],
+					windward_pilgrimage: [2, 5],
+				}
+			},
+		},
+		target_key: { kind: 'motion', skill: 'a_knights_heartfelt_prayers', motion: 'blade_of_howling_squall_dmg' }
+	},
 } as const;
 
 export default data;

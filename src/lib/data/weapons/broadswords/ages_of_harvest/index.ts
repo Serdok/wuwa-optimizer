@@ -14,12 +14,10 @@ export default {
 		'ageless_marking': {
 			key: 'ageless_marking',
 			kind: 'switch',
-			value: 1,
 		},
 		'ethereal_endowment': {
 			key: 'ethereal_endowment',
 			kind: 'switch',
-			value: 1,
 		}
 	},
 	apply_effects: (request, combat_stats) => {

@@ -25,7 +25,6 @@ const data: CharacterData = {
 			key: 'enflamement',
 			kind: 'slider',
 			sequence: 0,
-			value: 4,
 			min_value: 0,
 			max_value: 4
 		},
@@ -33,13 +32,11 @@ const data: CharacterData = {
 			key: 'fiery_feather',
 			kind: 'switch',
 			sequence: 0,
-			value: 1
 		},
 		polished_words: {
 			key: 'polished_words',
 			kind: 'switch',
 			sequence: 4,
-			value: 1
 		}
 	},
 	apply_effects: (request, combat_stats) => {
@@ -294,11 +291,21 @@ const data: CharacterData = {
 			motions: []
 		}
 	},
+	image: { portrait },
 	defaults: {
+		character: {
+			buffs: {
+				enflamement: 4,
+				fiery_feather: 1,
+				polished_words: 0,
+			}
+		},
 		weapon: {
 			key: 'blazing_brilliance',
 			rank: 1,
-			buffs: {}
+			buffs: {
+				searing_feather: 14,
+			}
 		},
 		echo: {
 			filter: {
@@ -309,18 +316,19 @@ const data: CharacterData = {
 				},
 				activated_effects: {
 					molten_rift: [2, 5],
-					lingering_tunes: [2, 5],
 					flaming_clawprint: [2, 5]
 				}
 			},
-			buffs: {},
+			buffs: {
+				molten_rift: { skill_released: 1 },
+				flaming_clawprint: { burst_released: 1 }
+			},
 			allow_rainbow: false,
 			allow_partial: false
 		},
 		// keep_count: 3,
 		target_key: { kind: 'motion', skill: 'flaming_sacrifice', motion: 'flaming_sacrifice_dmg' }
 	},
-	image: { portrait }
 } as const;
 
 export default data;

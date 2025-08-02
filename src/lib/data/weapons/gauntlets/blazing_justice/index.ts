@@ -15,7 +15,6 @@ export default {
 		'cast_basic_attack': {
 			key: 'cast_basic_attack',
 			kind: 'switch',
-			value: 1,
 		}
 	},
 	apply_effects: (request, combat_stats) => {

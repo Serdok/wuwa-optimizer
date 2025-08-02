@@ -14,7 +14,6 @@ export default {
 		'stormy_resolution': {
 			key: 'stormy_resolution',
 			kind: 'slider',
-			value: 3,
 			min_value: 0,
 			max_value: 3,
 		},

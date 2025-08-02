@@ -14,7 +14,6 @@ export default {
 		'homebuilder_s_anthem': {
 			key: 'homebuilder_s_anthem',
 			kind: 'slider',
-			value: 3,
 			min_value: 0,
 			max_value: 3,
 		},

@@ -30,6 +30,8 @@
 	import { db } from '$lib/db';
 	import type { DamageResult } from '$lib/optimizer/build';
 
+	import CharacterBuffs from './character-buffs.svelte';
+	import WeaponBuffs from './weapon-buffs.svelte';
 	import SonataItem from './sonata-item.svelte';
 	import Result from './Result.svelte';
 
@@ -69,7 +71,6 @@
 	let echo_primaries: OptimizerRequest['echo']['filter']['allowed_primary_stats'] = $state({ 4: [], 3: [], 1: [] });
 	let echo_buffs: OptimizerRequest['echo']['buffs'] = $state({});
 	let activated_effects: OptimizerRequest['echo']['filter']['activated_effects'] = $state({});
-	$inspect(activated_effects);
 
 	let results: DamageResult[] = $state([]);
 
@@ -99,10 +100,10 @@
 			weapon_key = first_weapon.key;
 		}
 
+		set_character_defaults();
+
 		reset_character_buffs();
 		reset_weapon_buffs();
-
-		set_character_defaults();
 	}
 
 	function set_character_defaults() {
@@ -112,20 +113,24 @@
 		keep_count = character.defaults?.keep_count || 3;
 		target_key = character.defaults?.target_key || { kind: 'stat', stat: 'atk' };
 
-		echo_primaries['4'] = character.defaults?.echo?.filter.allowed_primary_stats['4'] || Object.values(PRIMARY_MAIN_STATS['4'].stats).map(s => s.stat);
-		echo_primaries['3'] = character.defaults?.echo?.filter.allowed_primary_stats['3'] || Object.values(PRIMARY_MAIN_STATS['3'].stats).map(s => s.stat);
-		echo_primaries['1'] = character.defaults?.echo?.filter.allowed_primary_stats['1'] || Object.values(PRIMARY_MAIN_STATS['1'].stats).map(s => s.stat);
+		echo_primaries['4'] = character.defaults?.echo?.filter?.allowed_primary_stats['4'] || Object.values(PRIMARY_MAIN_STATS['4'].stats).map(s => s.stat);
+		echo_primaries['3'] = character.defaults?.echo?.filter?.allowed_primary_stats['3'] || Object.values(PRIMARY_MAIN_STATS['3'].stats).map(s => s.stat);
+		echo_primaries['1'] = character.defaults?.echo?.filter?.allowed_primary_stats['1'] || Object.values(PRIMARY_MAIN_STATS['1'].stats).map(s => s.stat);
 
-		echo_buffs = character.defaults?.echo?.buffs || Object.fromEntries(Object.values(SONATA_DATA).map(d => [d.key, Object.fromEntries(Object.values(d.buffs).map(b => [b.key, b.value]))]));
-		activated_effects = Object.fromEntries(Object.values(SONATA_DATA).map(s => [s.key, character.defaults?.echo?.filter.activated_effects[s.key] || []]));
+		echo_buffs = Object.fromEntries(Object.values(SONATA_DATA).map(d =>
+			[d.key, Object.fromEntries(Object.values(d.buffs).map(b =>
+				[b.key, character.defaults?.echo?.buffs?.[d.key]?.[b.key] || 0]
+			))]
+		));
+		activated_effects = Object.fromEntries(Object.values(SONATA_DATA).map(s => [s.key, character.defaults?.echo?.filter?.activated_effects[s.key] || []]));
 	}
 
 	function reset_character_buffs() {
-		character_buffs = Object.fromEntries(Object.entries(character.buffs).map(([key, buff]) => [key, sequence <= buff.sequence ? buff.value : 0]));
+		character_buffs = Object.fromEntries(Object.entries(character.buffs).map(([key, _]) => [key, character.defaults?.character?.buffs[key] || 0]));
 	}
 
 	function reset_weapon_buffs() {
-		weapon_buffs = Object.fromEntries(Object.entries(weapon.buffs).map(([key, buff]) => [key, buff.value]));
+		weapon_buffs = Object.fromEntries(Object.entries(weapon.buffs).map(([key, _]) => [key, character.defaults?.weapon?.buffs[key] || 0]));
 	}
 
 	function add_all_stats() {
@@ -507,52 +512,13 @@
 					<Accordion.Item value="character-buffs">
 						<Accordion.Trigger class="px-2">{m.character_buffs()}</Accordion.Trigger>
 						<Accordion.Content class="px-2">
-							<div class="px-2 flex flex-col gap-4">
-								{#each Object.entries(character.buffs) as [key, buff]}
-									{#if buff.kind === 'slider'}
-										<div>
-											<div class="flex flex-row items-center gap-2">
-												<Input id={key} bind:value={character_buffs[key]} disabled={sequence < buff.sequence}
-															 class="basis-16" />
-												<Label for={key}>{get_message(key)}</Label>
-											</div>
-											<Slider type="single" bind:value={character_buffs[key]} min={buff.min_value} max={buff.max_value}
-															step={1} disabled={sequence < buff.sequence} class="mt-2" />
-										</div>
-									{:else}
-										{@const checked = character_buffs[key] > 0}
-										<div class="flex flex-row items-center gap-2">
-											<Switch id={key} {checked} onCheckedChange={chk => character_buffs[key] = +chk}
-															disabled={sequence < buff.sequence} class="" />
-											<Label for={key}>{get_message(key)}</Label>
-										</div>
-									{/if}
-								{/each}
-							</div>
+							<CharacterBuffs {character} {sequence} bind:buffs={character_buffs} />
 						</Accordion.Content>
 					</Accordion.Item>
 					<Accordion.Item value="weapon-buffs">
 						<Accordion.Trigger class="px-2">{m.weapon_buffs()}</Accordion.Trigger>
 						<Accordion.Content class="px-2">
-							<div class="px-2 flex flex-col gap-4">
-								{#each Object.entries(weapon.buffs) as [key, buff]}
-									{#if buff.kind === 'slider'}
-										<div>
-											<div class="flex flex-row items-center gap-2">
-												<Input id={key} bind:value={weapon_buffs[key]} class="basis-16" />
-												<Label for={key}>{get_message(key)}</Label>
-											</div>
-											<Slider type="single" bind:value={weapon_buffs[key]} min={buff.min_value} max={buff.max_value} step={1} class="mt-2" />
-										</div>
-									{:else}
-										{@const checked = weapon_buffs[key] > 0}
-										<div class="flex flex-row items-center gap-2">
-											<Switch id={key} {checked} onCheckedChange={chk => weapon_buffs[key] = +chk} />
-											<Label for={key}>{get_message(key)}</Label>
-										</div>
-									{/if}
-								{/each}
-							</div>
+							<WeaponBuffs {weapon} bind:buffs={weapon_buffs} />
 						</Accordion.Content>
 					</Accordion.Item>
 					<Accordion.Item value="character-stats">
@@ -636,7 +602,7 @@
 			<div class="col-span-2 p-2 border rounded-lg flex flex-col gap-2">
 				<div class="grid grid-cols-3 gap-2">
 					{#each SONATAS as sonata (sonata)}
-						<SonataItem {sonata} {on_buff_change} bind:allow_list={activated_effects[sonata]} />
+						<SonataItem {sonata} bind:buffs={echo_buffs[sonata]} bind:allow_list={activated_effects[sonata]} />
 					{/each}
 				</div>
 			</div>

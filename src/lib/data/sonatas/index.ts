@@ -37,14 +37,12 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			'basic_released': {
 				key: 'basic_released',
 				kind: 'slider',
-				value: 3,
 				min_value: 0,
 				max_value: 3,
 			},
 			'heavy_released': {
 				key: 'heavy_released',
 				kind: 'slider',
-				value: 3,
 				min_value: 0,
 				max_value: 3,
 			},
@@ -69,7 +67,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			skill_released: {
 				key: 'skill_released',
 				kind: 'switch',
-				value: 1,
 			}
 		},
 		piece_effects: [2, 5],
@@ -92,14 +89,12 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			heavy_released: {
 				key: 'heavy_released',
 				kind: 'slider',
-				value: 2,
 				min_value: 0,
 				max_value: 2,
 			},
 			skill_released: {
 				key: 'skill_released',
 				kind: 'slider',
-				value: 2,
 				min_value: 0,
 				max_value: 2,
 			}
@@ -126,7 +121,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			intro_released: {
 				key: 'intro_released',
 				kind: 'switch',
-				value: 1,
 			}
 		},
 		piece_effects: [2, 5],
@@ -149,7 +143,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			intro_released: {
 				key: 'intro_released',
 				kind: 'switch',
-				value: 1,
 			}
 		},
 		piece_effects: [2, 5],
@@ -174,14 +167,12 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			basic_released: {
 				key: 'basic_released',
 				kind: 'slider',
-				value: 4,
 				min_value: 0,
 				max_value: 4,
 			},
 			heavy_released: {
 				key: 'heavy_released',
 				kind: 'slider',
-				value: 4,
 				min_value: 0,
 				max_value: 4,
 			}
@@ -206,7 +197,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			healing_allies: {
 				key: 'healing_allies',
 				kind: 'switch',
-				value: 1,
 			}
 		},
 		piece_effects: [2, 5],
@@ -232,7 +222,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			outro_released: {
 				key: 'outro_released',
 				kind: 'switch',
-				value: 1
 			}
 		},
 		piece_effects: [2, 5],
@@ -257,7 +246,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			on_field: {
 				key: 'on_field',
 				kind: 'slider',
-				value: 4,
 				min_value: 0,
 				max_value: 4,
 			}
@@ -283,14 +271,12 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			skill_released: {
 				key: 'skill_released',
 				kind: 'slider',
-				value: 2,
 				min_value: 0,
 				max_value: 2,
 			},
 			burst_released: {
 				key: 'burst_released',
 				kind: 'slider',
-				value: 2,
 				min_value: 0,
 				max_value: 2,
 			},
@@ -316,7 +302,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			spectro_frazzle: {
 				key: 'spectro_frazzle',
 				kind: 'slider',
-				value: 10,
 				min_value: 0,
 				max_value: 10
 			}
@@ -342,7 +327,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			outro_released: {
 				key: 'outro_released',
 				kind: 'switch',
-				value: 1,
 			}
 		},
 		piece_effects: [2, 5],
@@ -375,7 +359,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			coordinated_crit: {
 				key: 'coordinated_crit',
 				kind: 'switch',
-				value: 1,
 			}
 		},
 		piece_effects: [2, 5],
@@ -418,7 +401,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			aero_erosion: {
 				key: 'aero_erosion',
 				kind: 'switch',
-				value: 1,
 			}
 		},
 		piece_effects: [2, 5],
@@ -442,7 +424,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			aero_erosion: {
 				key: 'aero_erosion',
 				kind: 'switch',
-				value: 1,
 			}
 		},
 		piece_effects: [2, 5],
@@ -467,7 +448,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			burst_released: {
 				key: 'burst_released',
 				kind: 'switch',
-				value: 1,
 			}
 		},
 		piece_effects: [2, 5],
@@ -493,7 +473,6 @@ export const SONATA_DATA: Record<string, SonataData> = {
 			no_energy: {
 				key: 'no_energy',
 				kind: 'switch',
-				value: 1,
 			}
 		},
 		piece_effects: [3],

@@ -25,19 +25,16 @@ const data: CharacterData = {
 			key: 'final_bow',
 			kind: 'switch',
 			sequence: 0,
-			value: 1,
 		},
 		'deconstruction': {
 			key: 'deconstruction',
 			kind: 'switch',
 			sequence: 0,
-			value: 1,
 		},
 		'yesterday_s_raindrops_make_finest_wine': {
 			key: 'yesterday_s_raindrops_make_the_finest_wine',
 			kind: 'switch',
 			sequence: 4,
-			value: 1,
 		},
 	},
 	apply_effects: (request, combat_stats, context) => {
@@ -288,6 +285,39 @@ const data: CharacterData = {
 		},
 	},
 	image: { portrait },
+	defaults: {
+		character: {
+			buffs: {
+				final_bow: 1,
+				deconstruction: 1,
+			},
+		},
+		weapon: {
+			key: 'the_last_dance',
+			rank: 1,
+			buffs: {
+				silent_eulogy: 1,
+			},
+		},
+		echo: {
+			filter: {
+				allowed_primary_stats: {
+					4: ['crit_dmg', 'crit_rate'],
+					3: ['glacio_bonus', 'atk_p'],
+					1: ['atk_p']
+				},
+				activated_effects: {
+					freezing_frost: [2, 5],
+					frosty_resolve: [2, 5],
+				}
+			},
+			buffs: {
+				freezing_frost: { basic_released: 3 },
+				frosty_resolve: { skill_released: 2, burst_released: 2 },
+			},
+		},
+		target_key: { kind: 'motion', skill: 'era_of_new_wave', motion: 'fatal_finale_dmg' }
+	},
 } as const;
 
 export default data;

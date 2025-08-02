@@ -14,7 +14,6 @@ export default {
 		'searing_feather': {
 			key: 'searing_feather',
 			kind: 'slider',
-			value: 14,
 			min_value: 0,
 			max_value: 14,
 		}

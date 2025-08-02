@@ -78,13 +78,11 @@ export interface GameplayEffect {
 export type SwitchBuff = {
 	kind: 'switch',
 	key: string,
-	value: number,
 };
 
 export type SliderBuff = {
 	kind: 'slider',
 	key: string,
-	value: number,
 	min_value: number,
 	max_value: number,
 };

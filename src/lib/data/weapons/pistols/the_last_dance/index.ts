@@ -14,7 +14,6 @@ export default {
 		'silent_eulogy': {
 			key: 'silent_eulogy',
 			kind: 'switch',
-			value: 1,
 		}
 	},
 	apply_effects: (request, combat_stats) => {

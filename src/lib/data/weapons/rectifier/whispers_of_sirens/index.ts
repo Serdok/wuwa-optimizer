@@ -15,7 +15,6 @@ export default {
 		'from_the_deep': {
 			key: 'from_the_deep',
 			kind: 'slider',
-			value: 2,
 			min_value: 0,
 			max_value: 2,
 		},

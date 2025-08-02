@@ -25,7 +25,6 @@ const data: CharacterData = {
 			key: 'poison',
 			kind: 'slider',
 			sequence: 0,
-			value: 2,
 			min_value: 0,
 			max_value: 2,
 		},
@@ -33,7 +32,6 @@ const data: CharacterData = {
 			key: 'flowing_suffocation',
 			kind: 'switch',
 			sequence: 6,
-			value: 1,
 		}
 	},
 	apply_effects: (request, combat_stats) => {
@@ -306,6 +304,42 @@ const data: CharacterData = {
 		},
 	},
 	image: { portrait },
+	defaults: {
+		character: {
+			buffs: {
+				poison: 2,
+			},
+		},
+		weapon: {
+			key: 'whispers_of_sirens',
+			rank: 1,
+			buffs: {},
+		},
+		echo: {
+			filter: {
+				allowed_primary_stats: {
+					4: ['crit_dmg', 'crit_rate'],
+					3: ['havoc_bonus', 'atk_p'],
+					1: ['atk_p']
+				},
+				activated_effects: {
+					sun_sinking_eclipse: [2, 5],
+					moonlit_clouds: [5],
+					midnight_veil: [5],
+					empyrean_anthem: [5],
+				}
+			},
+			buffs: {
+				sun_sinking_eclipse: { basic_released: 4, },
+				moonlit_clouds: { outro_released: 1 },
+				midnight_veil: { outro_released: 1 },
+				empyrean_anthem: { coordinated_crit: 1 },
+			},
+			allow_rainbow: false,
+			allow_partial: false,
+		},
+		target_key: { kind: 'motion', skill: 'between_illusion_and_reality', motion: 'perception_drain_dmg' },
+	},
 } as const;
 
 export default data;

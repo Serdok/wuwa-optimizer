@@ -15,7 +15,6 @@ export default {
 		a_free_knights_tarantella: {
 			key: 'a_free_knights_tarantella',
 			kind: 'slider',
-			value: 2,
 			min_value: 0,
 			max_value: 2,
 		}

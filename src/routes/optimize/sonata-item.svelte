@@ -11,14 +11,13 @@
 	interface Props {
 		sonata: SonataKey;
 		allow_list: number[];
-		on_buff_change: (buff: { sonata: SonataKey, key: string, value: number }) => void;
+		buffs: Record<string, number>;
 	}
 
-	const { sonata, allow_list = $bindable(), on_buff_change }: Props = $props();
+	const { sonata, allow_list = $bindable(), buffs = $bindable() }: Props = $props();
 
 	const data = SONATA_DATA[sonata];
 
-	const buffs = $state(Object.fromEntries(Object.values(data.buffs).map(b => [b.key, b.value])));
 	const activated = $derived(data.piece_effects.map(e => ({ piece: e, value: allow_list && allow_list.includes(e) })));
 
 	function toggle_effect(item: { piece: number, value: boolean }) {
@@ -36,15 +35,14 @@
 			{#if buff.kind === 'slider'}
 				<div>
 					<div class="flex flex-row items-center space-x-2">
-						<Input id={key} bind:value={buffs[key]} onchange={() => on_buff_change({ sonata, key, value: buffs[key] })} class="basis-16 h-8 rounded-xl" />
+						<Input id={key} bind:value={buffs[key]} class="basis-16 h-8 rounded-xl" />
 						<Label for={key}>{get_message(key)}</Label>
 					</div>
-					<Slider type="single" bind:value={buffs[key]} min={buff.min_value} max={buff.max_value} step={1} onValueCommit={() => on_buff_change({ sonata, key, value: buffs[key]})} class="mt-2" />
+					<Slider type="single" bind:value={buffs[key]} min={buff.min_value} max={buff.max_value} step={1} class="mt-2" />
 				</div>
 			{:else}
-				{@const checked = buffs[key] > 0}
 				<div class="flex flex-row items-center space-x-2">
-					<Switch id={key} {checked} onCheckedChange={chk => { buffs[key] = +chk; on_buff_change({ sonata, key, value: buffs[key] }); }} />
+					<Switch id={key} bind:checked={() => buffs[key] > 0, (v) => buffs[key] = +v} />
 					<Label for={key}>{get_message(key)}</Label>
 				</div>
 			{/if}

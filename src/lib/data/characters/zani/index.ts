@@ -25,19 +25,16 @@ const data: CharacterData = {
 			key: 'sunburst',
 			kind: 'switch',
 			sequence: 0,
-			value: 1,
 		},
 		'inferno_mode': {
 			key: 'inferno_mode',
 			kind: 'switch',
 			sequence: 0,
-			value: 1,
 		},
 		'nightfall_blaze_consumed': {
 			key: 'nightfall_blaze_consumed',
 			kind: 'slider',
 			sequence: 0,
-			value: 40,
 			min_value: 0,
 			max_value: 40,
 		},
@@ -45,13 +42,11 @@ const data: CharacterData = {
 			key: 'immediate_execution',
 			kind: 'switch',
 			sequence: 0,
-			value: 1,
 		},
 		'heliacal_ember': {
 			key: 'heliacal_ember',
 			kind: 'slider',
 			sequence: 0,
-			value: 60,
 			min_value: 0,
 			max_value: 60,
 		},
@@ -59,7 +54,6 @@ const data: CharacterData = {
 			key: 'total_blaze_consumed',
 			kind: 'slider',
 			sequence: 3,
-			value: 150,
 			min_value: 0,
 			max_value: 150,
 		},
@@ -355,6 +349,40 @@ const data: CharacterData = {
 		},
 	},
 	image: { portrait },
+	defaults: {
+		character: {
+			buffs: {
+				sunburst: 1,
+				inferno_mode: 1,
+				nightfall_blaze_consumed: 40,
+				immediate_execution: 1,
+				heliacal_ember: 60,
+			}
+		},
+		weapon: {
+			key: 'blazing_justice',
+			rank: 1,
+			buffs: {
+				cast_basic_attack: 1
+			}
+		},
+		echo: {
+			filter: {
+				allowed_primary_stats: {
+					4: ['crit_dmg', 'crit_rate'],
+					3: ['spectro_bonus', 'atk_p'],
+					1: ['atk_p']
+				},
+				activated_effects: {
+					eternal_radiance: [2, 5]
+				}
+			},
+			buffs: {
+				eternal_radiance: { spectro_frazzle: 10 }
+			}
+		},
+		target_key: { kind: 'motion', skill: 'between_dawn_and_dusk', motion: 'the_last_stand_dmg' }
+	},
 }
 
 export default data;

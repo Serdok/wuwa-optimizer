@@ -1,5 +1,5 @@
 import type { BaseStatKey, StatValue } from '$lib/data/stats';
-import type { Buff, GameplayEffect } from '$lib/optimizer';
+import type { Buff, GameplayEffect } from '$lib/data/optimizer';
 
 import { SWORDS } from './swords';
 import { BROADSWORDS } from './broadswords';

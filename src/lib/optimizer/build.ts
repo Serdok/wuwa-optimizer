@@ -3,7 +3,7 @@ import type {
 	OptimizerContext,
 	OptimizerInput,
 	OptimizerOptions
-} from '$lib/optimizer/index';
+} from '$lib/data/optimizer';
 import { SONATA_DATA, type SonataKey } from '$lib/data/sonatas';
 import { type StatKey, STATS } from '$lib/data/stats';
 import { type AttackKey, CHARACTERS, type SkillKey } from '$lib/data/characters';
@@ -101,14 +101,14 @@ export function compute_damage(build: Echo[], input: OptimizerInput, options: Op
 	const final_stats = get_final_stats(base_stats, build_stats);
 
 	let target_value: number;
-	if (STATS.includes(input.target_key)) {
-		const key = input.target_key as StatKey;
-		target_value = final_stats[key];
+	if (input.target_key.kind === 'stat') {
+		target_value = final_stats[input.target_key.stat];
 	} else {
-		// it is an attack
-		const [skill_key, attack_key] = input.target_key.split('-', 2);
-		const target_skill = Object.values(skills).find(s => s.key === skill_key)!;
-		const target_attack = target_skill.motions.find(a => a.key === attack_key)!;
+		const { skill, motion } = input.target_key;
+		const target_skill = Object.values(skills).find(s => s.key === skill)!;
+		const target_attack = target_skill.motions.find(a => a.key === motion)!;
+
+		// todo: optimize against non-crit/forced_crit as well
 		target_value = target_attack.average.reduce((acc, v) => acc + v, 0);
 	}
 

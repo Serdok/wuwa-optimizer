@@ -1,7 +1,7 @@
 import { generate_combinations } from '$lib/math';
 import type { Echo } from '$lib/data/echoes/types';
 import type { CostCombo } from './optimize';
-import type { OptimizerInput, OptimizerOptions } from '$lib/optimizer/index';
+import type { OptimizerInput, OptimizerOptions } from '$lib/data/optimizer';
 
 type Data = {
 	echoes: { cost_4: Echo[], cost_3: Echo[], cost_1: Echo[] },

@@ -9,6 +9,19 @@ export type EchoFilter = {
 	activated_effects: Record<SonataKey, number[]>,
 };
 
+export type StatTarget = {
+	kind: 'stat',
+	stat: StatKey,
+};
+
+export type MotionTarget = {
+	kind: 'motion',
+	skill: string,
+	motion: string,
+};
+
+export type Target = StatTarget | MotionTarget;
+
 export type OptimizerInput = {
 	character: {
 		key: string,
@@ -27,7 +40,7 @@ export type OptimizerInput = {
 		allow_partial: boolean,
 		buffs: Record<SonataKey, SonataBuff<SonataKey>>,
 	},
-	target_key: StatKey | `${string}-${string}`,
+	target_key: Target,
 	keep_count: number,
 };
 

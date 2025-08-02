@@ -300,16 +300,14 @@ const data: CharacterData = {
 			},
 		},
 		echo: {
-			filter: {
-				allowed_primary_stats: {
-					4: ['crit_dmg', 'crit_rate'],
-					3: ['glacio_bonus', 'atk_p'],
-					1: ['atk_p']
-				},
-				activated_effects: {
-					freezing_frost: [2, 5],
-					frosty_resolve: [2, 5],
-				}
+			allowed_primary_stats: {
+				4: ['crit_dmg', 'crit_rate'],
+				3: ['glacio_bonus', 'atk_p'],
+				1: ['atk_p']
+			},
+			activated_effects: {
+				freezing_frost: [2, 5],
+				frosty_resolve: [2, 5],
 			},
 			buffs: {
 				freezing_frost: { basic_released: 3 },

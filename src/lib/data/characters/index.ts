@@ -1,8 +1,7 @@
-import type { RecursivePartial } from '$lib/utils';
 import type { ElementKey } from '$lib/data/elements';
 import type { WeaponKey } from '$lib/data/weapons';
 import type { BaseStatKey, StatValue, StatValueMap, TagStatKey } from '$lib/data/stats';
-import type { Buff, GameplayEffect, OptimizerRequest } from '$lib/data/optimizer';
+import type { Buff, GameplayEffect, RequestDefaults } from '$lib/data/optimizer';
 
 import changli from './changli';
 import jinhsi from './jinhsi';
@@ -46,7 +45,7 @@ export type CharacterData = GameplayEffect & {
 	buffs: { [key: string]: CharacterBuff, },
 	skills: Record<SkillKey, SkillData>,
 	image: { portrait: string, },
-	defaults?: Partial<OptimizerRequest>,
+	defaults?: RequestDefaults,
 };
 
 export const CHARACTERS: Record<string, CharacterData> = {

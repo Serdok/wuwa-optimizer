@@ -316,18 +316,16 @@ const data: CharacterData = {
 			buffs: {},
 		},
 		echo: {
-			filter: {
-				allowed_primary_stats: {
-					4: ['crit_dmg', 'crit_rate'],
-					3: ['havoc_bonus', 'atk_p'],
-					1: ['atk_p']
-				},
-				activated_effects: {
-					sun_sinking_eclipse: [2, 5],
-					moonlit_clouds: [5],
-					midnight_veil: [5],
-					empyrean_anthem: [5],
-				}
+			allowed_primary_stats: {
+				4: ['crit_dmg', 'crit_rate'],
+				3: ['havoc_bonus', 'atk_p'],
+				1: ['atk_p']
+			},
+			activated_effects: {
+				sun_sinking_eclipse: [2, 5],
+				moonlit_clouds: [5],
+				midnight_veil: [5],
+				empyrean_anthem: [5],
 			},
 			buffs: {
 				sun_sinking_eclipse: { basic_released: 4, },
@@ -335,8 +333,6 @@ const data: CharacterData = {
 				midnight_veil: { outro_released: 1 },
 				empyrean_anthem: { coordinated_crit: 1 },
 			},
-			allow_rainbow: false,
-			allow_partial: false,
 		},
 		target_key: { kind: 'motion', skill: 'between_illusion_and_reality', motion: 'perception_drain_dmg' },
 	},

@@ -44,6 +44,23 @@ export type OptimizerRequest = {
 	keep_count: number,
 };
 
+export type RequestDefaults = {
+	character?: {
+		buffs: Record<string, number>,
+	},
+	weapon?: {
+		key: string,
+		rank: number,
+		buffs: Record<string, number>
+	},
+	echo?: {
+		allowed_primary_stats?: Record<number, StatKey[]>,
+		activated_effects?: Record<SonataKey, number[]>,
+		buffs?: Record<SonataKey, SonataBuff<SonataKey>>,
+	},
+	target_key?: Target,
+}
+
 export type OptimizerContext = {
 	character: CharacterData,
 	build: Echo[],

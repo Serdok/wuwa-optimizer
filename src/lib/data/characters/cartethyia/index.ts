@@ -439,17 +439,15 @@ const data: CharacterData = {
 			}
 		},
 		echo: {
-			filter: {
-				allowed_primary_stats: {
-					4: ['crit_rate', 'crit_dmg'],
-					3: ['aero_bonus', 'hp_p'],
-					1: ['hp_p']
-				},
-				activated_effects: {
-					sierra_gale: [2, 5],
-					gusts_of_welkin: [2, 5],
-					windward_pilgrimage: [2, 5],
-				}
+			allowed_primary_stats: {
+				4: ['crit_rate', 'crit_dmg'],
+				3: ['aero_bonus', 'hp_p'],
+				1: ['hp_p']
+			},
+			activated_effects: {
+				sierra_gale: [2, 5],
+				gusts_of_welkin: [2, 5],
+				windward_pilgrimage: [2, 5],
 			},
 		},
 		target_key: { kind: 'motion', skill: 'a_knights_heartfelt_prayers', motion: 'blade_of_howling_squall_dmg' }

@@ -24,15 +24,17 @@
 
 	import { ChartColumnBig, LoaderCircle, Settings } from 'lucide-svelte';
 
-	import type { OptimizerInput } from '$lib/optimizer';
+	import type { OptimizerInput, Target } from '$lib/data/optimizer';
 	import { optimize } from '$lib/optimizer/optimize';
 
-	import { m } from '$lib/paraglide/messages';
 	import { db } from '$lib/db';
 	import type { DamageResult } from '$lib/optimizer/build';
 
 	import SonataItem from './sonata-item.svelte';
 	import Result from './Result.svelte';
+
+	import { m } from '$lib/paraglide/messages';
+	import { get_message } from '$lib/messages';
 
 	const first_character = $derived(Object.values(CHARACTERS)[0]);
 
@@ -55,7 +57,7 @@
 	const some_stats_checked = $derived(!all_stats_checked && stat_bonuses.some(s => s !== null));
 
 	let keep_count = $state(0);
-	let target_key: StatKey | `${string}-${string}` = $state('atk');
+	let target_key: Target = $state({ kind: 'stat', stat: 'atk' });
 	let target_dialog_open = $state(false);
 
 	let world_level = $state(0);
@@ -70,7 +72,6 @@
 	let echo_primaries: { 4: StatKey[], 3: StatKey[], 1: StatKey[] } = $state({ 4: [], 3: [], 1: [] });
 	let echo_buffs: Record<SonataKey, SonataBuff<SonataKey>> = $state({});
 	let activated_effects: Record<SonataKey, number[]> = $state({});
-	$inspect(activated_effects);
 
 	let results = $state([] as DamageResult[]);
 
@@ -89,7 +90,7 @@
 		rank = 1;
 
 		keep_count = 3;
-		target_key = 'atk';
+		target_key = { kind: 'stat', stat: 'atk' };
 
 		allow_rainbow = false;
 		allow_partial = false;
@@ -150,6 +151,11 @@
 		}
 
 		stat_bonuses[idx] = null;
+	}
+
+	function on_target_change(target: Target) {
+		target_key = target;
+		target_dialog_open = false;
 	}
 
 	function on_buff_change(buff: {sonata: SonataKey, key: string, value: number}) {
@@ -245,18 +251,18 @@
 						<span>{m.character()}</span>
 						<div class="px-1 flex flex-row gap-2">
 							<Select.Root type="single" bind:value={key} onValueChange={() => on_character_change()}>
-								<Select.Trigger class="flex-1">{m[character.key]?.() || character.key}</Select.Trigger>
+								<Select.Trigger class="flex-1">{get_message(character.key)}</Select.Trigger>
 								<Select.Content>
 									{#each Object.values(CHARACTERS) as chr (chr.key)}
-										<Select.Item label={m[chr.key]?.() || chr.key} value={chr.key} />
+										<Select.Item label={get_message(chr.key)} value={chr.key} />
 									{/each}
 								</Select.Content>
 							</Select.Root>
-							<Select.Root type="single" bind:value={sequence}>
+							<Select.Root type="single" bind:value={() => sequence.toString(), (v) => sequence = +v}>
 								<Select.Trigger class="basis-24">S{sequence}</Select.Trigger>
 								<Select.Content>
 									{#each [0, 1, 2, 3, 4, 5, 6] as s (s)}
-										<Select.Item label="S{s}" value={s} />
+										<Select.Item label="S{s}" value={s.toString()} />
 									{/each}
 								</Select.Content>
 							</Select.Root>
@@ -266,18 +272,18 @@
 						<span>{m.weapon()}</span>
 						<div class="px-1 flex flex-row gap-2">
 							<Select.Root type="single" bind:value={weapon_key} onValueChange={() => reset_weapon_buffs()}>
-								<Select.Trigger class="flex-1">{m[weapon.key]?.() || weapon.key}</Select.Trigger>
+								<Select.Trigger class="flex-1">{get_message(weapon.key)}</Select.Trigger>
 								<Select.Content>
 									{#each Object.values(weapons) as weap (weap.key)}
-										<Select.Item label={m[weap.key]?.() || weap.key} value={weap.key} />
+										<Select.Item label={get_message(weap.key)} value={weap.key} />
 									{/each}
 								</Select.Content>
 							</Select.Root>
-							<Select.Root type="single" bind:value={rank}>
+							<Select.Root type="single" bind:value={() => rank.toString(), (v) => rank = +v}>
 								<Select.Trigger class="basis-24">R{rank}</Select.Trigger>
 								<Select.Content>
 									{#each [1, 2, 3, 4, 5] as r (r)}
-										<Select.Item label="R{r}" value={r} />
+										<Select.Item label="R{r}" value={r.toString()} />
 									{/each}
 								</Select.Content>
 							</Select.Root>
@@ -285,77 +291,57 @@
 
 					</div>
 					<div class="p-2 flex flex-col gap-2">
-						<span>optimizer options</span>
+						<span>{m.optimizer_options()}</span>
 						<div class="px-1 flex flex-col gap-1">
-							<Select.Root type="single" bind:value={keep_count}>
-								<Select.Trigger>keep top {keep_count} build(s)</Select.Trigger>
+							<Select.Root type="single" bind:value={() => keep_count.toString(), (v) => keep_count = +v}>
+								<Select.Trigger>{m.keep_top_builds({ count: keep_count })}</Select.Trigger>
 								<Select.Content>
 									{#each [1, 2, 3, 5] as k (k)}
-										<Select.Item label="keep top {k} build(s)" value={k} />
+										<Select.Item label="keep top {k} build(s)" value={k.toString()}>
+											{m.keep_top_builds({ count: k })}
+										</Select.Item>
 									{/each}
 								</Select.Content>
 							</Select.Root>
 							<div>Target</div>
 							<Dialog.Root bind:open={target_dialog_open}>
 								<Dialog.Trigger class={buttonVariants({ variant: 'secondary', class: 'justify-start px-3' })}>
-									{#if STATS.includes(target_key)}
-										{m[target_key]?.() || target_key}
+									{#if target_key.kind === 'stat'}
+										{get_message(target_key.stat)}
 									{:else}
-										{@const [skill_key, attack_key] = target_key.split('-')}
-										{m[skill_key]?.() || skill_key} - {m[attack_key]?.() || attack_key}
+										{get_message(target_key.skill)} - {get_message(target_key.motion)}
 									{/if}
 								</Dialog.Trigger>
 								<Dialog.Content class="max-w-[70%] h-2/3 flex flex-col flex-wrap gap-2">
 									<Dialog.Header>
-										<Dialog.Title>optimization target</Dialog.Title>
+										<Dialog.Title>{m.optimization_target()}</Dialog.Title>
 									</Dialog.Header>
-									<div class="columns columns-4 gap-2 gap-2">
+									<div class="columns columns-4 gap-2">
 										<div class="break-inside-avoid border rounded-lg p-2 flex flex-col gap-2">
-											<div>basic stats</div>
+											<div>{m.basic_stats()}</div>
 											<div class="flex flex-col gap-1">
-												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'hp'; target_dialog_open = false; }}>{m.hp()}
-												</Button>
-												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'atk'; target_dialog_open = false; }}>{m.atk()}
-												</Button>
-												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'def'; target_dialog_open = false; }}>{m.def()}
-												</Button>
-												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'crit_rate'; target_dialog_open = false; }}>{m.crit_rate()}
-												</Button>
-												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'crit_dmg'; target_dialog_open = false; }}>{m.crit_dmg()}
-												</Button>
-												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'energy_regen'; target_dialog_open = false; }}>
-													{m.energy_regen()}
-												</Button>
-												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'healing_bonus'; target_dialog_open = false; }}>
-													{m.healing_bonus()}
-												</Button>
-												<Button type="button" variant="ghost"
-																onclick={() => { target_key = `${character.element}_bonus`; target_dialog_open = false; }}>
-													{m[`${character.element}_bonus`]?.() || `${character.element}_bonus`}
-												</Button>
-												<Button type="button" variant="ghost"
-																onclick={() => { target_key = 'general_bonus'; target_dialog_open = false; }}>
-													{m.general_bonus()}
-												</Button>
+												<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'stat', stat: 'hp' })}>{m.hp()}</Button>
+												<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'stat', stat: 'atk' })}>{m.atk()}</Button>
+												<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'stat', stat: 'def' })}>{m.def()}</Button>
+												<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'stat', stat: 'crit_rate' })}>{m.crit_rate()}</Button>
+												<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'stat', stat: 'crit_dmg' })}>{m.crit_dmg()}</Button>
+												<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'stat', stat: 'energy_regen' })}>{m.energy_regen()}</Button>
+												<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'stat', stat: 'healing_bonus' })}>{m.healing_bonus()}</Button>
+												<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'stat', stat: `${character.element}_bonus` })}>{get_message(`${character.element}_bonus`)}</Button>
+												<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'stat', stat: 'general_bonus' })}>{m.general_bonus()}</Button>
+												<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'stat', stat: `${character.element}_amplify` })}>{get_message(`${character.element}_amplify`)}</Button>
+												<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'stat', stat: 'general_amplify' })}>{m.general_amplify()}</Button>
 											</div>
 										</div>
 										{#each Object.values(character.skills).filter(s => s.motions.length > 0) as skill (skill.key)}
 											<div class="break-inside-avoid border rounded-lg p-2 flex flex-col gap-2">
 												<div class="flex flex-row items-center">
-													<span class="flex-1">{m[skill.key]?.() || skill.key}</span>
-													<Badge variant="secondary">{m[skill.type]?.() || skill.type}</Badge>
+													<span class="flex-1">{get_message(skill.key)}</span>
+													<Badge variant="secondary">{get_message(skill.type)}</Badge>
 												</div>
 												<div class="flex flex-col gap-1">
 													{#each skill.motions as motion (motion.key)}
-														<Button type="button" variant="ghost"
-																		onclick={() => { target_key = `${skill.key}-${motion.key}`; target_dialog_open = false; }}>{m[motion.key]?.() || motion.key}</Button>
+														<Button type="button" variant="ghost" onclick={() => on_target_change({ kind: 'motion', skill: skill.key, motion: motion.key })}>{get_message(motion.key)}</Button>
 													{/each}
 												</div>
 											</div>
@@ -370,15 +356,15 @@
 					<Dialog.Root>
 						<Dialog.Trigger class={buttonVariants({ variant: 'outline', class: 'flex-1' })}>
 							<ChartColumnBig />
-							<span>extra stats</span>
+							<span>{m.extra_stats()}</span>
 						</Dialog.Trigger>
 						<Dialog.Content class="max-w-[80%] flex flex-col gap-2">
 							<Dialog.Header>
-								<Dialog.Title>extra stats</Dialog.Title>
+								<Dialog.Title>{m.extra_stats()}</Dialog.Title>
 							</Dialog.Header>
 							<div class="grid grid-cols-3 auto-cols-fr gap-2">
 								<div class="p-2 border rounded-lg flex flex-col gap-2">
-									<div class="px-2">main stats</div>
+									<div class="px-2">{m.main_stats()}</div>
 									<div class="px-4 grid grid-cols-2 gap-1">
 										<div class="flex flex-row items-center gap-2">
 											<Input id="extra-stat-hp_p" value={extra_stats['hp_p'].value} oninput={e => extra_stats['hp_p'].value = +e.currentTarget.value} class="basis-20" />
@@ -423,7 +409,7 @@
 									</div>
 								</div>
 								<div class="p-2 border rounded-lg flex flex-col gap-2">
-									<div class="px-2">combat stats</div>
+									<div class="px-2">{m.combat_stats()}</div>
 									<div class="px-4 grid grid-cols-2 gap-1">
 										<div class="flex flex-row items-center gap-2">
 											<Input id="extra-stat-general_bonus" value={extra_stats['general_bonus'].value} oninput={e => extra_stats['general_bonus'].value = +e.currentTarget.value}
@@ -439,24 +425,24 @@
 										<div class="flex flex-row items-center gap-2">
 											<Input id="extra-stat-{character.element}_bonus"
 														 value={extra_stats[`${character.element}_bonus`].value} oninput={e => extra_stats[`${character.element}_bonus`].value = +e.currentTarget.value} class="basis-20" />
-											<Label for="extra-stat-{character.element}_bonus">{m[`${character.element}_bonus`]?.() || `${character.element}_bonus`}</Label>
+											<Label for="extra-stat-{character.element}_bonus">{get_message(`${character.element}_bonus`)}</Label>
 										</div>
 										<div class="flex flex-row items-center gap-2">
 											<Input id="extra-stat-{character.element}_amplify"
 														 value={extra_stats[`${character.element}_amplify`].value} oninput={e => extra_stats[`${character.element}_amplify`].value = +e.currentTarget.value} class="basis-20" />
-											<Label for="extra-stat-{character.element}_amplify">{m[`${character.element}_amplify`]?.() || `${character.element}_amplify`}</Label>
+											<Label for="extra-stat-{character.element}_amplify">{get_message(`${character.element}_amplify`)}</Label>
 										</div>
 
 										{#each ATTACKS as a (a)}
 											<div class="flex flex-row items-center gap-2">
 												<Input id="extra-stat-{a}_bonus" value={extra_stats[`${a}_bonus`].value} oninput={e => extra_stats[`${a}_bonus`].value = +e.currentTarget.value}
 															 class="basis-20" />
-												<Label for="extra-stat-{a}_bonus">{m[`${a}_bonus`]?.() || `${a}_bonus`}</Label>
+												<Label for="extra-stat-{a}_bonus">{get_message(`${a}_bonus`)}</Label>
 											</div>
 											<div class="flex flex-row items-center gap-2">
 												<Input id="extra-stat-{a}_amplify" value={extra_stats[`${a}_amplify`].value} oninput={e => extra_stats[`${a}_amplify`].value = +e.currentTarget.value}
 															 class="basis-20" />
-												<Label for="extra-stat-{a}_amplify">{m[`${a}_amplify`]?.() || `${a}_amplify`}</Label>
+												<Label for="extra-stat-{a}_amplify">{get_message(`${a}_amplify`)}</Label>
 											</div>
 										{/each}
 									</div>
@@ -523,7 +509,7 @@
 											<div class="flex flex-row items-center gap-2">
 												<Input id={key} bind:value={character_buffs[key]} disabled={sequence < buff.sequence}
 															 class="basis-16" />
-												<Label for={key}>{m[key]?.() || key}</Label>
+												<Label for={key}>{get_message(key)}</Label>
 											</div>
 											<Slider type="single" bind:value={character_buffs[key]} min={buff.min_value} max={buff.max_value}
 															step={1} disabled={sequence < buff.sequence} class="mt-2" />
@@ -533,7 +519,7 @@
 										<div class="flex flex-row items-center gap-2">
 											<Switch id={key} {checked} onCheckedChange={chk => character_buffs[key] = +chk}
 															disabled={sequence < buff.sequence} class="" />
-											<Label for={key}>{m[key]?.() || key}</Label>
+											<Label for={key}>{get_message(key)}</Label>
 										</div>
 									{/if}
 								{/each}
@@ -549,16 +535,15 @@
 										<div>
 											<div class="flex flex-row items-center gap-2">
 												<Input id={key} bind:value={weapon_buffs[key]} class="basis-16" />
-												<Label for={key}>{m[key]?.() || key}</Label>
+												<Label for={key}>{get_message(key)}</Label>
 											</div>
-											<Slider type="single" bind:value={weapon_buffs[key]} min={buff.min_value} max={buff.max_value}
-															step={1} class="mt-2" />
+											<Slider type="single" bind:value={weapon_buffs[key]} min={buff.min_value} max={buff.max_value} step={1} class="mt-2" />
 										</div>
 									{:else}
 										{@const checked = weapon_buffs[key] > 0}
 										<div class="flex flex-row items-center gap-2">
 											<Switch id={key} {checked} onCheckedChange={chk => weapon_buffs[key] = +chk} />
-											<Label for={key}>{m[key]?.() || key}</Label>
+											<Label for={key}>{get_message(key)}</Label>
 										</div>
 									{/if}
 								{/each}
@@ -571,8 +556,7 @@
 								<Checkbox id="character-stats-chk" checked={all_stats_checked} indeterminate={some_stats_checked}
 													disabled
 													class="disabled:cursor-default disabled:opacity-100 data-[disabled=true]:cursor-default data-[disabled=true]:opacity-100" />
-								<Label for="character-stats-chk" class="pl-2 peer-disabled:cursor-default peer-disabled:opacity-100">character
-									stat bonuses</Label>
+								<Label for="character-stats-chk" class="pl-2 peer-disabled:cursor-default peer-disabled:opacity-100">{m.character_stat_bonus()}</Label>
 							</div>
 						</Accordion.Trigger>
 						<Accordion.Content class="px-2">
@@ -584,12 +568,11 @@
 								{#each character.stat_bonuses as s, i (i)}
 									{@const checked = stat_bonuses[i] !== null}
 									<div class="px-4 flex flex-row items-center">
-										<Checkbox id="stat-{s.stat}-{i}" {checked}
-															onCheckedChange={(v) => v ? add_stat(i) : remove_stat(i)} />
+										<Checkbox id="stat-{s.stat}-{i}" {checked} onCheckedChange={(v) => v ? add_stat(i) : remove_stat(i)} />
 										<Label for="stat-{s.stat}-{i}" class="pl-2 flex flex-row items-center">
 											<img src={STAT_ICONS[s.stat]} alt={s.stat} class="w-6" />
 											<div>+{(s.value * 100).toFixed(1)}%</div>
-											<div class="ml-1">{m[s.stat]?.() || s.stat}</div>
+											<div class="ml-1">{get_message(s.stat)}</div>
 										</Label>
 									</div>
 								{/each}
@@ -611,7 +594,7 @@
 							<ToggleGroup.Item value={s.stat} class="min-w-max border rounded-lg">
 								<div class="flex flex-row items-center gap-x-1">
 									<img src={STAT_ICONS[s.stat]} alt={s.stat} class="w-6" />
-									<div>{m[s.stat]?.() || s.stat}</div>
+									<div>{get_message(s.stat)}</div>
 								</div>
 							</ToggleGroup.Item>
 						{/each}
@@ -624,7 +607,7 @@
 							<ToggleGroup.Item value={s.stat} class="min-w-max border rounded-lg">
 								<div class="flex flex-row items-center gap-x-1">
 									<img src={STAT_ICONS[s.stat]} alt={s.stat} class="w-6" />
-									<div>{m[s.stat]?.() || s.stat}</div>
+									<div>{get_message(s.stat)}</div>
 								</div>
 							</ToggleGroup.Item>
 						{/each}
@@ -637,7 +620,7 @@
 							<ToggleGroup.Item value={s.stat} class="min-w-fit border rounded-lg">
 								<div class="flex flex-row items-center gap-x-1">
 									<img src={STAT_ICONS[s.stat]} alt={s.stat} class="w-6" />
-									<div>{m[s.stat]?.() || s.stat}</div>
+									<div>{get_message(s.stat)}</div>
 								</div>
 							</ToggleGroup.Item>
 						{/each}

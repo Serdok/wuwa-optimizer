@@ -4,6 +4,13 @@
   "character": "Character",
   "character_buffs": "Character buffs",
 
+  "normal": "Normal",
+  "skill": "Skill",
+  "forte": "Forte",
+  "burst": "Liberation",
+  "intro": "Intro",
+  "outro": "Outro",
+
   "basic_attack_1_dmg": "Basic Attack 1 DMG",
   "stage_1_dmg": "Stage 1 DMG",
   "basic_attack_stage_1": "Basic Attack Stage 1",

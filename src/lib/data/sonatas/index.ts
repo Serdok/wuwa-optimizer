@@ -17,7 +17,7 @@ import windward_pilgrimage from './T_IconElementAttriWindErrorA.png';
 import flaming_clawprint from './T_IconElementAttriFireUltimateSkill.png';
 import dream_of_the_lost from './T_IconElementAttriDarkVision.png';
 
-import type { Buff, OptimizerContext, OptimizerInput } from '$lib/optimizer';
+import type { Buff, OptimizerContext, OptimizerInput } from '$lib/data/optimizer';
 import type { StatKey } from '$lib/data/stats';
 
 

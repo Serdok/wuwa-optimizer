@@ -1,0 +1,21 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+
+  "optimizer_options": "Optimizer options",
+
+  "character_stat_bonus": "Character Stat Bonus",
+  "extra_stats": "Extra Stats",
+  "optimization_target": "Optimization Target",
+  "basic_stats": "Basic Stats",
+  "main_stats": "Main Stats",
+  "combat_stats": "Combat Stats",
+
+  "keep_top_builds": [{
+    "declarations": ["input count", "local count_plural = count: plural"],
+    "selectors": ["count_plural"],
+    "match": {
+      "count_plural=one": "Keep top 1 build",
+      "count_plural=other": "Keep top {count} builds"
+    }
+  }]
+}

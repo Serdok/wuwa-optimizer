@@ -3,7 +3,7 @@ import { combination_count } from '$lib/math';
 import OptimizerWorker from './worker?worker';
 import type { Echo } from '$lib/data/echoes/types';
 import { compute_damage, type DamageResult } from '$lib/optimizer/build';
-import type { OptimizerInput, OptimizerOptions } from '$lib/optimizer';
+import type { OptimizerInput, OptimizerOptions } from '$lib/data/optimizer';
 import { BoundedMaxPriorityQueue } from '$lib/optimizer/bounded_max_priority_queue';
 
 type BatchResult = { combinations: Echo[][]; processed: number };

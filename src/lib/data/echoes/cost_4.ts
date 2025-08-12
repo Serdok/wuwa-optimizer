@@ -1,4 +1,4 @@
-import type { EchoData } from './types';
+import type { EchoDef } from './types';
 
 export default [
 	// calamity
@@ -146,4 +146,4 @@ export default [
 		cost: 4,
 		possible_sonatas: ['freezing_frost', 'empyrean_anthem'],
 	},
-] as const satisfies EchoData[];
+] as const satisfies EchoDef[];

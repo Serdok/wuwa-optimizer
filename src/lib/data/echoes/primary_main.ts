@@ -1,4 +1,4 @@
-import type { StatKey } from '$lib/data/stats';
+import type { StatType } from '$lib/data/stats/types';
 
 export default {
 	1: {
@@ -192,6 +192,6 @@ export default {
 		number,
 		{
 			cost: number,
-			stats: { [k in StatKey]?: { stat: k, values: { [r: number]: { rank: number, base: number } } } }
+			stats: { [k in StatType]?: { stat: k, values: { [r: number]: { rank: number, base: number } } } }
 		}
 	>;

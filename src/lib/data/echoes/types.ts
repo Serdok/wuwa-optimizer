@@ -1,21 +1,21 @@
-import type { SonataKey } from '$lib/data/sonatas';
-import type { StatValue } from '$lib/data/stats';
+import type { StatDef, StatType } from '$lib/data/stats/types';
+import type { SonataType } from '$lib/data/sonatas/types';
 
-export type EchoData = {
+export type EchoDef = {
 	key: string,
 	cost: number,
-	possible_sonatas: SonataKey[],
+	possible_sonatas: SonataType[],
 }
 
 export type Echo = {
 	id: string,
 	key: string,
-	sonata: SonataKey,
+	sonata: SonataType,
 	cost: number,
 	rank: number,
 	level: number,
-	primary_stat: StatValue,
-	secondary_stat: StatValue,
-	sub_stats: StatValue[],
+	primary_stat: StatDef<StatType>,
+	secondary_stat: StatDef<StatType>,
+	sub_stats: StatDef<StatType>[],
 	created_at: number,
 };

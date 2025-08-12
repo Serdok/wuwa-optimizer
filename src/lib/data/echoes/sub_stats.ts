@@ -1,4 +1,4 @@
-import type { StatKey } from '$lib/data/stats';
+import type { StatType } from '$lib/data/stats/types';
 
 export default {
 	'hp': {
@@ -53,4 +53,4 @@ export default {
 		stat: 'burst_bonus',
 		values: [0.064, 0.071, 0.079, 0.086, 0.094, 0.101, 0.109, 0.116]
 	}
-} as const as { [key in StatKey]?: { stat: key, values: number[] } };
+} as const as { [key in StatType]?: { stat: key, values: number[] } };

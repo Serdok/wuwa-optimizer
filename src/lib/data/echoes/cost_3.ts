@@ -1,4 +1,4 @@
-import type { EchoData } from './types';
+import type { EchoDef } from './types';
 
 export default [
 	// 1.0
@@ -151,4 +151,4 @@ export default [
 		cost: 3,
 		possible_sonatas: ['eternal_radiance', 'gusts_of_welkin'],
 	}
-] as const satisfies EchoData[];
+] as const satisfies EchoDef[];

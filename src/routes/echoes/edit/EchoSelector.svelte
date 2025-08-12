@@ -4,14 +4,14 @@
 	import { ScrollArea } from '$lib/components/ui/scroll-area';
 
 	import { COST_1, COST_3, COST_4 } from '$lib/data/echoes';
-	import type { EchoData } from '$lib/data/echoes/types';
+	import type { EchoDef } from '$lib/data/echoes/types';
 	import { SONATA_DATA } from '$lib/data/sonatas';
 	import { get_echo_image } from '$lib/data/echoes/images';
 
 	interface Props {
 		key: string;
 		open: boolean;
-		selected: EchoData;
+		selected: EchoDef;
 	}
 
 	let { key = $bindable(), open = $bindable(false), selected }: Props = $props();

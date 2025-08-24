@@ -1,5 +1,5 @@
 import type { Schema } from '$lib/utils';
-import type { DisplayStats, StatDef, StatResult, StatType } from '$lib/data/stats/types';
+import type { StatDef, StatResult, StatType } from '$lib/data/stats/types';
 import type {
 	CharacterDef,
 	CharacterKey, Characters,

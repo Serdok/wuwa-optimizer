@@ -1,10 +1,12 @@
+import type { Echo } from '$lib/data/echoes/types';
+import type { DamageResult, OptimizerRequest, OptimizerOptions } from '$lib/data/optimizer/types';
+import { BoundedMaxPriorityQueue } from '$lib/optimizer/bounded_max_priority_queue';
 import { combination_count } from '$lib/math';
+import { compute_damage } from '$lib/optimizer/build';
 
 import OptimizerWorker from './worker?worker';
-import type { Echo } from '$lib/data/echoes/types';
-import { compute_damage, type DamageResult } from '$lib/optimizer/build';
-import type { OptimizerRequest, OptimizerOptions } from '$lib/data/optimizer';
-import { BoundedMaxPriorityQueue } from '$lib/optimizer/bounded_max_priority_queue';
+import type { CharacterKey, Characters } from '$lib/data/characters/types';
+import type { WeaponKeysFor, WeaponType } from '$lib/data/weapons/types';
 
 type BatchResult = { combinations: Echo[][]; processed: number };
 
@@ -17,14 +19,14 @@ export type CostCombo = {
 	pattern: number[];
 };
 
-type WorkerData = {
-	echoes: { cost_4: Echo[], cost_3: Echo[], cost_1: Echo[] },
-	cost_combo: CostCombo,
-	input: OptimizerRequest,
-	options: { batch_size: number, report_size: number, total_workers: number, worker_id: number },
+type WorkerData<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>> = {
+	echoes: { cost_4: Echo[]; cost_3: Echo[]; cost_1: Echo[] };
+	cost_combo: CostCombo;
+	request: OptimizerRequest<CK, WT, WK>;
+	options: { batch_size: number; report_size: number; total_workers: number; worker_id: number };
 }
 
-function generate_cost_combinations(input: OptimizerRequest) {
+function generate_cost_combinations<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>>(request: OptimizerRequest<CK, WT, WK>) {
 	const cost_combos: CostCombo[] = [];
 
 	for (let count_4 = 0; count_4 <= 3; count_4 += 1) {
@@ -38,7 +40,7 @@ function generate_cost_combinations(input: OptimizerRequest) {
 				const total_cost = count_4 * 4 + count_3 * 3 + count_1;
 
 				if (total_cost < 0 || total_cost > 12) continue;
-				if (!input.echo.allow_partial && total_items !== 5) continue;
+				if (!request.echos.partial_build_allowed && total_items !== 5) continue;
 
 				cost_combos.push({
 					count_4,
@@ -55,7 +57,7 @@ function generate_cost_combinations(input: OptimizerRequest) {
 	return cost_combos;
 }
 
-export function optimize(echoes: Echo[], input: OptimizerRequest, options: OptimizerOptions) {
+export function optimize<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>>(echoes: Echo[], request: OptimizerRequest<CK, WT, WK>, options: OptimizerOptions) {
 	const defaults = {
 		batch_size: 50,
 		report_size: 10000,
@@ -65,11 +67,11 @@ export function optimize(echoes: Echo[], input: OptimizerRequest, options: Optim
 	const settings = { ...defaults, ...options };
 	const max_workers = options.max_workers || Math.max(12, (navigator.hardwareConcurrency || 4) - 1);
 
-	const cost_4 = echoes.filter(e => e.cost === 4 && input.echo.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
-	const cost_3 = echoes.filter(e => e.cost === 3 && input.echo.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
-	const cost_1 = echoes.filter(e => e.cost === 1 && input.echo.filter.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
+	const cost_4 = echoes.filter(e => e.cost === 4 && request.echos.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
+	const cost_3 = echoes.filter(e => e.cost === 3 && request.echos.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
+	const cost_1 = echoes.filter(e => e.cost === 1 && request.echos.allowed_primary_stats[e.cost].includes(e.primary_stat.stat));
 
-	const cost_combos = generate_cost_combinations(input);
+	const cost_combos = generate_cost_combinations(request);
 	cost_combos.sort((a, b) => b.total_cost - a.total_cost);
 
 	const expected = cost_combos.reduce((acc, cost_combo) => {
@@ -83,7 +85,7 @@ export function optimize(echoes: Echo[], input: OptimizerRequest, options: Optim
 	let completed_workers = 0;
 
 
-	const queue = new BoundedMaxPriorityQueue<DamageResult>(input.keep_count, r => r.target_value);
+	const queue = new BoundedMaxPriorityQueue<DamageResult>(request.keep_count, r => r.target);
 	// const results: DamageResult[] = [];
 
 	const workers: Worker[] = [];
@@ -122,7 +124,7 @@ export function optimize(echoes: Echo[], input: OptimizerRequest, options: Optim
 		workers_progress[i] = processed;
 
 		// const filtered = combinations.filter(build => is_valid_combination(build, input.filter));
-		const damages = combinations.map(build => compute_damage(build, input, options));
+		const damages = combinations.map(build => compute_damage(build, request));
 		// results.push(...damages);
 		for (const damage of damages) {
 			queue.fixed_enqueue(damage);
@@ -185,7 +187,8 @@ export function optimize(echoes: Echo[], input: OptimizerRequest, options: Optim
 		};
 
 		const cost_combo = cost_combos[i];
-		worker.postMessage({ echoes: { cost_4, cost_3, cost_1 }, cost_combo, input, options: worker_options } satisfies WorkerData);
+		const sanitized = structuredClone({ echoes: { cost_4, cost_3, cost_1 }, cost_combo, request, options: worker_options });
+		worker.postMessage(sanitized satisfies WorkerData<CK, WT, WK>);
 	}
 
 	return {

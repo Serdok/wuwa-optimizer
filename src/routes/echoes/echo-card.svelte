@@ -1,0 +1,79 @@
+<script lang="ts">
+	import { db } from '$lib/db';
+
+	import { Button } from '$lib/components/ui/button';
+	import { Pencil, Star, Trash } from 'lucide-svelte';
+
+	import type { Echo } from '$lib/data/echoes/types';
+	import { SONATAS } from '$lib/data/sonatas';
+	import { STAT_ICONS } from '$lib/data/stats/display';
+
+	import { get_message } from '$lib/messages';
+	import { get_echo_image } from '$lib/data/echoes/images';
+	import { has_icon, is_base_stat } from '$lib/data/stats/utils';
+
+	interface Props {
+		echo: Echo;
+	}
+
+	const { echo }: Props = $props();
+
+	async function delete_echo(id: string) {
+		await db.echoes.delete(id);
+	}
+
+</script>
+
+<div class="border-2 rounded-xl flex flex-col">
+	<div class="flex-1 flex flex-row gap-4">
+		<img src={get_echo_image(echo.key)} alt={echo.key} class="rounded-xl size-44" />
+		<div class="flex-1 flex flex-col gap-2 py-2">
+			<div>
+				<span class="text-lg font-medium">{get_message(echo.key)}</span>
+				<div class="flex flex-row items-center justify-around">
+					<span class="text-sm font-light">+{echo.level}</span>
+					<div class="flex flex-row items-center">
+						{#each { length: echo.rank } as _}
+							<Star class="size-3 fill-white" />
+						{/each}
+					</div>
+				</div>
+			</div>
+			<div class="flex flex-row items-center space-x-2">
+				<img src={SONATAS[echo.sonata].image} alt={echo.sonata} class="size-8" />
+				<span>{get_message(echo.sonata)}</span>
+			</div>
+			<div class="flex flex-col">
+				<div class="flex flex-row items-center space-x-2">
+					{#if has_icon(echo.primary_stat.stat)}
+						<img src={STAT_ICONS[echo.primary_stat.stat]} alt={echo.primary_stat.stat} class="size-10" />
+						<span class="text-lg">{get_message(echo.primary_stat.stat)}</span>
+						<span
+							class="text-lg">{is_base_stat(echo.primary_stat.stat) ? echo.primary_stat.value.toFixed(0) : (echo.primary_stat.value * 100).toFixed(1) + '%'}</span>
+					{/if}
+				</div>
+				<div class="flex flex-row items-center space-x-2">
+					{#if has_icon(echo.secondary_stat.stat)}
+						<img src={STAT_ICONS[echo.secondary_stat.stat]} alt={echo.secondary_stat.stat} class="size-6" />
+						<span
+							class="font-light">{is_base_stat(echo.secondary_stat.stat) ? echo.secondary_stat.value.toFixed(0) : (echo.secondary_stat.value * 100).toFixed(1) + '%'}</span>
+					{/if}
+				</div>
+			</div>
+		</div>
+		<div class="basis-1/5 border-l-2 pl-2 pt-2 flex flex-col">
+			{#each echo.sub_stats as sub_stat}
+				<div class="flex flex-row items-center space-x-2">
+					{#if has_icon(sub_stat.stat)}
+						<img src={STAT_ICONS[sub_stat.stat]} alt={sub_stat.stat} class="size-8" />
+						<span>{is_base_stat(sub_stat.stat) ? sub_stat.value.toFixed(0) : (sub_stat.value * 100).toFixed(1) + '%'}</span>
+					{/if}
+				</div>
+			{/each}
+		</div>
+	</div>
+	<div class="basis-1/6 border-t-2 flex flex-row items-center justify-end gap-2">
+		<Button variant="ghost" href={`/echoes/edit?id=${echo.id}`}><Pencil /></Button>
+		<Button variant="ghost" onclick={() => delete_echo(echo.id)}><Trash /></Button>
+	</div>
+</div>

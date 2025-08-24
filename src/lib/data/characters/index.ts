@@ -1,59 +1,15 @@
-import type { ElementKey } from '$lib/data/elements';
-import type { WeaponKey } from '$lib/data/weapons';
-import type { BaseStatKey, StatValue, StatValueMap, TagStatKey } from '$lib/data/stats';
-import type { Buff, GameplayEffect, RequestDefaults } from '$lib/data/optimizer';
-
-import changli from './changli';
-import jinhsi from './jinhsi';
-import carlotta from './carlotta';
-import phoebe from './phoebe';
-import zani from './zani';
-import cantarella from './cantarella';
-import cartethyia from './cartethyia';
-
-export const SKILLS = ['normal', 'skill', 'forte', 'burst', 'intro', 'outro'] as const;
-export type SkillKey = typeof SKILLS[number];
-
-export const ATTACKS = ['basic', 'heavy', 'skill', 'burst', 'intro', 'outro'] as const;
-export type AttackKey = typeof ATTACKS[number];
-
-export type MotionData = GameplayEffect & {
-	type: AttackKey[],
-	key: string,
-	element: ElementKey[],
-	tags: TagStatKey[],
-	related_stat: BaseStatKey,
-	values: number[],
-};
-
-export type SkillData = GameplayEffect & {
-	type: SkillKey,
-	key: string,
-	motions: MotionData[],
-};
-
-export type CharacterBuff = Buff & {
-	sequence: number,
-}
-
-export type CharacterData = GameplayEffect & {
-	key: string,
-	element: ElementKey,
-	weapon_type: WeaponKey,
-	base_stats: StatValueMap<BaseStatKey>,
-	stat_bonuses: StatValue[],
-	buffs: { [key: string]: CharacterBuff, },
-	skills: Record<SkillKey, SkillData>,
-	image: { portrait: string, },
-	defaults?: RequestDefaults,
-};
-
-export const CHARACTERS: Record<string, CharacterData> = {
-	changli,
-	jinhsi,
-	carlotta,
-	phoebe,
-	zani,
-	cantarella,
-	cartethyia,
+export const CHARACTERS = {
+	// 1.1
+	jinhsi: (await import('./jinhsi')).jinhsi,
+	changli: (await import('./changli')).changli,
+	// 2.0
+	carlotta: (await import('./carlotta')).carlotta,
+	// 2.1
+	phoebe: (await import('./phoebe')).phoebe,
+	// 2.2
+	cantarella: (await import('./cantarella')).cantarella,
+	// 2.3
+	zani: (await import('./zani')).zani,
+	// 2.4
+	cartethyia: (await import('./cartethyia')).cartethyia,
 } as const;

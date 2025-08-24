@@ -1,4 +1,5 @@
 import type { Schema } from '$lib/utils';
+import { STAT_ICONS } from '$lib/data/stats/display';
 
 export const BASE_STATS = ['hp', 'atk', 'def'] as const;
 export type BaseStatType = typeof BASE_STATS[number];
@@ -33,3 +34,5 @@ export type StatType = typeof STATS[number];
 export type StatDef<T extends StatType> = { stat: T, value: number, };
 export type StatSchema<T extends StatType> = Schema<StatDef<T>, 'stat'>;
 export type StatResult<T extends StatType> = Record<T, number>;
+
+export type DisplayStats = keyof typeof STAT_ICONS;

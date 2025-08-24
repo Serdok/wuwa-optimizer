@@ -27,6 +27,9 @@ export default ts.config(
 
 		languageOptions: {
 			parserOptions: {
+				svelteFeatures: {
+					experimentalGenerics: true,
+				},
 				parser: ts.parser
 			}
 		}

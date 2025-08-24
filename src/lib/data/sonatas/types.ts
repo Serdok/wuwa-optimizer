@@ -1,6 +1,6 @@
 import type { ApplyEffect, BuffDef, BuffSchema } from '$lib/data/optimizer/types';
 
-export const SONATAS = [
+export const SONATA_TYPES = [
 	'freezing_frost',
 	'molten_rift',
 	'void_thunder',
@@ -19,16 +19,16 @@ export const SONATAS = [
 	'windward_pilgrimage',
 	'flaming_clawprint',
 	'dream_of_the_lost',
-	'crown_of_valor',
-	'law_of_harmony'
 ] as const;
 
-export type SonataType = typeof SONATAS[number];
+export type SonataType = typeof SONATA_TYPES[number];
 
-export type SonataDef = {
+export type SonataDef<P extends readonly number[], S extends BuffSchema<BuffDef>> = {
 	key: string;
-	piece_effects: number[];
-	buffs: BuffSchema<BuffDef>;
-	apply_effect: ApplyEffect<BuffDef, BuffSchema<BuffDef>>;
+	piece_effects: P;
+	buffs: S;
+	apply_effect_for: Record<number, ApplyEffect<BuffDef, S>>;
 	image: string;
 };
+
+export type SonataInit = Omit<SonataDef<never, never>, 'piece_effects' | 'buffs' | 'apply_effect_for'>;

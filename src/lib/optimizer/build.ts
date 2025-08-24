@@ -1,123 +1,144 @@
+import type { Schema } from '$lib/utils';
 import type { Echo } from '$lib/data/echoes/types';
-import type {
-	OptimizerContext,
-	OptimizerRequest,
-	OptimizerOptions
-} from '$lib/data/optimizer';
-import { SONATA_DATA, type SonataKey } from '$lib/data/sonatas';
-import { type StatKey, STATS } from '$lib/data/stats';
-import { type AttackKey, CHARACTERS, type SkillKey } from '$lib/data/characters';
-import { WEAPONS } from '$lib/data/weapons';
+import type { DamageResult, OptimizerRequest, SkillDamage } from '$lib/data/optimizer/types';
+import { type SonataType } from '$lib/data/sonatas/types';
+import type { StatResult, StatType } from '$lib/data/stats/types';
+import { get_character } from '$lib/data/characters/utils';
+import { get_weapon } from '$lib/data/weapons/utils';
+import { apply_piece_effects, get_sonata } from '$lib/data/sonatas/utils';
+import { weapon_secondary_curve } from '$lib/data/weapons/curve';
+import { default_finalizer } from '$lib/optimizer/finalizer';
 import {
 	apply_echo_stats,
 	get_base_stats,
 	get_default_stats,
 	get_display_stats,
 	get_final_stats
-} from './stats';
-import { weapon_secondary_curve } from '$lib/data/weapons/curve';
-import { default_finalizer } from '$lib/optimizer/finalizer';
+} from '$lib/data/stats/utils';
+import type { CharacterKey, Characters } from '$lib/data/characters/types';
+import type { WeaponKeysFor, WeaponType } from '$lib/data/weapons/types';
 
-export type MotionDamage = {
-	type: AttackKey;
-	key: string;
-	non_crit: number[],
-	average: number[],
-	forced_crit: number[],
-};
 
-export type SkillDamage<S extends SkillKey> = {
-	type: S;
-	key: string;
-	motions: MotionDamage[];
-};
+export function compute_damage<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>>(build: Echo[], request: OptimizerRequest<CK, WT, WK>) {
+	const base_character = get_character(request.character.key);
+	const character = base_character.create_ranked(base_character, request.character.rank);
+	const weapon = get_weapon(request.weapon.type, request.weapon.key);
 
-export type DamageResult = {
-	build: Echo[];
-	skills: { [S in SkillKey]: SkillDamage<S>; };
-	build_stats: Record<StatKey, number>;
-	display_stats: Partial<Record<StatKey, number>>;
-	final_stats: Record<StatKey, number>;
-	target_value: number;
-};
-
-export function compute_damage(build: Echo[], input: OptimizerRequest, options: OptimizerOptions): DamageResult {
-	const character = CHARACTERS[input.character.key];
-	const weapon = WEAPONS[character.weapon_type][input.weapon.key];
-
-	const base_stats = get_base_stats(character, weapon);
+	const base_stats = get_base_stats(character.base_stats, weapon.base_stats);
 	const default_stats = get_default_stats();
 
 	const combat_stats = Object.fromEntries(
 		Object.entries(default_stats).map(([key, value]) => {
-			const stat = key as StatKey;
-			return [stat, value + (input.character.extra_stats[stat].value ?? 0)];
+			const stat = key as StatType;
+			value += (request.character.extra_stats[stat] ?? 0);
+			value += request.character.stat_bonus.filter(b => b.stat === stat).reduce((acc, b) => acc + b.value, 0);
+			return [stat, value];
 		})
-	) as Record<StatKey, number>;
+	) as StatResult<StatType>;
 
-	const context: OptimizerContext = { character, build, };
-
-	character.apply_effects(input, combat_stats, context);
-	weapon.apply_effects(input, combat_stats, context);
+	character.apply_effect(
+		combat_stats,
+		{
+			buffs: request.character.buffs,
+			rank: request.character.rank,
+			character,
+			weapon,
+		}
+	);
+	weapon.apply_effect(
+		combat_stats,
+		{
+			buffs: request.weapon.buffs,
+			rank: request.weapon.rank,
+			character,
+			weapon,
+		}
+	);
 	combat_stats[weapon.base_stats.secondary.stat] += weapon.base_stats.secondary.value * weapon_secondary_curve['6/90'];
 
 	const build_stats = structuredClone(combat_stats);
 	build.forEach((echo) => apply_echo_stats(build_stats, echo));
 
 	const sets = Object.groupBy(build, e => e.sonata);
-	for (const [key, echoes] of Object.entries(sets)) {
-		const sonata = key as SonataKey;
-		SONATA_DATA[sonata].apply_effects(input, build_stats, context);
+	for (const [key, group] of Object.entries(sets)) {
+		const sonata_key = key as SonataType;
+		apply_piece_effects(
+			get_sonata(sonata_key),
+			group.length,
+			[
+				build_stats,
+				{
+					buffs: request.sonatas[sonata_key].buffs,
+					rank: 0,
+					character,
+					weapon,
+				}
+			]
+		);
 	}
 
 	const skills = Object.fromEntries(
 		Object.values(character.skills)
-			.filter((s) => s.motions.length > 0)
-			.map((skill) => {
+			.filter(s => s.motions.length > 0)
+			.map(skill => {
 				const skill_stats = structuredClone(build_stats);
-				skill.apply_effects(input, skill_stats, context);
+				skill.apply_effect(
+					skill_stats,
+					{
+						buffs: request.character.buffs,
+						rank: request.character.rank,
+						character,
+						weapon,
+					}
+				);
 
 				return [
 					skill.type,
 					{
 						type: skill.type,
 						key: skill.key,
-						motions: skill.motions.map((motion) => {
-							const attack_stats = structuredClone(skill_stats);
-							motion.apply_effects(input, attack_stats, context);
+						motions: skill.motions.map(motion => {
+							const motion_stats = structuredClone(skill_stats);
+							skill.motions_effect[motion.key]?.(
+								motion_stats,
+								{
+									buffs: request.character.buffs,
+									rank: request.character.rank,
+									character,
+									weapon,
+								}
+							);
 
 							return {
 								type: motion.type,
 								key: motion.key,
-								...default_finalizer(motion, base_stats, attack_stats)
+								damage: default_finalizer(motion, base_stats, motion_stats)
 							};
 						})
 					}
 				];
 			})
-	) as { [S in SkillKey]: SkillDamage<S>; };
+	) as Schema<SkillDamage, 'type'>;
 
 	const display_stats = get_display_stats(base_stats, build_stats);
 	const final_stats = get_final_stats(base_stats, build_stats);
 
 	let target_value: number;
-	if (input.target_key.kind === 'stat') {
-		target_value = final_stats[input.target_key.stat];
+	if (request.target.kind === 'stat') {
+		target_value = final_stats[request.target.stat];
 	} else {
-		const { skill, motion } = input.target_key;
+		const { skill, motion } = request.target;
 		const target_skill = Object.values(skills).find(s => s.key === skill)!;
 		const target_attack = target_skill.motions.find(a => a.key === motion)!;
 
 		// todo: optimize against non-crit/forced_crit as well
-		target_value = target_attack.average.reduce((acc, v) => acc + v, 0);
+		target_value = target_attack.damage.average.reduce((acc, v) => acc + v, 0);
 	}
 
 	return {
 		build,
 		skills,
-		build_stats,
-		display_stats,
-		final_stats,
-		target_value,
-	};
+		stats: { build: build_stats, display: display_stats, final: final_stats, },
+		target: target_value,
+	} as DamageResult;
 }

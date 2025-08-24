@@ -1,17 +1,30 @@
 import { generate_combinations } from '$lib/math';
 import type { Echo } from '$lib/data/echoes/types';
 import type { CostCombo } from './optimize';
-import type { OptimizerRequest, OptimizerOptions } from '$lib/data/optimizer';
+import type { OptimizerRequest, OptimizerOptions } from '$lib/data/optimizer/types';
+import type { SonataType } from '$lib/data/sonatas/types';
+import type { CharacterKey, Characters } from '$lib/data/characters/types';
+import type { WeaponKeysFor, WeaponType } from '$lib/data/weapons/types';
 
-type Data = {
+type Data<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>> = {
 	echoes: { cost_4: Echo[], cost_3: Echo[], cost_1: Echo[] },
 	cost_combo: CostCombo,
-	input: OptimizerRequest,
+	request: OptimizerRequest<CK, WT, WK>,
 	options: OptimizerOptions,
 }
 
-self.onmessage = async function (event: MessageEvent) {
-	const { echoes, cost_combo, input, options } = event.data as Data;
+function echo_keys_are_unique(echoes: Echo[]) {
+	const seen = new Set<string>();
+	for (const echo of echoes) {
+		if (seen.has(echo.key)) return false;
+		seen.add(echo.key);
+	}
+
+	return true;
+}
+
+self.onmessage = async function <CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>>(event: MessageEvent) {
+	const { echoes, cost_combo, request, options } = event.data as Data<CK, WT, WK>;
 	const { count_4, count_3, count_1, pattern } = cost_combo;
 
 	const batch_size = options.batch_size || 1000;
@@ -40,19 +53,19 @@ self.onmessage = async function (event: MessageEvent) {
 
 				const sonatas = Object.groupBy(build, e => e.sonata);
 
-				let set_ok = false;
-				for (const sonata in sonatas) {
-					if (input.echo.filter.activated_effects[sonata].some(n => (sonatas[sonata]?.length || 0) >= n)) {
-						set_ok = true;
+				let activated_set = false;
+				for (const [key, echoes] of Object.entries(sonatas)) {
+					const sonata = key as SonataType;
+					if (request.sonatas[sonata].activated_pieces.some(n => echoes.length >= n)) {
+						activated_set = true;
 					}
 				}
 
-				if (input.echo.allow_rainbow || set_ok) {
-					// todo: filter unique echo within same sonata
-					for (const partial of Object.values(sonatas)) {
-						if (partial.every((echo, i, arr) => arr.findIndex(e => e.key === echo.key) === i)) {
-							batch.push(build);
-						}
+				if (request.echos.rainbow_build_allowed) {
+					batch.push(build);
+				} else if (activated_set) {
+					if (Object.values(sonatas).every(echoes => echo_keys_are_unique(echoes))) {
+						batch.push(build);
 					}
 				}
 

@@ -7,7 +7,7 @@
 	import * as Sidebar from '$lib/components/ui/sidebar';
 	import { Toaster } from '$lib/components/ui/sonner';
 
-	import AppSidebar from './AppSidebar.svelte';
+	import AppSidebar from './app-sidebar.svelte';
 
 	// import { Moon, Settings, Skull, SquareKanban, Sun } from 'lucide-svelte';
 

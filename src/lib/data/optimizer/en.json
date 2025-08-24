@@ -17,5 +17,9 @@
       "count_plural=one": "Keep top 1 build",
       "count_plural=other": "Keep top {count} builds"
     }
-  }]
+  }],
+
+  "non_crit": "Non-crit",
+  "average": "Average",
+  "forced_crit": "Forced crit"
 }

@@ -1,8 +1,8 @@
-import type { MotionData } from '$lib/data/characters';
-import type { BaseStatKey, StatKey } from '$lib/data/stats';
-import { get_base_stat_value } from '$lib/optimizer/stats';
+import type { MotionDef } from '$lib/data/characters/types';
+import type { BaseStatType, StatResult, StatType } from '$lib/data/stats/types';
+import { get_base_stat_value } from '$lib/data/stats/utils';
 
-export function default_finalizer(motion: MotionData, base_stats: Record<BaseStatKey, number>, combat_stats: Record<StatKey, number>) {
+export function default_finalizer(motion: MotionDef, base_stats: StatResult<BaseStatType>, combat_stats: StatResult<StatType>) {
 	// source: https://wutheringwaves.fandom.com/wiki/Damage
 	// source: https://wutheringwaves.gg/damage-calculation-guide/
 
@@ -10,15 +10,15 @@ export function default_finalizer(motion: MotionData, base_stats: Record<BaseSta
 	const skill_hits: number[] = motion.values.map((v: number) => v * combat_stats.skill_multiplier * get_base_stat_value(motion.related_stat, base_stats[motion.related_stat], combat_stats));
 
 	// hit * (element bonus + skill bonus) * skill amplify
-	const bonus = combat_stats.general_bonus + motion.element.reduce((acc, e) => acc + combat_stats[`${e}_bonus`], 0) + motion.type.reduce((acc, t) => acc + combat_stats[`${t}_bonus`], 0);
-	const amplify = combat_stats.general_amplify + motion.element.reduce((acc, e) => acc + combat_stats[`${e}_amplify`], 0) + motion.type.reduce((acc, t) => acc + combat_stats[`${t}_amplify`], 0);
+	const bonus = combat_stats.general_bonus + motion.elements.reduce((acc, e) => acc + combat_stats[`${e}_bonus`], 0) + combat_stats[`${motion.type}_bonus`];
+	const amplify = combat_stats.general_amplify + motion.elements.reduce((acc, e) => acc + combat_stats[`${e}_amplify`], 0) + combat_stats[`${motion.type}_amplify`];
 
 	// fixme: find where these apply? for the moment they will apply as bonus damage
-	const tags = motion.tags.reduce((acc, e) => acc + combat_stats[e], 0);
+	const specials = motion.specials.reduce((acc, e) => acc + combat_stats[e], 0);
 
 	const dmg_vulnerability = combat_stats.enemy_damage_vulnerability;
 
-	const expected_hits = skill_hits.map(v => v * (1 + bonus + tags) * (1 + amplify) * (1 + dmg_vulnerability));
+	const expected_hits = skill_hits.map(v => v * (1 + bonus + specials) * (1 + amplify) * (1 + dmg_vulnerability));
 
 	// res * def * dmg reduction * element reduction
 	const resistance = combat_stats.enemy_resistance;

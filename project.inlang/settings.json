@@ -30,20 +30,20 @@
 
       "./src/lib/data/weapons/{locale}.json",
 
-      "./src/lib/data/weapons/broadswords/ages_of_harvest/{locale}.json",
-      "./src/lib/data/weapons/broadswords/lustrous_razor/{locale}.json",
+      "./src/lib/data/weapons/broadsword/ages_of_harvest/{locale}.json",
+      "./src/lib/data/weapons/broadsword/lustrous_razor/{locale}.json",
 
-      "./src/lib/data/weapons/gauntlets/blazing_justice/{locale}.json",
+      "./src/lib/data/weapons/gauntlet/blazing_justice/{locale}.json",
 
-      "./src/lib/data/weapons/pistols/static_mist/{locale}.json",
-      "./src/lib/data/weapons/pistols/the_last_dance/{locale}.json",
+      "./src/lib/data/weapons/pistol/static_mist/{locale}.json",
+      "./src/lib/data/weapons/pistol/the_last_dance/{locale}.json",
 
       "./src/lib/data/weapons/rectifier/luminous_hymn/{locale}.json",
       "./src/lib/data/weapons/rectifier/whispers_of_sirens/{locale}.json",
 
-      "./src/lib/data/weapons/swords/blazing_brilliance/{locale}.json",
-      "./src/lib/data/weapons/swords/emerald_of_genesis/{locale}.json",
-      "./src/lib/data/weapons/swords/defiers_thorn/{locale}.json"
+      "./src/lib/data/weapons/sword/blazing_brilliance/{locale}.json",
+      "./src/lib/data/weapons/sword/emerald_of_genesis/{locale}.json",
+      "./src/lib/data/weapons/sword/defiers_thorn/{locale}.json"
     ]
   },
   "sourceLanguageTag": "en",

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { type SonataKey, SONATA_DATA } from '$lib/data/sonatas';
 	import { Switch } from '$lib/components/ui/switch';
 	import { Input } from '$lib/components/ui/input';
 	import { Slider } from '$lib/components/ui/slider';
@@ -7,21 +6,27 @@
 	import { Checkbox } from '$lib/components/ui/checkbox';
 
 	import { get_message } from '$lib/messages';
+	import type { SonataType } from '$lib/data/sonatas/types';
+	import { get_sonata } from '$lib/data/sonatas/utils';
+	import type { AsBuffValues, BuffDef, BuffSchema } from '$lib/data/optimizer/types';
 
 	interface Props {
-		sonata: SonataKey;
+		sonata: SonataType;
 		allow_list: number[];
-		buffs: Record<string, number>;
+		buffs: AsBuffValues<BuffDef, BuffSchema<BuffDef>>;
 	}
 
 	const { sonata, allow_list = $bindable(), buffs = $bindable() }: Props = $props();
 
-	const data = SONATA_DATA[sonata];
-
-	const activated = $derived(data.piece_effects.map(e => ({ piece: e, value: allow_list && allow_list.includes(e) })));
+	const data = $derived(get_sonata(sonata));
+	const activated = $derived(data.piece_effects.map(e => ({ piece: e, value: allow_list.includes(e) })));
 
 	function toggle_effect(item: { piece: number, value: boolean }) {
-		allow_list.splice(allow_list.indexOf(item.piece), 1);
+		if (allow_list.includes(item.piece)) {
+			allow_list.splice(allow_list.indexOf(item.piece), 1);
+		} else {
+			allow_list.push(item.piece);
+		}
 	}
 </script>
 

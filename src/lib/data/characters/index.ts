@@ -1,15 +1,23 @@
+import { jinhsi } from './jinhsi';
+import { changli } from './changli';
+import { carlotta } from './carlotta';
+import { phoebe } from './phoebe';
+import { cantarella } from './cantarella';
+import { zani } from './zani';
+import { cartethyia } from './cartethyia';
+
 export const CHARACTERS = {
 	// 1.1
-	jinhsi: (await import('./jinhsi')).jinhsi,
-	changli: (await import('./changli')).changli,
+	jinhsi,
+	changli,
 	// 2.0
-	carlotta: (await import('./carlotta')).carlotta,
+	carlotta,
 	// 2.1
-	phoebe: (await import('./phoebe')).phoebe,
+	phoebe,
 	// 2.2
-	cantarella: (await import('./cantarella')).cantarella,
+	cantarella,
 	// 2.3
-	zani: (await import('./zani')).zani,
+	zani,
 	// 2.4
-	cartethyia: (await import('./cartethyia')).cartethyia,
+	cartethyia,
 } as const;

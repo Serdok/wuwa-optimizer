@@ -1,5 +1,9 @@
+import { blazing_brilliance } from '$lib/data/weapons/sword/blazing_brilliance';
+import { emerald_of_genesis } from '$lib/data/weapons/sword/emerald_of_genesis';
+import { defiers_thorn } from '$lib/data/weapons/sword/defiers_thorn';
+
 export const SWORDS = {
-	blazing_brilliance: (await import('./blazing_brilliance')).blazing_brilliance,
-	emerald_of_genesis: (await import('./emerald_of_genesis')).emerald_of_genesis,
-	defiers_thorn: (await import('./defiers_thorn')).defiers_thorn,
+	blazing_brilliance,
+	emerald_of_genesis,
+	defiers_thorn,
 } as const;

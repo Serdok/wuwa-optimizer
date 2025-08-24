@@ -1,30 +1,52 @@
 import type { StatType } from '$lib/data/stats/types';
 
+import hp from './T_Iconpropertygreenlife_UI.png';
+import atk from './T_Iconpropertyredattack_UI.png';
+import def from './T_Iconpropertygreendefense_UI.png';
+
+import crit_rate from './T_Iconpropertyredbaoji_UI.png';
+import crit_dmg from './T_Iconpropertyredcrit_UI.png';
+import energy_regen from './T_Iconpropertygreenenergy_UI.png';
+import healing_bonus from './T_Iconpropertygreencure_UI.png';
+
+import physical_bonus from './T_Iconpropertyredgeneral_UI.png';
+import glacio_bonus from './T_Iconpropertyredice_UI.png';
+import fusion_bonus from './T_Iconpropertyredhot_UI.png';
+import electro_bonus from './T_Iconpropertyredmine_UI.png';
+import aero_bonus from './T_Iconpropertyredwind_UI.png';
+import spectro_bonus from './T_Iconpropertyredlight_UI.png';
+import havoc_bonus from './T_Iconpropertyreddark_UI.png';
+
+import basic_bonus from './T_Iconpropertyredphysics_UI.png';
+import heavy_bonus from './T_Iconpropertyredfoco_UI.png';
+import skill_bonus from './T_Iconpropertyredskill_UI.png';
+import burst_bonus from './T_Iconpropertyredqte_UI.png';
+
 const STAT_ICONS = {
-	hp: (await import('./T_Iconpropertygreenlife_UI.png')).default,
-	atk: (await import('./T_Iconpropertyredattack_UI.png')).default,
-	def: (await import('./T_Iconpropertygreendefense_UI.png')).default,
+	hp: hp,
+	atk: atk,
+	def: def,
 
-	hp_p: (await import('./T_Iconpropertygreenlife_UI.png')).default,
-	atk_p: (await import('./T_Iconpropertyredattack_UI.png')).default,
-	def_p: (await import('./T_Iconpropertygreendefense_UI.png')).default,
-	crit_rate: (await import('./T_Iconpropertyredbaoji_UI.png')).default,
-	crit_dmg: (await import('./T_Iconpropertyredcrit_UI.png')).default,
-	energy_regen: (await import('./T_Iconpropertygreenenergy_UI.png')).default,
-	healing_bonus: (await import('./T_Iconpropertygreencure_UI.png')).default,
+	hp_p: hp,
+	atk_p: atk,
+	def_p: def,
+	crit_rate: crit_rate,
+	crit_dmg: crit_dmg,
+	energy_regen: energy_regen,
+	healing_bonus: healing_bonus,
 
-	physical_bonus: (await import('./T_Iconpropertyredgeneral_UI.png')).default,
-	glacio_bonus: (await import('./T_Iconpropertyredice_UI.png')).default,
-	fusion_bonus: (await import('./T_Iconpropertyredhot_UI.png')).default,
-	electro_bonus: (await import('./T_Iconpropertyredmine_UI.png')).default,
-	aero_bonus: (await import('./T_Iconpropertyredwind_UI.png')).default,
-	spectro_bonus: (await import('./T_Iconpropertyredlight_UI.png')).default,
-	havoc_bonus: (await import('./T_Iconpropertyreddark_UI.png')).default,
+	physical_bonus: physical_bonus,
+	glacio_bonus: glacio_bonus,
+	fusion_bonus: fusion_bonus,
+	electro_bonus: electro_bonus,
+	aero_bonus: aero_bonus,
+	spectro_bonus: spectro_bonus,
+	havoc_bonus: havoc_bonus,
 
-	basic_bonus: (await import('./T_Iconpropertyredphysics_UI.png')).default,
-	heavy_bonus: (await import('./T_Iconpropertyredfoco_UI.png')).default,
-	skill_bonus: (await import('./T_Iconpropertyredskill_UI.png')).default,
-	burst_bonus: (await import('./T_Iconpropertyredqte_UI.png')).default,
+	basic_bonus: basic_bonus,
+	heavy_bonus: heavy_bonus,
+	skill_bonus: skill_bonus,
+	burst_bonus: burst_bonus,
 } as const satisfies Partial<Record<StatType, string>>;
 
 export { STAT_ICONS };

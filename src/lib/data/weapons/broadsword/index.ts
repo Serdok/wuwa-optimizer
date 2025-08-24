@@ -1,4 +1,7 @@
+import { ages_of_harvest } from '$lib/data/weapons/broadsword/ages_of_harvest';
+import { lustrous_razor } from '$lib/data/weapons/broadsword/lustrous_razor';
+
 export const BROADSWORDS = {
-	ages_of_harvest: (await import('./ages_of_harvest')).ages_of_harvest,
-	lustrous_razor: (await import('./lustrous_razor')).lustrous_razor,
+	ages_of_harvest,
+	lustrous_razor,
 } as const;

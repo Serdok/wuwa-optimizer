@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CharacterKey } from '$lib/data/characters/types';
+	import type { CharacterKey, SkillType } from '$lib/data/characters/types';
 	import type { DamageSelection, Target } from '$lib/data/optimizer/types';
 
 	import { Badge } from '$lib/components/ui/badge';
@@ -27,6 +27,15 @@
 		target = new_target;
 		open = false;
 	}
+
+	$effect(() => {
+		if (target.kind === 'motion') {
+			const { skill, motion } = target;
+			if (!Object.values(character.skills).some(s => s.key === skill && s.motions.some(m => m.key === motion))) {
+				target = { kind: 'stat', stat: 'atk' };
+			}
+		}
+	})
 </script>
 
 <div class="flex flex-row gap-1">

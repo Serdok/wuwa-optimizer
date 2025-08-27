@@ -96,6 +96,18 @@ export function get_final_stats(base_stats: StatResult<BaseStatType>, combat_sta
 	};
 }
 
+export function stat_bonus_hp_p() {
+	return [{ stat: 'hp_p', value: 0.018 }, { stat: 'hp_p', value: 0.042 }] as const;
+}
+
+export function stat_bonus_atk_p() {
+	return [{ stat: 'atk_p', value: 0.018, }, { stat: 'atk_p', value: 0.042, }] as const;
+}
+
+export function stat_bonus_def_p() {
+	return [{ stat: 'def_p', value: 0.0228, }, { stat: 'def_p', value: 0.0532, }] as const;
+}
+
 export function stat_bonus_crit_rate() {
 	return [{ stat: 'crit_rate', value: 0.012, }, { stat: 'crit_rate', value: 0.028, }] as const;
 }
@@ -104,10 +116,30 @@ export function stat_bonus_crit_dmg() {
 	return [{ stat: 'crit_dmg', value: 0.012, }, { stat: 'crit_dmg', value: 0.028, }] as const;
 }
 
-export function stat_bonus_atk_p() {
-	return [{ stat: 'atk_p', value: 0.018, }, { stat: 'atk_p', value: 0.042, }] as const;
+export function stat_bonus_healing_bonus() {
+	return [{ stat: 'healing_bonus', value: 0.018, }, { stat: 'healing_bonus', value: 0.042, }] as const;
 }
 
-export function stat_bonus_hp_p() {
-	return [{ stat: 'hp_p', value: 0.018 }, { stat: 'hp_p', value: 0.042 }] as const;
+export function stat_bonus_glacio_bonus() {
+	return [{ stat: 'glacio_bonus', value: 0.018, }, { stat: 'glacio_bonus', value: 0.042, }] as const;
+}
+
+export function stat_bonus_fusion_bonus() {
+	return [{ stat: 'fusion_bonus', value: 0.018, }, { stat: 'fusion_bonus', value: 0.042, }] as const;
+}
+
+export function stat_bonus_electro_bonus() {
+	return [{ stat: 'electro_bonus', value: 0.018, }, { stat: 'electro_bonus', value: 0.042, }] as const;
+}
+
+export function stat_bonus_aero_bonus() {
+	return [{ stat: 'aero_bonus', value: 0.018, }, { stat: 'aero_bonus', value: 0.042, }] as const;
+}
+
+export function stat_bonus_spectro_bonus() {
+	return [{ stat: 'spectro_bonus', value: 0.018, }, { stat: 'spectro_bonus', value: 0.042, }] as const;
+}
+
+export function stat_bonus_havoc_bonus() {
+	return [{ stat: 'havoc_bonus', value: 0.018, }, { stat: 'havoc_bonus', value: 0.042, }] as const;
 }

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CharacterKey, SkillType } from '$lib/data/characters/types';
+	import type { CharacterKey } from '$lib/data/characters';
 	import type { DamageSelection, Target } from '$lib/data/optimizer/types';
 
 	import { Badge } from '$lib/components/ui/badge';

@@ -1,5 +1,6 @@
 <script lang="ts" generics="WT extends WeaponType">
-	import type { WeaponType, WeaponKeysFor } from '$lib/data/weapons/types';
+	import type { WeaponType } from '$lib/data/weapons/types';
+	import type { WeaponKeysFor } from '$lib/data/weapons';
 	import type { AsBuffValues, BuffDef, BuffSchema } from '$lib/data/optimizer/types';
 
 	import { Switch } from '$lib/components/ui/switch';

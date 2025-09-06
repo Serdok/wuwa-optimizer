@@ -1,5 +1,5 @@
-import { CHARACTERS } from '$lib/data/characters/index';
-import type { CharacterDef, CharacterKey } from '$lib/data/characters/types';
+import { CHARACTERS, type CharacterKey } from '$lib/data/characters/index';
+import type { CharacterDef } from '$lib/data/characters/types';
 import type { BuffSchema, RankedBuffDef } from '$lib/data/optimizer/types';
 import { get_weapon_keys_of_type, get_weapons_of_type } from '$lib/data/weapons/utils';
 import { deep_clone } from '$lib/utils';

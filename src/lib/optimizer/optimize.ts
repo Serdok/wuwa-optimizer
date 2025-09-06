@@ -4,9 +4,11 @@ import { BoundedMaxPriorityQueue } from '$lib/optimizer/bounded_max_priority_que
 import { combination_count } from '$lib/math';
 import { compute_damage } from '$lib/optimizer/build';
 
+import type { CharacterKey, Characters } from '$lib/data/characters';
+import type { WeaponType } from '$lib/data/weapons/types';
+import type { WeaponKeysFor } from '$lib/data/weapons';
+
 import OptimizerWorker from './worker?worker';
-import type { CharacterKey, Characters } from '$lib/data/characters/types';
-import type { WeaponKeysFor, WeaponType } from '$lib/data/weapons/types';
 
 type BatchResult = { combinations: Echo[][]; processed: number };
 

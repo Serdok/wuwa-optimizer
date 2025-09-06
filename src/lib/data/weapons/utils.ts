@@ -1,7 +1,7 @@
 // erases any type information, so get directly from SONATAS should you need the full definition
-import type { WeaponKeysFor, WeaponDef, WeaponType } from '$lib/data/weapons/types';
+import type { WeaponDef, WeaponType } from '$lib/data/weapons/types';
 import type { BuffDef, BuffSchema } from '$lib/data/optimizer/types';
-import { WEAPONS } from '$lib/data/weapons';
+import { WEAPONS, type WeaponKeysFor } from '$lib/data/weapons';
 import { deep_clone } from '$lib/utils';
 
 

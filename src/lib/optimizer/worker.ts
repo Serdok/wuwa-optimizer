@@ -3,8 +3,9 @@ import type { Echo } from '$lib/data/echoes/types';
 import type { CostCombo } from './optimize';
 import type { OptimizerRequest, OptimizerOptions } from '$lib/data/optimizer/types';
 import type { SonataType } from '$lib/data/sonatas/types';
-import type { CharacterKey, Characters } from '$lib/data/characters/types';
-import type { WeaponKeysFor, WeaponType } from '$lib/data/weapons/types';
+import type { CharacterKey, Characters } from '$lib/data/characters';
+import type { WeaponType } from '$lib/data/weapons/types';
+import type { WeaponKeysFor } from '$lib/data/weapons';
 
 type Data<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>> = {
 	echoes: { cost_4: Echo[], cost_3: Echo[], cost_1: Echo[] },

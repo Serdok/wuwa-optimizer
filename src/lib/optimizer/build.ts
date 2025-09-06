@@ -15,8 +15,9 @@ import {
 	get_display_stats,
 	get_final_stats
 } from '$lib/data/stats/utils';
-import type { CharacterKey, Characters } from '$lib/data/characters/types';
-import type { WeaponKeysFor, WeaponType } from '$lib/data/weapons/types';
+import type { CharacterKey, Characters } from '$lib/data/characters';
+import type { WeaponType } from '$lib/data/weapons/types';
+import type { WeaponKeysFor } from '$lib/data/weapons';
 
 
 export function compute_damage<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>>(build: Echo[], request: OptimizerRequest<CK, WT, WK>) {

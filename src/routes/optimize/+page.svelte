@@ -5,8 +5,9 @@
 		EchoRequest, SonataRequest,
 		Target
 	} from '$lib/data/optimizer/types';
-	import type { CharacterKey } from '$lib/data/characters/types';
-	import type { WeaponKeysFor, WeaponType } from '$lib/data/weapons/types';
+	import type { CharacterKey } from '$lib/data/characters';
+	import type { WeaponType } from '$lib/data/weapons/types';
+	import type { WeaponKeysFor } from '$lib/data/weapons';
 	import type { StatType } from '$lib/data/stats/types';
 	import { SONATA_TYPES, type SonataType } from '$lib/data/sonatas/types';
 

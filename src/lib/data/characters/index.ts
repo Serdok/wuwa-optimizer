@@ -21,3 +21,6 @@ export const CHARACTERS = {
 	// 2.4
 	cartethyia,
 } as const;
+
+export type Characters = typeof CHARACTERS;
+export type CharacterKey = keyof Characters;

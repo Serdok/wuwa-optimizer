@@ -1,14 +1,11 @@
 import type { Schema } from '$lib/utils';
 import type { StatDef, StatResult, StatType } from '$lib/data/stats/types';
-import type {
-	CharacterDef,
-	CharacterKey, Characters,
-	MotionType,
-	SkillType,
-} from '$lib/data/characters/types';
+import type { CharacterDef, MotionType, SkillType, } from '$lib/data/characters/types';
 import type { SonataType } from '$lib/data/sonatas/types';
-import type { WeaponDef, WeaponKeysFor, WeaponType } from '$lib/data/weapons/types';
+import type { WeaponDef, WeaponType } from '$lib/data/weapons/types';
 import type { Echo } from '$lib/data/echoes/types';
+import type { CharacterKey, Characters, } from '$lib/data/characters';
+import type { WeaponKeysFor } from '$lib/data/weapons';
 
 export type ToggleBuffDef = { kind: 'toggle' };
 export type SliderBuffDef = { kind: 'slider', min_value: number, max_value: number };

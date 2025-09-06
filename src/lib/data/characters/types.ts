@@ -4,7 +4,6 @@ import type { ApplyEffect, BuffSchema, RankedBuffDef } from '$lib/data/optimizer
 import type { BaseElementType } from '$lib/data/elements/types';
 import type { ExtractPropFromArray, Schema } from '$lib/utils';
 import type { WeaponType } from '$lib/data/weapons/types';
-import { CHARACTERS } from '$lib/data/characters/index';
 
 export const SKILLS = ['normal', 'skill', 'forte', 'burst', 'intro', 'outro'] as const;
 export type SkillType = typeof SKILLS[number];
@@ -46,5 +45,3 @@ export type CharacterDef<BS extends BuffSchema<RankedBuffDef>> = {
 
 export type CharacterInit = Omit<CharacterDef<never>, 'buffs' | 'skills' | 'apply_effect' | 'create_ranked'>;
 
-export type Characters = typeof CHARACTERS;
-export type CharacterKey = keyof Characters;

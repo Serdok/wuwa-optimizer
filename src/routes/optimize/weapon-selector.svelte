@@ -1,5 +1,6 @@
 <script lang="ts" generics="WT extends WeaponType">
-	import type { WeaponKeysFor, WeaponType } from '$lib/data/weapons/types';
+	import type { WeaponType } from '$lib/data/weapons/types';
+	import type { WeaponKeysFor } from '$lib/data/weapons';
 
 	import * as Select from "$lib/components/ui/select";
 

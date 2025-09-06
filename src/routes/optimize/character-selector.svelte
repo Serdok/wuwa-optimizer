@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type { CharacterKey } from '$lib/data/characters/types';
-	import { CHARACTERS } from '$lib/data/characters';
+	import { CHARACTERS, type CharacterKey } from '$lib/data/characters';
 
 	import * as Select from '$lib/components/ui/select';
 

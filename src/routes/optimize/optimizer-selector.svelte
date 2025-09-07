@@ -19,7 +19,8 @@
 
 	let { key, rank, target = $bindable(), damage_selection = $bindable() }: Props = $props();
 
-	const character = $derived(get_character(key).create_ranked(get_character(key), rank));
+	const character = $derived(get_character(key, rank));
+	$inspect(character);
 	
 	let open = $state(false);
 

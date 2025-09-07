@@ -39,9 +39,11 @@ const buffs = [
 	{ key: 'debuff_effect', kind: 'toggle', rank: 4, },
 ] as const satisfies RankedBuffDef[];
 
-const data = CharacterBuilder.create(init, create_schema_from_array(buffs, 'key'))
-  // character
-	.set_effect((stats, { buffs, rank }) => {
+const data = (rank: number) => {
+	let builder = CharacterBuilder.create(init, create_schema_from_array(buffs, 'key'));
+
+	// character
+	builder = builder.set_effect((stats, { buffs }) => {
 		if (buffs.manifest) {
 			if (buffs.mandate_of_divinity) stats.aero_erosion_amplify += 0.5;
 			stats.crit_dmg += 0.25 * Math.min(buffs.conviction, 4);
@@ -53,62 +55,38 @@ const data = CharacterBuilder.create(init, create_schema_from_array(buffs, 'key'
 		if (buffs.debuff_effect) stats.general_bonus += 0.2;
 
 		if (rank >= 6) stats.enemy_damage_vulnerability += 0.4;
-	})
-  // normal
-  .set_skill_key('normal', 'sword_to_carve_my_forms')
-  .set_skill_motions('normal', normal)
-	.set_motion_effect('normal', 'stage_1_dmg', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 0.5;
-	})
-	.set_motion_effect('normal', 'stage_2_dmg', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 0.5;
-	})
-	.set_motion_effect('normal', 'stage_3_dmg', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 0.5;
-	})
-	.set_motion_effect('normal', 'stage_4_dmg', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 0.5;
-	})
-	.set_motion_effect('normal', 'dodge_counter_dmg', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 0.5;
-	})
-	.set_motion_effect('normal', 'heavy_attack_dmg', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 0.5;
-	})
-	.set_motion_effect('normal', 'mid_air_attack', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 2;
-	})
-	.set_motion_effect('normal', 'mid_air_attack_1_sword_shadow_recalled', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 2;
-	})
-	.set_motion_effect('normal', 'mid_air_attack_2_sword_shadow_recalled', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 2;
-	})
-	.set_motion_effect('normal', 'mid_air_attack_3_sword_shadow_recalled', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 2;
-	})
-  // skill
-  .set_skill_key('skill', 'sword_to_bear_their_names')
-  .set_skill_motions('skill', skill)
-  // forte
-  .set_skill_key('forte', 'tempest')
-  .set_skill_motions('forte', forte)
-  // burst
-  .set_skill_key('burst', 'a_knights_heartfelt_prayers')
-  .set_skill_motions('burst', burst)
-	.set_motion_effect('burst', 'blade_of_howling_squall_dmg', (stats, { buffs, rank }) => {
-		// fixme: is it enemy damage amplify?
-		stats.general_amplify += 0.2 * Math.min(5, buffs.aero_erosion);
+	});
 
-		if (rank >= 3) stats.skill_multiplier += 1;
-	})
-  // intro
-  .set_skill_key('intro', 'sword_to_mark_tides_trace')
-  .set_skill_motions('intro', intro)
-  // outro
-  .set_skill_key('outro', 'winds_divine_blessing')
-  .set_skill_motions('outro', outro)
-  // finalize
-  .build();
+	// normal
+	builder = builder.set_skill_key('normal', 'sword_to_carve_my_forms')
+		.set_skill_motions('normal', normal(rank));
+
+	// skill
+	builder = builder.set_skill_key('skill', 'sword_to_bear_their_names')
+		.set_skill_motions('skill', skill(rank));
+
+	// forte
+	builder = builder.set_skill_key('forte', 'tempest')
+		.set_skill_motions('forte', forte(rank));
+
+	// burst
+	builder = builder.set_skill_key('burst', 'a_knights_heartfelt_prayers')
+		.set_skill_motions('burst', burst(rank))
+		.set_motion_effect('burst', 'blade_of_howling_squall_dmg', (stats, { buffs }) => {
+			// fixme: is it enemy damage amplify?
+			stats.general_amplify += 0.2 * Math.min(5, buffs.aero_erosion);
+		})
+
+	// intro
+	builder = builder.set_skill_key('intro', 'sword_to_mark_tides_trace')
+		.set_skill_motions('intro', intro(rank))
+
+	// outro
+	builder = builder.set_skill_key('outro', 'winds_divine_blessing')
+		.set_skill_motions('outro', outro(rank))
+
+	// finalize
+	return builder.build();
+}
 
 export { data as cartethyia };

@@ -19,8 +19,8 @@ const buffs = {
 	a_free_knights_tarantella: { key: 'a_free_knights_tarantella', kind: 'slider', min_value: 0, max_value: 2 },
 } as const satisfies BuffSchema<BuffDef>;
 
-const data = WeaponBuilder.create(init, buffs)
-	.set_effect((stats, { buffs, rank }) => {
+const data = (rank: number) =>  WeaponBuilder.create(init, buffs)
+	.set_effect((stats, { buffs }) => {
 		stats.hp_p += ranks[rank - 1];
 		if (buffs.a_free_knights_tarantella) {
 			stats.enemy_def_ignore += def_ignore[rank - 1];

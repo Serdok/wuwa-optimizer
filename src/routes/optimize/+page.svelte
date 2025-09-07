@@ -47,24 +47,24 @@
 
 	let character_key: CharacterKey = $state('changli');
 	let character_rank = $state(0);
-	let character_buffs = $state(create_buff_values(get_character('changli').buffs));
-	let character_stat_bonus = $state(get_character('changli').stat_bonus);
+	let character_buffs = $state(create_buff_values(get_character('changli', 0).buffs));
+	let character_stat_bonus = $state(get_character('changli', 0).stat_bonus);
 
 	let extra_stats = $state(get_empty_stats());
 
 	let weapon_key: WeaponKeysFor<WeaponType> = $state('blazing_brilliance');
 	let weapon_rank = $state(1);
-	let weapon_buffs = $state(create_buff_values(get_weapon('sword', 'blazing_brilliance').buffs));
+	let weapon_buffs = $state(create_buff_values(get_weapon('sword', 'blazing_brilliance', 1).buffs));
 
 	let target: Target = $state({ kind: 'stat', stat: 'atk' });
 	let keep_count = $state(3);
 
-	const character = $derived(get_character(character_key));
+	const character = $derived(get_character(character_key, character_rank));
 
 	const weapon_keys = $derived(get_weapon_keys_of_type(character.weapon_type));
 	const safe_weapon_key = $derived(weapon_keys.includes(weapon_key) ? weapon_key : weapon_keys[0]);
 
-	const weapon = $derived(get_weapon(character.weapon_type, safe_weapon_key));
+	const weapon = $derived(get_weapon(character.weapon_type, safe_weapon_key, weapon_rank));
 
 	let echo_primaries: Record<number, StatType[]> = $state({});
 
@@ -199,7 +199,7 @@
 					<Accordion.Item value="weapon-buffs">
 						<Accordion.Trigger class="px-2">{get_message('weapon_buffs')}</Accordion.Trigger>
 						<Accordion.Content class="px-2">
-							<WeaponBuffs weapon_type={character.weapon_type} key={safe_weapon_key} bind:buffs={weapon_buffs} />
+							<WeaponBuffs weapon_type={character.weapon_type} key={safe_weapon_key} rank={weapon_rank} bind:buffs={weapon_buffs} />
 						</Accordion.Content></Accordion.Item>
 					<Accordion.Item value="stats">
 						<Accordion.Trigger class="px-2">{get_message('extra_stats')}</Accordion.Trigger>

@@ -15,15 +15,14 @@ import {
 	get_display_stats,
 	get_final_stats
 } from '$lib/data/stats/utils';
-import type { CharacterKey, Characters } from '$lib/data/characters';
+import type { CharacterEntry, CharacterKey } from '$lib/data/characters';
 import type { WeaponType } from '$lib/data/weapons/types';
 import type { WeaponKeysFor } from '$lib/data/weapons';
 
 
-export function compute_damage<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>>(build: Echo[], request: OptimizerRequest<CK, WT, WK>) {
-	const base_character = get_character(request.character.key);
-	const character = base_character.create_ranked(base_character, request.character.rank);
-	const weapon = get_weapon(request.weapon.type, request.weapon.key);
+export function compute_damage<CK extends CharacterKey, WT extends WeaponType & CharacterEntry<CK>['weapon_type'], WK extends WeaponKeysFor<WT>>(build: Echo[], request: OptimizerRequest<CK, WT, WK>) {
+	const character = get_character(request.character.key, request.character.rank);
+	const weapon = get_weapon(request.weapon.type, request.weapon.key, request.weapon.rank);
 
 	const base_stats = get_base_stats(character.base_stats, weapon.base_stats);
 	const default_stats = get_default_stats();
@@ -41,7 +40,6 @@ export function compute_damage<CK extends CharacterKey, WT extends WeaponType & 
 		combat_stats,
 		{
 			buffs: request.character.buffs,
-			rank: request.character.rank,
 			character,
 			weapon,
 		}
@@ -50,7 +48,6 @@ export function compute_damage<CK extends CharacterKey, WT extends WeaponType & 
 		combat_stats,
 		{
 			buffs: request.weapon.buffs,
-			rank: request.weapon.rank,
 			character,
 			weapon,
 		}
@@ -70,7 +67,6 @@ export function compute_damage<CK extends CharacterKey, WT extends WeaponType & 
 				build_stats,
 				{
 					buffs: request.sonatas[sonata_key].buffs,
-					rank: 0,
 					character,
 					weapon,
 				}
@@ -87,7 +83,6 @@ export function compute_damage<CK extends CharacterKey, WT extends WeaponType & 
 					skill_stats,
 					{
 						buffs: request.character.buffs,
-						rank: request.character.rank,
 						character,
 						weapon,
 					}
@@ -104,7 +99,6 @@ export function compute_damage<CK extends CharacterKey, WT extends WeaponType & 
 								motion_stats,
 								{
 									buffs: request.character.buffs,
-									rank: request.character.rank,
 									character,
 									weapon,
 								}

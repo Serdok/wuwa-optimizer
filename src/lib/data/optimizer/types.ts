@@ -4,7 +4,7 @@ import type { CharacterDef, MotionType, SkillType, } from '$lib/data/characters/
 import type { SonataType } from '$lib/data/sonatas/types';
 import type { WeaponDef, WeaponType } from '$lib/data/weapons/types';
 import type { Echo } from '$lib/data/echoes/types';
-import type { CharacterKey, Characters, } from '$lib/data/characters';
+import type { CharacterEntry, CharacterKey } from '$lib/data/characters';
 import type { WeaponKeysFor } from '$lib/data/weapons';
 
 export type ToggleBuffDef = { kind: 'toggle' };
@@ -15,7 +15,7 @@ export type RankedBuffDef = { rank: number } & BuffDef;
 export type BuffSchema<T extends BuffDef> = Schema<T, 'key'>;
 export type AsBuffValues<D extends BuffDef, S extends BuffSchema<D>> = { [K in keyof S]: S[K]['kind'] extends 'toggle' ? boolean : number; };
 
-export type ApplyContext<D extends BuffDef, S extends BuffSchema<D>> = { buffs: AsBuffValues<D, S>; rank: number; character: CharacterDef<BuffSchema<RankedBuffDef>>; weapon: WeaponDef<BuffSchema<BuffDef>>; };
+export type ApplyContext<D extends BuffDef, S extends BuffSchema<D>> = { buffs: AsBuffValues<D, S>; character: CharacterDef<BuffSchema<RankedBuffDef>>; weapon: WeaponDef<BuffSchema<BuffDef>>; };
 export type ApplyEffect<D extends BuffDef, S extends BuffSchema<D>> = (stats: StatResult<StatType>, context: ApplyContext<D, S>) => void;
 export type ApplyRequest<D extends BuffDef, S extends BuffSchema<D>> = Parameters<ApplyEffect<D, S>>;
 
@@ -52,7 +52,7 @@ export type EchoRequest = {
 	partial_build_allowed: boolean;
 };
 
-export type OptimizerRequest<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>> = {
+export type OptimizerRequest<CK extends CharacterKey, WT extends WeaponType & CharacterEntry<CK>['weapon_type'], WK extends WeaponKeysFor<WT>> = {
 	character: CharacterRequest<CK>;
 	weapon: WeaponRequest<WT, WK>;
 	sonatas: Schema<SonataRequest, 'sonata'>;

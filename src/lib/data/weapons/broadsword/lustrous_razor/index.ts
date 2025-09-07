@@ -18,8 +18,8 @@ const buffs = {
 	stormy_resolution: { key: 'stormy_resolution', kind: 'slider', min_value: 0, max_value: 3, },
 } as const satisfies BuffSchema<BuffDef>;
 
-const data = WeaponBuilder.create(init, buffs)
-	.set_effect((stats, { buffs, rank }) => {
+const data = (rank: number) => WeaponBuilder.create(init, buffs)
+	.set_effect((stats, { buffs }) => {
 		stats.energy_regen += ranks[rank - 1];
 		if (buffs.stormy_resolution) stats.skill_bonus += skill_bonuses[rank - 1];
 	})

@@ -19,8 +19,8 @@ const buffs = {
 	ethereal_endowment: { key: 'ethereal_endowment', kind: 'toggle' },
 } as const satisfies BuffSchema<BuffDef>;
 
-const data = WeaponBuilder.create(init, buffs)
-	.set_effect((stats, { buffs, rank }) => {
+const data = (rank: number) => WeaponBuilder.create(init, buffs)
+	.set_effect((stats, { buffs }) => {
 		stats.general_bonus += ranks[rank - 1];
 		if (buffs.ageless_marking) stats.skill_bonus += skill_bonuses[rank - 1];
 		if (buffs.ethereal_endowment) stats.skill_bonus += skill_bonuses[rank - 1];

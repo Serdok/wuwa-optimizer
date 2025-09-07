@@ -1,6 +1,6 @@
 import type { MotionDef } from '$lib/data/characters/types';
 
-const data = [
+const data = (rank: number) => [
 	{
 		type: 'skill',
 		key: 'true_sight_capture_dmg',

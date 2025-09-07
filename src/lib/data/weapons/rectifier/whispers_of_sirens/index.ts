@@ -19,8 +19,8 @@ const buffs = {
 	from_the_deep: { key: 'from_the_deep', kind: 'slider', min_value: 0, max_value: 2 },
 } as const satisfies BuffSchema<BuffDef>;
 
-const data = WeaponBuilder.create(init, buffs)
-	.set_effect((stats, { buffs, rank }) => {
+const data = (rank: number) => WeaponBuilder.create(init, buffs)
+	.set_effect((stats, { buffs }) => {
 		stats.atk_p += ranks[rank - 1];
 		if (buffs.from_the_deep >= 1) stats.basic_bonus += basic_bonuses[rank - 1];
 		if (buffs.from_the_deep >= 2) stats.enemy_resistance -= res_bonuses[rank - 1];

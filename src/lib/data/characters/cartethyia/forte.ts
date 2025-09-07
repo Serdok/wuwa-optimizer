@@ -1,6 +1,6 @@
 import type { MotionDef } from '$lib/data/characters/types';
 
-const data = [
+const data = (_rank: number) => [
 	{
 		key: 'basic_attack_stage_1_dmg',
 		type: 'basic',

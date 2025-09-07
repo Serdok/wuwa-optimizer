@@ -1,15 +1,14 @@
 import type { MotionDef } from '$lib/data/characters/types';
 
-const data = [
-	{
-		key: 'skill_dmg',
-		type: 'outro',
-		elements: ['glacio'],
-		specials: [],
-		related_stat: 'atk',
-		values: [7.942]
-	}
-] as const satisfies MotionDef[];
+const skill = {
+	key: 'skill_dmg',
+	type: 'outro',
+	elements: ['glacio'],
+	specials: [],
+	related_stat: 'atk',
+	values: [7.942]
+} as const satisfies MotionDef;
+
 
 const kaleidoscope_sparks_s3 = {
 	key: 'kaleidoscope_sparks',
@@ -19,5 +18,11 @@ const kaleidoscope_sparks_s3 = {
 	related_stat: 'atk',
 	values: [10.3218],
 } as const satisfies MotionDef;
+
+
+const data = (rank: number) => {
+	if (rank >= 3) return [skill, kaleidoscope_sparks_s3];
+	return [skill];
+}
 
 export { data as outro, kaleidoscope_sparks_s3 };

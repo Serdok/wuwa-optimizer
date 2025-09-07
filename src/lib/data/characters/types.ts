@@ -39,7 +39,6 @@ export type CharacterDef<BS extends BuffSchema<RankedBuffDef>> = {
 	buffs: BS;
 	skills: Schema<SkillDef<readonly MotionDef[], BS>, 'type'>;
 	apply_effect: ApplyEffect<RankedBuffDef, BS>;
-	create_ranked: (base: CharacterDef<BS>, rank: number) => CharacterDef<BS>;
 	image: { portrait: string; };
 };
 

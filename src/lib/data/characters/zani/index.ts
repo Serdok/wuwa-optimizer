@@ -40,9 +40,11 @@ const buffs = [
 	{ key: 'total_blaze_consumed', kind: 'slider', rank: 3, min_value: 0, max_value: 150, },
 ] as const satisfies RankedBuffDef[];
 
-const data = CharacterBuilder.create(init, create_schema_from_array(buffs, 'key'))
-  // character
-	.set_effect((stats, { buffs, rank }) => {
+const data = (rank: number) => {
+	let builder = CharacterBuilder.create(init, create_schema_from_array(buffs, 'key'));
+
+	// character
+	builder = builder.set_effect((stats, { buffs }) => {
 		if (buffs.sunburst) {
 			stats.spectro_frazzle_amplify += 0.2;
 			if (rank >= 1) stats.spectro_bonus += 0.5;
@@ -54,60 +56,49 @@ const data = CharacterBuilder.create(init, create_schema_from_array(buffs, 'key'
 		}
 
 		if (rank >= 2) stats.crit_rate += 0.2;
-	})
+	});
 
-  // normal
-  .set_skill_key('normal', 'routine_negotiation')
-  .set_skill_motions('normal', normal)
-  // skill
-  .set_skill_key('skill', 'restless_watch')
-  .set_skill_motions('skill', skill)
-	.set_motion_effect('skill', 'targeted_action_dmg', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 0.8;
-	})
-	.set_motion_effect('skill', 'forcible_riposte_dmg', (stats, { rank }) => {
-		if (rank >= 2) stats.skill_multiplier += 0.8;
-	})
-  // forte
-  .set_skill_key('forte', 'there_will_be_a_light')
-  .set_skill_motions('forte', forte)
-	.set_skill_effect('forte', (stats, { buffs }) => {
-		if (buffs.inferno_mode) stats.skill_multiplier += 0.25;
-	})
-	.set_motion_effect('forte', 'heavy_slash_daybreak_dmg', (stats, { rank }) => {
-		if (rank >= 6) stats.skill_multiplier += 0.4;
-	})
-	.set_motion_effect('forte', 'heavy_slash_dawning_dmg', (stats, { rank }) => {
-		if (rank >= 6) stats.skill_multiplier += 0.4;
-	})
-	.set_motion_effect('forte', 'heavy_slash_nightfall_dmg', (stats, { buffs, rank }) => {
-		let multiplier = 0.095;
-		if (rank >= 6) {
-			multiplier += 0.4;
-			stats.skill_multiplier += 0.4;
-		}
+	// normal
+	builder = builder.set_skill_key('normal', 'routine_negotiation')
+		.set_skill_motions('normal', normal(rank));
 
-		stats.skill_multiplier += multiplier * buffs.nightfall_blaze_consumed;
-	})
-  // burst
-  .set_skill_key('burst', 'between_dawn_and_dusk')
-  .set_skill_motions('burst', burst)
-	.set_motion_effect('burst', 'rekindle_dmg', (stats, { rank }) => {
-		if (rank >= 5) stats.skill_multiplier += 1.2;
-	})
-	.set_motion_effect('burst', 'the_last_stand_dmg', (stats, { buffs }) => {
-		stats.skill_multiplier += Math.min(0.08 * buffs.total_blaze_consumed, 12);
-	})
-  // intro
-  .set_skill_key('intro', 'immediate_execution')
-  .set_skill_motions('intro', intro)
-  // outro
-  .set_skill_key('outro', 'beacon_for_the_future')
-  .set_skill_motions('outro', outro)
-	.set_motion_effect('outro', 'skill_dmg', (stats, { buffs }) => {
-		stats.skill_multiplier += 0.1 * buffs.heliacal_ember;
-	})
-  // finalize
-  .build();
+	// skill
+	builder = builder.set_skill_key('skill', 'restless_watch')
+		.set_skill_motions('skill', skill(rank));
+
+		// forte
+	builder = builder.set_skill_key('forte', 'there_will_be_a_light')
+		.set_skill_motions('forte', forte(rank))
+		.set_skill_effect('forte', (stats, { buffs }) => {
+			if (buffs.inferno_mode) stats.skill_multiplier += 0.25;
+		})
+		.set_motion_effect('forte', 'heavy_slash_nightfall_dmg', (stats, { buffs }) => {
+			let multiplier = 0.095;
+			if (rank >= 6) multiplier += 0.4;
+
+			stats.skill_multiplier += multiplier * buffs.nightfall_blaze_consumed;
+		});
+
+	// burst
+	builder = builder.set_skill_key('burst', 'between_dawn_and_dusk')
+		.set_skill_motions('burst', burst(rank))
+		.set_motion_effect('burst', 'the_last_stand_dmg', (stats, { buffs }) => {
+			stats.skill_multiplier += Math.min(0.08 * buffs.total_blaze_consumed, 12);
+		});
+
+	// intro
+	builder = builder.set_skill_key('intro', 'immediate_execution')
+		.set_skill_motions('intro', intro(rank));
+
+	// outro
+	builder = builder.set_skill_key('outro', 'beacon_for_the_future')
+		.set_skill_motions('outro', outro(rank))
+		.set_motion_effect('outro', 'skill_dmg', (stats, { buffs }) => {
+			stats.skill_multiplier += 0.1 * buffs.heliacal_ember;
+		});
+
+	// finalize
+	return builder.build();
+}
 
 export { data as zani };

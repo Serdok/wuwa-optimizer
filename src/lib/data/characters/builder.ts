@@ -38,18 +38,12 @@ export class CharacterBuilder<BS extends BuffSchema<RankedBuffDef>, S extends Sc
 				outro: { type: 'outro', key: 'outro', motions: [], apply_effect: () => {}, motions_effect: {} }
 			},
 			apply_effect: () => {},
-			create_ranked: (base) => base,
 		});
 	}
 
 	// set global effects
 	set_effect(cb: ApplyEffect<RankedBuffDef, BS>) {
 		return new CharacterBuilder<BS, S>({ ...this.def, apply_effect: cb });
-	}
-
-	// modify the definition depending on the rank
-	set_rank_effect(fn: (base: CharacterDef<BS>, rank: number) => CharacterDef<BS>) {
-		return new CharacterBuilder<BS, S>({ ...this.def, create_ranked: fn });
 	}
 
 	with_skill<K extends SkillType>(skill: K, updater: (prev: S[K]) => S[K]) {

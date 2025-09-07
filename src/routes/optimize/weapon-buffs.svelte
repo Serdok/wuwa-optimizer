@@ -15,12 +15,13 @@
 	interface Props {
 		weapon_type: WT;
 		key: WeaponKeysFor<WT>;
+		rank: number;
 		buffs: AsBuffValues<BuffDef, BuffSchema<BuffDef>>;
 	}
 
-	const { weapon_type, key, buffs = $bindable() }: Props = $props();
+	const { weapon_type, key, rank, buffs = $bindable() }: Props = $props();
 
-	const weapon = $derived(get_weapon(weapon_type, key));
+	const weapon = $derived(get_weapon(weapon_type, key, rank));
 </script>
 
 <div class="px-2 flex flex-col gap-4">

@@ -19,8 +19,8 @@ const buffs = {
 	cast_basic_attack: { key: 'cast_basic_attack', kind: 'toggle' }
 } as const satisfies BuffSchema<BuffDef>;
 
-const data = WeaponBuilder.create(init, buffs)
-	.set_effect((stats, { buffs, rank }) => {
+const data = (rank: number) => WeaponBuilder.create(init, buffs)
+	.set_effect((stats, { buffs }) => {
 		stats.atk_p += ranks[rank - 1];
 		if (buffs.cast_basic_attack) {
 			stats.enemy_def_ignore += def_ignore[rank - 1];

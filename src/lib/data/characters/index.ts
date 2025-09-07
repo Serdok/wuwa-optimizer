@@ -24,3 +24,4 @@ export const CHARACTERS = {
 
 export type Characters = typeof CHARACTERS;
 export type CharacterKey = keyof Characters;
+export type CharacterEntry<K extends CharacterKey> = ReturnType<Characters[K]>;

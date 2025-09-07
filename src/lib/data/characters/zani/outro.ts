@@ -1,6 +1,6 @@
 import type { MotionDef } from '$lib/data/characters/types';
 
-const data = [
+const data = (rank: number) => [
 	{
 		type: 'outro',
 		key: 'skill_dmg',

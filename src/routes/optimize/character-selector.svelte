@@ -18,8 +18,8 @@
 	<Select.Root type="single" bind:value={key}>
 		<Select.Trigger class="flex-1">{get_message(key)}</Select.Trigger>
 		<Select.Content>
-			{#each Object.values(CHARACTERS) as chr (chr.key)}
-				<Select.Item label={get_message(chr.key)} value={chr.key} />
+			{#each Object.keys(CHARACTERS) as key (key)}
+				<Select.Item label={get_message(key)} value={key} />
 			{/each}
 		</Select.Content>
 	</Select.Root>

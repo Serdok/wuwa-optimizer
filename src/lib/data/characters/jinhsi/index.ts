@@ -38,53 +38,55 @@ const arr = [
 	{ key: 'benevolent_grace', kind: 'toggle', rank: 3, },
 ] as const satisfies RankedBuffDef[];
 
-const data = CharacterBuilder.create(init, create_schema_from_array(arr, 'key'))
-  // character
-	.set_effect((stats, { buffs }) => {
+const data = (rank: number) => {
+	let builder = CharacterBuilder.create(init, create_schema_from_array(arr, 'key'));
+
+	// character
+	builder = builder.set_effect((stats, { buffs }) => {
 		stats.spectro_bonus += 0.2;
 		stats.atk_p += 0.25 * buffs.immortal_s_descendancy;
 		if (buffs.benevolent_grace) stats.general_bonus += 0.2;
-	})
+	});
 
-  // normal
-  .set_skill_key('normal', 'slash_of_breaking_dawn')
-  .set_skill_motions('normal', normal)
-  // skill
-  .set_skill_key('skill', 'trailing_lights_of_eons')
-  .set_skill_motions('skill', skill)
-  // forte
-  .set_skill_key('forte', 'luminal_synthesis')
-  .set_skill_motions('forte', forte)
-	.set_motion_effect('forte', 'illuminous_epiphany_solar_flare_dmg', (stats, { buffs, rank }) => {
-		stats.skill_bonus += 0.2 * buffs.herald_of_revival;
-		if (rank >= 6) stats.skill_multiplier += 0.45;
-	})
-	.set_motion_effect('forte', 'illuminous_epiphany_stella_glamor_dmg', (stats, { buffs, rank }) => {
-		let incandescence = 0.4454;
-		if (rank >= 6) {
-			incandescence += 0.45;
-			stats.skill_multiplier += 0.45;
-		}
+	// normal
+	builder = builder.set_skill_key('normal', 'slash_of_breaking_dawn')
+		.set_skill_motions('normal', normal(rank));
 
-		stats.skill_multiplier += incandescence * buffs.incandescence;
-		stats.skill_bonus += 0.2 * buffs.herald_of_revival;
-	})
-  // burst
-  .set_skill_key('burst', 'purge_of_light')
-  .set_skill_motions('burst', burst)
-	.set_skill_effect('burst', stats => {
-		stats.skill_multiplier += 1.2;
-	})
-  // intro
-  .set_skill_key('intro', 'loong_s_halo')
-  .set_skill_motions('intro', intro)
-	.set_skill_effect('intro', stats => {
-		stats.skill_multiplier += 0.5;
-	})
-  // outro
-  .set_skill_key('outro', 'temporal_bender')
-  .set_skill_motions('outro', outro)
-  // finalize
-  .build();
+	// skill
+	builder = builder.set_skill_key('skill', 'trailing_lights_of_eons')
+		.set_skill_motions('skill', skill(rank));
+
+	// forte
+	builder = builder.set_skill_key('forte', 'luminal_synthesis')
+		.set_skill_motions('forte', forte(rank))
+		.set_motion_effect('forte', 'illuminous_epiphany_solar_flare_dmg', (stats, { buffs }) => {
+			stats.skill_bonus += 0.2 * buffs.herald_of_revival;
+		})
+		.set_motion_effect('forte', 'illuminous_epiphany_stella_glamor_dmg', (stats, { buffs }) => {
+			let incandescence = 0.4454;
+			if (rank >= 6) incandescence += 0.45;
+
+			stats.skill_multiplier += incandescence * buffs.incandescence;
+			stats.skill_bonus += 0.2 * buffs.herald_of_revival;
+		});
+
+	// burst
+	builder = builder.set_skill_key('burst', 'purge_of_light')
+		.set_skill_motions('burst', burst(rank));
+
+	// intro
+	builder = builder.set_skill_key('intro', 'loong_s_halo')
+		.set_skill_motions('intro', intro(rank))
+		.set_skill_effect('intro', stats => {
+			stats.skill_multiplier += 0.5;
+		});
+
+	// outro
+	builder = builder.set_skill_key('outro', 'temporal_bender')
+		.set_skill_motions('outro', outro(rank));
+
+	// finalize
+	return builder.build();
+}
 
 export { data as jinhsi };

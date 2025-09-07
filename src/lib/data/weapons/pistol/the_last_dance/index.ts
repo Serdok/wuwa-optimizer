@@ -18,8 +18,8 @@ const buffs = {
 	silent_eulogy: { key: 'silent_eulogy', kind: 'toggle' },
 } as const satisfies BuffSchema<BuffDef>;
 
-const data = WeaponBuilder.create(init, buffs)
-	.set_effect((stats, { buffs, rank }) => {
+const data = (rank: number) => WeaponBuilder.create(init, buffs)
+	.set_effect((stats, { buffs }) => {
 		stats.atk_p += ranks[rank - 1];
 		if (buffs.silent_eulogy) stats.skill_bonus += skill_bonus[rank - 1];
 	})

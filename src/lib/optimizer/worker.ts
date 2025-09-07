@@ -3,11 +3,11 @@ import type { Echo } from '$lib/data/echoes/types';
 import type { CostCombo } from './optimize';
 import type { OptimizerRequest, OptimizerOptions } from '$lib/data/optimizer/types';
 import type { SonataType } from '$lib/data/sonatas/types';
-import type { CharacterKey, Characters } from '$lib/data/characters';
+import type { CharacterEntry, CharacterKey } from '$lib/data/characters';
 import type { WeaponType } from '$lib/data/weapons/types';
 import type { WeaponKeysFor } from '$lib/data/weapons';
 
-type Data<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>> = {
+type Data<CK extends CharacterKey, WT extends WeaponType & CharacterEntry<CK>['weapon_type'], WK extends WeaponKeysFor<WT>> = {
 	echoes: { cost_4: Echo[], cost_3: Echo[], cost_1: Echo[] },
 	cost_combo: CostCombo,
 	request: OptimizerRequest<CK, WT, WK>,
@@ -24,7 +24,7 @@ function echo_keys_are_unique(echoes: Echo[]) {
 	return true;
 }
 
-self.onmessage = async function <CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>>(event: MessageEvent) {
+self.onmessage = async function <CK extends CharacterKey, WT extends WeaponType & CharacterEntry<CK>['weapon_type'], WK extends WeaponKeysFor<WT>>(event: MessageEvent) {
 	const { echoes, cost_combo, request, options } = event.data as Data<CK, WT, WK>;
 	const { count_4, count_3, count_1, pattern } = cost_combo;
 

@@ -1,6 +1,6 @@
 import type { MotionDef } from '$lib/data/characters/types';
 
-const data = [
+const incarnation = [
 	{
 		type: 'skill',
 		key: 'incarnation_basic_attack_1_dmg',
@@ -56,7 +56,10 @@ const data = [
 		specials: [],
 		related_stat: 'atk',
 		values: [1.0076, 0.7557, 0.7557, 2.519]
-	},
+	}
+] as const satisfies MotionDef[];
+
+const illuminous_epiphany = [
 	{
 		type: 'skill',
 		key: 'illuminous_epiphany_solar_flare_dmg',
@@ -74,5 +77,30 @@ const data = [
 		values: [3.4792]
 	}
 ] as const satisfies MotionDef[];
+
+const illuminous_epiphany_s6 = [
+	{
+		type: 'skill',
+		key: 'illuminous_epiphany_solar_flare_dmg',
+		elements: ['spectro'],
+		specials: [],
+		related_stat: 'atk',
+		values: [0.288405, 0.288405, 0.288405, 0.288405, 0.288405, 0.288405]
+	},
+	{
+		type: 'skill',
+		key: 'illuminous_epiphany_stella_glamor_dmg',
+		elements: ['spectro'],
+		specials: [],
+		related_stat: 'atk',
+		values: [5.04484]
+	}
+] as const satisfies MotionDef[];
+
+
+const data = (rank: number) => {
+	if (rank >= 6) return [...incarnation, ...illuminous_epiphany_s6];
+	return [...incarnation, ...illuminous_epiphany];
+}
 
 export { data as forte };

@@ -1,6 +1,6 @@
 import type { MotionDef } from '$lib/data/characters/types';
 
-const data = [
+const data = (rank: number) => [
 	{
 		type: 'heavy',
 		key: 'absolution_litany_dmg',

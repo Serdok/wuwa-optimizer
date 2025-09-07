@@ -17,8 +17,8 @@ const init = {
 const buffs = {
 } as const satisfies BuffSchema<BuffDef>;
 
-const data = WeaponBuilder.create(init, buffs)
-	.set_effect((stats, { rank }) => {
+const data = (rank: number) => WeaponBuilder.create(init, buffs)
+	.set_effect((stats) => {
 		stats.energy_regen += ranks[rank - 1];
 		// todo: next character +atk% buff on outro
 	})

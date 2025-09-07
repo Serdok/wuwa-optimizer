@@ -18,8 +18,8 @@ const buffs = {
 	searing_feather: { key: 'searing_feather', kind: 'slider', min_value: 0, max_value: 14 },
 } as const satisfies BuffSchema<BuffDef>;
 
-const data = WeaponBuilder.create(init, buffs)
-	.set_effect((stats, { buffs, rank }) => {
+const data = (rank: number) =>  WeaponBuilder.create(init, buffs)
+	.set_effect((stats, { buffs }) => {
 		stats.atk_p += ranks[rank - 1];
 		stats.skill_bonus += skill_bonus[rank - 1] * buffs.searing_feather;
 	})

@@ -4,7 +4,7 @@ import { BoundedMaxPriorityQueue } from '$lib/optimizer/bounded_max_priority_que
 import { combination_count } from '$lib/math';
 import { compute_damage } from '$lib/optimizer/build';
 
-import type { CharacterKey, Characters } from '$lib/data/characters';
+import type { CharacterEntry, CharacterKey } from '$lib/data/characters';
 import type { WeaponType } from '$lib/data/weapons/types';
 import type { WeaponKeysFor } from '$lib/data/weapons';
 
@@ -21,14 +21,14 @@ export type CostCombo = {
 	pattern: number[];
 };
 
-type WorkerData<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>> = {
+type WorkerData<CK extends CharacterKey, WT extends WeaponType & CharacterEntry<CK>['weapon_type'], WK extends WeaponKeysFor<WT>> = {
 	echoes: { cost_4: Echo[]; cost_3: Echo[]; cost_1: Echo[] };
 	cost_combo: CostCombo;
 	request: OptimizerRequest<CK, WT, WK>;
 	options: { batch_size: number; report_size: number; total_workers: number; worker_id: number };
 }
 
-function generate_cost_combinations<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>>(request: OptimizerRequest<CK, WT, WK>) {
+function generate_cost_combinations<CK extends CharacterKey, WT extends WeaponType & CharacterEntry<CK>['weapon_type'], WK extends WeaponKeysFor<WT>>(request: OptimizerRequest<CK, WT, WK>) {
 	const cost_combos: CostCombo[] = [];
 
 	for (let count_4 = 0; count_4 <= 3; count_4 += 1) {
@@ -59,7 +59,7 @@ function generate_cost_combinations<CK extends CharacterKey, WT extends WeaponTy
 	return cost_combos;
 }
 
-export function optimize<CK extends CharacterKey, WT extends WeaponType & Characters[CK]['weapon_type'], WK extends WeaponKeysFor<WT>>(echoes: Echo[], request: OptimizerRequest<CK, WT, WK>, options: OptimizerOptions) {
+export function optimize<CK extends CharacterKey, WT extends WeaponType & CharacterEntry<CK>['weapon_type'], WK extends WeaponKeysFor<WT>>(echoes: Echo[], request: OptimizerRequest<CK, WT, WK>, options: OptimizerOptions) {
 	const defaults = {
 		batch_size: 50,
 		report_size: 10000,

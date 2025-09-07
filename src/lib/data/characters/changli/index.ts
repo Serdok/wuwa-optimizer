@@ -37,62 +37,69 @@ const buffs = [
 	{ key: 'polished_words', kind: 'toggle', rank: 4, },
 ] as const satisfies RankedBuffDef[];
 
-const data = CharacterBuilder.create(init, create_schema_from_array(buffs, 'key'))
-  // character
-	.set_effect((stats, { buffs, rank }) => {
-		if (buffs.fiery_feather) stats.atk_p += 0.25;
-		if (rank >= 2 && buffs.enflamement > 0) stats.crit_rate += 0.25;
-		if (buffs.polished_words) stats.atk_p += 0.2;
-	})
-  // normal
-  .set_skill_key('normal', 'blazing_enlightment')
-  .set_skill_motions('normal', normal)
-  // skill
-  .set_skill_key('skill', 'tripartite_flames')
-  .set_skill_motions('skill', skill)
-	.set_skill_effect('skill', (stats, { rank }) => {
-		if (rank >= 1) stats.general_bonus += 0.1;
-		if (rank >= 6) stats.enemy_def_ignore += 0.4;
-	})
-	.set_motion_effect('skill', 'true_sight_conquest_dmg', (stats, { buffs }) => {
-		stats.fusion_bonus += 0.05 * buffs.enflamement;
-	})
-	.set_motion_effect('skill', 'true_sight_charge_dmg', (stats, { buffs }) => {
-		stats.fusion_bonus += 0.05 * buffs.enflamement;
-	})
-  // forte
-  .set_skill_key('forte', 'flaming_sacrifice')
-  .set_skill_motions('forte', forte)
-	.set_skill_effect('forte', (stats, { rank }) => {
-		if (rank >= 1) stats.general_bonus += 0.1;
-		if (rank >= 4) {
-			stats.skill_multiplier += 0.5;
-			stats.skill_bonus += 0.5;
-		}
-		if (rank >= 6) stats.enemy_def_ignore += 0.4;
-	})
-	.set_motion_effect('forte', 'flaming_sacrifice_dmg', stats => {
-		stats.fusion_bonus += 0.2;
-		stats.enemy_def_ignore += 0.15;
-	})
-  // burst
-  .set_skill_key('burst', 'radiance_of_fealty')
-  .set_skill_motions('burst', burst)
-	.set_skill_effect('burst', (stats, { rank }) => {
-		if (rank >= 3) stats.burst_bonus += 0.8;
-		if (rank >= 6) stats.enemy_def_ignore += 0.4;
-	})
-	.set_motion_effect('burst', 'skill_dmg', stats => {
-		stats.fusion_bonus += 0.2;
-		stats.enemy_def_ignore += 0.15;
-	})
-  // intro
-  .set_skill_key('intro', 'obedience_of_rules')
-  .set_skill_motions('intro', intro)
-  // outro
-  .set_skill_key('outro', 'strategy_of_duality')
-  .set_skill_motions('outro', outro)
-  // finalize
-  .build();
+const data = (rank: number) => {
+	let builder = CharacterBuilder.create(init, create_schema_from_array(buffs, 'key'));
+
+	// character
+	builder = builder.set_effect((stats, { buffs }) => {
+			if (buffs.fiery_feather) stats.atk_p += 0.25;
+			if (rank >= 2 && buffs.enflamement > 0) stats.crit_rate += 0.25;
+			if (buffs.polished_words) stats.atk_p += 0.2;
+		});
+
+	// normal
+	builder = builder.set_skill_key('normal', 'blazing_enlightment')
+		.set_skill_motions('normal', normal(rank));
+
+	// skill
+	builder = builder.set_skill_key('skill', 'tripartite_flames')
+		.set_skill_motions('skill', skill(rank))
+		.set_skill_effect('skill', (stats) => {
+			if (rank >= 1) stats.general_bonus += 0.1;
+			if (rank >= 6) stats.enemy_def_ignore += 0.4;
+		})
+		.set_motion_effect('skill', 'true_sight_conquest_dmg', (stats, { buffs }) => {
+			stats.fusion_bonus += 0.05 * buffs.enflamement;
+		})
+		.set_motion_effect('skill', 'true_sight_charge_dmg', (stats, { buffs }) => {
+			stats.fusion_bonus += 0.05 * buffs.enflamement;
+		});
+
+	// forte
+	builder = builder.set_skill_key('forte', 'flaming_sacrifice')
+		.set_skill_motions('forte', forte(rank))
+		.set_skill_effect('forte', (stats) => {
+			if (rank >= 1) stats.general_bonus += 0.1;
+			if (rank >= 4) stats.skill_bonus += 0.5;
+			if (rank >= 6) stats.enemy_def_ignore += 0.4;
+		})
+		.set_motion_effect('forte', 'flaming_sacrifice_dmg', stats => {
+			stats.fusion_bonus += 0.2;
+			stats.enemy_def_ignore += 0.15;
+		});
+
+	// burst
+	builder = builder.set_skill_key('burst', 'radiance_of_fealty')
+		.set_skill_motions('burst', burst(rank))
+		.set_skill_effect('burst', (stats) => {
+			if (rank >= 3) stats.burst_bonus += 0.8;
+			if (rank >= 6) stats.enemy_def_ignore += 0.4;
+		})
+		.set_motion_effect('burst', 'skill_dmg', stats => {
+			stats.fusion_bonus += 0.2;
+			stats.enemy_def_ignore += 0.15;
+		});
+
+	// intro
+	builder = builder.set_skill_key('intro', 'obedience_of_rules')
+		.set_skill_motions('intro', intro(rank));
+
+	// outro
+	builder = builder.set_skill_key('outro', 'strategy_of_duality')
+		.set_skill_motions('outro', outro(rank));
+
+	// finalize
+	return builder.build();
+}
 
 export { data as changli };

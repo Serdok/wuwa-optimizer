@@ -25,10 +25,10 @@
 </script>
 
 <div class="border-2 rounded-xl flex flex-col">
-	<div class="flex-1 flex flex-row gap-4">
+	<div class="flex-1 flex flex-row gap-2">
 		<img src={get_echo_image(echo.key)} alt={echo.key} class="rounded-xl size-44" />
-		<div class="flex-1 flex flex-col gap-2 py-2">
-			<div>
+		<div class="flex-1 flex flex-col gap-2 py-2 min-w-0">
+			<div class="truncate">
 				<span class="text-lg font-medium">{get_message(echo.key)}</span>
 				<div class="flex flex-row items-center justify-around">
 					<span class="text-sm font-light">+{echo.level}</span>
@@ -47,16 +47,14 @@
 				<div class="flex flex-row items-center space-x-2">
 					{#if has_icon(echo.primary_stat.stat)}
 						<img src={STAT_ICONS[echo.primary_stat.stat]} alt={echo.primary_stat.stat} class="size-10" />
-						<span class="text-lg">{get_message(echo.primary_stat.stat)}</span>
-						<span
-							class="text-lg">{is_base_stat(echo.primary_stat.stat) ? echo.primary_stat.value.toFixed(0) : (echo.primary_stat.value * 100).toFixed(1) + '%'}</span>
+						<span class="text-lg text-nowrap truncate">{get_message(echo.primary_stat.stat)}</span>
+						<span class="text-lg">{is_base_stat(echo.primary_stat.stat) ? echo.primary_stat.value.toFixed(0) : (echo.primary_stat.value * 100).toFixed(1) + '%'}</span>
 					{/if}
 				</div>
 				<div class="flex flex-row items-center space-x-2">
 					{#if has_icon(echo.secondary_stat.stat)}
 						<img src={STAT_ICONS[echo.secondary_stat.stat]} alt={echo.secondary_stat.stat} class="size-6" />
-						<span
-							class="font-light">{is_base_stat(echo.secondary_stat.stat) ? echo.secondary_stat.value.toFixed(0) : (echo.secondary_stat.value * 100).toFixed(1) + '%'}</span>
+						<span class="font-light">{is_base_stat(echo.secondary_stat.stat) ? echo.secondary_stat.value.toFixed(0) : (echo.secondary_stat.value * 100).toFixed(1) + '%'}</span>
 					{/if}
 				</div>
 			</div>

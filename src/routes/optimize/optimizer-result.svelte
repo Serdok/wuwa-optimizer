@@ -2,14 +2,13 @@
 	import type { DamageResult, DamageSelection, Target } from '$lib/data/optimizer/types';
 	import type { StatType } from '$lib/data/stats/types';
 	import type { SonataType } from '$lib/data/sonatas/types';
-	import { SONATAS } from '$lib/data/sonatas';
 
 	import { Separator } from '$lib/components/ui/separator';
 
+	import EchoCard from './echo-card.svelte';
 	import DisplayStat from './display-stat.svelte';
 	import DisplaySkill from './display-skill.svelte';
 
-	import { get_echo_image } from '$lib/data/echoes/images';
 	import { get_message } from '$lib/messages';
 	import { get_sonata } from '$lib/data/sonatas/utils';
 	import type { Echo } from '$lib/data/echoes/types';
@@ -27,6 +26,7 @@
 	const total_cost = $derived(result.build.reduce((acc, echo) => acc + echo.cost, 0));
 	const build_sets = $derived(Object.groupBy(result.build, e => e.sonata) as { [key in SonataType]?: Echo[] });
 
+	// todo: filter out elements that are not the same as the character
 	const stat_entries = $derived.by(() => Object.entries(result.stats.display) as [StatType, number][]);
 	const skill_target = $derived(target.kind === 'motion' ? target : null);
 </script>
@@ -54,30 +54,7 @@
 	<div class="grid grid-cols-5 gap-1 justify-around">
 		{#each result.build as echo (echo.id)}
 			<!-- build -->
-			<div class="border rounded-lg flex flex-col gap-3">
-				<div class="flex flex-row">
-					<img src={get_echo_image(echo.key)} alt={echo.key} class="size-36" />
-					<div class="flex flex-col gap-2 ml-2">
-						<div>
-							<span class="font-bold">{get_message(echo.key)}</span>
-							<span>(+{echo.level})</span>
-						</div>
-						<div class="flex flex-row gap-2 items-center">
-							<img src={SONATAS[echo.sonata].image} alt="{echo.sonata}" class="w-8" />
-							<span>{get_message(echo.sonata)}</span>
-						</div>
-						<div class="flex flex-col">
-							<DisplayStat key={echo.primary_stat.stat} value={echo.primary_stat.value} />
-							<DisplayStat key={echo.secondary_stat.stat} value={echo.secondary_stat.value} />
-						</div>
-					</div>
-				</div>
-				<div class="flex flex-row flex-wrap space-x-2 justify-evenly my-2">
-					{#each echo.sub_stats as sub_stat}
-						<DisplayStat key={sub_stat.stat} value={sub_stat.value} />
-					{/each}
-				</div>
-			</div>
+			<EchoCard {echo} />
 		{/each}
 	</div>
 	<div class="columns-3">
